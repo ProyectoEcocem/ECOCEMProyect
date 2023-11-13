@@ -5,5 +5,5 @@ public class Sede
     public string UbicacionSede {get; set;}
     public int IdEmpresa {get; set;}
     public Empresa Empresa {get; set;} = null!;
-    
+    public List<Trabajador> Trabajadores {get;} = new List<Trabajador>();
 }

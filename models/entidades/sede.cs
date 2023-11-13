@@ -6,4 +6,5 @@ public class Sede
     public int IdEmpresa {get; set;}
     public Empresa Empresa {get; set;} = null!;
     public List<Trabajador> Trabajadores {get;} = new List<Trabajador>();
+    public List<Equipo> Equipos {get;} = new List<Equipo>();
 }

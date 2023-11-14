@@ -2,7 +2,7 @@ namespace ECOCEMProyect;
 
 public class AccionMantenimiento
 {
-    public int IdAM { get; set; }
+    public int AMId { get; set; }
 }
 public class MantenimientoImprevisto : AccionMantenimiento 
 {

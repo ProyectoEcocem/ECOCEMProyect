@@ -1,6 +1,6 @@
 namespace ECOCEMProyect;
 
-public class Brigada
+public class OrdenDeTrabajo
 {
     public int BrigadaId { get; set; }
 }

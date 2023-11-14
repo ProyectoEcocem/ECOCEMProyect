@@ -2,7 +2,6 @@ namespace ECOCEMProyect;
 
 public class MedicionBascula
 {
-    public int Id { get; set; }
     public int VehiculoId { get; set; }
     public int BasculaId { get; set; }
     public DateTime FechaId {get; set;}

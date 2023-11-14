@@ -1,7 +1,7 @@
 public class Reporte
 {
-    public int IdEquipo {get; set;}
-    public DateTime IdFecha {get; set;}
+    public int EquipoId {get; set;}
+    public DateTime FechaId {get; set;}
 
 //ToDo: Revisar cada uno de los indicadores y parametros sujetos a cambios.
 // QUESTION: Hay intersección entre los parámetros e indicadores, ¿cómo se debe representar?

@@ -7,8 +7,8 @@ public class Equipo
     public required Sede Sede {get; set;}
 
     public required TipoEquipo TipoEquipo {get; set;}
-    public Brigada? Brigada {get;set;}
 
     //public List<RoturaEquipo> RoturasEquipos {get; set;}
     //public List<Reporte> Reportes {get; set;}
+    public List<OrdenTrabajo> OrdenesTrabajo {get; } = new();
 }

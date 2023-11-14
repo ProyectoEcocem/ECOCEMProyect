@@ -10,4 +10,5 @@ public class MantenimientoImprevisto : AccionMantenimiento
 }
 public class MantenimientoPlanificado : AccionMantenimiento 
 {
+    public List<MantenimientoNecesario> MantenimientosNecesarios {get;} = new();
 }

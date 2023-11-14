@@ -4,5 +4,7 @@ public class TipoEquipo
 {
     public int TipoEId { get; set; }
     public string TipoE {get; set;}
+
+    public List<MantenimientoNecesario> MantenimientosNecesarios {get;} = new();
 }
 

@@ -16,4 +16,6 @@ public class OrdenTrabajo
 
    public List<AccionMantenimiento> AccionesMantenimiento {get; } = new(); 
    // Question: es necesario el mod 'required'?
+
+   public List<OrdenTrabajoAMRealizada> OrdenesAMRealizadas {get; } = new();
 }

@@ -32,7 +32,18 @@ public class MyContext : DbContext//IdentityDbContext<Trabajador, Role, Guid>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-       
+        modelBuilder.Entity<Compra>().HasKey(key => new { key.SedeId, key.FabricaId, key.FechaId });
+        modelBuilder.Entity<Venta>().HasKey(key => new { key.SedeId, key.EntidadCompradoraId, key.FechaId });
+        modelBuilder.Entity<Carga>().HasKey(key => new { key.TipoCementoId, key.SiloId,key.VehiculoId, key.FechaId });
+        modelBuilder.Entity<Descarga>().HasKey(key => new {key.TipoCementoId, key.SiloId, key.VehiculoId, key.FechaId});
+        modelBuilder.Entity<MedicionBascula>().HasKey(key => new { key.VehiculoId, key.BasculaId, key.FechaId });
+        modelBuilder.Entity<MedicionSilo>().HasKey(key => new { key.SiloId, key.MedidorId, key.FechaId });
+        modelBuilder.Entity<MantenimientoNecesario>().HasKey(key => new { key.TipoEquipoId, key.AMId, key.HorasExpId });
+        modelBuilder.Entity<OrdenTrabajo>().HasKey(key => new { key.EquipoId, key.BrigadaId, key.TrabajadorId, key.FechaId });
+        //modelBuilder.Entity<OrdenTrabajoAtendida>().HasKey(key => new { key.TipoEquipoId, key.AMId, key.HorasExpId };
+        modelBuilder.Entity<RoturaEquipo>().HasKey(key => new { key.EquipoId, key.RoturaId, key.FechaId });
+    
+    
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

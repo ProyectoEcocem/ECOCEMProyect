@@ -1,8 +1,11 @@
+using ECOCEMProyect;
+
 namespace ECOCEMProyect;
 
 public class AccionMantenimiento
 {
     public int AMId { get; set; }
+    public List<OrdenTrabajo> OrdenesTrabajo {get; } = new();
 }
 public class MantenimientoImprevisto : AccionMantenimiento 
 {

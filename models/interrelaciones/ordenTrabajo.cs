@@ -13,4 +13,7 @@ public class OrdenTrabajo
    public RoturaEquipo? RoturaEquipo {get; set;} // Question: en realidad es 1,1 o 0,1?
 
    // Question: Debo poner las llaves de RoturaEquipo?
+
+   public List<AccionMantenimiento> AccionesMantenimiento {get; } = new(); 
+   // Question: es necesario el mod 'required'?
 }

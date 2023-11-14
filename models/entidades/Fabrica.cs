@@ -2,5 +2,5 @@ namespace ECOCEMProyect;
 
 public class Fabrica
 {
-    public int IdFabrica { get; set; }
+    public int FabricaId { get; set; }
 }

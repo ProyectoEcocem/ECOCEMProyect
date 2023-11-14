@@ -2,5 +2,5 @@ namespace ECOCEMProyect;
 
 public class Medidor
 {
-    public int IdMedidor { get; set; }
+    public int MedidorId { get; set; }
 }

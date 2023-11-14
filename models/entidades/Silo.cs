@@ -2,5 +2,5 @@ namespace ECOCEMProyect;
 
 public class Silo
 {
-    public int NoSilo {get; set;}
+    public int SiloId {get; set;}
 }

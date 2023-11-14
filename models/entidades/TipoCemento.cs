@@ -2,5 +2,5 @@ namespace ECOCEMProyect;
 
 public class TipoCemento
 {
-    public int IdTipoCemento { get; set; }
+    public int TipoCementoId { get; set; }
 }

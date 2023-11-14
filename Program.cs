@@ -1,8 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+
+using ECOCEMProyect.migrations;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<MyContext>(opciones=>
+    opciones.UseNpgsql("name = DefaultConnection")
+);
 
 var app = builder.Build();
 

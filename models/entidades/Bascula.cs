@@ -1,6 +1,7 @@
+
 namespace ECOCEMProyect;
 
 public class Bascula
 {
-    public int IdBascula { get; set; }
+    public int BasculaId { get; set; }
 }

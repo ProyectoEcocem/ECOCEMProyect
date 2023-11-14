@@ -18,4 +18,5 @@ public class OrdenTrabajo
    // Question: es necesario el mod 'required'?
 
    public List<OrdenTrabajoAMRealizada> OrdenesAMRealizadas {get; } = new();
+   public List<OrdenTrabajoHerramienta> OrdenTrabajoHerramientas {get; } = new();
 }

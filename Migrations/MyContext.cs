@@ -50,17 +50,6 @@ public class MyContext : DbContext//IdentityDbContext<Trabajador, Role, Guid>
     public DbSet<Venta>Ventas{get;set;}
     
 
-
-
-
-
-
-
-
-
-
-
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Compra>().HasKey(key => new { key.SedeId, key.FabricaId, key.FechaId });
@@ -71,9 +60,9 @@ public class MyContext : DbContext//IdentityDbContext<Trabajador, Role, Guid>
         modelBuilder.Entity<MedicionSilo>().HasKey(key => new { key.SiloId, key.MedidorId, key.FechaId });
         modelBuilder.Entity<MantenimientoNecesario>().HasKey(key => new { key.TipoEquipoId, key.AMId, key.HorasExpId });
         modelBuilder.Entity<OrdenTrabajo>().HasKey(key => new { key.EquipoId, key.BrigadaId, key.TrabajadorId, key.FechaId });
-        //modelBuilder.Entity<OrdenTrabajoAtendida>().HasKey(key => new { key.TipoEquipoId, key.AMId, key.HorasExpId };
+        modelBuilder.Entity<OrdenTrabajoAtendida>().HasKey(key => new { key.TipoEquipoId, key.AMId, key.HorasExpId };
         modelBuilder.Entity<RoturaEquipo>().HasKey(key => new { key.EquipoId, key.RoturaId, key.FechaId });
-    
+         modelBuilder.Entity<Reporte>().HasKey(key => new { key.EquipoId, key.FechaId });
     
     }
 

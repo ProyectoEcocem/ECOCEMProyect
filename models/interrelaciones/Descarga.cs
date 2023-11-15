@@ -3,7 +3,6 @@ namespace ECOCEMProyect;
 
 public class Descarga
 {
-    public int Id { get; set; }
     public int TipoCementoId { get; set; }
     public int SiloId {get; set;}
     public int VehiculoId { get; set; }

@@ -4,10 +4,9 @@ namespace ECOCEMProyect;
 
 public class Venta
 {
-    public int Id { get; set; }
-    public int IdSede {get; set;}
-    public int IdEntidadCompradora {get; set;}
-    public DateTime IdFecha {get; set;}
+    public int SedeId {get; set;}
+    public int EntidadCompradoraId {get; set;}
+    public DateTime FechaId {get; set;}
 
     public required List<Carga> Cargas {get; set;}
 }

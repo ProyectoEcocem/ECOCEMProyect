@@ -2,5 +2,6 @@ namespace ECOCEMProyect;
 
 public class Brigada
 {
-    public int IdBrigada { get; set; }
+    public int BrigadaId { get; set; }
+    public List<OrdenTrabajo> OrdenesTrabajo {get; } = new();
 }

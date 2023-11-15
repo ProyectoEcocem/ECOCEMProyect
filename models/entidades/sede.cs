@@ -1,10 +1,12 @@
+namespace ECOCEMProyect;
+
 public class Sede
 {
     public int IdSede {get; set;}
     public string NombreSede {get; set;}
     public string UbicacionSede {get; set;}
     public int IdEmpresa {get; set;}
-    public Empresa Empresa {get; set;} = null!;
-    public List<Trabajador> Trabajadores {get;} = new List<Trabajador>();
-    public List<Equipo> Equipos {get;} = new List<Equipo>();
+    public required Empresa Empresa {get; set;} 
+    public required List<Trabajador> Trabajadores {get;set;} 
+    public required List<Equipo> Equipos {get;set;}
 }

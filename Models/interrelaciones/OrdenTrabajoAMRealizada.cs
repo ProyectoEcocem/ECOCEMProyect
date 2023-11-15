@@ -5,6 +5,7 @@ namespace ECOCEMProyect;
 public class OrdenTrabajoAMRealizada
 {
     public int AMId {get; set;}
+    public required AccionMantenimiento AccionMantenimiento {get; set;}
 
     //llaves de Orden de Trabajo
     public int EquipoId {get; set;} 
@@ -12,9 +13,8 @@ public class OrdenTrabajoAMRealizada
     public int TrabajadorId {get; set;}
     public DateTime FechaId {get; set;}
 
-    public required AccionMantenimiento AccionMantenimiento {get; set;}
-    public OrdenTrabajo OrdenTrabajo {get; set;} //no requerido necesariamente.
+    public OrdenTrabajo? OrdenTrabajo {get; set;} 
 
     public string Resultado {get ; set;} 
-    // Question: Que es resultado?
+ 
 }

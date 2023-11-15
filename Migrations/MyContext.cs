@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECOCEMProyect.migrations;
 
 
-public class MyContext : DbContext//IdentityDbContext<Trabajador, Role, Guid>
+public class MyContext : DbContext
 {
     private readonly IConfiguration _configuration;
 
@@ -44,29 +44,62 @@ public class MyContext : DbContext//IdentityDbContext<Trabajador, Role, Guid>
     public DbSet<MantenimientoNecesario>MantenimientosNecesarios{get;set;} 
     public DbSet<MedicionBascula>MedicionesBasculas{get;set;}
     public DbSet<MedicionSilo>MedicionesSilos{get;set;}
-    public DbSet<OrdenTrabajo>OrdenesTrabajo{get;set;}
+    //public DbSet<OrdenTrabajo>OrdenesTrabajo{get;set;}
     public DbSet<OrdenTrabajoAtendida>OrdenesTrabajoAtendidas{get;set;}
-    public DbSet<RoturaEquipo>Roturasequipos{get;set;}
+    //public DbSet<RoturaEquipo>Roturasequipos{get;set;}
     public DbSet<Venta>Ventas{get;set;}
     
-
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
        modelBuilder.Entity<Compra>().HasKey(key => new { key.SedeId, key.FabricaId, key.FechaId });
-        modelBuilder.Entity<Venta>().HasKey(key => new { key.SedeId, key.EntidadCompradoraId, key.FechaId });
-        modelBuilder.Entity<Carga>().HasKey(key => new { key.TipoCementoId, key.SiloId,key.VehiculoId, key.FechaId });
+        modelBuilder.Entity<Venta>().HasKey(key => new { key.SedeId, key.EntidadCompradoraId, key.FechaVentaId });
+        modelBuilder.Entity<Carga>().HasKey(key => new { key.TipoCementoId, key.SiloId,key.VehiculoId, key.FechaCargaId });
         modelBuilder.Entity<Descarga>().HasKey(key => new {key.TipoCementoId, key.SiloId, key.VehiculoId, key.FechaId});
-        modelBuilder.Entity<MedicionBascula>().HasKey(key => new { key.VehiculoId, key.BasculaId, key.FechaId });
-        modelBuilder.Entity<MedicionSilo>().HasKey(key => new { key.SiloId, key.MedidorId, key.FechaId });
+        modelBuilder.Entity<MedicionBascula>().HasKey(key => new { key.VehiculoId, key.BasculaId, key.FechaBId });
+        modelBuilder.Entity<MedicionSilo>().HasKey(key => new { key.SiloId, key.MedidorId, key.FechaMId });
         modelBuilder.Entity<MantenimientoNecesario>().HasKey(key => new { key.TipoEquipoId, key.AMId, key.HorasExpId });
+        modelBuilder.Entity<OrdenTrabajoAtendida>().HasKey(key => new { key.TrabajadorId, key.DiaId });
+        modelBuilder.Entity<Reporte>().HasKey(key => new { key.EquipoId, key.FechaId });
+        modelBuilder.Entity<AccionMantenimiento>().HasKey(key => new { key.AMId });
+        modelBuilder.Entity<HerramientaMantNecesario>().HasKey(key => new { key.HerramientasId, key.TipoEquipoId,key.AMId, key.HorasExpId  });
+        modelBuilder.Entity<OrdenTrabajoAMRealizada>().HasKey(key => new { key.AMId, key.EquipoId,key.BrigadaId, key.TrabajadorId, key.FechaId  });
+        modelBuilder.Entity<OrdenTrabajoHerramienta>().HasKey(key => new { key.HerramientasId, key.EquipoId,key.BrigadaId, key.TrabajadorId, key.FechaId  });
+        modelBuilder.Entity<TipoEquipo>().HasKey(key => new { key.TipoEId });
+
+        modelBuilder.Entity<Equipo>()
+        .HasOne(equipo => equipo.TipoEquipo)
+        .WithOne(tipoEquipo => tipoEquipo.Equipo)
+        .HasForeignKey<Equipo>(equipo => equipo.TipoEId);
+  
+        /* modelBuilder.Entity<RoturaEquipo>()
+        .HasOne(re => re.OrdenTrabajo)
+        .WithOne(ot => ot.RoturaEquipo)
+        .HasForeignKey<RoturaEquipo>(re => new {re.TrabajadorId, re.BrigadaId})
+        .HasPrincipalKey<OrdenTrabajo>(ot => new { ot.EquipoId, ot.RoturaId, ot.FechaId });*/
+
+                
+         /*modelBuilder.Entity<RoturaEquipo>()
+        .HasOne(re => re.OrdenTrabajo)
+        .WithOne(ot => ot.RoturaEquipo)
+        .HasForeignKey<RoturaEquipo>(re => re.RoturaId)
+        .HasPrincipalKey<OrdenTrabajo>(ot => new { ot.EquipoId, ot.BrigadaId, ot.TrabajadorId, ot.FechaId });*/
+
+        modelBuilder.Entity<OrdenTrabajo>()
+        .HasOne(ot => ot.RoturaEquipo)
+        .WithOne(re => re.OrdenTrabajo);
+        //.HasForeignKey<RoturaEquipo>(re => new { re.TrabajadorId, re.BrigadaId })
+        //.HasPrincipalKey<OrdenTrabajo>(ot => new { ot.TrabajadorId, ot.BrigadaId });
+
         modelBuilder.Entity<OrdenTrabajo>().HasKey(key => new { key.EquipoId, key.BrigadaId, key.TrabajadorId, key.FechaId });
-        modelBuilder.Entity<OrdenTrabajoAtendida>().HasKey(key => new { key.TipoEquipoId, key.AMId, key.HorasExpId };
+
+        modelBuilder.Entity<RoturaEquipo>()
+        .HasOne(re => re.OrdenTrabajo)
+        .WithOne(ot => ot.RoturaEquipo);
+        //.HasForeignKey<RoturaEquipo>(re => re.RoturaId);
+
         modelBuilder.Entity<RoturaEquipo>().HasKey(key => new { key.EquipoId, key.RoturaId, key.FechaId });
-         modelBuilder.Entity<Reporte>().HasKey(key => new { key.EquipoId, key.FechaId });
-    
-    
+
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -66,40 +66,17 @@ public class MyContext : DbContext
         modelBuilder.Entity<OrdenTrabajoAMRealizada>().HasKey(key => new { key.AMId, key.EquipoId,key.BrigadaId, key.TrabajadorId, key.FechaId  });
         modelBuilder.Entity<OrdenTrabajoHerramienta>().HasKey(key => new { key.HerramientasId, key.EquipoId,key.BrigadaId, key.TrabajadorId, key.FechaId  });
         modelBuilder.Entity<TipoEquipo>().HasKey(key => new { key.TipoEId });
+        modelBuilder.Entity<OrdenTrabajo>().HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});
+        modelBuilder.Entity<RoturaEquipo>().HasKey(key=> new {key.EquipoId, key.RoturaId, key.FechaId});
+
 
         modelBuilder.Entity<Equipo>()
         .HasOne(equipo => equipo.TipoEquipo)
         .WithOne(tipoEquipo => tipoEquipo.Equipo)
         .HasForeignKey<Equipo>(equipo => equipo.TipoEId);
-  
-        /* modelBuilder.Entity<RoturaEquipo>()
-        .HasOne(re => re.OrdenTrabajo)
-        .WithOne(ot => ot.RoturaEquipo)
-        .HasForeignKey<RoturaEquipo>(re => new {re.TrabajadorId, re.BrigadaId})
-        .HasPrincipalKey<OrdenTrabajo>(ot => new { ot.EquipoId, ot.RoturaId, ot.FechaId });*/
 
-                
-         /*modelBuilder.Entity<RoturaEquipo>()
-        .HasOne(re => re.OrdenTrabajo)
-        .WithOne(ot => ot.RoturaEquipo)
-        .HasForeignKey<RoturaEquipo>(re => re.RoturaId)
-        .HasPrincipalKey<OrdenTrabajo>(ot => new { ot.EquipoId, ot.BrigadaId, ot.TrabajadorId, ot.FechaId });*/
-
-        modelBuilder.Entity<OrdenTrabajo>()
-        .HasOne(ot => ot.RoturaEquipo)
-        .WithOne(re => re.OrdenTrabajo);
-        //.HasForeignKey<RoturaEquipo>(re => new { re.TrabajadorId, re.BrigadaId })
-        //.HasPrincipalKey<OrdenTrabajo>(ot => new { ot.TrabajadorId, ot.BrigadaId });
-
-        modelBuilder.Entity<OrdenTrabajo>().HasKey(key => new { key.EquipoId, key.BrigadaId, key.TrabajadorId, key.FechaId });
-
-        modelBuilder.Entity<RoturaEquipo>()
-        .HasOne(re => re.OrdenTrabajo)
-        .WithOne(ot => ot.RoturaEquipo);
-        //.HasForeignKey<RoturaEquipo>(re => re.RoturaId);
-
-        modelBuilder.Entity<RoturaEquipo>().HasKey(key => new { key.EquipoId, key.RoturaId, key.FechaId });
-
+        modelBuilder.Entity<OrdenTrabajoRoturaEquipo>().HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});
+        
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

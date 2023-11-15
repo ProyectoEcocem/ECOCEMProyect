@@ -29,6 +29,27 @@ public class MyContext : DbContext//IdentityDbContext<Trabajador, Role, Guid>
     public DbSet<Vehiculo>Vehiculos {get; set;}
     public DbSet<Carga>Cargas {get; set;}
     public DbSet<Compra>Compras {get; set;}
+    public DbSet<Brigada>Brigadas{get;set;}
+    public DbSet<AccionMantenimiento>AccionMantenimientos{get;set;}
+    public DbSet<MantenimientoPlanificado>MantenimientoPlanificados{get;set;}
+    public DbSet<Empresa>Empresas{get;set;}
+    public DbSet<Equipo>Equipos{get;set;}
+    public DbSet<Herramientas>Herramientas{get;set;}
+    public DbSet<JefeMantenimiento>JefeMantenimientos{get;set;}
+    public DbSet<Reporte>Reportes{get;set;}
+    public DbSet<Rotura>Roturas{get;set;}
+    public DbSet<TipoEquipo>TipoEquipos{get;set;}
+    public DbSet<Trabajador>Trabajadores{get;set;}
+
+
+
+
+
+
+
+
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

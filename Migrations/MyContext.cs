@@ -30,16 +30,26 @@ public class MyContext : DbContext//IdentityDbContext<Trabajador, Role, Guid>
     public DbSet<Carga>Cargas {get; set;}
     public DbSet<Compra>Compras {get; set;}
     public DbSet<Brigada>Brigadas{get;set;}
-    public DbSet<AccionMantenimiento>AccionMantenimientos{get;set;}
-    public DbSet<MantenimientoPlanificado>MantenimientoPlanificados{get;set;}
+    public DbSet<AccionMantenimiento>AccionesMantenimientos{get;set;}
+    public DbSet<MantenimientoPlanificado>MantenimientosPlanificados{get;set;}
     public DbSet<Empresa>Empresas{get;set;}
     public DbSet<Equipo>Equipos{get;set;}
     public DbSet<Herramientas>Herramientas{get;set;}
-    public DbSet<JefeMantenimiento>JefeMantenimientos{get;set;}
+    public DbSet<JefeMantenimiento>JefesMantenimientos{get;set;}
     public DbSet<Reporte>Reportes{get;set;}
     public DbSet<Rotura>Roturas{get;set;}
-    public DbSet<TipoEquipo>TipoEquipos{get;set;}
+    public DbSet<TipoEquipo>TiposEquipos{get;set;}
     public DbSet<Trabajador>Trabajadores{get;set;}
+    public DbSet<Descarga>Descargas{get;set;}
+    public DbSet<MantenimientoNecesario>MantenimientosNecesarios{get;set;} 
+    public DbSet<MedicionBascula>MedicionesBasculas{get;set;}
+    public DbSet<MedicionSilo>MedicionesSilos{get;set;}
+    public DbSet<OrdenTrabajo>OrdenesTrabajo{get;set;}
+    public DbSet<OrdenTrabajoAtendida>OrdenesTrabajoAtendidas{get;set;}
+    public DbSet<RoturaEquipo>Roturasequipos{get;set;}
+    public DbSet<Venta>Ventas{get;set;}
+    
+
 
 
 

@@ -1,28 +1,44 @@
 using ECOCEMProyect.migrations;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using ECOCEMProyect.Services;
+
 
 namespace ECOCEMProyect.Controllers;
 
 [ApiController]
 [Route("API/bascula")]
-public class BasculaController: ControllerBase
+
+public class BasculaController : ControllerBase
 {
-    public readonly MyContext context;
+    private readonly BasculaService _basculaService;
 
-    public BasculaController(MyContext context)
+    public BasculaController(BasculaService basculaService)
     {
-        this.context=context;
+        _basculaService = basculaService;
     }
 
-    [HttpPost]
-    public async Task<ActionResult>Post(Bascula bascula)
+    // POST
+    public async Task<ActionResult> Post(Bascula bascula)
     {
-        context.Add(bascula);
-        await context.SaveChangesAsync(); //insertar en la tabla de generos
-        return Ok();
+        return Ok(await _basculaService.CreateBasculaAsync(bascula));
     }
-    [HttpGet]
-    public IEnumerable<Bascula>Get() => context.Basculas.ToList();
 
+    // GET by ID
+    public async Task<ActionResult<Bascula>> GetById(int id)
+    {
+        return await _basculaService.GetBasculaAsync(id);
+    }
+
+    // PUT
+    public async Task<ActionResult> Put(Bascula bascula)
+    {
+        return Ok(await _basculaService.UpdateBasculaAsync(bascula));
+    }
+
+    // DELETE
+    public async Task<ActionResult> Delete(int id)
+    {
+        return Ok(await _basculaService.DeleteBasculaAsync(id));
+    }
 }

@@ -38,6 +38,7 @@ public class MyContext : DbContext
     public DbSet<JefeMantenimiento>JefesMantenimientos{get;set;}
     public DbSet<Reporte>Reportes{get;set;}
     public DbSet<Rotura>Roturas{get;set;}
+    //public DbSet<RoturaEquipo>RoturasEquipos{get;set;}
     public DbSet<TipoEquipo>TiposEquipos{get;set;}
     public DbSet<Trabajador>Trabajadores{get;set;}
     public DbSet<Descarga>Descargas{get;set;}
@@ -66,17 +67,19 @@ public class MyContext : DbContext
         modelBuilder.Entity<OrdenTrabajoAMRealizada>().HasKey(key => new { key.AMId, key.EquipoId,key.BrigadaId, key.TrabajadorId, key.FechaId  });
         modelBuilder.Entity<OrdenTrabajoHerramienta>().HasKey(key => new { key.HerramientasId, key.EquipoId,key.BrigadaId, key.TrabajadorId, key.FechaId  });
         modelBuilder.Entity<TipoEquipo>().HasKey(key => new { key.TipoEId });
-        modelBuilder.Entity<OrdenTrabajo>().HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});
+        
         modelBuilder.Entity<RoturaEquipo>().HasKey(key=> new {key.EquipoId, key.RoturaId, key.FechaId});
+        modelBuilder.Entity<OrdenTrabajo>().HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});
 
 
         modelBuilder.Entity<Equipo>()
-        .HasOne(equipo => equipo.TipoEquipo)
-        .WithOne(tipoEquipo => tipoEquipo.Equipo)
-        .HasForeignKey<Equipo>(equipo => equipo.TipoEId);
+            .HasOne(equipo => equipo.TipoEquipo)
+            .WithOne(tipoEquipo => tipoEquipo.Equipo)
+            .HasForeignKey<Equipo>(equipo => equipo.TipoEId);
 
-        modelBuilder.Entity<OrdenTrabajoRoturaEquipo>().HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});
-        
+        modelBuilder.Entity<OrdenTrabajoRoturaEquipo>()
+            .HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});
+
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

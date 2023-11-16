@@ -15,9 +15,9 @@ public class OrdenTrabajoHerramienta
 
     public OrdenTrabajo? OrdenTrabajo {get; set;}
 
-    public string UnidadMedidaU {get; set;}
+    public string? UnidadMedidaU {get; set;}
     public int CantidadU {get; set;}
     public double Precio {get; set;}
-    public string ValeAlmacen {get; set;} 
+    public string? ValeAlmacen {get; set;} 
     // TODO: Considerar crear un objeto ValeAlmacen con sus especificaciones. 
 }

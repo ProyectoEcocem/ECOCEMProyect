@@ -15,6 +15,6 @@ public class OrdenTrabajoAMRealizada
 
     public OrdenTrabajo? OrdenTrabajo {get; set;} 
 
-    public string Resultado {get ; set;} 
+    public string? Resultado {get ; set;} 
  
 }

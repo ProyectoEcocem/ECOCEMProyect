@@ -1,4 +1,4 @@
-namespace ECOCEMProyect;
+namespace ECOCEMProject.Models; 
 
 public class Brigada
 {

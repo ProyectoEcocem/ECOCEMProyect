@@ -1,6 +1,6 @@
 using ECOCEMProyect;
 
-namespace ECOCEMProyect;
+namespace ECOCEMProject.Models; 
 
 public class OrdenTrabajoAMRealizada
 {

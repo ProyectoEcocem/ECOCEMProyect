@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using System;
-namespace ECOCEMProyect;
+
+namespace ECOCEMProject.Models; 
 
 public class Venta
 {

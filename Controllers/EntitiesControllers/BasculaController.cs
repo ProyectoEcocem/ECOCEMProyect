@@ -19,26 +19,31 @@ public class BasculaController : ControllerBase
     }
 
     // POST
+    [HttpPost]
     public async Task<ActionResult> Post(Bascula bascula)
     {
         return Ok(await _basculaService.CreateBasculaAsync(bascula));
     }
 
     // GET by ID
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<Bascula>> GetById(int id)
     {
         return await _basculaService.GetBasculaAsync(id);
     }
 
     // PUT
+    [HttpPut("{id:int}")]
     public async Task<ActionResult> Put(Bascula bascula)
     {
         return Ok(await _basculaService.UpdateBasculaAsync(bascula));
     }
 
     // DELETE
+    [HttpDelete("{id:int}")]
     public async Task<ActionResult> Delete(int id)
     {
         return Ok(await _basculaService.DeleteBasculaAsync(id));
     }
 }
+

@@ -1,3 +1,4 @@
+namespace ECOCEMProject.Models; 
 public class Reporte
 {
     public int EquipoId {get; set;}

@@ -1,5 +1,5 @@
 
-namespace ECOCEMProyect;
+namespace ECOCEMProject.Models; 
 
 public class RoturaEquipo
 {

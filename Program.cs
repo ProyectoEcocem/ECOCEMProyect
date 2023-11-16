@@ -9,54 +9,51 @@ using ECOCEMProyect.migrations;
 var builder = WebApplication.CreateBuilder(args);
 
 
-
-// Add services to the container.
-
-//builder.Services.AddControllersWithViews();
+// // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-
-    
-});
+// builder.Services.AddEndpointsApiExplorer();
+// builder.Services.AddSwaggerGen(c =>
+// {
+//     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });  
+// });
 
 
-//agregar el contexto de la base de datos como servicios
+// //agregar el contexto de la base de datos como servicios
 builder.Services.AddDbContext<MyContext>(opciones=>
-    opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
+     opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+ );
 
 
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
-    });
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        //app.UseHsts();
-}
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
+// // Configure the HTTP request pipeline.
+// if (app.Environment.IsDevelopment())
+// {
+//     app.UseSwagger();
+//     app.UseSwaggerUI(c =>
+    
+//         c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1")
+//     );
+//         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+//         //app.UseHsts();
+// }
 
-app.UseAuthorization();
-app.MapControllers();
+// app.UseHttpsRedirection();
+// app.UseStaticFiles();
+// app.UseRouting();
 
-/*app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+// app.UseAuthorization();
+// app.MapControllers();
 
-app.MapFallbackToFile("index.html");
-*/
+// app.MapControllerRoute(
+//     name: "default",
+//     pattern: "{controller}/{action=Index}/{id?}");
+
+// app.MapFallbackToFile("index.html");
+
+app.MapGet("/", () => "Hello World!");
 
 
 app.Run();

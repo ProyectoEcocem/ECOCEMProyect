@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-//builder.Services.AddDbContext<MyContext>(opt=>opt.UseInMemoryDatabse("ECOCEMProject"));
 
 //agregar el contexto de la base de datos como servicios
 builder.Services.AddDbContext<MyContext>(opciones=>

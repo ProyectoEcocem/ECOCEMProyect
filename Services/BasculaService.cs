@@ -1,6 +1,5 @@
-using ECOCEMProyect.migrations;
 
-namespace ECOCEMProyect.Services;
+namespace ECOCEMProject;
 
 public class BasculaService
 {
@@ -54,4 +53,5 @@ public class BasculaService
         return true;
     }
 }
+
 

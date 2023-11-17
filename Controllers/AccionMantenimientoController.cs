@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
 
 [ApiController]
-[Route("API/[controller]/[action]")]
-public class AccionMantenimientoController : ControllerBase
+[Route("api/[controller]/[action]")]
+public class AccionMantenimientoController : Controller
 {
     private readonly AccionMantenimientoService _accionMantenimientoService;
 
@@ -17,28 +18,25 @@ public class AccionMantenimientoController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Post(AccionMantenimiento accionMantenimiento)
     {
-        return Ok(await _accionMantenimientoService.CreateAccionMantenimientoAsync(accionMantenimiento));
+        return Ok(await _accionMantenimientoService.Create(accionMantenimiento));
     }
 
     // GET by ID
-    [HttpGet("{id:int}")]
-    public async Task<ActionResult<AccionMantenimiento>> GetById(int id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Get(int id)
     {
-        return await _accionMantenimientoService.GetAccionMantenimientoAsync(id);
+        AccionMantenimiento accionMantenimiento=await _accionMantenimientoService.Get(id);
+        if(accionMantenimiento == null){
+            return NotFound();
+        }
+        return Ok(accionMantenimiento);
     }
+    // GETALL
+     [HttpGet]
+    public async Task<IEnumerable<AccionMantenimiento>> GetAll() => await _accionMantenimientoService.GetAll();
 
-    // PUT
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult> Put(AccionMantenimiento accionMantenimiento)
-    {
-        return Ok(await _accionMantenimientoService.UpdateAccionMantenimientoAsync(accionMantenimiento));
-    }
+    
 
-    // DELETE
-    [HttpDelete("{id:int}")]
-    public async Task<ActionResult> Delete(int id)
-    {
-        return Ok(await _accionMantenimientoService.DeleteAccionMantenimientoAsync(id));
-    }
+    
 }
 

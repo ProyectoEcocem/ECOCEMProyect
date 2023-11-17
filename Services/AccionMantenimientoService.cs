@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 namespace ECOCEMProject;
 
 public class AccionMantenimientoService
@@ -8,47 +10,53 @@ public class AccionMantenimientoService
     {
         _context = context;
     }
-
-    public async Task<AccionMantenimiento> CreateAccionMantenimientoAsync(AccionMantenimiento accionMantenimiento)
+    public async Task<AccionMantenimiento> Get(int id)
     {
-        _context.AccionesMantenimientos.Add(accionMantenimiento);
-        await _context.SaveChangesAsync();
-
-        return accionMantenimiento;
+        //var current_entity = await _context.FindAsync<Bascula>(id);
+        var current_entity = await _context.AccionesMantenimientos.FindAsync(id);
+        
+        if(current_entity == null!){
+             throw new InvalidOperationException("Entidad no encontrada");
+        }
+        return current_entity;
     }
-
-    public async Task<AccionMantenimiento> GetAccionMantenimientoAsync(int id)
+    public async Task<IEnumerable<AccionMantenimiento>> GetAll()
     {
-        return await _context.AccionesMantenimientos.FindAsync(id);
+        return await _context.AccionesMantenimientos.ToListAsync();
     }
-
-    public async Task<AccionMantenimiento> UpdateAccionMantenimientoAsync(AccionMantenimiento accionMantenimiento)
+    public async Task<AccionMantenimiento> Update(int id,AccionMantenimiento accionM)
     {
-        AccionMantenimiento accionMantenimientoActualizada = await _context.AccionesMantenimientos.FindAsync(accionMantenimiento.AMId);
+        var accionMExistente = await Get(id);
 
-        if (accionMantenimientoActualizada == null)
+        if (accionMExistente == null)
         {
             return null;
         }
-
-        _context.Entry(accionMantenimientoActualizada).CurrentValues.SetValues(accionMantenimiento);
+        
+        //existingBascula.BasculaId = bascula.BasculaId;
         await _context.SaveChangesAsync();
 
-        return accionMantenimientoActualizada;
+        return accionM;
     }
-
-    public async Task<bool> DeleteAccionMantenimientoAsync(int id)
+    public async Task<AccionMantenimiento> Create(AccionMantenimiento accionM)
     {
-        AccionMantenimiento accionMantenimiento = await _context.AccionesMantenimientos.FindAsync(id);
+        _context.AccionesMantenimientos.Add(accionM);
+        await _context.SaveChangesAsync();
 
-        if (accionMantenimiento == null)
+        return accionM;
+    }
+     public async Task Delete(int id)
+    {
+        var accionM = await Get(id);
+
+        if (accionM == null)
         {
-            return false;
+            return;
         }
 
-        _context.AccionesMantenimientos.Remove(accionMantenimiento);
+        _context.AccionesMantenimientos.Remove(accionM);
         await _context.SaveChangesAsync();
-
-        return true;
     }
+
+
 }

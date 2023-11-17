@@ -16,7 +16,8 @@ builder.Services.AddDbContext<MyContext>(opciones=>
 
 // Servicios de entidades
 builder.Services.AddScoped<BasculaService>();
-builder.Services.AddScoped<AccionMantenimiento>();
+builder.Services.AddScoped<AccionMantenimientoService>();
+builder.Services.AddScoped<SedeService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

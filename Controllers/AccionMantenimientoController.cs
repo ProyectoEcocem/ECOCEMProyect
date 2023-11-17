@@ -35,7 +35,31 @@ public class AccionMantenimientoController : Controller
      [HttpGet]
     public async Task<IEnumerable<AccionMantenimiento>> GetAll() => await _accionMantenimientoService.GetAll();
 
-    
+    [HttpPut]
+    public async Task<IActionResult> Put( int id, AccionMantenimiento accionMantenimiento)
+    {
+        if (accionMantenimiento == null)
+        {
+            return BadRequest();
+        }
+
+        AccionMantenimiento updatedAccionMantenimiento = await _accionMantenimientoService.Update(id,accionMantenimiento);
+
+        if (updatedAccionMantenimiento == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(updatedAccionMantenimiento);
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _accionMantenimientoService.Delete(id);
+
+        return NoContent();
+    }
 
     
 }

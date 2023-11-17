@@ -13,7 +13,6 @@ public class SedeService
 
     public async Task<Sede> Get(int id)
     {
-        //var current_entity = await _context.FindAsync<Bascula>(id);
         var current_entity = await _context.Sedes.FindAsync(id);
         
         if(current_entity == null!){
@@ -31,12 +30,6 @@ public class SedeService
     public async Task<Sede> Update(int id,Sede sede)
     {
         var sedeExistente = await Get(id);
-
-        if (sedeExistente == null)
-        {
-            return null;
-        }
-        
         
         await _context.SaveChangesAsync();
 
@@ -63,4 +56,6 @@ public class SedeService
         _context.Sedes.Remove(sede);
         await _context.SaveChangesAsync();
     }
+
+    
 }

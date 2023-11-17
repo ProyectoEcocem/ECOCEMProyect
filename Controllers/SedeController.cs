@@ -31,7 +31,7 @@ public class SedeController:Controller
     public async Task<IEnumerable<Sede>> GetAll() => await _sedeService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Sede sede)
+    public async Task<IActionResult> Post( Sede sede)
     {
         if (sede == null)
         {

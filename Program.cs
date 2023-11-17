@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore;
 using ECOCEMProject;
 
@@ -18,6 +17,13 @@ builder.Services.AddDbContext<MyContext>(opciones=>
 builder.Services.AddScoped<BasculaService>();
 builder.Services.AddScoped<AccionMantenimientoService>();
 builder.Services.AddScoped<SedeService>();
+builder.Services.AddScoped<MedidorService>();
+builder.Services.AddScoped<EntidadCompradoraService>();
+builder.Services.AddScoped<Vehiculo>();
+builder.Services.AddScoped<TipoCementoService>();
+builder.Services.AddScoped<RoturaService>();
+builder.Services.AddScoped<FabricaService>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

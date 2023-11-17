@@ -14,6 +14,9 @@ builder.Services.AddDbContext<MyContext>(opciones=>
     opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+// Servicios de entidades
+builder.Services.AddScoped<BasculaService>();
+builder.Services.AddScoped<AccionMantenimiento>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

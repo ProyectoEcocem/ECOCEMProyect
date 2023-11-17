@@ -1,4 +1,6 @@
 
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 namespace ECOCEMProject;
 
 public class BasculaService
@@ -10,7 +12,39 @@ public class BasculaService
         _context = context;
     }
 
-    public async Task<Bascula> CreateBasculaAsync(Bascula bascula)
+    public async Task<Bascula> Get(int id)
+    {
+        //var current_entity = await _context.FindAsync<Bascula>(id);
+        var current_entity = await _context.Basculas.FindAsync(id);
+        
+        if(current_entity == null!){
+             throw new InvalidOperationException("Entidad no encontrada");
+        }
+        return current_entity;
+    }
+
+
+    public async Task<IEnumerable<Bascula>> GetAll()
+    {
+        return await _context.Basculas.ToListAsync();
+    }
+
+    public async Task<Bascula> Update(int id,Bascula bascula)
+    {
+        var existingBascula = await Get(id);
+
+        if (existingBascula == null)
+        {
+            return null;
+        }
+        
+        //existingBascula.BasculaId = bascula.BasculaId;
+        await _context.SaveChangesAsync();
+
+        return bascula;
+    }
+
+    public async Task<Bascula> Create(Bascula bascula)
     {
         _context.Basculas.Add(bascula);
         await _context.SaveChangesAsync();
@@ -18,40 +52,16 @@ public class BasculaService
         return bascula;
     }
 
-    public async Task<Bascula> GetBasculaAsync(int id)
+    public async Task Delete(int id)
     {
-        return await _context.Basculas.FindAsync(id);
-    }
-
-    public async Task<Bascula> UpdateBasculaAsync(Bascula bascula)
-    {
-        Bascula basculaActualizada = await _context.Basculas.FindAsync(bascula.BasculaId);
-
-        if (basculaActualizada == null)
-        {
-            return null;
-        }
-
-        _context.Entry(basculaActualizada).CurrentValues.SetValues(bascula);
-        await _context.SaveChangesAsync();
-
-        return basculaActualizada;
-    }
-
-    public async Task<bool> DeleteBasculaAsync(int id)
-    {
-        Bascula bascula = await _context.Basculas.FindAsync(id);
+        var bascula = await Get(id);
 
         if (bascula == null)
         {
-            return false;
+            return;
         }
 
         _context.Basculas.Remove(bascula);
         await _context.SaveChangesAsync();
-
-        return true;
     }
 }
-
-

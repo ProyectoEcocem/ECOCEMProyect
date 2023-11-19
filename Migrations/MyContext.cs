@@ -27,13 +27,15 @@ public class MyContext: DbContext
     public DbSet<MantenimientoPlanificado>MantenimientosPlanificados{get;set;}
     public DbSet<Empresa>Empresas{get;set;}
     public DbSet<Equipo>Equipos{get;set;}
-    public DbSet<Herramientas>Herramientas{get;set;}
+    public DbSet<Herramienta>Herramientas{get;set;}
     public DbSet<JefeMantenimiento>JefesMantenimientos{get;set;}
     public DbSet<Reporte>Reportes{get;set;}
     public DbSet<Rotura>Roturas{get;set;}
     //public DbSet<RoturaEquipo>RoturasEquipos{get;set;}
     public DbSet<TipoEquipo>TiposEquipos{get;set;}
     public DbSet<Trabajador>Trabajadores{get;set;}
+    public DbSet<Operador>Operadores{get;set;}
+
     public DbSet<Descarga>Descargas{get;set;}
     public DbSet<MantenimientoNecesario>MantenimientosNecesarios{get;set;} 
     public DbSet<MedicionBascula>MedicionesBasculas{get;set;}
@@ -60,7 +62,6 @@ public class MyContext: DbContext
         modelBuilder.Entity<OrdenTrabajoAMRealizada>().HasKey(key => new { key.AMId, key.EquipoId,key.BrigadaId, key.TrabajadorId, key.FechaId  });
         modelBuilder.Entity<OrdenTrabajoHerramienta>().HasKey(key => new { key.HerramientasId, key.EquipoId,key.BrigadaId, key.TrabajadorId, key.FechaId  });
         modelBuilder.Entity<TipoEquipo>().HasKey(key => new { key.TipoEId });
-        
         modelBuilder.Entity<RoturaEquipo>().HasKey(key=> new {key.EquipoId, key.RoturaId, key.FechaId});
         modelBuilder.Entity<OrdenTrabajo>().HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});
 

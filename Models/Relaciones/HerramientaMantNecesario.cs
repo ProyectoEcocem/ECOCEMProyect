@@ -4,7 +4,7 @@ namespace ECOCEMProject;
 public class HerramientaMantNecesario
 {
     public int HerramientasId {get; set;}
-    public Herramientas? Herramienta {get; set;}
+    public Herramienta? Herramienta {get; set;}
 
     //llaves de Mantenimiento necesario
     public int TipoEquipoId {get; set;}

@@ -4,7 +4,7 @@ namespace ECOCEMProject;
 public class OrdenTrabajoHerramienta
 {
     public int HerramientasId {get; set; }
-    public Herramientas? Herramientas {get; set;}
+    public Herramienta? Herramientas {get; set;}
     
     //llaves de Orden de trabajo
     public int EquipoId {get; set;} 

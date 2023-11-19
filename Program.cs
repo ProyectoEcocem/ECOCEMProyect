@@ -23,6 +23,14 @@ builder.Services.AddScoped<Vehiculo>();
 builder.Services.AddScoped<TipoCementoService>();
 builder.Services.AddScoped<RoturaService>();
 builder.Services.AddScoped<FabricaService>();
+builder.Services.AddScoped<EmpresaService>();
+builder.Services.AddScoped<HerramientaService>();
+builder.Services.AddScoped<EquipoServicio>();
+builder.Services.AddScoped<OperadorServicio>();
+builder.Services.AddScoped<TrabajadorServicio>();
+builder.Services.AddScoped<SiloServicio>();
+builder.Services.AddScoped<BrigadaServicio>();
+builder.Services.AddScoped<JefeMantenimientoServicio>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

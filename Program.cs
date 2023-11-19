@@ -31,15 +31,16 @@ builder.Services.AddScoped<TrabajadorServicio>();
 builder.Services.AddScoped<SiloServicio>();
 builder.Services.AddScoped<BrigadaServicio>();
 builder.Services.AddScoped<JefeMantenimientoServicio>();
+// Servicios de interrelaciones
+builder.Services.AddScoped<CargaServicio>();
 
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configuracion  HTTP .
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -33,6 +33,7 @@ builder.Services.AddScoped<BrigadaServicio>();
 builder.Services.AddScoped<JefeMantenimientoServicio>();
 // Servicios de interrelaciones
 builder.Services.AddScoped<CargaServicio>();
+builder.Services.AddScoped<DescargaServicio>();
 
 
 builder.Services.AddEndpointsApiExplorer();

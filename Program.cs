@@ -35,6 +35,9 @@ builder.Services.AddScoped<JefeMantenimientoServicio>();
 builder.Services.AddScoped<CargaServicio>();
 builder.Services.AddScoped<DescargaServicio>();
 builder.Services.AddScoped<MedicionBasculaServicio>();
+builder.Services.AddScoped<MedicionSiloServicio>();
+builder.Services.AddScoped<VentaServicio>();
+builder.Services.AddScoped<CompraServicio>();
 
 
 builder.Services.AddEndpointsApiExplorer();

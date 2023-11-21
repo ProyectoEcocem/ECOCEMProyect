@@ -38,6 +38,8 @@ builder.Services.AddScoped<MedicionBasculaServicio>();
 builder.Services.AddScoped<MedicionSiloServicio>();
 builder.Services.AddScoped<VentaServicio>();
 builder.Services.AddScoped<CompraServicio>();
+builder.Services.AddScoped<ReporteServicio>();
+builder.Services.AddScoped<OrdenTrabajoAtendidaServicio>();
 
 
 builder.Services.AddEndpointsApiExplorer();

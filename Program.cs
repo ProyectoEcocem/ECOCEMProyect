@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore;
 using ECOCEMProject;
 
@@ -16,15 +15,39 @@ builder.Services.AddDbContext<MyContext>(opciones=>
 
 // Servicios de entidades
 builder.Services.AddScoped<BasculaService>();
-builder.Services.AddScoped<AccionMantenimiento>();
+builder.Services.AddScoped<AccionMantenimientoService>();
+builder.Services.AddScoped<SedeService>();
+builder.Services.AddScoped<MedidorService>();
+builder.Services.AddScoped<EntidadCompradoraService>();
+builder.Services.AddScoped<Vehiculo>();
+builder.Services.AddScoped<TipoCementoService>();
+builder.Services.AddScoped<RoturaService>();
+builder.Services.AddScoped<FabricaService>();
+builder.Services.AddScoped<EmpresaService>();
+builder.Services.AddScoped<HerramientaService>();
+builder.Services.AddScoped<EquipoServicio>();
+builder.Services.AddScoped<OperadorServicio>();
+builder.Services.AddScoped<TrabajadorServicio>();
+builder.Services.AddScoped<SiloServicio>();
+builder.Services.AddScoped<BrigadaServicio>();
+builder.Services.AddScoped<JefeMantenimientoServicio>();
+// Servicios de interrelaciones
+builder.Services.AddScoped<CargaServicio>();
+builder.Services.AddScoped<DescargaServicio>();
+builder.Services.AddScoped<MedicionBasculaServicio>();
+builder.Services.AddScoped<MedicionSiloServicio>();
+builder.Services.AddScoped<VentaServicio>();
+builder.Services.AddScoped<CompraServicio>();
+builder.Services.AddScoped<ReporteServicio>();
+builder.Services.AddScoped<OrdenTrabajoAtendidaServicio>();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configuracion  HTTP .
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -1,10 +1,10 @@
-using ECOCEMProject;
+
 
 namespace ECOCEMProject;
 
-public class Herramientas
+public class Herramienta
 {
-    public int HerramientasId { get; set; }
+    public int HerramientaId { get; set; }
     public List<OrdenTrabajoHerramienta> OrdenTrabajoHerramientas {get; } = new();
     public List<HerramientaMantNecesario> HerramientaMantNecesarios {get; } = new();
 }

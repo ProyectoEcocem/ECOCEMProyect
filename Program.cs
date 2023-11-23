@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Net.Http.Headers; 
 using Microsoft.AspNetCore.Authentication;
+
 using ECOCEMProject;
 
 
@@ -15,6 +17,15 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<MyContext>(opciones=>
     opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 
+);
+
+
+
+builder.Services.AddControllers();
+
+//agregar el contexto de la base de datos como servicios
+builder.Services.AddDbContext<MyContext>(opciones=>
+    opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
 
@@ -39,6 +50,7 @@ builder.Services.AddScoped<JefeMantenimientoServicio>();
 // Servicios de interrelaciones
 builder.Services.AddScoped<CargaServicio>();
 
+
 // Agregar las clases User y Role usando el paquete Identity de .Net Core
 builder.Services.AddIdentity<User, Role>(options =>
     {
@@ -56,6 +68,15 @@ builder.Services.AddIdentity<User, Role>(options =>
 
 
 builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<DescargaServicio>();
+builder.Services.AddScoped<MedicionBasculaServicio>();
+builder.Services.AddScoped<MedicionSiloServicio>();
+builder.Services.AddScoped<VentaServicio>();
+builder.Services.AddScoped<CompraServicio>();
+builder.Services.AddScoped<ReporteServicio>();
+builder.Services.AddScoped<OrdenTrabajoAtendidaServicio>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

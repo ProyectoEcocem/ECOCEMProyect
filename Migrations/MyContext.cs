@@ -12,6 +12,8 @@ public class MyContext: DbContext
     }
 
 
+    public DbSet<User>Users {get; set;}
+    public DbSet<Role>Roles {get; set;}
     public DbSet<Bascula>Basculas {get; set;}
     public DbSet<EntidadCompradora> EntidadCompradoras {get; set;}
     public DbSet<Fabrica>Fabricas {get; set;}
@@ -31,22 +33,20 @@ public class MyContext: DbContext
     public DbSet<JefeMantenimiento>JefesMantenimientos{get;set;}
     public DbSet<Reporte>Reportes{get;set;}
     public DbSet<Rotura>Roturas{get;set;}
-    //public DbSet<RoturaEquipo>RoturasEquipos{get;set;}
     public DbSet<TipoEquipo>TiposEquipos{get;set;}
     public DbSet<Trabajador>Trabajadores{get;set;}
     public DbSet<Operador>Operadores{get;set;}
-
+    //public DbSet<RoturaEquipo>RoturasEquipos{get;set;}
     public DbSet<Descarga>Descargas{get;set;}
     public DbSet<MantenimientoNecesario>MantenimientosNecesarios{get;set;} 
     public DbSet<MedicionBascula>MedicionesBasculas{get;set;}
     public DbSet<MedicionSilo>MedicionesSilos{get;set;}
-    //public DbSet<OrdenTrabajo>OrdenesTrabajo{get;set;}
     public DbSet<OrdenTrabajoAtendida>OrdenesTrabajoAtendidas{get;set;}
-    //public DbSet<RoturaEquipo>Roturasequipos{get;set;}
     public DbSet<Venta>Ventas{get;set;}
 
  
         protected override void OnModelCreating(ModelBuilder modelBuilder)
+
     {
        modelBuilder.Entity<Compra>().HasKey(key => new { key.SedeId, key.FabricaId, key.FechaId });
         modelBuilder.Entity<Venta>().HasKey(key => new { key.SedeId, key.EntidadCompradoraId, key.FechaVentaId });
@@ -64,8 +64,6 @@ public class MyContext: DbContext
         modelBuilder.Entity<TipoEquipo>().HasKey(key => new { key.TipoEId });
         modelBuilder.Entity<RoturaEquipo>().HasKey(key=> new {key.EquipoId, key.RoturaId, key.FechaId});
         modelBuilder.Entity<OrdenTrabajo>().HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});
-
-
         modelBuilder.Entity<Equipo>()
             .HasOne(equipo => equipo.TipoEquipo)
             .WithOne(tipoEquipo => tipoEquipo.Equipo)

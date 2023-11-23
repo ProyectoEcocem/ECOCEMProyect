@@ -3,6 +3,7 @@ using System;
 using ECOCEMProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20231119195945_InicialCreate")]
+    partial class InicialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,11 +204,9 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EmpresaId"));
 
-
                     b.Property<string>("NombreEmpresa")
                         .IsRequired()
                         .HasColumnType("text");
-
 
                     b.HasKey("EmpresaId");
 
@@ -262,7 +263,6 @@ namespace ECOCEMProject.Migrations
                     b.ToTable("Fabricas");
                 });
 
-
             modelBuilder.Entity("ECOCEMProject.Herramienta", b =>
                 {
                     b.Property<int>("HerramientaId")
@@ -275,7 +275,6 @@ namespace ECOCEMProject.Migrations
 
                     b.ToTable("Herramientas");
                 });
-
 
             modelBuilder.Entity("ECOCEMProject.HerramientaMantNecesario", b =>
                 {
@@ -293,7 +292,6 @@ namespace ECOCEMProject.Migrations
 
                     b.Property<int>("CantidadR")
                         .HasColumnType("integer");
-
 
                     b.Property<int?>("HerramientaId")
                         .HasColumnType("integer");
@@ -313,27 +311,12 @@ namespace ECOCEMProject.Migrations
 
                     b.HasKey("HerramientasId", "TipoEquipoId", "AMId", "HorasExpId");
 
-
                     b.HasIndex("HerramientaId");
 
                     b.HasIndex("MantenimientoNecesarioTipoEquipoId", "MantenimientoNecesarioAMId", "MantenimientoNecesarioHorasExpId");
 
                     b.ToTable("HerramientaMantNecesario");
                 });
-
-            modelBuilder.Entity("ECOCEMProject.Herramientas", b =>
-                {
-                    b.Property<int>("HerramientasId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("HerramientasId"));
-
-                    b.HasKey("HerramientasId");
-
-                    b.ToTable("Herramientas");
-                });
-
 
             modelBuilder.Entity("ECOCEMProject.MantenimientoNecesario", b =>
                 {
@@ -657,7 +640,6 @@ namespace ECOCEMProject.Migrations
                     b.ToTable("OrdenTrabajoRoturaEquipo");
                 });
 
-
             modelBuilder.Entity("ECOCEMProject.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -822,7 +804,6 @@ namespace ECOCEMProject.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-
             modelBuilder.Entity("ECOCEMProject.User", b =>
                 {
                     b.Property<int>("Id")
@@ -877,7 +858,6 @@ namespace ECOCEMProject.Migrations
 
                     b.ToTable("Users");
                 });
-
 
             modelBuilder.Entity("ECOCEMProject.Vehiculo", b =>
                 {
@@ -986,7 +966,6 @@ namespace ECOCEMProject.Migrations
                     b.HasDiscriminator().HasValue("JefeMantenimiento");
                 });
 
-
             modelBuilder.Entity("ECOCEMProject.Operador", b =>
                 {
                     b.HasBaseType("ECOCEMProject.Trabajador");
@@ -1052,13 +1031,9 @@ namespace ECOCEMProject.Migrations
 
             modelBuilder.Entity("ECOCEMProject.HerramientaMantNecesario", b =>
                 {
-
                     b.HasOne("ECOCEMProject.Herramienta", "Herramienta")
                         .WithMany("HerramientaMantNecesarios")
                         .HasForeignKey("HerramientaId");
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
 
                     b.HasOne("ECOCEMProject.MantenimientoNecesario", "MantenimientoNecesario")
                         .WithMany("HerramientaMantNecesarios")
@@ -1159,9 +1134,7 @@ namespace ECOCEMProject.Migrations
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoHerramienta", b =>
                 {
-
                     b.HasOne("ECOCEMProject.Herramienta", "Herramientas")
-
                         .WithMany("OrdenTrabajoHerramientas")
                         .HasForeignKey("HerramientasId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1197,14 +1170,12 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("RoturaEquipo");
                 });
 
-
             modelBuilder.Entity("ECOCEMProject.Role", b =>
                 {
                     b.HasOne("ECOCEMProject.User", null)
                         .WithMany("Roles")
                         .HasForeignKey("UserId");
                 });
-
 
             modelBuilder.Entity("ECOCEMProject.Sede", b =>
                 {
@@ -1273,9 +1244,7 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("Sedes");
                 });
 
-
             modelBuilder.Entity("ECOCEMProject.Herramienta", b =>
-
                 {
                     b.Navigation("HerramientaMantNecesarios");
 
@@ -1320,12 +1289,10 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("OrdenesTrabajoAtendidas");
                 });
 
-
             modelBuilder.Entity("ECOCEMProject.User", b =>
                 {
                     b.Navigation("Roles");
                 });
-
 
             modelBuilder.Entity("ECOCEMProject.Venta", b =>
                 {

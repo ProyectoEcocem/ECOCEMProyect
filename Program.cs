@@ -47,6 +47,9 @@ builder.Services.AddScoped<TrabajadorServicio>();
 builder.Services.AddScoped<SiloServicio>();
 builder.Services.AddScoped<BrigadaServicio>();
 builder.Services.AddScoped<JefeMantenimientoServicio>();
+builder.Services.AddScoped<RoleService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<UserRoleServicio>();
 // Servicios de interrelaciones
 builder.Services.AddScoped<CargaServicio>();
 

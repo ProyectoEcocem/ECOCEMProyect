@@ -1,10 +1,10 @@
 import { useState } from "react";
 import {
-    DatePicker,
     FormLabel,
     Button,
     Flex,
     Select,
+    Input,
     //BackgroundImage
   } from "@chakra-ui/react"; 
 
@@ -49,7 +49,7 @@ const InsertarRoturaEquipo = () => {
   Insertar Rotura de Equipo
 </FormLabel>
 
-<FormLabel style={{margin: "0px 220px 0px 40px"}}>Tipo de Rotura</FormLabel>
+<FormLabel style={{margin: "0px 250px 0px 40px"}}>Tipo de Rotura</FormLabel>
   
 <Select
           value={roturaId}
@@ -64,7 +64,7 @@ const InsertarRoturaEquipo = () => {
           ))}
         </Select>
       
-            <FormLabel style={{margin: "20px 210px 0px 0px"}}>Equipo</FormLabel>
+            <FormLabel style={{margin: "0px 260px 0px 0px"}}>Equipo</FormLabel>
 
             <Select
           value={equipoId}
@@ -79,11 +79,15 @@ const InsertarRoturaEquipo = () => {
           ))}
         </Select>
 
-        <FormLabel style={{margin: "20px 210px 0px 0px"}}>Fecha de la Rotura</FormLabel>
+        <FormLabel style={{margin: "0px 180px 0px 0px"}}>Fecha de la Rotura</FormLabel>
 
-        <DatePicker
-          defaultValue={fecha}
-          onChange={(date) => setFecha(date)}
+        <Input
+          type="datetime-local"
+          value={fecha}
+          onChange={(e) => setFecha(e.target.value)}
+          width={80}
+          marginBottom={30}
+         
         />
 
         <Flex>
@@ -98,6 +102,7 @@ const InsertarRoturaEquipo = () => {
   );
 };
 
-// ToDo: Arreglar fecha
+// ToDo: Verificar que los valores sean validos
+// ToDo: Evento de los Botontes
 
 export default InsertarRoturaEquipo;

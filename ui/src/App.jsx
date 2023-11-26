@@ -3,7 +3,11 @@
 //import viteLogo from '/vite.svg'
 import './App.css'
 import { ChakraProvider } from '@chakra-ui/react'
-import Login from './components/Login'
+//import Login from './components/Login'
+//import InsertarSede from './components/InsertarSede'
+//import InsertarTipoDeEquipo from './components/InsertarTipoDeEquipo'
+//import InsertarEquipo from './components/InsertarEquipo'
+import InsertarRoturaEquipo from './components/InsertarRoturaEquipo'
 
 function App() {
  // const [count, setCount] = useState(0)
@@ -11,7 +15,7 @@ function App() {
   return (
     <ChakraProvider>
       <div>
-      <Login />
+      <InsertarRoturaEquipo/>
     </div>
   </ChakraProvider>
   )

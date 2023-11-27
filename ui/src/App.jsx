@@ -7,8 +7,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 //import InsertarSede from './components/InsertarSede'
 //import InsertarTipoDeEquipo from './components/InsertarTipoDeEquipo'
 //import InsertarEquipo from './components/InsertarEquipo'
-import InsertarRoturaEquipo from './components/InsertarRoturaEquipo'
+//import InsertarRoturaEquipo from './components/InsertarRoturaEquipo'
 //import InsertarTrabajador from './components/InsertarTrabajador'
+import InsertarIndicadores from './components/InsertarIndicadores'
 
 function App() {
  // const [count, setCount] = useState(0)
@@ -16,7 +17,7 @@ function App() {
   return (
     <ChakraProvider>
       <div>
-      <InsertarRoturaEquipo/>
+      <InsertarIndicadores/>
     </div>
   </ChakraProvider>
   )

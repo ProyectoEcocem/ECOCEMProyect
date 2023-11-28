@@ -1,6 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
+    public class SedeData
+    {
+        public int sedeid { get; set; }
+        public string nombreSede { get; set; }
+        public string ubicacionSede { get; set; }
+        public int empresaId { get; set; }
+    }
 [Route("api/[controller]/[action]")]
 [ApiController]
 
@@ -31,7 +38,7 @@ public class SedeController:Controller
     public async Task<IEnumerable<Sede>> GetAll() => await _sedeService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post( Sede sede)
+    public async Task<IActionResult> Post( SedeData sede)
     {
         if (sede == null)
         {

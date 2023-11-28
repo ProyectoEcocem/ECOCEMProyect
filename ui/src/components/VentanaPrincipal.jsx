@@ -10,6 +10,7 @@ import {
  import InsertarEquipo from './InsertarEquipo';
  import InsertarRoturaEquipo from './InsertarRoturaEquipo';
 import InsertarParametros from './InsertarParametros';
+import VisualizarSede from './VisualizarSede';
 
  const VentanaPrincipal = () => {
  return(
@@ -24,7 +25,25 @@ import InsertarParametros from './InsertarParametros';
   <TabPanels>
 
     <TabPanel> {/*Panel para Visualizar Tablas*/}
-      <p>one!</p>
+      <Tabs isFitted variant='soft-rounded' colorScheme='orange'>
+        <TabList>
+            <Tab>Sedes</Tab>
+        </TabList>
+
+        <TabPanels>
+
+            <TabPanel> {/*Panel para Visualizar Sede*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <VisualizarSede/>
+                </div>
+            </TabPanel>
+
+        </TabPanels>
+      </Tabs>
     </TabPanel>
 
     <TabPanel> {/*Panel para Introducir Datos*/}

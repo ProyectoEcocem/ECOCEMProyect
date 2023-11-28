@@ -12,6 +12,7 @@ import {
 import InsertarParametros from './InsertarParametros';
 import VisualizarSede from './VisualizarSede';
 import VisualizarTipoEquipo from './VisualizarTipoEquipo';
+import VisualizarEquipo from './VisualizarSede copy';
 
  const VentanaPrincipal = () => {
  return(
@@ -30,6 +31,7 @@ import VisualizarTipoEquipo from './VisualizarTipoEquipo';
         <TabList>
             <Tab>Sedes</Tab>
             <Tab>Tipos de Equipo</Tab>
+            <Tab>Equipos</Tab>
         </TabList>
 
         <TabPanels>
@@ -54,6 +56,15 @@ import VisualizarTipoEquipo from './VisualizarTipoEquipo';
                 </div>
             </TabPanel>
 
+            <TabPanel> {/*Panel para Visualizar Equipo*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <VisualizarEquipo/>
+                </div>
+            </TabPanel>
         </TabPanels>
       </Tabs>
     </TabPanel>

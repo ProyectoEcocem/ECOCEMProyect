@@ -16,7 +16,7 @@ public class UserService
 
     public async Task<User> GetByName(string name)
     {
-        var current_entity = await _context.Users.FindAsync(name);
+        var current_entity = await _userManager.FindByNameAsync(name);
         
         if(current_entity == null!){
              throw new InvalidOperationException("Entidad no encontrada");

@@ -49,9 +49,23 @@ builder.Services.AddScoped<BrigadaServicio>();
 builder.Services.AddScoped<JefeMantenimientoServicio>();
 builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<UserRoleServicio>();
+builder.Services.AddScoped<TipoEquipoServicio>();
 // Servicios de interrelaciones
 builder.Services.AddScoped<CargaServicio>();
+builder.Services.AddScoped<CompraServicio>();
+builder.Services.AddScoped<DescargaServicio>();
+builder.Services.AddScoped<MedicionBasculaServicio>();
+builder.Services.AddScoped<MedicionSiloServicio>();
+builder.Services.AddScoped<OrdenTrabajoAtendidaServicio>();
+builder.Services.AddScoped<ReporteServicio>();
+builder.Services.AddScoped<RoturaEquipoServicio>();
+builder.Services.AddScoped<UserRoleServicio>();
+builder.Services.AddScoped<VentaServicio>();
+
+//Servicio para filtro
+builder.Services.AddScoped<FiltroMantenimientoService>();
+
+
 
 
 // Agregar las clases User y Role usando el paquete Identity de .Net Core
@@ -95,7 +109,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseAuthentication();
 app.MapControllers();
 
 app.Run();

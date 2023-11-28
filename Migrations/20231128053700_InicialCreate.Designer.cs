@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20231125061014_InicialCreate")]
+    [Migration("20231128053700_InicialCreate")]
     partial class InicialCreate
     {
         /// <inheritdoc />
@@ -691,7 +691,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasKey("EquipoId", "RoturaId", "FechaId");
 
-                    b.ToTable("RoturaEquipo");
+                    b.ToTable("RoturasEquipos");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Sede", b =>
@@ -702,9 +702,6 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SedeId"));
 
-                    b.Property<int>("EmpresaId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("NombreSede")
                         .HasColumnType("text");
 
@@ -712,8 +709,6 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("SedeId");
-
-                    b.HasIndex("EmpresaId");
 
                     b.ToTable("Sedes");
                 });
@@ -1244,17 +1239,6 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("RoturaEquipo");
                 });
 
-            modelBuilder.Entity("ECOCEMProject.Sede", b =>
-                {
-                    b.HasOne("ECOCEMProject.Empresa", "Empresa")
-                        .WithMany("Sedes")
-                        .HasForeignKey("EmpresaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empresa");
-                });
-
             modelBuilder.Entity("ECOCEMProject.Silo", b =>
                 {
                     b.HasOne("ECOCEMProject.Equipo", "Equipo")
@@ -1334,11 +1318,6 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("MedicionesBascula");
 
                     b.Navigation("MedicionesSilo");
-                });
-
-            modelBuilder.Entity("ECOCEMProject.Empresa", b =>
-                {
-                    b.Navigation("Sedes");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Herramienta", b =>

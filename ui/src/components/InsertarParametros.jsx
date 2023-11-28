@@ -56,8 +56,10 @@ const InsertarParametros = () => {
   ]
 
   return (
-    <div>
-        <FormLabel style={{fontSize: 30}}>Insertar Parámetros</FormLabel>
+    <div style={{ borderRadius: 20,
+        border: "2px solid #5F89C1", width: 1200, height: "400px",
+        backgroundColor: "white",}}>
+        <FormLabel style={{fontSize: 30, marginTop:"20px", marginLeft:"450px"}}>Insertar Parámetros</FormLabel>
     <Flex>
         <Input
           type="datetime-local"
@@ -185,7 +187,7 @@ const InsertarParametros = () => {
     </TableContainer>
 
         <Flex>
-        <Button variant="contained" color="primary" style={{ marginRight: 10, marginLeft: 350 }}>
+        <Button variant="contained" color="primary" style={{ marginRight: 10, marginLeft: 450 }}>
           Aceptar
         </Button>
         <Button variant="contained" color="secondary">

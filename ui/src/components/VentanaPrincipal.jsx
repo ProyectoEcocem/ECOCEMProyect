@@ -8,6 +8,7 @@ import {
  import InsertarSede from './InsertarSede';
  import InsertarTipoDeEquipo from './InsertarTipoDeEquipo';
  import InsertarEquipo from './InsertarEquipo';
+ import InsertarRoturaEquipo from './InsertarRoturaEquipo';
 
  const VentanaPrincipal = () => {
  return(
@@ -65,6 +66,26 @@ import {
                 alignItems: "center",
                 }}>
                 <InsertarEquipo/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Rotura */}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                    <p>Tipo de rotura</p>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Rotura de Equipo */}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarRoturaEquipo/>
                 </div>
             </TabPanel>
 

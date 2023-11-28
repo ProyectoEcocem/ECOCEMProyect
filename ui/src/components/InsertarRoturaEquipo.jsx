@@ -30,7 +30,7 @@ const InsertarRoturaEquipo = () => {
   return (
     <div style={{
       width: "400px",
-      height: "500px",
+      height: "430px",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -39,12 +39,7 @@ const InsertarRoturaEquipo = () => {
       borderRadius: 20,
       border: "2px solid #5F89C1",
     }}>
-      <img
-        src="/public/ecocemlogo.png"
-        alt="Logo"
-        width={80}
-        height={80}
-      />
+     
 <FormLabel style={{fontSize: 30}}>
   Insertar Rotura de Equipo
 </FormLabel>

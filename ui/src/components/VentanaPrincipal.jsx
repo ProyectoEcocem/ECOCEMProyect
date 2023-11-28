@@ -7,6 +7,7 @@ import {
  } from '@chakra-ui/react'
  import InsertarSede from './InsertarSede';
  import InsertarTipoDeEquipo from './InsertarTipoDeEquipo';
+ import InsertarEquipo from './InsertarEquipo';
 
  const VentanaPrincipal = () => {
  return(
@@ -54,6 +55,16 @@ import {
                 alignItems: "center",
                 }}>
                 <InsertarTipoDeEquipo/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Equipo */}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarEquipo/>
                 </div>
             </TabPanel>
 

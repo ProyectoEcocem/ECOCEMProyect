@@ -9,6 +9,7 @@ import {
  import InsertarTipoDeEquipo from './InsertarTipoDeEquipo';
  import InsertarEquipo from './InsertarEquipo';
  import InsertarRoturaEquipo from './InsertarRoturaEquipo';
+import InsertarParametros from './InsertarParametros';
 
  const VentanaPrincipal = () => {
  return(
@@ -86,6 +87,12 @@ import {
                 alignItems: "center",
                 }}>
                 <InsertarRoturaEquipo/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Parámetros */}
+            <div>
+                <InsertarParametros/>
                 </div>
             </TabPanel>
 

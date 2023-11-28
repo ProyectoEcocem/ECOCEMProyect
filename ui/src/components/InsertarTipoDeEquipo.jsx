@@ -15,7 +15,7 @@ const InsertarTipoDeEquipo = () => {
     return (
         <div style={{
             width: "400px",
-            height: "500px",
+            height: "400px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -24,14 +24,7 @@ const InsertarTipoDeEquipo = () => {
             borderRadius: 20,
             border: "2px solid #5F89C1",
           }}>
-             <img
-        src="/public/ecocemlogo.png"
-        alt="Logo"
-        width={100}
-        height={100}
-        
-      />
-
+          
 <FormLabel style={{fontSize: 30, marginTop: 20}}>
   Insertar Tipo de Equipo
 </FormLabel>

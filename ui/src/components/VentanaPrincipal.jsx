@@ -6,6 +6,7 @@ import {
     TabPanel
  } from '@chakra-ui/react'
  import InsertarSede from './InsertarSede';
+ import InsertarTipoDeEquipo from './InsertarTipoDeEquipo';
 
  const VentanaPrincipal = () => {
  return(
@@ -24,7 +25,7 @@ import {
     </TabPanel>
 
     <TabPanel> {/*Panel para Introducir Datos*/}
-        <Tabs isFitted variant='soft-rounded' colorScheme='green'>
+        <Tabs isFitted variant='soft-rounded' colorScheme='orange'>
         <TabList>
             <Tab>Insertar Sede</Tab>
             <Tab>Insertar Tipo de Equipo</Tab>
@@ -46,8 +47,14 @@ import {
                 </div>
             </TabPanel>
 
-            <TabPanel>
-            <p>two!</p>
+            <TabPanel> {/*Panel para Insertar Tipo de Equipo */}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarTipoDeEquipo/>
+                </div>
             </TabPanel>
 
         </TabPanels>

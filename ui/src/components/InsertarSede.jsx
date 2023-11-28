@@ -7,16 +7,54 @@ import {
     Flex,
     //BackgroundImage
   } from "@chakra-ui/react"; 
+import axios from "axios";
+//import { sedeController } from "../../../Controllers/Entidades"
 
 const InsertarSede = () => {
   const [numeroSede, setNumeroSede] = useState("");
   const [nombreSede, setNombreSede] = useState("");
   const [ubicacion, setUbicacion] = useState("");
 
+  const clickAceptar = (event) => {
+    event.preventDefault();
+
+    const boton = event.target;
+    boton.style.backgroundColor = "gray";
+    setTimeout(() => {
+      boton.style.backgroundColor = "";
+  }, 0.5000);
+
+    registrar();
+  }
+
+  //Para el evento onClick del botón Aceptar
+  const registrar = async (e) => {
+    e.preventDefault();
+
+    const sede = {
+      numeroSede: numeroSede,
+      nombreSede: nombreSede,
+      ubicacion: ubicacion,
+    };
+
+    //solicitud post y manejo de errores
+    try {
+      const response = await axios.post("api/[controller]/[action]", sede);
+      if (response.status === 201) {
+        console.log("Sede insertada correctamente");
+      } else {
+        console.error("Error al insertar la sede");
+        
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div style={{
       width: "400px",
-      height: "500px",
+      height: "400px",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -25,12 +63,7 @@ const InsertarSede = () => {
       borderRadius: 20,
       border: "2px solid #5F89C1",
     }}>
-      <img
-        src="/public/ecocemlogo.png"
-        alt="Logo"
-        width={80}
-        height={80}
-      />
+     
 <FormLabel style={{fontSize: 30}}>
   Insertar Sede
 </FormLabel>
@@ -72,7 +105,7 @@ const InsertarSede = () => {
               />
             </FormControl>
         <Flex>
-        <Button variant="contained" color="primary" style={{ marginRight: 10 }}>
+        <Button variant="contained" color="primary" style={{ marginRight: 10 }} onClick={clickAceptar}>
           Aceptar
         </Button>
         <Button variant="contained" color="secondary">
@@ -82,8 +115,9 @@ const InsertarSede = () => {
       </div>
   );
 };
+
+export default InsertarSede;
+
 // ToDo: Verificar que ya no exista la sede creada (por el Id)
 // ToDo: Evento con los botones.
 // Question: Las sedes tienen un id propio en la vida real o es asignado por el programa?
-
-export default InsertarSede;

@@ -6,28 +6,22 @@ using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Authentication;
 
 using ECOCEMProject;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        });
 
 //agregar el contexto de la base de datos como servicios
 builder.Services.AddDbContext<MyContext>(opciones=>
     opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 
 );
-
-
-
-builder.Services.AddControllers();
-
-//agregar el contexto de la base de datos como servicios
-builder.Services.AddDbContext<MyContext>(opciones=>
-    opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
-
 
 // Servicios de entidades
 builder.Services.AddScoped<BasculaService>();
@@ -49,9 +43,23 @@ builder.Services.AddScoped<BrigadaServicio>();
 builder.Services.AddScoped<JefeMantenimientoServicio>();
 builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<UserRoleServicio>();
+builder.Services.AddScoped<TipoEquipoServicio>();
 // Servicios de interrelaciones
 builder.Services.AddScoped<CargaServicio>();
+builder.Services.AddScoped<CompraServicio>();
+builder.Services.AddScoped<DescargaServicio>();
+builder.Services.AddScoped<MedicionBasculaServicio>();
+builder.Services.AddScoped<MedicionSiloServicio>();
+builder.Services.AddScoped<OrdenTrabajoAtendidaServicio>();
+builder.Services.AddScoped<ReporteServicio>();
+builder.Services.AddScoped<RoturaEquipoServicio>();
+builder.Services.AddScoped<UserRoleServicio>();
+builder.Services.AddScoped<VentaServicio>();
+
+//Servicio para filtro
+builder.Services.AddScoped<FiltroMantenimientoService>();
+
+
 
 
 // Agregar las clases User y Role usando el paquete Identity de .Net Core
@@ -95,7 +103,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseAuthentication();
 app.MapControllers();
 
 app.Run();

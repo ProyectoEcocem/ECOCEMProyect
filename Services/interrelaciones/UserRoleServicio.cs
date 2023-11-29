@@ -41,7 +41,7 @@ public class UserRoleServicio
                 RoleId = idRole,
 
             };
-            _context.UserRoles.Add(relation);
+            await _context.UserRoles.AddAsync(relation);
             await _context.SaveChangesAsync();
             return relation;
         }
@@ -59,4 +59,5 @@ public class UserRoleServicio
         await _context.SaveChangesAsync();
     }
 
+    
 }

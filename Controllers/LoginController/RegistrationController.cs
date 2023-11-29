@@ -18,12 +18,14 @@ namespace ECOCEMProject;
         private readonly UserRoleServicio _userRoleService;
         private readonly IConfiguration _configuration;
         private readonly SignInManager<User> _signInManager;
+        private readonly FiltroMantenimientoService _filtro;
 
         public RegistrationController(
             UserService userService,
             RoleService roleService,
             UserRoleServicio userRoleService,
             IConfiguration configuration,
+            FiltroMantenimientoService filtro,
             
             
             
@@ -34,6 +36,7 @@ namespace ECOCEMProject;
             _userRoleService = userRoleService;
             _configuration = configuration;
             _signInManager = signInManager;
+            _filtro = filtro;
         }
 
         [HttpPost]
@@ -69,7 +72,7 @@ namespace ECOCEMProject;
             }
             catch
             {
-                await _roleService.Delete(current_user.Id);
+                await _userService.DeleteByName(current_user.Nombre);
                 return BadRequest("Fatal errwor");
             }
             await _userRoleService.Create(current_user.Id, current_role.Id);
@@ -89,8 +92,8 @@ namespace ECOCEMProject;
             if (!result.Succeeded)
                 return BadRequest("Wrong name or password");
 
-            /*var user = await _userService.GetByName(login.Name!);
-            var roles = await _relationFilter.GetType2ByType1(user.Id);
+            var user = await _userService.GetByName(login.Name!);
+            var roles =  await _filtro.GetRoles(user.Id);
             
             // Crea una lista de claims.
             var claims = new List<Claim>
@@ -104,7 +107,7 @@ namespace ECOCEMProject;
             {
                 claims.Add(new Claim(ClaimTypes.Role, role.Name!));
             }
-*/
+
             return Ok();
         }
     }

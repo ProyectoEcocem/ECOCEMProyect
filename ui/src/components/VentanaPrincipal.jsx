@@ -3,36 +3,48 @@ import {
     TabList,
     TabPanels,
     Tab,
-    TabPanel
+    TabPanel,
+    TabIndicator
  } from '@chakra-ui/react'
  import InsertarSede from './InsertarSede';
  import InsertarTipoDeEquipo from './InsertarTipoDeEquipo';
  import InsertarEquipo from './InsertarEquipo';
+ import InsertarRotura from './InsertarRotura';
  import InsertarRoturaEquipo from './InsertarRoturaEquipo';
 import InsertarParametros from './InsertarParametros';
 import VisualizarSede from './VisualizarSede';
 import VisualizarTipoEquipo from './VisualizarTipoEquipo';
 import VisualizarEquipo from './VisualizarSede copy';
 
+
  const VentanaPrincipal = () => {
  return(
 <div>
- <Tabs isFitted variant='soft-rounded' colorScheme='blue'>
+ <Tabs isFitted variant="enclosed">
 
   <TabList>
-    <Tab>Visualizar Tablas</Tab>
-    <Tab>Introducir Datos</Tab>
+    <Tab fontSize={24}>Visualizar Tablas</Tab>
+    <Tab fontSize={24}>Introducir Datos</Tab>
   </TabList>
+
+
 
   <TabPanels>
 
     <TabPanel> {/*Panel para Visualizar Tablas*/}
-      <Tabs isFitted variant='soft-rounded' colorScheme='orange'>
+      <Tabs isFitted variant="enclosed" colorScheme='orange'>
         <TabList>
             <Tab>Sedes</Tab>
             <Tab>Tipos de Equipo</Tab>
             <Tab>Equipos</Tab>
         </TabList>
+
+        <TabIndicator
+      mt="-1.5px"
+      height="2px"
+      bg="blue.500"
+      borderRadius="1px"
+    />
 
         <TabPanels>
 
@@ -70,7 +82,7 @@ import VisualizarEquipo from './VisualizarSede copy';
     </TabPanel>
 
     <TabPanel> {/*Panel para Introducir Datos*/}
-        <Tabs isFitted variant='soft-rounded' colorScheme='orange'>
+        <Tabs isFitted variant="enclosed" colorScheme='orange'>
         <TabList>
             <Tab>Insertar Sede</Tab>
             <Tab>Insertar Tipo de Equipo</Tab>
@@ -118,7 +130,7 @@ import VisualizarEquipo from './VisualizarSede copy';
                 justifyContent: "center",
                 alignItems: "center",
                 }}>
-                    <p>Tipo de rotura</p>
+                    <InsertarRotura/>
                 </div>
             </TabPanel>
 

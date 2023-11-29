@@ -7,10 +7,11 @@ public class Trabajador
     public string? NombreTrabajador {get; set;}
     public int SedeId {get; set;}
 
-    /*[JsonIgnore]
-    public  Sede Sede {get; set;} = new();*/
     [JsonIgnore]
-    public List<OrdenTrabajoAtendida> OrdenesTrabajoAtendidas {get;} = new();
+    public  virtual Sede Sede {get; set;} =null!;
+    //
+    //public List<OrdenTrabajoAtendida> OrdenesTrabajoAtendidas {get;} = new();
+
 
     
 }

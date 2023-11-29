@@ -3,6 +3,7 @@ using System;
 using ECOCEMProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20231129001613_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -782,6 +785,8 @@ namespace ECOCEMProject.Migrations
 
                     b.HasKey("TrabajadorId");
 
+                    b.HasIndex("SedeId");
+
                     b.ToTable("Trabajadores");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Trabajador");
@@ -875,27 +880,6 @@ namespace ECOCEMProject.Migrations
 
                     b.ToTable("Ventas");
                 });
-
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
-
-                    b.HasKey("RoleId", "ClaimType");
-
-                    b.ToTable("IdentityRoleClaims", (string)null);
-                });
-
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
@@ -1276,34 +1260,15 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("Equipo");
                 });
 
-            modelBuilder.Entity("RoleUser", b =>
+            modelBuilder.Entity("ECOCEMProject.Trabajador", b =>
                 {
-                    b.HasOne("ECOCEMProject.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
+                    b.HasOne("ECOCEMProject.Sede", "Sede")
+                        .WithMany("Trabajadores")
+                        .HasForeignKey("SedeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ECOCEMProject.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ECOCEMProject.UserRole", b =>
-                {
-                    b.HasOne("ECOCEMProject.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId1");
-
-                    b.HasOne("ECOCEMProject.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
+                    b.Navigation("Sede");
                 });
 
             modelBuilder.Entity("RoleUser", b =>
@@ -1396,12 +1361,10 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("OrdenTrabajoRoturaEquipo");
                 });
 
-
             modelBuilder.Entity("ECOCEMProject.Sede", b =>
                 {
                     b.Navigation("Trabajadores");
                 });
-
 
             modelBuilder.Entity("ECOCEMProject.TipoEquipo", b =>
                 {
@@ -1409,13 +1372,6 @@ namespace ECOCEMProject.Migrations
 
                     b.Navigation("MantenimientosNecesarios");
                 });
-
-
-            modelBuilder.Entity("ECOCEMProject.Trabajador", b =>
-                {
-                    b.Navigation("OrdenesTrabajoAtendidas");
-                });
-
 
             modelBuilder.Entity("ECOCEMProject.Venta", b =>
                 {

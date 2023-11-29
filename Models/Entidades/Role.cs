@@ -7,8 +7,10 @@ namespace ECOCEMProject;
 
 public class Role: IdentityRole<int>
 {
+
     public string? Descripcion { get; set; }
 
     public List<User> Users { get; } = new();
+
     
 }

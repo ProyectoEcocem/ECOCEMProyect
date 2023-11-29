@@ -1,4 +1,5 @@
 using System;
+
 using Microsoft.EntityFrameworkCore;
 namespace ECOCEMProject;
 
@@ -64,9 +65,11 @@ public class FiltroMantenimientoService
         return roles;
     }
 
+
     /*public async Task<IEnumerable<Role>> GetAllRoles()
     {
         var roles = myContext.Users.Include(e => e.Roles).ToList();
         return roles;
     }*/
+
 }

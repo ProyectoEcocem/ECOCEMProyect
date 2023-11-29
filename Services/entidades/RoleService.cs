@@ -15,7 +15,9 @@ public class RoleService
 
     public async Task<Role> GetByName(string name)
     {
+
         var current_entity = await _roleManager.FindByNameAsync(name);
+
         
         if(current_entity == null!){
              throw new InvalidOperationException("Entidad no encontrada");
@@ -36,9 +38,11 @@ public class RoleService
 
     public async Task<IEnumerable<Role>> GetAll()
     {
+
         //var roles = await _context.Roles.Include(u=>u.Users).ToListAsync();
         return await _roleManager.Roles.ToListAsync();
         //return roles;
+
     }
 
     public  async Task Update(int id,string? role_name, RoleModel edited_role)
@@ -56,11 +60,14 @@ public class RoleService
                 throw new InvalidOperationException("The role already exists");
 
             var role = new Role()
+
             {
                 Name = new_role.Name,
                 Descripcion = new_role.Description
             };
 
+
+         
             /*var result = await _roleManager.CreateAsync(role);
 
             if (!result.Succeeded)
@@ -72,6 +79,7 @@ public class RoleService
             //await _context.SaveChangesAsync();
             await _roleManager.CreateAsync(role);
             return role;
+
         }
 
     public async Task DeleteByName(string name)
@@ -84,7 +92,9 @@ public class RoleService
         }
 
         _context.Roles.Remove(role);
+
         await _roleManager.DeleteAsync(role);
+
         await _context.SaveChangesAsync();
     }
     public async Task Delete(int id)
@@ -97,7 +107,9 @@ public class RoleService
         }
 
         _context.Roles.Remove(role);
+
         await _roleManager.DeleteAsync(role);
+
         await _context.SaveChangesAsync();
     }
 }

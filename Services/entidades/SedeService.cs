@@ -24,7 +24,7 @@ public class SedeService
 
     public async Task<IEnumerable<Sede>> GetAll()
     {
-        return await _context.Sedes.ToListAsync();
+        return await _context.Sedes.Include(e=> e.Trabajadores).Include(e=> e.Equipos).ToListAsync();
     }
 
     public async Task<Sede> Update(int id,Sede sede)

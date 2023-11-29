@@ -16,6 +16,7 @@ import VisualizarSede from './VisualizarSede';
 import VisualizarTipoEquipo from './VisualizarTipoEquipo';
 import VisualizarEquipo from './VisualizarEquipo';
 import VisualizarRotura from './VisualizarRotura';
+import VisualizarRoturaEquipo from './VisualizarRoturaEquipo';
 
 
  const VentanaPrincipal = () => {
@@ -39,6 +40,7 @@ import VisualizarRotura from './VisualizarRotura';
             <Tab>Tipos de Equipo</Tab>
             <Tab>Equipos</Tab>
             <Tab>Rotura</Tab>
+            <Tab>Roturas de Equipos</Tab>
         </TabList>
 
         <TabIndicator
@@ -87,6 +89,16 @@ import VisualizarRotura from './VisualizarRotura';
                 alignItems: "center",
                 }}>
                 <VisualizarRotura/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Visualizar Roturas de Equipos*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <VisualizarRoturaEquipo/>
                 </div>
             </TabPanel>
 

@@ -116,6 +116,18 @@ public class MyContext: DbContext
             .WithOne(e => e.Empresa)
             .HasForeignKey(e => e.EmpresaId)
             .IsRequired();
+        modelBuilder.Entity<Sede>()
+            .HasMany(e => e.Trabajadores)
+            .WithOne(e => e.Sede)
+            .HasForeignKey(e => e.SedeId)
+            .IsRequired();
+        modelBuilder.Entity<Sede>()
+            .HasMany(e=>e.Equipos)
+            .WithOne(e=>e.Sede)
+            .HasForeignKey(e=>e.SedeId)
+            .IsRequired();
+                
+             
 
         // modelBuilder.Entity<Sede>()
         // .

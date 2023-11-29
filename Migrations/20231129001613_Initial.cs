@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     /// <inheritdoc />
-    public partial class InicialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -220,21 +220,6 @@ namespace ECOCEMProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TiposEquipos", x => x.TipoEId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Trabajadores",
-                columns: table => new
-                {
-                    TrabajadorId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    NombreTrabajador = table.Column<string>(type: "text", nullable: true),
-                    SedeId = table.Column<int>(type: "integer", nullable: false),
-                    Discriminator = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Trabajadores", x => x.TrabajadorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -522,12 +507,6 @@ namespace ECOCEMProject.Migrations
                         columns: x => new { x.OrdenTrabajoEquipoId, x.OrdenTrabajoBrigadaId, x.OrdenTrabajoTrabajadorId, x.OrdenTrabajoFechaId },
                         principalTable: "OrdenTrabajo",
                         principalColumns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" });
-                    table.ForeignKey(
-                        name: "FK_OrdenesTrabajoAtendidas_Trabajadores_TrabajadorId",
-                        column: x => x.TrabajadorId,
-                        principalTable: "Trabajadores",
-                        principalColumn: "TrabajadorId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -646,6 +625,27 @@ namespace ECOCEMProject.Migrations
                         column: x => x.TipoEId,
                         principalTable: "TiposEquipos",
                         principalColumn: "TipoEId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Trabajadores",
+                columns: table => new
+                {
+                    TrabajadorId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NombreTrabajador = table.Column<string>(type: "text", nullable: true),
+                    SedeId = table.Column<int>(type: "integer", nullable: false),
+                    Discriminator = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trabajadores", x => x.TrabajadorId);
+                    table.ForeignKey(
+                        name: "FK_Trabajadores_Sedes_SedeId",
+                        column: x => x.SedeId,
+                        principalTable: "Sedes",
+                        principalColumn: "SedeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -885,6 +885,11 @@ namespace ECOCEMProject.Migrations
                 name: "IX_Silos_EquipoId",
                 table: "Silos",
                 column: "EquipoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trabajadores_SedeId",
+                table: "Trabajadores",
+                column: "SedeId");
         }
 
         /// <inheritdoc />
@@ -945,6 +950,9 @@ namespace ECOCEMProject.Migrations
                 name: "TipoCementos");
 
             migrationBuilder.DropTable(
+                name: "Trabajadores");
+
+            migrationBuilder.DropTable(
                 name: "UserClaims");
 
             migrationBuilder.DropTable(
@@ -958,9 +966,6 @@ namespace ECOCEMProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Descargas");
-
-            migrationBuilder.DropTable(
-                name: "Trabajadores");
 
             migrationBuilder.DropTable(
                 name: "Herramientas");

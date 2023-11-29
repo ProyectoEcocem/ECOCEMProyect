@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20231128163633_InicialCreate")]
-    partial class InicialCreate
+    [Migration("20231129001613_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -785,6 +785,8 @@ namespace ECOCEMProject.Migrations
 
                     b.HasKey("TrabajadorId");
 
+                    b.HasIndex("SedeId");
+
                     b.ToTable("Trabajadores");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Trabajador");
@@ -1191,12 +1193,6 @@ namespace ECOCEMProject.Migrations
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoAtendida", b =>
                 {
-                    b.HasOne("ECOCEMProject.Trabajador", null)
-                        .WithMany("OrdenesTrabajoAtendidas")
-                        .HasForeignKey("TrabajadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ECOCEMProject.OrdenTrabajo", "OrdenTrabajo")
                         .WithMany()
                         .HasForeignKey("OrdenTrabajoEquipoId", "OrdenTrabajoBrigadaId", "OrdenTrabajoTrabajadorId", "OrdenTrabajoFechaId");
@@ -1262,6 +1258,17 @@ namespace ECOCEMProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Equipo");
+                });
+
+            modelBuilder.Entity("ECOCEMProject.Trabajador", b =>
+                {
+                    b.HasOne("ECOCEMProject.Sede", "Sede")
+                        .WithMany("Trabajadores")
+                        .HasForeignKey("SedeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sede");
                 });
 
             modelBuilder.Entity("RoleUser", b =>
@@ -1354,16 +1361,16 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("OrdenTrabajoRoturaEquipo");
                 });
 
+            modelBuilder.Entity("ECOCEMProject.Sede", b =>
+                {
+                    b.Navigation("Trabajadores");
+                });
+
             modelBuilder.Entity("ECOCEMProject.TipoEquipo", b =>
                 {
                     b.Navigation("Equipo");
 
                     b.Navigation("MantenimientosNecesarios");
-                });
-
-            modelBuilder.Entity("ECOCEMProject.Trabajador", b =>
-                {
-                    b.Navigation("OrdenesTrabajoAtendidas");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Venta", b =>

@@ -49,6 +49,8 @@ const InsertarParametros = () => {
     { id: 2, nombre: "Sede 2" },
     { id: 3, nombre: "Sede 3" },
   ]
+
+  // ToDo: Necesariamente debo poner reporte acá
   const equipos = [
     {id: 1, tipoEquipo: "Tipo1"},
      {id: 2, tipoEquipo: "Tipo2"},

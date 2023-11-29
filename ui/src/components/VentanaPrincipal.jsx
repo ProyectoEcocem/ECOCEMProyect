@@ -18,6 +18,7 @@ import VisualizarEquipo from './VisualizarEquipo';
 import VisualizarRotura from './VisualizarRotura';
 import VisualizarRoturaEquipo from './VisualizarRoturaEquipo';
 import VisualizarParametros from './VisualizarParametros';
+import VisualizarIndicadores from './VisualizarIndicadores';
 
 
  const VentanaPrincipal = () => {
@@ -43,6 +44,7 @@ import VisualizarParametros from './VisualizarParametros';
             <Tab>Rotura</Tab>
             <Tab>Roturas de Equipos</Tab>
             <Tab>Parámetros</Tab>
+            <Tab>Indicadores</Tab>
         </TabList>
 
         <TabIndicator
@@ -111,6 +113,16 @@ import VisualizarParametros from './VisualizarParametros';
                 alignItems: "center",
                 }}>
                 <VisualizarParametros/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Visualizar indicadores*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <VisualizarIndicadores/>
                 </div>
             </TabPanel>
 

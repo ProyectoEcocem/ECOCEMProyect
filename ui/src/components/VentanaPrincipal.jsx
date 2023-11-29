@@ -6,17 +6,18 @@ import {
     TabPanel,
     TabIndicator
  } from '@chakra-ui/react'
- import InsertarSede from './InsertarSede';
- import InsertarTipoDeEquipo from './InsertarTipoDeEquipo';
- import InsertarEquipo from './InsertarEquipo';
- import InsertarRotura from './InsertarRotura';
- import InsertarRoturaEquipo from './InsertarRoturaEquipo';
+import InsertarSede from './InsertarSede';
+import InsertarTipoDeEquipo from './InsertarTipoDeEquipo';
+import InsertarEquipo from './InsertarEquipo';
+import InsertarRotura from './InsertarRotura';
+import InsertarRoturaEquipo from './InsertarRoturaEquipo';
 import InsertarParametros from './InsertarParametros';
 import VisualizarSede from './VisualizarSede';
 import VisualizarTipoEquipo from './VisualizarTipoEquipo';
 import VisualizarEquipo from './VisualizarEquipo';
 import VisualizarRotura from './VisualizarRotura';
 import VisualizarRoturaEquipo from './VisualizarRoturaEquipo';
+import VisualizarParametros from './VisualizarParametros';
 
 
  const VentanaPrincipal = () => {
@@ -41,6 +42,7 @@ import VisualizarRoturaEquipo from './VisualizarRoturaEquipo';
             <Tab>Equipos</Tab>
             <Tab>Rotura</Tab>
             <Tab>Roturas de Equipos</Tab>
+            <Tab>Parámetros</Tab>
         </TabList>
 
         <TabIndicator
@@ -99,6 +101,16 @@ import VisualizarRoturaEquipo from './VisualizarRoturaEquipo';
                 alignItems: "center",
                 }}>
                 <VisualizarRoturaEquipo/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Visualizar parametros*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <VisualizarParametros/>
                 </div>
             </TabPanel>
 

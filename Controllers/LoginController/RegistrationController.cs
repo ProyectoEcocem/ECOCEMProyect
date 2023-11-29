@@ -72,7 +72,10 @@ namespace ECOCEMProject;
             }
             catch
             {
+
                 await _roleService.Delete(current_user.Id);
+                await _userService.DeleteByName(current_user.Nombre);
+
                 return BadRequest("Fatal errwor");
             }
             await _userRoleService.Create(current_user.Id, current_role.Id);

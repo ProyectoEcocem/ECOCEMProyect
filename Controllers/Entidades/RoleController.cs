@@ -23,16 +23,6 @@ public class RoleController : Controller
         }
         return Ok(role);
     }*/
-     [HttpGet("{Id}")]
-    public async Task<IActionResult> Get(int id)
-    {
-        Role role = await _roleService.Get(id);
-        if (role == null)
-        {
-            return NotFound();
-        }
-        return Ok(role);
-    }
     [HttpGet]
     public async Task<IEnumerable<Role>> GetAll() => await _roleService.GetAll();
 
@@ -42,7 +32,9 @@ public class RoleController : Controller
         try
         {
             await _roleService.Create(new_entity);
-            return Ok();
+
+            return Ok(new_entity);
+
         }
         catch (Exception ex)
         {

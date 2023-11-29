@@ -37,7 +37,10 @@ public class UserService
 
     public async Task<IEnumerable<User>> GetAll()
     {
-        return await _context.Users.ToListAsync();
+       
+        var roles = _context.Users.Include(e => e.Roles).ToList();
+        return roles;
+
     }
 
     public async Task Update(int user_id, [FromBody]RegistrationModel edited_model)
@@ -76,7 +79,7 @@ public class UserService
 
             //_context.Users.Add(user);
             //await _context.SaveChangesAsync();
-            //await _userManager.CreateAsync(user);
+
             return user;
         }
 
@@ -90,6 +93,9 @@ public class UserService
         }
 
         _context.Users.Remove(user);
+
+        await _userManager.DeleteAsync(user);
+
         await _context.SaveChangesAsync();
     }
     public async Task Delete(int id)
@@ -102,6 +108,9 @@ public class UserService
         }
 
         _context.Users.Remove(user);
+
+        await _userManager.DeleteAsync(user);
+
         await _context.SaveChangesAsync();
     }
 }

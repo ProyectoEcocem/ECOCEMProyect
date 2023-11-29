@@ -111,11 +111,21 @@ public class MyContext: DbContext
         modelBuilder.Entity<IdentityUserRole<int>>()
             .HasKey(key => new { key.UserId, key.RoleId });
 
+
+        /*modelBuilder.Entity<UserRole>()
+            .HasKey(key => new { key.UserId, key.RoleId } );*/
+
+        modelBuilder.Entity<User>()
+            .HasMany(e => e.Roles)
+            .WithMany(e => e.Users);
+
+
         modelBuilder.Entity<Empresa>()
             .HasMany(e => e.Sedes)
             .WithOne(e => e.Empresa)
             .HasForeignKey(e => e.EmpresaId)
             .IsRequired();
+
         modelBuilder.Entity<Sede>()
             .HasMany(e => e.Trabajadores)
             .WithOne(e => e.Sede)
@@ -127,10 +137,12 @@ public class MyContext: DbContext
             .HasForeignKey(e=>e.SedeId)
             .IsRequired();
                 
-             
+        modelBuilder.Entity<IdentityRoleClaim<int>>(entity =>
+        {
+            entity.ToTable("IdentityRoleClaims");
+            entity.HasKey(p => new { p.RoleId, p.ClaimType });
+        });
 
-        // modelBuilder.Entity<Sede>()
-        // .
 
 
 

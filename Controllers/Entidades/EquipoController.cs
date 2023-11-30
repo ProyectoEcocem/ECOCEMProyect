@@ -40,7 +40,8 @@ public class EquipoController : Controller
             return BadRequest();
         }
         Equipo equipoCreado = await _equipoServicio.Create(equipo);
-        return CreatedAtRoute("Get", new { id = equipoCreado.EquipoId }, equipoCreado);
+        return Ok(equipoCreado);
+        //return CreatedAtRoute("Get", new { id = equipoCreado.EquipoId }, equipoCreado);
     }
 
     [HttpPut]

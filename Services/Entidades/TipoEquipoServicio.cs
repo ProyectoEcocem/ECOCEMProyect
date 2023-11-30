@@ -17,7 +17,7 @@ public class TipoEquipoServicio
     }
     public async Task<IEnumerable<TipoEquipo>> GetAll()
     {
-        return await _context.TiposEquipos.ToListAsync();
+        return await _context.TiposEquipos.Include(e=>e.Equipos).ToListAsync();
     }
     public async Task<TipoEquipo> Update(int id, TipoEquipo tipoE)
     {
@@ -29,11 +29,14 @@ public class TipoEquipoServicio
         await _context.SaveChangesAsync();
         return tipoE;
     }
-    public async Task<TipoEquipo> Create(TipoEquipo tipoE)
+    public async Task<TipoEquipo> Create(TipoEData tipoE)
     {
-        _context.TiposEquipos.Add(tipoE);
+        TipoEquipo tipoE1=new TipoEquipo();
+        tipoE1.TipoE=tipoE.TipoE;
+        tipoE1.TipoEId=tipoE.TipoEId;
+        _context.TiposEquipos.Add(tipoE1);
         await _context.SaveChangesAsync();
-        return tipoE;
+        return tipoE1;
     }
     public async Task Delete(int id)
     {

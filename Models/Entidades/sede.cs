@@ -12,7 +12,7 @@ public class Sede
     [JsonIgnore]
     public virtual  Empresa Empresa {get; set;} = null!;
     //[JsonIgnore]
-    public List<Trabajador>? Trabajadores {get;}=new List<Trabajador>();
+    public List<Trabajador>? Trabajadores {get;} = new List<Trabajador>();
     
     public List<Equipo> Equipos {get;} = new List<Equipo>();
 }

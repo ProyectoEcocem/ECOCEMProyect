@@ -241,8 +241,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("SedeId");
 
-                    b.HasIndex("TipoEId")
-                        .IsUnique();
+                    b.HasIndex("TipoEId");
 
                     b.ToTable("Equipos");
                 });
@@ -670,6 +669,10 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoturaId"));
 
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("RoturaId");
 
                     b.ToTable("Roturas");
@@ -782,6 +785,8 @@ namespace ECOCEMProject.Migrations
 
                     b.HasKey("TrabajadorId");
 
+                    b.HasIndex("SedeId");
+
                     b.ToTable("Trabajadores");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Trabajador");
@@ -876,7 +881,6 @@ namespace ECOCEMProject.Migrations
                     b.ToTable("Ventas");
                 });
 
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("RoleId")
@@ -895,7 +899,6 @@ namespace ECOCEMProject.Migrations
 
                     b.ToTable("IdentityRoleClaims", (string)null);
                 });
-
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
@@ -1103,14 +1106,14 @@ namespace ECOCEMProject.Migrations
             modelBuilder.Entity("ECOCEMProject.Equipo", b =>
                 {
                     b.HasOne("ECOCEMProject.Sede", "Sede")
-                        .WithMany()
+                        .WithMany("Equipos")
                         .HasForeignKey("SedeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ECOCEMProject.TipoEquipo", "TipoEquipo")
-                        .WithOne("Equipo")
-                        .HasForeignKey("ECOCEMProject.Equipo", "TipoEId")
+                        .WithMany("Equipos")
+                        .HasForeignKey("TipoEId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1139,12 +1142,6 @@ namespace ECOCEMProject.Migrations
                     b.HasOne("ECOCEMProject.MantenimientoPlanificado", null)
                         .WithMany("MantenimientosNecesarios")
                         .HasForeignKey("AMId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ECOCEMProject.TipoEquipo", null)
-                        .WithMany("MantenimientosNecesarios")
-                        .HasForeignKey("TipoEquipoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1276,34 +1273,15 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("Equipo");
                 });
 
-            modelBuilder.Entity("RoleUser", b =>
+            modelBuilder.Entity("ECOCEMProject.Trabajador", b =>
                 {
-                    b.HasOne("ECOCEMProject.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
+                    b.HasOne("ECOCEMProject.Sede", "Sede")
+                        .WithMany("Trabajadores")
+                        .HasForeignKey("SedeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ECOCEMProject.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ECOCEMProject.UserRole", b =>
-                {
-                    b.HasOne("ECOCEMProject.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId1");
-
-                    b.HasOne("ECOCEMProject.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
+                    b.Navigation("Sede");
                 });
 
             modelBuilder.Entity("RoleUser", b =>
@@ -1396,26 +1374,17 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("OrdenTrabajoRoturaEquipo");
                 });
 
-
             modelBuilder.Entity("ECOCEMProject.Sede", b =>
                 {
+                    b.Navigation("Equipos");
+
                     b.Navigation("Trabajadores");
                 });
 
-
             modelBuilder.Entity("ECOCEMProject.TipoEquipo", b =>
                 {
-                    b.Navigation("Equipo");
-
-                    b.Navigation("MantenimientosNecesarios");
+                    b.Navigation("Equipos");
                 });
-
-
-            modelBuilder.Entity("ECOCEMProject.Trabajador", b =>
-                {
-                    b.Navigation("OrdenesTrabajoAtendidas");
-                });
-
 
             modelBuilder.Entity("ECOCEMProject.Venta", b =>
                 {

@@ -5,11 +5,11 @@ public class Equipo
 {
     public int EquipoId {get; set;}
     public int TipoEId { get; set; }
-
-    public TipoEquipo TipoEquipo {get; set;}
+    [JsonIgnore]
+    public virtual TipoEquipo TipoEquipo {get;set; }=null!; 
     public int SedeId {get; set;}
     [JsonIgnore]
-    public  Sede Sede {get; set;}
+    public Sede Sede {get; }
     
     //public List<Reporte> Reportes = null!;
 

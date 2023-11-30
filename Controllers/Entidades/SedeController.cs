@@ -38,6 +38,9 @@ public class SedeController:Controller
     [HttpGet]
     public async Task<IEnumerable<Sede>> GetAll() => await _sedeService.GetAll();
 
+    [HttpGet]
+    public async Task<IEnumerable<Equipo>> GetEquipos(int id) => await _sedeService.GetEquipos(id);
+
     [HttpPost]
     public async Task<IActionResult> Post( SedeData sede)
     {
@@ -47,7 +50,7 @@ public class SedeController:Controller
         }
 
         Sede sedeCreada = await _sedeService.Create(sede);
-
+        //return Ok(sedeCreada);
         return CreatedAtRoute("Get", new { id = sedeCreada.SedeId }, sedeCreada);
     }
 

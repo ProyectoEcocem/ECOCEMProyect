@@ -12,6 +12,6 @@ public class Trabajador
     //
     //public List<OrdenTrabajoAtendida> OrdenesTrabajoAtendidas {get;} = new();
 
-
+ 
     
 }

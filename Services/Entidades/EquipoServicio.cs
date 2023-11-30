@@ -31,11 +31,11 @@ public class EquipoServicio
     }
     public async Task<Equipo> Create(EquipoData equipo)
     {
-        Equipo equipo1=new Equipo();
-        equipo1.SedeId=equipo.SedeId;
-        equipo1.EquipoId=equipo.EquipoId;
-        equipo1.TipoEId=equipo.TipoEId;
-        
+        Equipo equipo1 = new Equipo();
+
+        equipo1.SedeId = equipo.SedeId;
+        equipo1.EquipoId = equipo.EquipoId;
+        equipo1.TipoEId = equipo.TipoEId;
 
         _context.Equipos.Add(equipo1);
         await _context.SaveChangesAsync();

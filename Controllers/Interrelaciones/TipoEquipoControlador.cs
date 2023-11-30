@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
+public class TipoEData{
+     public int TipoEId { get; set; }
+    public string? TipoE {get; set;}
+}
 
 [ApiController]
 [Route("api/[controller]/[action]")]
@@ -16,7 +20,7 @@ public class TipoEquipoController : Controller
 
     // POST
     [HttpPost]
-    public async Task<ActionResult> Post(TipoEquipo tipoE)
+    public async Task<ActionResult> Post(TipoEData tipoE)
     {
         return Ok(await  _tipoEServicio.Create(tipoE));
     }

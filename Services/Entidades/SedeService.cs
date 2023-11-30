@@ -64,5 +64,20 @@ public class SedeService
         await _context.SaveChangesAsync();
     }
 
+    public async Task<IEnumerable<Equipo>> GetEquipos(int id)
+    {
+        var sedes =  await _context.Sedes.Include(e=> e.Trabajadores).Include(e=> e.Equipos).ToListAsync();
+        Sede sede = sedes.FirstOrDefault(s => s.SedeId == id)!;
+
+        if (sede != null)
+        {
+            return sede.Equipos;
+        }
+        else
+        {
+            return null!;
+        }
+    }
+
     
 }

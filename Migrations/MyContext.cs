@@ -91,19 +91,26 @@ public class MyContext: DbContext
         modelBuilder.Entity<OrdenTrabajoHerramienta>()
             .HasKey(key => new { key.HerramientasId, key.EquipoId,key.BrigadaId, key.TrabajadorId, key.FechaId  });
         
+        // modelBuilder.Entity<Equipo>()
+        //     .HasOne(e => e.TipoEquipo)
+        //     .WithMany(e=> e.Equipos)
+        //     .HasForeignKeyawait _context.SaveChangesAsync();(t=>t.TipoEId);
+
         modelBuilder.Entity<TipoEquipo>()
-            .HasKey(key => new { key.TipoEId });
-        
+            .HasMany(e => e.Equipos)
+            .WithOne(t => t.TipoEquipo)
+            .HasForeignKey(e => e.TipoEId)
+            .IsRequired();
+            
+
+         modelBuilder.Entity<TipoEquipo>()
+        .HasKey(e=> new{e.TipoEId});
         modelBuilder.Entity<RoturaEquipo>()
             .HasKey(key=> new {key.EquipoId, key.RoturaId, key.FechaId});
         
         modelBuilder.Entity<OrdenTrabajo>()
             .HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});
         
-        modelBuilder.Entity<Equipo>()
-            .HasOne(equipo => equipo.TipoEquipo)
-            .WithOne(tipoEquipo => tipoEquipo.Equipo)
-            .HasForeignKey<Equipo>(equipo => equipo.TipoEId);
 
         modelBuilder.Entity<OrdenTrabajoRoturaEquipo>()
             .HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});

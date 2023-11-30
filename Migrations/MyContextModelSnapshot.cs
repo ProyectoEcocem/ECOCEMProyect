@@ -241,8 +241,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("SedeId");
 
-                    b.HasIndex("TipoEId")
-                        .IsUnique();
+                    b.HasIndex("TipoEId");
 
                     b.ToTable("Equipos");
                 });
@@ -649,7 +648,6 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -658,16 +656,7 @@ namespace ECOCEMProject.Migrations
                     b.Property<string>("NormalizedName")
                         .HasColumnType("text");
 
-                    b.Property<string>("RolNombre")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Roles");
                 });
@@ -679,6 +668,10 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoturaId"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("RoturaId");
 
@@ -698,7 +691,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasKey("EquipoId", "RoturaId", "FechaId");
 
-                    b.ToTable("RoturaEquipo");
+                    b.ToTable("RoturasEquipos");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Sede", b =>
@@ -827,6 +820,9 @@ namespace ECOCEMProject.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Nombre")
+                        .HasColumnType("text");
+
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("text");
 
@@ -883,6 +879,68 @@ namespace ECOCEMProject.Migrations
                     b.HasKey("SedeId", "EntidadCompradoraId", "FechaVentaId");
 
                     b.ToTable("Ventas");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("RoleId", "ClaimType");
+
+                    b.ToTable("IdentityRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.ToTable("IdentityUserRole<int>");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<int>");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Reporte", b =>
@@ -949,6 +1007,21 @@ namespace ECOCEMProject.Migrations
                     b.ToTable("Reportes");
                 });
 
+            modelBuilder.Entity("RoleUser", b =>
+                {
+                    b.Property<int>("RolesId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("RolesId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("RoleUser");
+                });
+
             modelBuilder.Entity("ECOCEMProject.MantenimientoPlanificado", b =>
                 {
                     b.HasBaseType("ECOCEMProject.AccionMantenimiento");
@@ -968,6 +1041,29 @@ namespace ECOCEMProject.Migrations
                     b.HasBaseType("ECOCEMProject.Trabajador");
 
                     b.HasDiscriminator().HasValue("Operador");
+                });
+
+            modelBuilder.Entity("ECOCEMProject.UserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<int>");
+
+                    b.Property<int>("IdRole")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("RoleId1")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("integer");
+
+                    b.HasIndex("RoleId1");
+
+                    b.HasIndex("UserId1");
+
+                    b.HasDiscriminator().HasValue("UserRole");
                 });
 
             modelBuilder.Entity("AccionMantenimientoOrdenTrabajo", b =>
@@ -1016,8 +1112,8 @@ namespace ECOCEMProject.Migrations
                         .IsRequired();
 
                     b.HasOne("ECOCEMProject.TipoEquipo", "TipoEquipo")
-                        .WithOne("Equipo")
-                        .HasForeignKey("ECOCEMProject.Equipo", "TipoEId")
+                        .WithMany("Equipos")
+                        .HasForeignKey("TipoEId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1046,12 +1142,6 @@ namespace ECOCEMProject.Migrations
                     b.HasOne("ECOCEMProject.MantenimientoPlanificado", null)
                         .WithMany("MantenimientosNecesarios")
                         .HasForeignKey("AMId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ECOCEMProject.TipoEquipo", null)
-                        .WithMany("MantenimientosNecesarios")
-                        .HasForeignKey("TipoEquipoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1116,12 +1206,6 @@ namespace ECOCEMProject.Migrations
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoAtendida", b =>
                 {
-                    b.HasOne("ECOCEMProject.Trabajador", null)
-                        .WithMany("OrdenesTrabajoAtendidas")
-                        .HasForeignKey("TrabajadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ECOCEMProject.OrdenTrabajo", "OrdenTrabajo")
                         .WithMany()
                         .HasForeignKey("OrdenTrabajoEquipoId", "OrdenTrabajoBrigadaId", "OrdenTrabajoTrabajadorId", "OrdenTrabajoFechaId");
@@ -1167,13 +1251,6 @@ namespace ECOCEMProject.Migrations
                     b.Navigation("RoturaEquipo");
                 });
 
-            modelBuilder.Entity("ECOCEMProject.Role", b =>
-                {
-                    b.HasOne("ECOCEMProject.User", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("ECOCEMProject.Sede", b =>
                 {
                     b.HasOne("ECOCEMProject.Empresa", "Empresa")
@@ -1205,6 +1282,36 @@ namespace ECOCEMProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Sede");
+                });
+
+            modelBuilder.Entity("RoleUser", b =>
+                {
+                    b.HasOne("ECOCEMProject.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECOCEMProject.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ECOCEMProject.UserRole", b =>
+                {
+                    b.HasOne("ECOCEMProject.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId1");
+
+                    b.HasOne("ECOCEMProject.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ECOCEMProject.AccionMantenimiento", b =>
@@ -1276,19 +1383,7 @@ namespace ECOCEMProject.Migrations
 
             modelBuilder.Entity("ECOCEMProject.TipoEquipo", b =>
                 {
-                    b.Navigation("Equipo");
-
-                    b.Navigation("MantenimientosNecesarios");
-                });
-
-            modelBuilder.Entity("ECOCEMProject.Trabajador", b =>
-                {
-                    b.Navigation("OrdenesTrabajoAtendidas");
-                });
-
-            modelBuilder.Entity("ECOCEMProject.User", b =>
-                {
-                    b.Navigation("Roles");
+                    b.Navigation("Equipos");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Venta", b =>

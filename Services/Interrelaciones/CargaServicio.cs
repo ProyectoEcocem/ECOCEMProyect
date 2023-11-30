@@ -33,7 +33,6 @@ public class CargaServicio
             return null;
         }
         
-        //existingBascula.BasculaId = bascula.BasculaId;
         await _context.SaveChangesAsync();
 
         return carga;

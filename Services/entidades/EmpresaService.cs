@@ -23,9 +23,7 @@ public class EmpresaService
 
     public async Task<IEnumerable<Empresa>> GetAll()
     {
-
-        var empresas=_context.Empresas.Include(e => e.Sedes).ThenInclude(e=>e.Trabajadores).ToList();
-        return empresas;
+        return await _context.Empresas.ToListAsync();
     }
 
     public async Task<Empresa> Update(int id, Empresa empresa)

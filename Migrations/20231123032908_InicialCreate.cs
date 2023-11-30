@@ -116,20 +116,6 @@ namespace ECOCEMProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdentityRoleClaims",
-                columns: table => new
-                {
-                    RoleId = table.Column<int>(type: "integer", nullable: false),
-                    ClaimType = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    ClaimValue = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdentityRoleClaims", x => new { x.RoleId, x.ClaimType });
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Medidores",
                 columns: table => new
                 {
@@ -171,36 +157,7 @@ namespace ECOCEMProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Descripcion = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    NormalizedName = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Roturas",
-                columns: table => new
-                {
-                    RoturaId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nombre = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roturas", x => x.RoturaId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RoturasEquipos",
+                name: "RoturaEquipo",
                 columns: table => new
                 {
                     EquipoId = table.Column<int>(type: "integer", nullable: false),
@@ -209,7 +166,19 @@ namespace ECOCEMProject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoturasEquipos", x => new { x.EquipoId, x.RoturaId, x.FechaId });
+                    table.PrimaryKey("PK_RoturaEquipo", x => new { x.EquipoId, x.RoturaId, x.FechaId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roturas",
+                columns: table => new
+                {
+                    RoturaId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roturas", x => x.RoturaId);
                 });
 
             migrationBuilder.CreateTable(
@@ -238,27 +207,11 @@ namespace ECOCEMProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    ClaimType = table.Column<string>(type: "text", nullable: true),
-                    ClaimValue = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserClaims", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nombre = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "text", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: true),
@@ -302,25 +255,6 @@ namespace ECOCEMProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ventas", x => new { x.SedeId, x.EntidadCompradoraId, x.FechaVentaId });
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MantenimientosNecesarios",
-                columns: table => new
-                {
-                    TipoEquipoId = table.Column<int>(type: "integer", nullable: false),
-                    AMId = table.Column<int>(type: "integer", nullable: false),
-                    HorasExpId = table.Column<double>(type: "double precision", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MantenimientosNecesarios", x => new { x.TipoEquipoId, x.AMId, x.HorasExpId });
-                    table.ForeignKey(
-                        name: "FK_MantenimientosNecesarios_AccionesMantenimientos_AMId",
-                        column: x => x.AMId,
-                        principalTable: "AccionesMantenimientos",
-                        principalColumn: "AMId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -388,54 +322,51 @@ namespace ECOCEMProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdentityUserRole<int>",
+                name: "MantenimientosNecesarios",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    RoleId = table.Column<int>(type: "integer", nullable: false),
-                    Discriminator = table.Column<string>(type: "text", nullable: false),
-                    IdUser = table.Column<int>(type: "integer", nullable: true),
-                    IdRole = table.Column<int>(type: "integer", nullable: true),
-                    UserId1 = table.Column<int>(type: "integer", nullable: true),
-                    RoleId1 = table.Column<int>(type: "integer", nullable: true)
+                    TipoEquipoId = table.Column<int>(type: "integer", nullable: false),
+                    AMId = table.Column<int>(type: "integer", nullable: false),
+                    HorasExpId = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityUserRole<int>", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_MantenimientosNecesarios", x => new { x.TipoEquipoId, x.AMId, x.HorasExpId });
                     table.ForeignKey(
-                        name: "FK_IdentityUserRole<int>_Roles_RoleId1",
-                        column: x => x.RoleId1,
-                        principalTable: "Roles",
-                        principalColumn: "Id");
+                        name: "FK_MantenimientosNecesarios_AccionesMantenimientos_AMId",
+                        column: x => x.AMId,
+                        principalTable: "AccionesMantenimientos",
+                        principalColumn: "AMId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_IdentityUserRole<int>_Users_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "Users",
-                        principalColumn: "Id");
+                        name: "FK_MantenimientosNecesarios_TiposEquipos_TipoEquipoId",
+                        column: x => x.TipoEquipoId,
+                        principalTable: "TiposEquipos",
+                        principalColumn: "TipoEId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleUser",
+                name: "Roles",
                 columns: table => new
                 {
-                    RolesId = table.Column<int>(type: "integer", nullable: false),
-                    UsersId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RolNombre = table.Column<string>(type: "text", nullable: false),
+                    Descripcion = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    NormalizedName = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleUser", x => new { x.RolesId, x.UsersId });
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RoleUser_Roles_RolesId",
-                        column: x => x.RolesId,
-                        principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RoleUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_Roles_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -466,36 +397,6 @@ namespace ECOCEMProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HerramientaMantNecesario",
-                columns: table => new
-                {
-                    HerramientasId = table.Column<int>(type: "integer", nullable: false),
-                    TipoEquipoId = table.Column<int>(type: "integer", nullable: false),
-                    AMId = table.Column<int>(type: "integer", nullable: false),
-                    HorasExpId = table.Column<double>(type: "double precision", nullable: false),
-                    HerramientaId = table.Column<int>(type: "integer", nullable: true),
-                    MantenimientoNecesarioTipoEquipoId = table.Column<int>(type: "integer", nullable: true),
-                    MantenimientoNecesarioAMId = table.Column<int>(type: "integer", nullable: true),
-                    MantenimientoNecesarioHorasExpId = table.Column<double>(type: "double precision", nullable: true),
-                    UnidadMedidaR = table.Column<string>(type: "text", nullable: false),
-                    CantidadR = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HerramientaMantNecesario", x => new { x.HerramientasId, x.TipoEquipoId, x.AMId, x.HorasExpId });
-                    table.ForeignKey(
-                        name: "FK_HerramientaMantNecesario_Herramientas_HerramientaId",
-                        column: x => x.HerramientaId,
-                        principalTable: "Herramientas",
-                        principalColumn: "HerramientaId");
-                    table.ForeignKey(
-                        name: "FK_HerramientaMantNecesario_MantenimientosNecesarios_Mantenimi~",
-                        columns: x => new { x.MantenimientoNecesarioTipoEquipoId, x.MantenimientoNecesarioAMId, x.MantenimientoNecesarioHorasExpId },
-                        principalTable: "MantenimientosNecesarios",
-                        principalColumns: new[] { "TipoEquipoId", "AMId", "HorasExpId" });
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AccionMantenimientoOrdenTrabajo",
                 columns: table => new
                 {
@@ -520,32 +421,6 @@ namespace ECOCEMProject.Migrations
                         principalTable: "OrdenTrabajo",
                         principalColumns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" },
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrdenesTrabajoAtendidas",
-                columns: table => new
-                {
-                    TrabajadorId = table.Column<int>(type: "integer", nullable: false),
-                    DiaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    EquipoId = table.Column<int>(type: "integer", nullable: false),
-                    BrigadaId = table.Column<int>(type: "integer", nullable: false),
-                    FechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    OrdenTrabajoEquipoId = table.Column<int>(type: "integer", nullable: true),
-                    OrdenTrabajoBrigadaId = table.Column<int>(type: "integer", nullable: true),
-                    OrdenTrabajoTrabajadorId = table.Column<int>(type: "integer", nullable: true),
-                    OrdenTrabajoFechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    PrecioPorHora = table.Column<double>(type: "double precision", nullable: false),
-                    NoHoras = table.Column<double>(type: "double precision", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrdenesTrabajoAtendidas", x => new { x.TrabajadorId, x.DiaId });
-                    table.ForeignKey(
-                        name: "FK_OrdenesTrabajoAtendidas_OrdenTrabajo_OrdenTrabajoEquipoId_O~",
-                        columns: x => new { x.OrdenTrabajoEquipoId, x.OrdenTrabajoBrigadaId, x.OrdenTrabajoTrabajadorId, x.OrdenTrabajoFechaId },
-                        principalTable: "OrdenTrabajo",
-                        principalColumns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" });
                 });
 
             migrationBuilder.CreateTable(
@@ -634,9 +509,9 @@ namespace ECOCEMProject.Migrations
                         principalColumns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" },
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrdenTrabajoRoturaEquipo_RoturasEquipos_RoturaEquipoEquipoI~",
+                        name: "FK_OrdenTrabajoRoturaEquipo_RoturaEquipo_RoturaEquipoEquipoId_~",
                         columns: x => new { x.RoturaEquipoEquipoId, x.RoturaEquipoRoturaId, x.RoturaEquipoFechaId },
-                        principalTable: "RoturasEquipos",
+                        principalTable: "RoturaEquipo",
                         principalColumns: new[] { "EquipoId", "RoturaId", "FechaId" },
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -686,6 +561,36 @@ namespace ECOCEMProject.Migrations
                         principalTable: "Sedes",
                         principalColumn: "SedeId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HerramientaMantNecesario",
+                columns: table => new
+                {
+                    HerramientasId = table.Column<int>(type: "integer", nullable: false),
+                    TipoEquipoId = table.Column<int>(type: "integer", nullable: false),
+                    AMId = table.Column<int>(type: "integer", nullable: false),
+                    HorasExpId = table.Column<double>(type: "double precision", nullable: false),
+                    HerramientaId = table.Column<int>(type: "integer", nullable: true),
+                    MantenimientoNecesarioTipoEquipoId = table.Column<int>(type: "integer", nullable: true),
+                    MantenimientoNecesarioAMId = table.Column<int>(type: "integer", nullable: true),
+                    MantenimientoNecesarioHorasExpId = table.Column<double>(type: "double precision", nullable: true),
+                    UnidadMedidaR = table.Column<string>(type: "text", nullable: false),
+                    CantidadR = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HerramientaMantNecesario", x => new { x.HerramientasId, x.TipoEquipoId, x.AMId, x.HorasExpId });
+                    table.ForeignKey(
+                        name: "FK_HerramientaMantNecesario_Herramientas_HerramientaId",
+                        column: x => x.HerramientaId,
+                        principalTable: "Herramientas",
+                        principalColumn: "HerramientaId");
+                    table.ForeignKey(
+                        name: "FK_HerramientaMantNecesario_MantenimientosNecesarios_Mantenimi~",
+                        columns: x => new { x.MantenimientoNecesarioTipoEquipoId, x.MantenimientoNecesarioAMId, x.MantenimientoNecesarioHorasExpId },
+                        principalTable: "MantenimientosNecesarios",
+                        principalColumns: new[] { "TipoEquipoId", "AMId", "HorasExpId" });
                 });
 
             migrationBuilder.CreateTable(
@@ -779,6 +684,38 @@ namespace ECOCEMProject.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "OrdenesTrabajoAtendidas",
+                columns: table => new
+                {
+                    TrabajadorId = table.Column<int>(type: "integer", nullable: false),
+                    DiaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EquipoId = table.Column<int>(type: "integer", nullable: false),
+                    BrigadaId = table.Column<int>(type: "integer", nullable: false),
+                    FechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    OrdenTrabajoEquipoId = table.Column<int>(type: "integer", nullable: true),
+                    OrdenTrabajoBrigadaId = table.Column<int>(type: "integer", nullable: true),
+                    OrdenTrabajoTrabajadorId = table.Column<int>(type: "integer", nullable: true),
+                    OrdenTrabajoFechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    PrecioPorHora = table.Column<double>(type: "double precision", nullable: false),
+                    NoHoras = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrdenesTrabajoAtendidas", x => new { x.TrabajadorId, x.DiaId });
+                    table.ForeignKey(
+                        name: "FK_OrdenesTrabajoAtendidas_OrdenTrabajo_OrdenTrabajoEquipoId_O~",
+                        columns: x => new { x.OrdenTrabajoEquipoId, x.OrdenTrabajoBrigadaId, x.OrdenTrabajoTrabajadorId, x.OrdenTrabajoFechaId },
+                        principalTable: "OrdenTrabajo",
+                        principalColumns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" });
+                    table.ForeignKey(
+                        name: "FK_OrdenesTrabajoAtendidas_Trabajadores_TrabajadorId",
+                        column: x => x.TrabajadorId,
+                        principalTable: "Trabajadores",
+                        principalColumn: "TrabajadorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AccionMantenimientoOrdenTrabajo_OrdenesTrabajoEquipoId_Orde~",
                 table: "AccionMantenimientoOrdenTrabajo",
@@ -802,7 +739,8 @@ namespace ECOCEMProject.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Equipos_TipoEId",
                 table: "Equipos",
-                column: "TipoEId");
+                column: "TipoEId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_HerramientaMantNecesario_HerramientaId",
@@ -813,16 +751,6 @@ namespace ECOCEMProject.Migrations
                 name: "IX_HerramientaMantNecesario_MantenimientoNecesarioTipoEquipoId~",
                 table: "HerramientaMantNecesario",
                 columns: new[] { "MantenimientoNecesarioTipoEquipoId", "MantenimientoNecesarioAMId", "MantenimientoNecesarioHorasExpId" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_IdentityUserRole<int>_RoleId1",
-                table: "IdentityUserRole<int>",
-                column: "RoleId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_IdentityUserRole<int>_UserId1",
-                table: "IdentityUserRole<int>",
-                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MantenimientosNecesarios_AMId",
@@ -880,9 +808,9 @@ namespace ECOCEMProject.Migrations
                 columns: new[] { "RoturaEquipoEquipoId", "RoturaEquipoRoturaId", "RoturaEquipoFechaId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleUser_UsersId",
-                table: "RoleUser",
-                column: "UsersId");
+                name: "IX_Roles_UserId",
+                table: "Roles",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sedes_EmpresaId",
@@ -919,12 +847,6 @@ namespace ECOCEMProject.Migrations
                 name: "HerramientaMantNecesario");
 
             migrationBuilder.DropTable(
-                name: "IdentityRoleClaims");
-
-            migrationBuilder.DropTable(
-                name: "IdentityUserRole<int>");
-
-            migrationBuilder.DropTable(
                 name: "MedicionesBasculas");
 
             migrationBuilder.DropTable(
@@ -949,7 +871,7 @@ namespace ECOCEMProject.Migrations
                 name: "Reportes");
 
             migrationBuilder.DropTable(
-                name: "RoleUser");
+                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Roturas");
@@ -959,12 +881,6 @@ namespace ECOCEMProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "TipoCementos");
-
-            migrationBuilder.DropTable(
-                name: "Trabajadores");
-
-            migrationBuilder.DropTable(
-                name: "UserClaims");
 
             migrationBuilder.DropTable(
                 name: "Vehiculos");
@@ -979,16 +895,16 @@ namespace ECOCEMProject.Migrations
                 name: "Descargas");
 
             migrationBuilder.DropTable(
+                name: "Trabajadores");
+
+            migrationBuilder.DropTable(
                 name: "Herramientas");
 
             migrationBuilder.DropTable(
                 name: "OrdenTrabajo");
 
             migrationBuilder.DropTable(
-                name: "RoturasEquipos");
-
-            migrationBuilder.DropTable(
-                name: "Roles");
+                name: "RoturaEquipo");
 
             migrationBuilder.DropTable(
                 name: "Users");

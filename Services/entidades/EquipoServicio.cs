@@ -29,17 +29,11 @@ public class EquipoServicio
         await _context.SaveChangesAsync();
         return equipo;
     }
-    public async Task<Equipo> Create(EquipoData equipo)
+    public async Task<Equipo> Create(Equipo equipo)
     {
-        Equipo equipo1 = new Equipo();
-
-        equipo1.SedeId = equipo.SedeId;
-        equipo1.EquipoId = equipo.EquipoId;
-        equipo1.TipoEId = equipo.TipoEId;
-
-        _context.Equipos.Add(equipo1);
+        _context.Equipos.Add(equipo);
         await _context.SaveChangesAsync();
-        return equipo1;
+        return equipo;
     }
     public async Task Delete(int id)
     {

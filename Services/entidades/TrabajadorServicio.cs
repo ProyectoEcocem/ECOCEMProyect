@@ -29,16 +29,11 @@ public class TrabajadorServicio
         await _context.SaveChangesAsync();
         return trabajador;
     }
-    public async Task<Trabajador> Create(TrabajadorData trabajador)
+    public async Task<Trabajador> Create(Trabajador trabajador)
     {
-        Trabajador trabajador1= new Trabajador();
-        trabajador1.TrabajadorId=trabajador.TrabajadorId;
-        trabajador1.NombreTrabajador=trabajador.NombreTrabajador;
-        trabajador1.SedeId=trabajador.SedeId;
-
-        _context.Trabajadores.Add(trabajador1);
+        _context.Trabajadores.Add(trabajador);
         await _context.SaveChangesAsync();
-        return trabajador1;
+        return trabajador;
     }
     public async Task Delete(int id)
     {

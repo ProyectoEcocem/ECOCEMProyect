@@ -1,3 +1,5 @@
+
+using Microsoft.AspNetCore.Identity;
 namespace ECOCEMProject;
 
 public class Trabajador
@@ -7,4 +9,6 @@ public class Trabajador
     public required Sede Sede {get; set;}
 
     public List<OrdenTrabajoAtendida> OrdenesTrabajoAtendidas {get;} = new();
+
+    
 }

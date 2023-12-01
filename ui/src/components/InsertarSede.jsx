@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, fetch } from "react";
 import {
     FormControl,
     FormLabel,
@@ -7,49 +7,44 @@ import {
     Flex,
     //BackgroundImage
   } from "@chakra-ui/react"; 
-import axios from "axios";
-//import { sedeController } from "../../../Controllers/Entidades"
+//import axios from "axios";
+import { sedeController } from "../../../Controllers/Entidades"
 
 const InsertarSede = () => {
   const [numeroSede, setNumeroSede] = useState("");
   const [nombreSede, setNombreSede] = useState("");
   const [ubicacion, setUbicacion] = useState("");
 
-  const clickAceptar = (event) => {
-    event.preventDefault();
-
-    const boton = event.target;
-    boton.style.backgroundColor = "gray";
-    setTimeout(() => {
-      boton.style.backgroundColor = "";
-  }, 0.5000);
-
-    registrar();
-  }
-
-  //Para el evento onClick del botón Aceptar
-  const registrar = async (e) => {
-    e.preventDefault();
-
+  function EnviarForm(){
     const sede = {
       numeroSede: numeroSede,
       nombreSede: nombreSede,
       ubicacion: ubicacion,
     };
 
-    //solicitud post y manejo de errores
-    try {
-      const response = await axios.post("api/[controller]/[action]", sede);
-      if (response.status === 201) {
-        console.log("Sede insertada correctamente");
+    // Llama al método Post de SedeController
+  fetch("/SedeController/Post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(sede),
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        // La sede se insertó correctamente
+        alert("La sede se insertó correctamente");
       } else {
-        console.error("Error al insertar la sede");
-        
+        // Ocurrió un error
+        alert("Ocurrió un error al insertar la sede");
       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    })
+    .catch((error) => {
+      // Ocurrió un error inesperado
+      alert("Ocurrió un error inesperado");
+    });
+
+  }
 
   return (
     <div style={{
@@ -105,7 +100,7 @@ const InsertarSede = () => {
               />
             </FormControl>
         <Flex>
-        <Button variant="contained" color="primary" style={{ marginRight: 10 }} onClick={clickAceptar}>
+        <Button variant="contained" color="primary" style={{ marginRight: 10, onClick:{EnviarForm}}}>
           Aceptar
         </Button>
         <Button variant="contained" color="secondary">

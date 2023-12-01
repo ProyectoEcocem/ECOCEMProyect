@@ -12,6 +12,7 @@ import InsertarEquipo from './InsertarEquipo';
 import InsertarRotura from './InsertarRotura';
 import InsertarRoturaEquipo from './InsertarRoturaEquipo';
 import InsertarParametros from './InsertarParametros';
+import InsertarEmpresa from './InsertarEmpresa';
 import VisualizarSede from './VisualizarSede';
 import VisualizarTipoEquipo from './VisualizarTipoEquipo';
 import VisualizarEquipo from './VisualizarEquipo';
@@ -133,6 +134,7 @@ import VisualizarIndicadores from './VisualizarIndicadores';
     <TabPanel> {/*Panel para Introducir Datos*/}
         <Tabs isFitted variant="enclosed" colorScheme='orange'>
         <TabList>
+            <Tab>InsertarEmpresa</Tab>
             <Tab>Insertar Sede</Tab>
             <Tab>Insertar Tipo de Equipo</Tab>
             <Tab>Insertar Equipo</Tab>
@@ -142,6 +144,16 @@ import VisualizarIndicadores from './VisualizarIndicadores';
         </TabList>
 
         <TabPanels>
+
+        <TabPanel> {/*Panel para Insertar Empresa */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarEmpresa/>
+                </div>
+            </TabPanel>
 
             <TabPanel> {/*Panel para Insertar Sede */}
                 <div style={{

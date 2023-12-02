@@ -1,6 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
+public class TrabajadorData{
+    public int TrabajadorId {get; set;}
+    public string? NombreTrabajador {get; set;}
+    public int SedeId {get; set;}
+}
+
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class TrabajadorController : Controller
@@ -27,7 +33,7 @@ public class TrabajadorController : Controller
     public async Task<IEnumerable<Trabajador>> GetAll() => await _trabajadorServicio.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Trabajador trabajador)
+    public async Task<IActionResult> Post([FromBody] TrabajadorData trabajador)
     {
         if (trabajador == null)
         {

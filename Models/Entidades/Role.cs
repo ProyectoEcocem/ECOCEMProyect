@@ -7,10 +7,10 @@ namespace ECOCEMProject;
 
 public class Role: IdentityRole<int>
 {
-    public string RolNombre{get; set;}
-    public string Descripcion{get; set; }
 
-    [JsonIgnore]
-    public required List<User> Users;
+    public string? Descripcion { get; set; }
 
+    public List<User> Users { get; } = new();
+
+    
 }

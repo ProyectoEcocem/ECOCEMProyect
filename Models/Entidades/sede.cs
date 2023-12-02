@@ -7,8 +7,12 @@ public class Sede
     public int SedeId {get; set;}
     public string? NombreSede {get; set;}
     public string? UbicacionSede {get; set;}
+     [JsonIgnore]
     public int EmpresaId {get; set;}
-    public required Empresa Empresa {get; set;} 
-    public required List<Trabajador> Trabajadores {get;set;} 
-    public required List<Equipo> Equipos {get;set;}
+    [JsonIgnore]
+    public virtual  Empresa Empresa {get; set;} = null!;
+    //[JsonIgnore]
+    public List<Trabajador>? Trabajadores {get;} = new List<Trabajador>();
+    
+    public List<Equipo> Equipos {get;} = new List<Equipo>();
 }

@@ -49,6 +49,13 @@ builder.Services.AddScoped<BrigadaServicio>();
 builder.Services.AddScoped<JefeMantenimientoServicio>();
 // Servicios de interrelaciones
 builder.Services.AddScoped<CargaServicio>();
+builder.Services.AddScoped<DescargaServicio>();
+builder.Services.AddScoped<MedicionBasculaServicio>();
+builder.Services.AddScoped<MedicionSiloServicio>();
+builder.Services.AddScoped<VentaServicio>();
+builder.Services.AddScoped<CompraServicio>();
+builder.Services.AddScoped<ReporteServicio>();
+builder.Services.AddScoped<OrdenTrabajoAtendidaServicio>();
 
 
 // Agregar las clases User y Role usando el paquete Identity de .Net Core
@@ -69,13 +76,6 @@ builder.Services.AddIdentity<User, Role>(options =>
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddScoped<DescargaServicio>();
-builder.Services.AddScoped<MedicionBasculaServicio>();
-builder.Services.AddScoped<MedicionSiloServicio>();
-builder.Services.AddScoped<VentaServicio>();
-builder.Services.AddScoped<CompraServicio>();
-builder.Services.AddScoped<ReporteServicio>();
-builder.Services.AddScoped<OrdenTrabajoAtendidaServicio>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -88,6 +88,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(b => b
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
 
 app.UseHttpsRedirection();
 

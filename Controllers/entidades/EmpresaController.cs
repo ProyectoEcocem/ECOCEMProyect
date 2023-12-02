@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 [ApiController]
 public class EmpresaController : Controller
 {
@@ -33,7 +33,7 @@ public class EmpresaController : Controller
             return BadRequest();
         }
         Empresa creadaEmpresa = await _empresaService.Create(empresa);
-        return CreatedAtRoute("Get", new { id = creadaEmpresa.EmpresaId }, creadaEmpresa);
+        return Ok(creadaEmpresa);
     }
 
     [HttpPut]

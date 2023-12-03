@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 public class TipoEData{
     public int TipoEId { get; set; }
-    public string? TipoE {get; set;}
+    public string? TipoE {get; set;} 
 }
 
 [Route("api/[controller]")]
@@ -20,7 +20,8 @@ public class TipoEquipoController : Controller
 
 
     [HttpPost]
-    public async Task<ActionResult> Post([FromBody] TipoEData tipoE)
+
+    public async Task<ActionResult> Post([FromBody]TipoEData tipoE)
     {
         
         if (tipoE == null)
@@ -40,8 +41,8 @@ public class TipoEquipoController : Controller
         }
         return Ok(tipoE);
     }
-    // GETALL
-     [HttpGet]
+
+    [HttpGet]
     public async Task<IEnumerable<TipoEquipo>> GetAll() => await _tipoEServicio.GetAll();
 
     [HttpPut]

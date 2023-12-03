@@ -13,11 +13,9 @@ const InsertarTipoDeEquipo = () => {
     const [tipoEquipo, setTipoEquipo] = useState("");
     const [insertSuccess, setInsertSuccess] = useState(false);
   
-    const createTipoEquipo = async () => {
-      const tipoE = {
-        tipoEquipoId: tipoEquipoId,
-        tipoEquipo: tipoEquipo
-      };
+
+    const createTipoEquipo = async (event) => {
+      event.preventDefault();
       
       axios.post(`http://localhost:5103/api/TipoEquipo`, {
         tipoEquipoId: tipoEquipoId,
@@ -70,7 +68,7 @@ const InsertarTipoDeEquipo = () => {
               <Input
                 value={tipoEquipo}
                 placeholder="Ingrese el Tipo de equipo"
-                onChange={(e) => setTipoEquipo(e.target.value)}
+                onChange={(a) => setTipoEquipo(a.target.value)}
                 marginTop={0.5}
                 width={80}
                 backgroundColor= "white"
@@ -97,5 +95,3 @@ const InsertarTipoDeEquipo = () => {
 
 export default InsertarTipoDeEquipo;
 
-// ToDO: Verificar si lo que se inserta es válido.
-// ToDO: agregar evento con los botones.

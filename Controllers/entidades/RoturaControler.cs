@@ -11,7 +11,8 @@ public class RoturaController : Controller
     {
         _roturaService = roturaService;
     }
-    [HttpGet("{id}")]
+    
+    [HttpGet("id")]
     public async Task<IActionResult> Get(int id)
     {
         Rotura rotura = await _roturaService.Get(id);
@@ -33,7 +34,7 @@ public class RoturaController : Controller
             return BadRequest();
         }
         Rotura createdRotura = await _roturaService.Create(rotura);
-        return CreatedAtRoute("Get", new { id = createdRotura.RoturaId }, createdRotura);
+        return Ok(createdRotura);
     }
 
     [HttpPut]

@@ -8,7 +8,6 @@ import {
     Flex,
     //BackgroundImage
   } from "@chakra-ui/react"; 
-//import { sedeController } from "../../../Controllers/Entidades"
 
 const InsertarSede = () => {
   const [numeroSede, setNumeroSede] = useState("");

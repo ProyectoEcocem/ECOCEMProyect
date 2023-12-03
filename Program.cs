@@ -47,6 +47,7 @@ builder.Services.AddScoped<TrabajadorServicio>();
 builder.Services.AddScoped<SiloServicio>();
 builder.Services.AddScoped<BrigadaServicio>();
 builder.Services.AddScoped<JefeMantenimientoServicio>();
+builder.Services.AddScoped<TipoEquipoServicio>();
 // Servicios de interrelaciones
 builder.Services.AddScoped<CargaServicio>();
 builder.Services.AddScoped<DescargaServicio>();
@@ -102,3 +103,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+

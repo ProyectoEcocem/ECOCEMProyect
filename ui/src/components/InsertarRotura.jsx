@@ -18,9 +18,9 @@ const InsertarRotura = () => {
       const rotura = {
         roturaId: roturaId,
         nombreRotura: nombreRotura
-      };
-    alert("aqui")
-       axios.post(`http://localhost:5103/api/Rotura`, {
+      };  
+        axios.post(`http://localhost:5103/api/Rotura`, {
+
         roturaId: roturaId,
         nombreRotura: nombreRotura
       })
@@ -32,9 +32,6 @@ const InsertarRotura = () => {
         alert("no ok")
       });
     };
-   
-    
-
 
 
     return (
@@ -70,7 +67,7 @@ const InsertarRotura = () => {
               <Input
                 value={nombreRotura}
                 placeholder="Ingrese el nombre de la Rotura"
-                onChange={(e) => setNombreRotura(e.target.value)}
+                onChange={(a) => setNombreRotura(a.target.value)}
                 marginTop={0.5}
                 width={80}
                 backgroundColor= "white"

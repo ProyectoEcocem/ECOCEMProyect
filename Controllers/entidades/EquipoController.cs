@@ -7,6 +7,7 @@ public class EquipoData
     public int SedeId {get; set;}
 
 }
+
 [Route("api/[controller]")]
 [ApiController]
 public class EquipoController : Controller

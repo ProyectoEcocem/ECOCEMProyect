@@ -1,4 +1,18 @@
 
+import {
+    FormLabel,
+    Table,
+    TableContainer,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    //BackgroundImage
+  } from "@chakra-ui/react"; 
+  import { useState,useEffect } from "react";
+  import axios from "axios";
+
 import React from 'react';
 
 import axios from 'axios';
@@ -19,9 +33,11 @@ export default class TiposEquipo extends React.Component {
       return (
         
 
+
          <ul>
            { this.state.tipoEquipos.map(tipoE => <li key={tipoE.tipoEId}>Tipo: {tipoE.tipoE} </li>)}
          </ul>
       )
     }
   } 
+

@@ -11,8 +11,7 @@ public class RoturaController : Controller
     {
         _roturaService = roturaService;
     }
-    
-    [HttpGet("id")]
+    [HttpGet("(id)")]
     public async Task<IActionResult> Get(int id)
     {
         Rotura rotura = await _roturaService.Get(id);

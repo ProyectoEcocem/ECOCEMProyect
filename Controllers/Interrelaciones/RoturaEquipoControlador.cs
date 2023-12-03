@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 public class RoturaEquipoController : Controller
 {
     private readonly RoturaEquipoServicio _roturaEquipoServicio;

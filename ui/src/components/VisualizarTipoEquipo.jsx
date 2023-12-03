@@ -17,8 +17,6 @@ export default class TiposEquipo extends React.Component {
   
     render() {
       return (
-        
-
 
          <ul>
            { this.state.tipoEquipos.map(tipoE => <li key={tipoE.tipoEId}>Tipo: {tipoE.tipoE} </li>)}

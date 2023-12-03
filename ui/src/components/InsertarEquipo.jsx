@@ -15,7 +15,10 @@ const InsertarEquipo = () => {
   const [tipoEquipo, setTipoEquipo] = useState("");
   const [sede, setSede] = useState("");
 
-  /*const createEmpresa = async () => {
+  state = {
+    tipoEquipos: []
+  }
+  /*zconst createEmpresa = async () => {
     const empresa = {
       numeroEmpresa: numeroEmpresa,
       nombreEmpresa: nombreEmpresa
@@ -34,12 +37,17 @@ const InsertarEquipo = () => {
 
 
   //solo para testear, aquí irían los tipos de equipo en BD
-  const tiposEquipos = [
+  /*const tiposEquipos = [
     { id: 1, nombre: "Tipo de Equipo 1" },
     { id: 2, nombre: "Tipo de Equipo 2" },
     { id: 3, nombre: "Tipo de Equipo 3" },
-  ]
-  
+  ]*/
+  axios.get(`http://localhost:5103/api/TipoEquipo`)
+        .then(res => {
+          const tiposEquipos = res.data;
+          this.setTiposEquipos({ tiposEquipo });
+        })
+
   //solo para testear, aquí irían las sedes en BD
   const sedes = [
     { id: 1, nombre: "Sede 1" },
@@ -117,11 +125,5 @@ const InsertarEquipo = () => {
       </div>
   );
 };
-
-// ToDo: Enlazar de forma que se muestren enlas listas desplegables los datos de sede y tipo de equipo que haya en la BD
-
-// ToDo: Evento de los botones
-
-// ToDO: Verificar que el Id sea valido
 
 export default InsertarEquipo;

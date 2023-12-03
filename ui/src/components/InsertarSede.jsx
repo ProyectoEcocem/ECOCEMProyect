@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, fetch } from "react";
 import {
     FormControl,
     FormLabel,
@@ -12,35 +11,40 @@ import {
 //import { sedeController } from "../../../Controllers/Entidades"
 
 const InsertarSede = () => {
-  
   const [numeroSede, setNumeroSede] = useState("");
   const [nombreSede, setNombreSede] = useState("");
   const [ubicacion, setUbicacion] = useState("");
-  const [empresaId, setEmpresaId] = useState("");
 
   function EnviarForm(){
     const sede = {
       numeroSede: numeroSede,
       nombreSede: nombreSede,
       ubicacion: ubicacion,
-      empresaId: empresaId
     };
-    axios.post(`http://localhost:5103/api/Sede`, {
-      numeroSede: numeroSede,
-      nombreSede: nombreSede,
-      ubicacion: ubicacion,
-      empresaId: empresaId
-    })
+
+    // Llama al método Post de SedeController
+  fetch("/SedeController/Post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(sede),
+  })
     .then((response) => {
-      console.log(response);
-    }, (error) => {
-      console.log(error);
+      if (response.status === 200) {
+        // La sede se insertó correctamente
+        alert("La sede se insertó correctamente");
+      } else {
+        // Ocurrió un error
+        alert("Ocurrió un error al insertar la sede");
+      }
+    })
+    .catch((error) => {
+      // Ocurrió un error inesperado
+      alert("Ocurrió un error inesperado");
     });
-  };
-  // useEffect(() => {
-  //   setInsertSuccess(false);
-  // }, [numeroSede,nombreSede,ubicacion,empresaId]);
- 
+
+  }
 
   return (
     <div style={{
@@ -95,19 +99,6 @@ const InsertarSede = () => {
                 marginBottom={30}
               />
             </FormControl>
-
-            <FormControl>
-              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>EmpresaId</FormLabel>
-              <Input
-                value={empresaId}
-                placeholder="Ingrese la empresaId"
-                onChange={(e) => setEmpresaId(e.target.value)}
-                marginTop={0.5}
-                width={80}
-                backgroundColor= "white"
-                marginBottom={30}
-              />
-            </FormControl>
         <Flex>
         <Button variant="contained" color="primary" style={{ marginRight: 10, onClick:{EnviarForm}}}>
           Aceptar
@@ -116,8 +107,6 @@ const InsertarSede = () => {
           Cancelar
         </Button>
         </Flex>
-        
-      
       </div>
   );
 };

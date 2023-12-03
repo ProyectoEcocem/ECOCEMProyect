@@ -28,7 +28,6 @@ const InsertarEmpresa = () => {
     }, (error) => {
       console.log(error);
     });
-  };
  
   
 
@@ -87,12 +86,14 @@ const InsertarEmpresa = () => {
           style={{ marginRight: 10 }}
           onClick={createEmpresa}
           type="submit"
+
           >
           {insertSuccess && (
             <div style={{ marginTop: 20 }}>
               <Alert status="success">La empresa se creó correctamente.</Alert>
             </div>
           )}
+
           Aceptar
         </Button>
 
@@ -101,6 +102,12 @@ const InsertarEmpresa = () => {
         </Button>
       </Flex>
 
+
+      {insertSuccess && (
+        <div style={{ marginTop: 20 }}>
+          <Alert status="success">La empresa se creó correctamente.</Alert>
+        </div>
+      )}
     </div>
   );
 };

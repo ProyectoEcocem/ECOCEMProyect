@@ -6,6 +6,7 @@ public class Equipo
     public int EquipoId {get; set;}
     public int TipoEId { get; set; }
     [JsonIgnore]
+
     public virtual TipoEquipo TipoEquipo {get;set; }
     public int SedeId {get; set;}
     [JsonIgnore]

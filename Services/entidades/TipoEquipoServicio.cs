@@ -29,11 +29,13 @@ public class TipoEquipoServicio
         await _context.SaveChangesAsync();
         return tipoE;
     }
+
     public async Task<TipoEquipo> Create(TipoEData tipoEq)
     {
         TipoEquipo tipoE1=new TipoEquipo();
         tipoE1.TipoE=tipoEq.TipoE;
         tipoE1.TipoEId=tipoEq.TipoEId;
+
         _context.TiposEquipos.Add(tipoE1);
         await _context.SaveChangesAsync();
         return tipoE1;

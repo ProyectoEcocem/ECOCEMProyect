@@ -8,7 +8,9 @@ namespace ECOCEMProject;
         public string? ubicacionSede { get; set; }
         public int empresaId { get; set; }
     }
+
 [Route("api/[controller]")]
+
 [ApiController]
 public class SedeController:Controller
 {
@@ -35,6 +37,7 @@ public class SedeController:Controller
     [HttpGet]
     public async Task<IEnumerable<Sede>> GetAll() => await _sedeService.GetAll();
 
+
     [HttpGet("Equipos")]
     public async Task<IEnumerable<Equipo>> GetEquipos(int id) => await _sedeService.GetEquipos(id);
 
@@ -48,6 +51,7 @@ public class SedeController:Controller
 
         Sede sedeCreada = await _sedeService.Create(sede);
         return Ok(sedeCreada);
+
     }
 
     [HttpPut]

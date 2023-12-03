@@ -7,7 +7,8 @@ public class EquipoData
     public int SedeId {get; set;}
 
 }
-[Route("api/[controller]/[action]")]
+
+[Route("api/[controller]")]
 [ApiController]
 public class EquipoController : Controller
 {

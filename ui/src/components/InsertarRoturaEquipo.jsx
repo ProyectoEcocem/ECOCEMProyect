@@ -7,6 +7,7 @@ import {
     Input,
     //BackgroundImage
   } from "@chakra-ui/react"; 
+import axios from "axios";
 
 const InsertarRoturaEquipo = () => {
   const [roturaId, setRoturaId] = useState("");

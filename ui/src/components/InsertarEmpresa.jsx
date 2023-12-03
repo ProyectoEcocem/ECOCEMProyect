@@ -28,22 +28,6 @@ const InsertarEmpresa = () => {
     }, (error) => {
       console.log(error);
     });
-  
-    // try {
-    //   const response = await axios.post(
-    //     `https://localhost:5103/api/Empresa/Post`,
-    //     empresa,
-    //   );
-  
-    //   if (response.status === 201) {
-    //     setInsertSuccess(true);
-    //   } else {
-    //     alert("Error al crear la empresa");
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    //   alert("Error al crear la empresaaaaa");
-    // }
   };
  
   
@@ -103,8 +87,12 @@ const InsertarEmpresa = () => {
           style={{ marginRight: 10 }}
           onClick={createEmpresa}
           type="submit"
-          mt="4"
-        >
+          >
+          {insertSuccess && (
+            <div style={{ marginTop: 20 }}>
+              <Alert status="success">La empresa se creó correctamente.</Alert>
+            </div>
+          )}
           Aceptar
         </Button>
 
@@ -113,11 +101,6 @@ const InsertarEmpresa = () => {
         </Button>
       </Flex>
 
-      {insertSuccess && (
-        <div style={{ marginTop: 20 }}>
-          <Alert status="success">La empresa se creó correctamente.</Alert>
-        </div>
-      )}
     </div>
   );
 };

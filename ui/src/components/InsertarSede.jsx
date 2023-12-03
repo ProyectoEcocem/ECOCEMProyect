@@ -1,4 +1,5 @@
-import { useState, fetch } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
     FormControl,
     FormLabel,
@@ -7,44 +8,42 @@ import {
     Flex,
     //BackgroundImage
   } from "@chakra-ui/react"; 
-//import axios from "axios";
 //import { sedeController } from "../../../Controllers/Entidades"
 
 const InsertarSede = () => {
   const [numeroSede, setNumeroSede] = useState("");
   const [nombreSede, setNombreSede] = useState("");
   const [ubicacion, setUbicacion] = useState("");
+  const [empresaId, setEmpresaId] = useState("");
+  const [insertSuccess, setInsertSuccess] = useState(false);
 
-  function EnviarForm(){
+  const EnviarForm = async () => {
     const sede = {
       numeroSede: numeroSede,
       nombreSede: nombreSede,
       ubicacion: ubicacion,
+      empresaId: empresaId
     };
-
-    // Llama al método Post de SedeController
-  fetch("/SedeController/Post", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(sede),
-  })
-    .then((response) => {
-      if (response.status === 200) {
-        // La sede se insertó correctamente
-        alert("La sede se insertó correctamente");
-      } else {
-        // Ocurrió un error
-        alert("Ocurrió un error al insertar la sede");
-      }
+    axios.post(`http://localhost:5103/api/Sede`, {
+      numeroSede: numeroSede,
+      nombreSede: nombreSede,
+      ubicacion: ubicacion,
+      empresaId: empresaId
     })
-    .catch((error) => {
-      // Ocurrió un error inesperado
-      alert("Ocurrió un error inesperado");
+    .then((response) => {
+      console.log(response);
+      alert("se inserto")
+    }, (error) => {
+      console.log(error);
+      alert(console.log(error))
+      alert("noo se inserto")
     });
+  };
 
-  }
+   useEffect(() => {
+     setInsertSuccess(false);
+   }, [numeroSede,nombreSede,ubicacion,empresaId]);
+ 
 
   return (
     <div style={{
@@ -99,14 +98,41 @@ const InsertarSede = () => {
                 marginBottom={30}
               />
             </FormControl>
+
+            <FormControl>
+              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>EmpresaId</FormLabel>
+              <Input
+                value={empresaId}
+                placeholder="Ingrese la empresaId"
+                onChange={(e) => setEmpresaId(e.target.value)}
+                marginTop={0.5}
+                width={80}
+                backgroundColor= "white"
+                marginBottom={30}
+              />
+            </FormControl>
         <Flex>
-        <Button variant="contained" color="primary" style={{ marginRight: 10, onClick:{EnviarForm}}}>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          style={{ marginRight: 10 }}
+          onClick = {EnviarForm}
+          type="submit"
+          mt="4"
+          >
+          {insertSuccess && (
+            <div style={{ marginTop: 20 }}>
+              <Alert status="success">La empresa se creó correctamente.</Alert>
+            </div>
+          )}
           Aceptar
         </Button>
         <Button variant="contained" color="secondary">
           Cancelar
         </Button>
         </Flex>
+        
+    
       </div>
   );
 };

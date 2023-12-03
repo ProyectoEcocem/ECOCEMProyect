@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import {
     FormControl,
     FormLabel,
@@ -13,6 +14,24 @@ const InsertarEquipo = () => {
   const [equipoId, setEquipoId] = useState("");
   const [tipoEquipo, setTipoEquipo] = useState("");
   const [sede, setSede] = useState("");
+
+  /*const createEmpresa = async () => {
+    const empresa = {
+      numeroEmpresa: numeroEmpresa,
+      nombreEmpresa: nombreEmpresa
+    };
+  
+    axios.post(`http://localhost:5103/api/Empresa`, {
+      numeroEmpresa: numeroEmpresa,
+      nombreEmpresa: nombreEmpresa
+    })
+    .then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
+  };*/
+
 
   //solo para testear, aquí irían los tipos de equipo en BD
   const tiposEquipos = [

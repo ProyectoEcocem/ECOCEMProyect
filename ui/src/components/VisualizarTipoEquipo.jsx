@@ -1,60 +1,27 @@
-import {
-    FormLabel,
-    Table,
-    TableContainer,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    //BackgroundImage
-  } from "@chakra-ui/react"; 
 
-  const VisualizarTipoEquipo = () => {
+import React from 'react';
 
-  //para testear
-  const tipoEquipos = [
-    {id: 1, tipoEquipo: "Tipo de Equipo 1"},
-    {id: 2, tipoEquipo: "Tipo de Equipo 2"},
-    {id: 3, tipoEquipo: "Tipo de Equipo 3"},
-    {id: 4, tipoEquipo: "Tipo de Equipo 4"}
-  ]
+import axios from 'axios';
+export default class TiposEquipo extends React.Component {
+    state = {
+      tipoEquipos: []
+    }
+  
+    componentDidMount() {
+      axios.get(`http://localhost:5103/api/TipoEquipo`)
+        .then(res => {
+          const tipoEquipos= res.data;
+          this.setState({ tipoEquipos });
+        })
+    }
+  
+    render() {
+      return (
+        
 
-  return(
-
-    <div style={{
-        width: "500px",
-        height: "400px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "white",
-        flexDirection: "column",
-        borderRadius: 20,
-        border: "2px solid #5F89C1",
-      }}>
-        <FormLabel style={{fontSize: 30}}>Tipos de Equipo</FormLabel>
-
-        <TableContainer>
-            <Table>
-                <Thead>
-                    <Tr>
-                        <Th>No. Tipo de Equipo</Th>
-                        <Th>Tipo de Equipo</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {tipoEquipos.map((tipoEquipo) => (
-                        <Tr key = {tipoEquipo.id}>
-                            <Td>{tipoEquipo.id}</Td>
-                            <Td>{tipoEquipo.tipoEquipo}</Td>
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
-        </TableContainer>
-    </div>
-  );
-
-  };
- export default VisualizarTipoEquipo;
+         <ul>
+           { this.state.tipoEquipos.map(tipoE => <li key={tipoE.tipoEId}>Tipo: {tipoE.tipoE} </li>)}
+         </ul>
+      )
+    }
+  } 

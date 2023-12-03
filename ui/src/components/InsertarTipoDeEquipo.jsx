@@ -1,17 +1,42 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   FormControl,
   FormLabel,
   Input,
   Button,
   Flex,
-  //BackgroundImage
 } from "@chakra-ui/react"; 
 
 const InsertarTipoDeEquipo = () => {
     const [tipoEquipoId, setTipoEquipoId] = useState("");
     const [tipoEquipo, setTipoEquipo] = useState("");
+    const [insertSuccess, setInsertSuccess] = useState(false);
   
+    const createTipoEquipo = async () => {
+      const tipoE = {
+        tipoEquipoId: tipoEquipoId,
+        tipoEquipo: tipoEquipo
+      };
+      
+      axios.post(`http://localhost:5103/api/TipoEquipo`, {
+        tipoEquipoId: tipoEquipoId,
+        tipoEquipo: tipoEquipo
+      })
+      .then((response) => {
+        console.log(response);
+        alert("ok")
+      }, (error) => {
+        console.log(error);
+        alert("no ok")
+      });
+    };
+
+    useEffect(() => {
+      setInsertSuccess(false);
+    }, [tipoEquipoId,tipoEquipo]);
+  
+
     return (
         <div style={{
             width: "400px",
@@ -53,7 +78,13 @@ const InsertarTipoDeEquipo = () => {
               />
             </FormControl>
             <Flex>
-        <Button variant="contained" color="primary" style={{ marginRight: 10 }}>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          style={{ marginRight: 10 }}
+          onClick={createTipoEquipo}
+          type="submit"
+          >
           Aceptar
         </Button>
         <Button variant="contained" color="secondary">

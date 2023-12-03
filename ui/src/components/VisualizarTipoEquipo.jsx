@@ -9,6 +9,8 @@ import {
     Td,
     //BackgroundImage
   } from "@chakra-ui/react"; 
+  import { useState,useEffect } from "react";
+  import axios from "axios";
 
   const VisualizarTipoEquipo = () => {
 
@@ -20,6 +22,24 @@ import {
     {id: 4, tipoEquipo: "Tipo de Equipo 4"}
   ]
 
+
+  // State variables
+  const [listaTipoEquipo, setListaTipoEquipo] = useState([]);
+
+  // Effect
+  useEffect(() => {
+    // Get all empresas
+    try {
+      //const response = axios.get(`http://localhost:5103/api/TipoEquipo`);
+      //const TE = response.data;
+
+      // Set the list of empresas
+      //setListaTipoEquipo(TE);
+
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
   return(
 
     <div style={{
@@ -35,6 +55,8 @@ import {
       }}>
         <FormLabel style={{fontSize: 30}}>Tipos de Equipo</FormLabel>
 
+
+        <p>{listaTipoEquipo}</p>
         <TableContainer>
             <Table>
                 <Thead>

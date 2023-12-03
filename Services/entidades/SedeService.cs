@@ -24,7 +24,7 @@ public class SedeService
 
     public async Task<IEnumerable<Sede>> GetAll()
     {
-        return await _context.Sedes.ToListAsync();
+        return await _context.Sedes.Include(e=> e.Trabajadores).Include(e=> e.Equipos).ToListAsync();
     }
 
     public async Task<Sede> Update(int id,Sede sede)
@@ -36,12 +36,19 @@ public class SedeService
         return sede;
     }
 
-    public async Task<Sede> Create(Sede sede)
+    public async Task<Sede> Create(SedeData sede)
     {
-        _context.Sedes.Add(sede);
+        Sede sede1= new Sede();
+        sede1.SedeId=sede.sedeid;
+        sede1.NombreSede=sede.nombreSede;
+        sede1.EmpresaId=sede.empresaId;
+        sede1.UbicacionSede=sede.ubicacionSede;
+        
+        
+        _context.Sedes.Add(sede1);
         await _context.SaveChangesAsync();
 
-        return sede;
+        return sede1;
     }
 
     public async Task Delete(int id)
@@ -55,6 +62,21 @@ public class SedeService
 
         _context.Sedes.Remove(sede);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<Equipo>> GetEquipos(int id)
+    {
+        var sedes =  await _context.Sedes.Include(e=> e.Trabajadores).Include(e=> e.Equipos).ToListAsync();
+        Sede sede = sedes.FirstOrDefault(s => s.SedeId == id)!;
+
+        if (sede != null)
+        {
+            return sede.Equipos;
+        }
+        else
+        {
+            return null!;
+        }
     }
 
     

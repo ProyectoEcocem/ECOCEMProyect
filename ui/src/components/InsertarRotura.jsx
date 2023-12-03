@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -7,11 +7,33 @@ import {
   Flex,
   //BackgroundImage
 } from "@chakra-ui/react"; 
+import axios from "axios";
 
 const InsertarRotura = () => {
     const [roturaId, setRoturaId] = useState("");
     const [nombreRotura, setNombreRotura] = useState("");
   
+
+    const createRotura = async () => {
+      const rotura = {
+        roturaId: roturaId,
+        nombreRotura: nombreRotura
+      };
+      
+        axios.post(`http://localhost:5103/api/Rotura`, {
+        roturaId: roturaId,
+        nombreRotura: nombreRotura
+      })
+      .then((response) => {
+        console.log(response);
+        alert("ok")
+      }, (error) => {
+        console.log(error);
+        alert("no ok")
+      });
+    };
+
+
     return (
         <div style={{
             width: "400px",
@@ -45,7 +67,7 @@ const InsertarRotura = () => {
               <Input
                 value={nombreRotura}
                 placeholder="Ingrese el nombre de la Rotura"
-                onChange={(e) => setNombreRotura(e.target.value)}
+                onChange={(a) => setNombreRotura(a.target.value)}
                 marginTop={0.5}
                 width={80}
                 backgroundColor= "white"
@@ -53,7 +75,13 @@ const InsertarRotura = () => {
               />
             </FormControl>
             <Flex>
-        <Button variant="contained" color="primary" style={{ marginRight: 10 }}>
+        <Button 
+        variant="contained" 
+        color="primary" 
+        style={{ marginRight: 10 }}
+        onClick={createRotura}
+        type="submit"
+        >
           Aceptar
         </Button>
         <Button variant="contained" color="secondary">
@@ -65,6 +93,3 @@ const InsertarRotura = () => {
 };
 
 export default InsertarRotura;
-
-// ToDO: Verificar si lo que se inserta es válido.
-// ToDO: agregar evento con los botones.

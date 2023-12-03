@@ -34,7 +34,7 @@ public class EquipoController : Controller
     public async Task<IEnumerable<Equipo>> GetAll() => await _equipoServicio.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] EquipoData equipo)
+    public async Task<IActionResult> Post([FromBody]EquipoData equipo)
     {
         if (equipo == null)
         {
@@ -42,7 +42,6 @@ public class EquipoController : Controller
         }
         Equipo equipoCreado = await _equipoServicio.Create(equipo);
         return Ok(equipoCreado);
-        //return CreatedAtRoute("Get", new { id = equipoCreado.EquipoId }, equipoCreado);
     }
 
     [HttpPut]

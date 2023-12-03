@@ -11,27 +11,9 @@ import {
   } from "@chakra-ui/react"; 
 
 const InsertarEquipo = () => {
-  const [equipoId, setEquipoId] = useState("");
-  const [tipoEquipo, setTipoEquipo] = useState("");
-  const [sede, setSede] = useState("");
-
-  
-  const createEquipo = async () => {
-
-    axios.post(`http://localhost:5103/api/Equipo`, {
-      equipoId: equipoId,
-      tipoEquipo: tipoEquipo,
-      sede: sede
-    })
-    .then((response) => {
-      console.log(response);
-      alert("ok")
-    }, (error) => {
-      console.log(error);
-      alert("no ok")
-    });
-  };
-
+  const [EquipoId, setEquipoId] = useState(0);
+  const [TipoEId, setTipoEId] = useState(0);
+  const [SedeId, setSedeId] = useState(0);
 
   //Lista de tipos de equipos
     const [tiposEquipos, setTiposEquipos] = useState([]);
@@ -56,6 +38,22 @@ const InsertarEquipo = () => {
   }, []);
 
 
+  const createEquipo = async () => {
+
+    axios.post(`http://localhost:5103/api/Equipo`, {
+      EquipoId: EquipoId,
+      TipoEId: TipoEId,
+      SedeId: SedeId
+    })
+    .then((response) => {
+      console.log(response);
+      alert("ok")
+    }, (error) => {
+      console.log(error);
+      alert("no ok")
+    });
+  };
+
 
   return (
     <div style={{
@@ -77,7 +75,7 @@ const InsertarEquipo = () => {
   <FormControl>
               <FormLabel style={{margin: "0px 20px 0px 40px"}}>Número de Serie del Equipo</FormLabel>
               <Input
-                value={equipoId}
+                value={EquipoId}
                 placeholder="Ingrese el Número de serie del equipo"
                 onChange={(e) => setEquipoId(e.target.value)}
                 marginTop={0.5}
@@ -89,14 +87,14 @@ const InsertarEquipo = () => {
             <FormLabel style={{margin: "20px 210px 0px 0px"}}>Tipo de Equipo</FormLabel>
 
             <Select
-          value={tipoEquipo}
-          onChange={(e) => setTipoEquipo(e.target.value)}
+          value={TipoEId}
+          onChange={(e) => setTipoEId(e.target.value)}
           width={80}
           marginBottom={30}
         >
           {tiposEquipos.map((tipoEquipo) => (
-            <option key={tipoEquipo.TipoEId} value={tipoEquipo.TipoEId}>
-              {tipoEquipo.TipoE}
+            <option key={tipoEquipo.tipoEId} value={tipoEquipo.tipoEId}>
+              {tipoEquipo.tipoE}
             </option>
           ))}
         </Select>
@@ -104,8 +102,8 @@ const InsertarEquipo = () => {
             <FormLabel style={{margin: "0px 140px 0px 0px"}}>Sede a la que pertenece</FormLabel>
 
             <Select
-          value={sede}
-          onChange={(e) => setSede(e.target.value)}
+          value={SedeId}
+          onChange={(e) => setSedeId(e.target.value)}
           width={80}
           marginBottom={30}
         >

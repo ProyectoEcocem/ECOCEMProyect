@@ -9,14 +9,14 @@ import {
 } from "@chakra-ui/react"; 
 
 const InsertarTipoDeEquipo = () => {
-    const [tipoEquipoId, setTipoEquipoId] = useState("");
+    const [tipoEquipoId, setTipoEquipoId] = useState(0);
     const [tipoEquipo, setTipoEquipo] = useState("");
     const [insertSuccess, setInsertSuccess] = useState(false);
 
     const data = {
       tipoE: {
-        tipoEquipoId: 1,
-        tipoE: "tipoEquipo"
+        tipoEquipoId: tipoEquipoId,
+        tipoEquipo: tipoEquipo 
       }
     };
   

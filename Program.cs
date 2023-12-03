@@ -48,6 +48,7 @@ builder.Services.AddScoped<SiloServicio>();
 builder.Services.AddScoped<BrigadaServicio>();
 builder.Services.AddScoped<JefeMantenimientoServicio>();
 builder.Services.AddScoped<TipoEquipoServicio>();
+builder.Services.AddScoped<RoturaService>();
 // Servicios de interrelaciones
 builder.Services.AddScoped<CargaServicio>();
 builder.Services.AddScoped<DescargaServicio>();

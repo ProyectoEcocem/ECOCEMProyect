@@ -12,8 +12,14 @@ const InsertarTipoDeEquipo = () => {
     const [tipoEquipoId, setTipoEquipoId] = useState("");
     const [tipoEquipo, setTipoEquipo] = useState("");
     const [insertSuccess, setInsertSuccess] = useState(false);
-  
 
+    const data = {
+      tipoE: {
+        tipoEquipoId: 1,
+        tipoE: "tipoEquipo"
+      }
+    };
+  
     const createTipoEquipo = async (event) => {
       event.preventDefault();
       

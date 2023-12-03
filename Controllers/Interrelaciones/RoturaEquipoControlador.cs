@@ -14,7 +14,7 @@ public class RoturaEquipoController : Controller
         _roturaEquipoServicio =roturaEquipoServicio;
     }
 
-    // POST
+    
     [HttpPost]
     public async Task<ActionResult> Post(RoturaEquipo roturaE)
     {

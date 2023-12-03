@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
     FormControl,
@@ -15,45 +15,47 @@ const InsertarEquipo = () => {
   const [tipoEquipo, setTipoEquipo] = useState("");
   const [sede, setSede] = useState("");
 
-  state = {
-    tipoEquipos: []
-  }
-  /*zconst createEmpresa = async () => {
-    const empresa = {
-      numeroEmpresa: numeroEmpresa,
-      nombreEmpresa: nombreEmpresa
-    };
   
-    axios.post(`http://localhost:5103/api/Empresa`, {
-      numeroEmpresa: numeroEmpresa,
-      nombreEmpresa: nombreEmpresa
+  const createEquipo = async () => {
+
+    axios.post(`http://localhost:5103/api/Equipo`, {
+      equipoId: equipoId,
+      tipoEquipo: tipoEquipo,
+      sede: sede
     })
     .then((response) => {
       console.log(response);
+      alert("ok")
     }, (error) => {
       console.log(error);
+      alert("no ok")
     });
-  };*/
+  };
 
 
-  //solo para testear, aquí irían los tipos de equipo en BD
-  /*const tiposEquipos = [
-    { id: 1, nombre: "Tipo de Equipo 1" },
-    { id: 2, nombre: "Tipo de Equipo 2" },
-    { id: 3, nombre: "Tipo de Equipo 3" },
-  ]*/
-  axios.get(`http://localhost:5103/api/TipoEquipo`)
+  //Lista de tipos de equipos
+    const [tiposEquipos, setTiposEquipos] = useState([]);
+  
+    useEffect(() => {
+      axios.get(`http://localhost:5103/api/TipoEquipo`)
         .then(res => {
-          const tiposEquipos = res.data;
-          this.setTiposEquipos({ tiposEquipo });
+          setTiposEquipos(res.data);
         })
+        .catch(err => console.log(err));
+    }, []);
 
-  //solo para testear, aquí irían las sedes en BD
-  const sedes = [
-    { id: 1, nombre: "Sede 1" },
-    { id: 2, nombre: "Sede 2" },
-    { id: 3, nombre: "Sede 3" },
-  ]
+//Lista de sedes
+  const [sedes, setSedes] = useState([]);
+  
+  useEffect(() => {
+    axios.get(`http://localhost:5103/api/Sede`)
+      .then(res => {
+        setSedes(res.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+
 
   return (
     <div style={{
@@ -93,8 +95,8 @@ const InsertarEquipo = () => {
           marginBottom={30}
         >
           {tiposEquipos.map((tipoEquipo) => (
-            <option key={tipoEquipo.id} value={tipoEquipo.id}>
-              {tipoEquipo.nombre}
+            <option key={tipoEquipo.TipoEId} value={tipoEquipo.TipoEId}>
+              {tipoEquipo.TipoE}
             </option>
           ))}
         </Select>
@@ -108,18 +110,21 @@ const InsertarEquipo = () => {
           marginBottom={30}
         >
           {sedes.map((sede) => (
-            <option key={sede.id} value={sede.id}>
-              {sede.nombre}
+            <option key={sede.sedeId} value={sede.sedeId}>
+              {sede.nombreSede}
             </option>
           ))}
         </Select>
            
         <Flex>
-        <Button variant="contained" color="primary" style={{ marginRight: 10 }}>
+        <Button 
+        variant="contained" 
+        color="primary" 
+        style={{ marginRight: 10 }}
+        onClick={createEquipo}
+        type="submit"
+        >
           Aceptar
-        </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
         </Button>
         </Flex>
       </div>

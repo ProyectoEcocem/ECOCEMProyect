@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     FormLabel,
     Button,
@@ -10,23 +10,48 @@ import {
 import axios from "axios";
 
 const InsertarRoturaEquipo = () => {
-  const [roturaId, setRoturaId] = useState("");
-  const [equipoId, setEquipoId] = useState("");
+  const [equipoId, setEquipoId] = useState(0);
+  const [roturaId, setRoturaId] = useState(0);
   const [fecha, setFecha] = useState("");
 
-  //solo para testear, aquí irían las roturas registradas en BD
-  const roturas = [
-    { id: 1, nombre: "Tipo de Rotura 1" },
-    { id: 2, nombre: "Tipo de Rotura 2" },
-    { id: 3, nombre: "Tipo de Rotura 3" },
-  ]
+    //Lista de roturas
+    const [roturas, setRoturas] = useState([]);
   
-  //solo para testear, aquí irían los equipos registrados en BD
-  const equipos = [
-    { id: 1},
-    { id: 2},
-    { id: 3},
-  ]
+    useEffect(() => {
+      axios.get(`http://localhost:5103/api/Rotura`)
+        .then(res => {
+          setRoturas(res.data);
+        })
+        .catch(err => console.log(err));
+    }, []);
+
+//Lista de equipos
+  const [equipos, setEquipos] = useState([]);
+  
+  useEffect(() => {
+    axios.get(`http://localhost:5103/api/Equipo`)
+      .then(res => {
+        setEquipos(res.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  const createRE = async () => {
+    axios.post(`http://localhost:5103/api/RoturaEquipo`, {
+      equipoId: equipoId,
+      roturaId: roturaId,
+      fecha: fecha
+    })
+    .then((response) => {
+      console.log(response);
+      alert("ok")
+    }, (error) => {
+      console.log(error);
+      alert("no ok")
+    });
+};
+
+
 
   return (
     <div style={{
@@ -45,6 +70,22 @@ const InsertarRoturaEquipo = () => {
   Insertar Rotura de Equipo
 </FormLabel>
 
+<FormLabel style={{margin: "0px 260px 0px 0px"}}>Equipo</FormLabel>
+
+<Select
+value={equipoId}
+onChange={(e) => setEquipoId(e.target.value)}
+width={80}
+marginBottom={30}
+>
+{equipos.map((equipo) => (
+<option key={equipo.equipoId} value={equipo.equipoId}>
+  {equipo.equipoId}
+</option>
+))}
+</Select>
+
+
 <FormLabel style={{margin: "0px 250px 0px 40px"}}>Tipo de Rotura</FormLabel>
   
 <Select
@@ -54,27 +95,13 @@ const InsertarRoturaEquipo = () => {
           marginBottom={30}
         >
           {roturas.map((rotura) => (
-            <option key={rotura.id} value={rotura.id}>
-              {rotura.nombre}
+            <option key={rotura.roturaId} value={rotura.roturaId}>
+              {rotura.nombreRotura}
             </option>
           ))}
         </Select>
       
-            <FormLabel style={{margin: "0px 260px 0px 0px"}}>Equipo</FormLabel>
-
-            <Select
-          value={equipoId}
-          onChange={(e) => setEquipoId(e.target.value)}
-          width={80}
-          marginBottom={30}
-        >
-          {equipos.map((equipo) => (
-            <option key={equipo.id} value={equipo.id}>
-              {equipo.id}
-            </option>
-          ))}
-        </Select>
-
+           
         <FormLabel style={{margin: "0px 180px 0px 0px"}}>Fecha de la Rotura</FormLabel>
 
         <Input
@@ -87,7 +114,13 @@ const InsertarRoturaEquipo = () => {
         />
 
         <Flex>
-        <Button variant="contained" color="primary" style={{ marginRight: 10 }}>
+        <Button 
+        variant="contained" 
+        color="primary" 
+        style={{ marginRight: 10 }}
+        onClick={createRE}
+        type="submit"
+        >
           Aceptar
         </Button>
         <Button variant="contained" color="secondary">
@@ -98,7 +131,5 @@ const InsertarRoturaEquipo = () => {
   );
 };
 
-// ToDo: Verificar que los valores sean validos
-// ToDo: Evento de los Botontes
 
 export default InsertarRoturaEquipo;

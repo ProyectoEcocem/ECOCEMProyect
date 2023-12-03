@@ -1,3 +1,4 @@
+
 import {
     FormLabel,
     Table,
@@ -12,71 +13,31 @@ import {
   import { useState,useEffect } from "react";
   import axios from "axios";
 
-  const VisualizarTipoEquipo = () => {
+import React from 'react';
 
-  //para testear
-  const tipoEquipos = [
-    {id: 1, tipoEquipo: "Tipo de Equipo 1"},
-    {id: 2, tipoEquipo: "Tipo de Equipo 2"},
-    {id: 3, tipoEquipo: "Tipo de Equipo 3"},
-    {id: 4, tipoEquipo: "Tipo de Equipo 4"}
-  ]
-
-
-  // State variables
-  const [listaTipoEquipo, setListaTipoEquipo] = useState([]);
-
-  // Effect
-  useEffect(() => {
-    // Get all empresas
-    try {
-      //const response = axios.get(`http://localhost:5103/api/TipoEquipo`);
-      //const TE = response.data;
-
-      // Set the list of empresas
-      //setListaTipoEquipo(TE);
-
-    } catch (error) {
-      console.error(error);
+import axios from 'axios';
+export default class TiposEquipo extends React.Component {
+    state = {
+      tipoEquipos: []
     }
-  }, []);
-  return(
-
-    <div style={{
-        width: "500px",
-        height: "400px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "white",
-        flexDirection: "column",
-        borderRadius: 20,
-        border: "2px solid #5F89C1",
-      }}>
-        <FormLabel style={{fontSize: 30}}>Tipos de Equipo</FormLabel>
+  
+    componentDidMount() {
+      axios.get(`http://localhost:5103/api/TipoEquipo`)
+        .then(res => {
+          const tipoEquipos= res.data;
+          this.setState({ tipoEquipos });
+        })
+    }
+  
+    render() {
+      return (
+        
 
 
-        <p>{listaTipoEquipo}</p>
-        <TableContainer>
-            <Table>
-                <Thead>
-                    <Tr>
-                        <Th>No. Tipo de Equipo</Th>
-                        <Th>Tipo de Equipo</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {tipoEquipos.map((tipoEquipo) => (
-                        <Tr key = {tipoEquipo.id}>
-                            <Td>{tipoEquipo.id}</Td>
-                            <Td>{tipoEquipo.tipoEquipo}</Td>
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
-        </TableContainer>
-    </div>
-  );
+         <ul>
+           { this.state.tipoEquipos.map(tipoE => <li key={tipoE.tipoEId}>Tipo: {tipoE.tipoE} </li>)}
+         </ul>
+      )
+    }
+  } 
 
-  };
- export default VisualizarTipoEquipo;

@@ -1,62 +1,27 @@
-import {
-    FormLabel,
-    Table,
-    TableContainer,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    //BackgroundImage
-  } from "@chakra-ui/react"; 
 
-  const VisualizarSede = () => {
+import React from 'react';
 
-  //para testear
-  const sedes = [
-    {id: 1, nombre: "Sede1", ubicacion: "ubicacion1" },
-    {id: 2, nombre: "Sede2", ubicacion: "ubicacion2" },
-    {id: 3, nombre: "Sede3", ubicacion: "ubicacion3" },
-    {id: 4, nombre: "Sede4", ubicacion: "ubicacion4" }
-  ]
+import axios from 'axios';
+export default class Sedes extends React.Component {
+    state = {
+      sedes: []
+    }
+  
+    componentDidMount() {
+      axios.get(`http://localhost:5103/api/Sede`)
+        .then(res => {
+          const sedes = res.data;
+          this.setState({ sedes });
+        })
+    }
+  
+    render() {
+      return (
+        
 
-  return(
-
-    <div style={{
-        width: "500px",
-        height: "400px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "white",
-        flexDirection: "column",
-        borderRadius: 20,
-        border: "2px solid #5F89C1",
-      }}>
-        <FormLabel style={{fontSize: 30}}>Sedes</FormLabel>
-
-        <TableContainer>
-            <Table>
-                <Thead>
-                    <Tr>
-                        <Th>No. Sede</Th>
-                        <Th>Nombre de Sede</Th>
-                        <Th>Ubicación</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {sedes.map((sede) => (
-                        <Tr key = {sede.id}>
-                            <Td>{sede.id}</Td>
-                            <Td>{sede.nombre}</Td>
-                            <Td>{sede.ubicacion}</Td>
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
-        </TableContainer>
-    </div>
-  );
-
-  };
- export default VisualizarSede;
+         <ul>
+           { this.state.sedes.map(sede => <li key={sede.sedeId}>Nombre: {sede.nombreSede} , Ubicación: {sede.ubicacionSede}</li>)}
+         </ul>
+      )
+    }
+  } 

@@ -10,7 +10,6 @@ namespace ECOCEMProject;
     }
 
 [Route("api/[controller]")]
-
 [ApiController]
 public class SedeController:Controller
 {
@@ -51,7 +50,6 @@ public class SedeController:Controller
 
         Sede sedeCreada = await _sedeService.Create(sede);
         return Ok(sedeCreada);
-
     }
 
     [HttpPut]

@@ -13,6 +13,7 @@ const InsertarTipoDeEquipo = () => {
     const [tipoEquipo, setTipoEquipo] = useState("");
     const [insertSuccess, setInsertSuccess] = useState(false);
   
+
     const createTipoEquipo = async (event) => {
       event.preventDefault();
       

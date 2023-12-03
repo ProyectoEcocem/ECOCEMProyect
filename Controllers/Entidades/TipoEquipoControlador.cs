@@ -20,6 +20,7 @@ public class TipoEquipoController : Controller
 
 
     [HttpPost]
+
     public async Task<ActionResult> Post([FromBody]TipoEData tipoE)
     {
         

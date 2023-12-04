@@ -85,11 +85,12 @@ namespace ECOCEMProject;
         // }
 
 
-        public async Task<AutorizacionResponse> DevolverToken(AutorizacionRequest autorizacion)
+        public async Task<AutorizacionResponse> DevolverToken(LoginModel autorizacion)
         {
+            var usuarios = _context.Users.FirstOrDefault();
             var usuario_encontrado = _context.Users.FirstOrDefault(x =>
-                x.UserName == autorizacion.NombreUsuario &&
-                x.PasswordHash == autorizacion.Clave
+                x.UserName == autorizacion.Name &&
+                x.PasswordHash == autorizacion.Password
             );
 
             if (usuario_encontrado == null) { 

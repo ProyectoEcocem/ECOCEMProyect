@@ -5,6 +5,8 @@ import './App.css'
 import { ChakraProvider } from '@chakra-ui/react'
 //import Login from './components/Login'
 import VentanaPrincipal from './components/VentanaPrincipal'
+import InsertarParametrosTabla from './components/InsertarParametrosTabla'
+import Reporte from './components/Reporte'
 
 function App() {
  // const [count, setCount] = useState(0)

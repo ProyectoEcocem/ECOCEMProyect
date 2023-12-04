@@ -29,7 +29,6 @@ const InsertarEmpresa = () => {
       console.log(error);
     });
   };
-
  
   
 
@@ -54,7 +53,7 @@ const InsertarEmpresa = () => {
       <FormLabel style={{ fontSize: 30 }}>Insertar Empresa</FormLabel>
 
       <FormControl>
-        <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
+        <FormLabel style={{ margin: "20px 20px 0px 40px" }}>
           Número de Empresa
         </FormLabel>
         <Input
@@ -85,29 +84,19 @@ const InsertarEmpresa = () => {
         <Button
           variant="contained"
           color="primary"
-          style={{ marginRight: 10 }}
+          style={{ marginRight: 10, marginTop: 40 }}
           onClick={createEmpresa}
           type="submit"
           >
           {insertSuccess && (
-            <div style={{ marginTop: 20 }}>
+            <div style={{ marginTop: 40 }}>
               <Alert status="success">La empresa se creó correctamente.</Alert>
             </div>
           )}
-
           Aceptar
         </Button>
 
-        <Button variant="contained" color="secondary">
-          Cancelar
-        </Button>
       </Flex>
-
-      {insertSuccess && (
-        <div style={{ marginTop: 20 }}>
-          <Alert status="success">La empresa se creó correctamente.</Alert>
-        </div>
-      )}
 
     </div>
   );

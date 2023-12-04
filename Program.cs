@@ -37,7 +37,6 @@ builder.Services.AddScoped<MedidorService>();
 builder.Services.AddScoped<EntidadCompradoraService>();
 builder.Services.AddScoped<Vehiculo>();
 builder.Services.AddScoped<TipoCementoService>();
-builder.Services.AddScoped<RoturaService>();
 builder.Services.AddScoped<FabricaService>();
 builder.Services.AddScoped<EmpresaService>();
 builder.Services.AddScoped<HerramientaService>();
@@ -48,6 +47,7 @@ builder.Services.AddScoped<SiloServicio>();
 builder.Services.AddScoped<BrigadaServicio>();
 builder.Services.AddScoped<JefeMantenimientoServicio>();
 builder.Services.AddScoped<TipoEquipoServicio>();
+builder.Services.AddScoped<RoturaService>();
 // Servicios de interrelaciones
 builder.Services.AddScoped<CargaServicio>();
 builder.Services.AddScoped<DescargaServicio>();
@@ -57,6 +57,7 @@ builder.Services.AddScoped<VentaServicio>();
 builder.Services.AddScoped<CompraServicio>();
 builder.Services.AddScoped<ReporteServicio>();
 builder.Services.AddScoped<OrdenTrabajoAtendidaServicio>();
+builder.Services.AddScoped<RoturaEquipoServicio>();
 
 
 // Agregar las clases User y Role usando el paquete Identity de .Net Core

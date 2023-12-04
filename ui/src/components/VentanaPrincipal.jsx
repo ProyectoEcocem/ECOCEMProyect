@@ -12,6 +12,7 @@ import InsertarEquipo from './InsertarEquipo';
 import InsertarRotura from './InsertarRotura';
 import InsertarRoturaEquipo from './InsertarRoturaEquipo';
 import InsertarParametros from './InsertarParametros';
+import InsertarParametrosTabla from './InsertarParametrosTabla';
 import InsertarEmpresa from './InsertarEmpresa';
 import VisualizarSede from './VisualizarSede';
 import VisualizarTipoEquipo from './VisualizarTipoEquipo';
@@ -20,6 +21,7 @@ import VisualizarRotura from './VisualizarRotura';
 import VisualizarRoturaEquipo from './VisualizarRoturaEquipo';
 import VisualizarParametros from './VisualizarParametros';
 import VisualizarIndicadores from './VisualizarIndicadores';
+import Reporte from './Reporte';
 
 
  const VentanaPrincipal = () => {
@@ -44,8 +46,7 @@ import VisualizarIndicadores from './VisualizarIndicadores';
             <Tab>Equipos</Tab>
             <Tab>Rotura</Tab>
             <Tab>Roturas de Equipos</Tab>
-            <Tab>Parámetros</Tab>
-            <Tab>Indicadores</Tab>
+            <Tab>Reporte</Tab>
         </TabList>
 
         <TabIndicator
@@ -107,23 +108,13 @@ import VisualizarIndicadores from './VisualizarIndicadores';
                 </div>
             </TabPanel>
 
-            <TabPanel> {/*Panel para Visualizar parametros*/}
+            <TabPanel> {/*Panel para Reporte*/}
             <div style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 }}>
-                <VisualizarParametros/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Visualizar indicadores*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <VisualizarIndicadores/>
+                <Reporte/>
                 </div>
             </TabPanel>
 
@@ -207,7 +198,7 @@ import VisualizarIndicadores from './VisualizarIndicadores';
 
             <TabPanel> {/*Panel para Insertar Parámetros */}
             <div>
-                <InsertarParametros/>
+                <InsertarParametrosTabla/>
                 </div>
             </TabPanel>
 

@@ -1,10 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
-[Route("api/[controller]/[action]")]
+    public class SedeData
+    {
+        public int sedeid { get; set; }
+        public string? nombreSede { get; set; }
+        public string? ubicacionSede { get; set; }
+        public int empresaId { get; set; }
+    }
+
+[Route("api/[controller]")]
 [ApiController]
-
-
 public class SedeController:Controller
 {
     private readonly SedeService _sedeService;
@@ -14,7 +20,7 @@ public class SedeController:Controller
         _sedeService = sedeService;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("id")]
     public async Task<IActionResult> Get( int id)
     {
         Sede sede = await _sedeService.Get(id);
@@ -30,8 +36,12 @@ public class SedeController:Controller
     [HttpGet]
     public async Task<IEnumerable<Sede>> GetAll() => await _sedeService.GetAll();
 
+
+    [HttpGet("Equipos")]
+    public async Task<IEnumerable<Equipo>> GetEquipos(int id) => await _sedeService.GetEquipos(id);
+
     [HttpPost]
-    public async Task<IActionResult> Post( Sede sede)
+    public async Task<IActionResult> Post([FromBody] SedeData sede)
     {
         if (sede == null)
         {
@@ -39,8 +49,7 @@ public class SedeController:Controller
         }
 
         Sede sedeCreada = await _sedeService.Create(sede);
-
-        return CreatedAtRoute("Get", new { id = sedeCreada.SedeId }, sedeCreada);
+        return Ok(sedeCreada);
     }
 
     [HttpPut]

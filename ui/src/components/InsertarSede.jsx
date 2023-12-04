@@ -8,6 +8,7 @@ import {
     Flex,
     //BackgroundImage
   } from "@chakra-ui/react"; 
+//import { sedeController } from "../../../Controllers/Entidades"
 
 const InsertarSede = () => {
   const [numeroSede, setNumeroSede] = useState("");
@@ -35,7 +36,7 @@ const InsertarSede = () => {
     }, (error) => {
       console.log(error);
       alert(console.log(error))
-      alert("noo se inserto")
+      alert("no se inserto")
     });
   };
 
@@ -47,7 +48,7 @@ const InsertarSede = () => {
   return (
     <div style={{
       width: "400px",
-      height: "400px",
+      height: "500px",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -94,20 +95,20 @@ const InsertarSede = () => {
                 marginTop={0.5}
                 width={80}
                 backgroundColor= "white"
-                marginBottom={30}
+                marginBottom={0}
               />
             </FormControl>
 
             <FormControl>
-              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>EmpresaId</FormLabel>
+              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>ID de la Empresa</FormLabel>
               <Input
                 value={empresaId}
-                placeholder="Ingrese la empresaId"
+                placeholder="Ingrese el ID de la Empresa"
                 onChange={(e) => setEmpresaId(e.target.value)}
-                marginTop={0.5}
+                marginTop={1}
                 width={80}
                 backgroundColor= "white"
-                marginBottom={30}
+                marginBottom={5}
               />
             </FormControl>
         <Flex>
@@ -120,14 +121,11 @@ const InsertarSede = () => {
           mt="4"
           >
           {insertSuccess && (
-            <div style={{ marginTop: 20 }}>
+            <div style={{ marginTop: 1 }}>
               <Alert status="success">La empresa se creó correctamente.</Alert>
             </div>
           )}
           Aceptar
-        </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
         </Button>
         </Flex>
         

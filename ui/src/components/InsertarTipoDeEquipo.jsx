@@ -12,20 +12,27 @@ const InsertarTipoDeEquipo = () => {
     const [tipoEquipoId, setTipoEquipoId] = useState("");
     const [tipoEquipo, setTipoEquipo] = useState("");
     const [insertSuccess, setInsertSuccess] = useState(false);
-  
 
+    const data = {
+      tipoE: {
+        tipoEquipoId: tipoEquipoId,
+        tipoEquipo: tipoEquipo 
+      }
+    };
+  
     const createTipoEquipo = async (event) => {
       event.preventDefault();
       
       axios.post(`http://localhost:5103/api/TipoEquipo`, {
-        tipoEquipoId: tipoEquipoId,
-        tipoEquipo: tipoEquipo
+        tipoEId: tipoEquipoId,
+        tipoE: tipoEquipo
       })
       .then((response) => {
         console.log(response);
         alert("ok")
       }, (error) => {
         console.log(error);
+        alert(console.log(error))
         alert("no ok")
       });
     };
@@ -84,9 +91,6 @@ const InsertarTipoDeEquipo = () => {
           type="submit"
           >
           Aceptar
-        </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
         </Button>
         </Flex>
       </div>

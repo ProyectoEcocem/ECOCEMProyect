@@ -18,9 +18,9 @@ const InsertarRotura = () => {
       const rotura = {
         roturaId: roturaId,
         nombreRotura: nombreRotura
-      };  
+      };
+      
         axios.post(`http://localhost:5103/api/Rotura`, {
-
         roturaId: roturaId,
         nombreRotura: nombreRotura
       })
@@ -83,9 +83,6 @@ const InsertarRotura = () => {
         type="submit"
         >
           Aceptar
-        </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
         </Button>
         </Flex>
       </div>

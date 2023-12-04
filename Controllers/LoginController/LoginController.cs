@@ -1,6 +1,7 @@
 
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 //using Microsoft.IdentityModel.Tokens;
@@ -42,6 +43,7 @@ namespace ECOCEMProject;
         
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]LoginModel login)
         {
             var result = await _signInManager.PasswordSignInAsync(
@@ -68,6 +70,6 @@ namespace ECOCEMProject;
                 claims.Add(new Claim(ClaimTypes.Role, role.Name!));
             }
 
-            return Ok();
+            return Ok(roles);
         }
     }

@@ -10,15 +10,24 @@ import {
   } from "@chakra-ui/react";
   import axios from "axios"; 
 
-const InsertarRoles = () => {
-  const [nombreRol, setNombreRol] = useState("");
-  const [descripcionRol, setDescripcionRol] = useState("");
+const InsertarUsuarios = () => {
+  const [nombreUsuario, setNombreUsuario] = useState("");
+  const [constrasena, setContrasena] = useState("");
 
-  const crearRol = async () => {
+  const crearRegistro = async () => {
+    const user = {
+      name: nombreUsuario,
+      password: contrasena,
+      old_Password:"",
+      email:""
+    };
+    const role = {
+      name: nombreUsuario,
+      description: ""
+    };
 
-  axios.post(`http://localhost:5103/api/Role`, {
-    name: nombreRol,
-    description: descripcionRol
+    axios.post(`http://localhost:5103/api/Register`, {
+      user,role
     })
     .then((response) => {
       console.log(response);
@@ -47,11 +56,11 @@ const InsertarRoles = () => {
 </FormLabel>
 
   <FormControl>
-              <FormLabel style={{margin: "10px 20px 0px 40px"}}>Nombre del Rol</FormLabel>
+              <FormLabel style={{margin: "10px 20px 0px 40px"}}>Nombre del Usuario</FormLabel>
               <Input
-                value={nombreRol}
-                placeholder="Ingrese el nombre del Rol"
-                onChange={(e) => setNombreRol(e.target.value)}
+                value={nombreUsuario}
+                placeholder="Ingrese el nombre del Usuario"
+                onChange={(e) => setNombreUsuario(e.target.value)}
                 marginTop={0.5}
                 marginBottom={10}
                 width={80}
@@ -60,11 +69,11 @@ const InsertarRoles = () => {
             </FormControl>
       
             <FormControl>
-              <FormLabel style={{margin: "0px 20px 0px 40px"}}>Descripcion del Rol</FormLabel>
+              <FormLabel style={{margin: "0px 20px 0px 40px"}}>Contraseña</FormLabel>
               <Input
                 value={descripcionRol}
-                placeholder="Ingrese la descripción del Rol"
-                onChange={(e) => setDescripcionRol(e.target.value)}
+                placeholder="Ingrese la contraseña"
+                onChange={(e) => setContrasena(e.target.value)}
                 marginTop={0.5}
                 marginBottom={10}
                 width={80}
@@ -81,4 +90,4 @@ const InsertarRoles = () => {
   );
 };
 
-export default InsertarRoles;
+export default InsertarUsuarios;

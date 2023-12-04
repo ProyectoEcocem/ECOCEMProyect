@@ -14,14 +14,14 @@ public class AccionMantenimientoController : Controller
         _accionMantenimientoService = accionMantenimientoService;
     }
 
-    // POST
+    
     [HttpPost]
     public async Task<ActionResult> Post(AccionMantenimiento accionMantenimiento)
     {
         return Ok(await _accionMantenimientoService.Create(accionMantenimiento));
     }
 
-    // GET by ID
+    
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {

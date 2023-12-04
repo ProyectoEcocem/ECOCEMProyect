@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
@@ -33,6 +34,7 @@ public class TrabajadorController : Controller
     public async Task<IEnumerable<Trabajador>> GetAll() => await _trabajadorServicio.GetAll();
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Post([FromBody] TrabajadorData trabajador)
     {
         if (trabajador == null)

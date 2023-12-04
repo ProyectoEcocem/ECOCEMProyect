@@ -7,10 +7,34 @@ import {
   Button,
   //BackgroundImage
 } from "@chakra-ui/react"; 
+import axios from "axios"; 
 
-const Login = () => {
+const Login = ({manejoClick}) => {
     const [nombreUsuario, setNombreUsuario] = useState("");
-    const [contraseña, setContraseña] = useState("");
+    const [contrasena, setContraseña] = useState("");
+
+    const ClickAceptar = async () => {
+
+      if (!nombreUsuario || !contrasena) {
+        alert("Ingrese un nombre de usuario y una contraseña.");
+        return;
+      }
+        
+        axios.post(`http://localhost:5103/api/Login`,{
+          Name : nombreUsuario,
+          Password : contrasena
+        })
+        .then((response) => {
+            console.log(response);
+            alert("ok")
+            alert("Inicio de sesión exitoso");
+            manejoClick();
+        }, (error) => {
+            console.log(error);
+            alert("no ok")
+            setError("Nombre de usuario o contraseña inválidos.")
+        });
+    };
   
     return (
         <div style={{
@@ -47,7 +71,7 @@ const Login = () => {
               <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Contraseña</FormLabel>
               <Input
                 type="password"
-                value={contraseña}
+                value={contrasena}
                 placeholder="Ingrese su contraseña"
                 onChange={(e) => setContraseña(e.target.value)}
                 marginTop={0.5}
@@ -60,14 +84,13 @@ const Login = () => {
               variant="contained"
               color="primary"
               marginTop={6}
+              onClick={ClickAceptar}
+              type="submit"
             >
               Continuar
             </Button>
           </div>
     );
   };
-  
-// ToDo: Verificar que el usuario, la contraseña sean válidas.
-// ToDo: Evento con el botón.
 
   export default Login;

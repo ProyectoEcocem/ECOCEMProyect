@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   FormControl,
@@ -9,19 +9,17 @@ import {
 } from "@chakra-ui/react"; 
 
 const InsertarTipoDeEquipo = () => {
-    const [tipoEquipoId, setTipoEquipoId] = useState(0);
-    const [tipoEquipo, setTipoEquipo] = useState("");
-    const [insertSuccess, setInsertSuccess] = useState(false);
+    const [tipoEquipoId, setTipoEquipoId] = useState(8);
+    const [tipoEquipo, setTipoEquipo] = useState("te");
 
-    const data = {
-      tipoE: {
-        tipoEquipoId: tipoEquipoId,
-        tipoEquipo: tipoEquipo 
-      }
-    };
   
     const createTipoEquipo = async (event) => {
       event.preventDefault();
+
+      const tipoEquipoData = {
+        tipoEquipoId: parseInt(tipoEquipoId),
+        tipoEquipo: tipoEquipo,
+      };
       
       axios.post(`http://localhost:5103/api/TipoEquipo`, {
         tipoEquipoId: tipoEquipoId,
@@ -36,9 +34,6 @@ const InsertarTipoDeEquipo = () => {
       });
     };
 
-    useEffect(() => {
-      setInsertSuccess(false);
-    }, [tipoEquipoId,tipoEquipo]);
   
 
     return (

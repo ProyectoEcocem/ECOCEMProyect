@@ -21,7 +21,7 @@ public class TipoEquipoController : Controller
 
     [HttpPost]
 
-    public async Task<ActionResult> Post([FromBody]TipoEData tipoE)
+    public async Task<ActionResult> Post(TipoEData tipoE)
     {
         
         if (tipoE == null)

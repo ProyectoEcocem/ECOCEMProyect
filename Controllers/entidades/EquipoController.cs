@@ -34,7 +34,7 @@ public class EquipoController : Controller
     public async Task<IEnumerable<Equipo>> GetAll() => await _equipoServicio.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody]EquipoData equipo)
+    public async Task<IActionResult> Post(EquipoData equipo)
     {
         if (equipo == null)
         {

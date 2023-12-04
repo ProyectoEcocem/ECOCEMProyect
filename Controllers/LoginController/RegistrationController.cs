@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
 
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class RegistrationController : Controller
     {
@@ -80,37 +80,6 @@ namespace ECOCEMProject;
             }
             await _userRoleService.Create(current_user.Id, current_role.Id);
             await _signInManager.SignInAsync(current_user, isPersistent: false);
-            return Ok();
-        }
-
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginModel login)
-        {
-            var result = await _signInManager.PasswordSignInAsync(
-                login.Name!,
-                login.Password!,
-                isPersistent: false,
-                lockoutOnFailure: false);
-            if (!result.Succeeded)
-                return BadRequest("Wrong name or password");
-
-            var user = await _userService.GetByName(login.Name!);
-            var roles =  await _filtro.GetRoles(user.Id);
-            
-            // Crea una lista de claims.
-            var claims = new List<Claim>
-            {
-                new(ClaimTypes.Sid, user.Id.ToString()),
-                new(ClaimTypes.Name, user.UserName!)
-            };
-
-            // Agrega un claim por cada rol del usuario.
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role.Name!));
-            }
-
             return Ok();
         }
     }

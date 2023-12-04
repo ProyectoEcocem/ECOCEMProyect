@@ -74,7 +74,7 @@ const InsertarRotura = () => {
                 marginBottom={30}
               />
             </FormControl>
-            <Flex>
+            
         <Button 
         variant="contained" 
         color="primary" 
@@ -84,10 +84,7 @@ const InsertarRotura = () => {
         >
           Aceptar
         </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
-        </Button>
-        </Flex>
+       
       </div>
   );
 };

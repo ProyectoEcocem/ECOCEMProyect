@@ -31,6 +31,7 @@ export default class Sedes extends React.Component {
   
     render() {
       return (
+        <div style={{height : 400}}>
         <TableContainer>
           <Table>
             <Thead>
@@ -54,7 +55,7 @@ export default class Sedes extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-
+        </div>
 
         // <ul>
          //  { this.state.sedes.map(sede => <li key={sede.sedeId}>Nombre: {sede.nombreSede} , Ubicación: {sede.ubicacionSede}</li>)}

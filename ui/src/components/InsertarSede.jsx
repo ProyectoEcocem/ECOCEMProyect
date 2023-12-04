@@ -48,7 +48,7 @@ const InsertarSede = () => {
   return (
     <div style={{
       width: "400px",
-      height: "400px",
+      height: "500px",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -95,20 +95,20 @@ const InsertarSede = () => {
                 marginTop={0.5}
                 width={80}
                 backgroundColor= "white"
-                marginBottom={30}
+                marginBottom={1}
               />
             </FormControl>
 
             <FormControl>
-              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>EmpresaId</FormLabel>
+              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>ID de la Empresa</FormLabel>
               <Input
                 value={empresaId}
-                placeholder="Ingrese la empresaId"
+                placeholder="Ingrese el ID de la empresa"
                 onChange={(e) => setEmpresaId(e.target.value)}
                 marginTop={0.5}
                 width={80}
                 backgroundColor= "white"
-                marginBottom={30}
+                marginBottom={1}
               />
             </FormControl>
         <Flex>
@@ -121,14 +121,11 @@ const InsertarSede = () => {
           mt="4"
           >
           {insertSuccess && (
-            <div style={{ marginTop: 20 }}>
+            <div style={{ marginTop: 5 }}>
               <Alert status="success">La empresa se creó correctamente.</Alert>
             </div>
           )}
           Aceptar
-        </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
         </Button>
         </Flex>
         

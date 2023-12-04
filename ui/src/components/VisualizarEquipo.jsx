@@ -31,7 +31,7 @@ export default class Equipo extends React.Component {
   
     render() {
       return (
-        
+        <div style={{height : 400}}>
         <TableContainer>
         <Table>
           <Thead>
@@ -55,6 +55,7 @@ export default class Equipo extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
+      </div>
         // <ul>
           // { this.state.Equipos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}
         // </ul>

@@ -113,7 +113,6 @@ marginBottom={30}
          
         />
 
-        <Flex>
         <Button 
         variant="contained" 
         color="primary" 
@@ -123,10 +122,6 @@ marginBottom={30}
         >
           Aceptar
         </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
-        </Button>
-        </Flex>
       </div>
   );
 };

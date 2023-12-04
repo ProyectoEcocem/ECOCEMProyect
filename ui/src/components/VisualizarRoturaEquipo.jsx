@@ -31,7 +31,7 @@ export default class RoturaEquipo extends React.Component {
   
     render() {
       return (
-        <div>
+        <div style={{height : 400}}>
         <TableContainer>
           <Table>
             <Thead>

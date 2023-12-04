@@ -80,11 +80,10 @@ const InsertarEmpresa = () => {
         />
       </FormControl>
 
-      <Flex>
         <Button
           variant="contained"
           color="primary"
-          style={{ marginRight: 10 }}
+          style={{ marginRight: 10, marginTop: 20 }}
           onClick={createEmpresa}
           type="submit"
           >
@@ -95,11 +94,7 @@ const InsertarEmpresa = () => {
           )}
           Aceptar
         </Button>
-
-        <Button variant="contained" color="secondary">
-          Cancelar
-        </Button>
-      </Flex>
+      
 
     </div>
   );

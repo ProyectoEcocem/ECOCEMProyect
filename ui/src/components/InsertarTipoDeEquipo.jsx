@@ -76,7 +76,7 @@ const InsertarTipoDeEquipo = () => {
                 marginBottom={30}
               />
             </FormControl>
-            <Flex>
+            
         <Button 
           variant="contained" 
           color="primary" 
@@ -86,10 +86,7 @@ const InsertarTipoDeEquipo = () => {
           >
           Aceptar
         </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
-        </Button>
-        </Flex>
+      
       </div>
   );
 };

@@ -31,7 +31,7 @@ export default class TiposEquipo extends React.Component {
   
     render() {
       return (
-        
+        <div style={{height : 400}}>
         <TableContainer>
           <Table>
             <Thead>
@@ -53,7 +53,7 @@ export default class TiposEquipo extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-
+</div>
 
         // <ul>
           // { this.state.Roturas.map(rotura => <li key={rotura.RoturaId}>Tipo: {rotura.nombreRotura} </li>)}

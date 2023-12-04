@@ -1,6 +1,7 @@
 
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 //using Microsoft.IdentityModel.Tokens;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
 
-
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : Controller

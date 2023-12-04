@@ -13,7 +13,7 @@ import {
 const InsertarSede = () => {
   const [numeroSede, setNumeroSede] = useState("");
   const [nombreSede, setNombreSede] = useState("");
-  const [ubicacionSede, setUbicacion] = useState("");
+  const [ubicacion, setUbicacion] = useState("");
   const [empresaId, setEmpresaId] = useState("");
   const [insertSuccess, setInsertSuccess] = useState(false);
 
@@ -21,13 +21,13 @@ const InsertarSede = () => {
     const sede = {
       numeroSede: numeroSede,
       nombreSede: nombreSede,
-      ubicacionSede: ubicacionSede,
+      ubicacion: ubicacion,
       empresaId: empresaId
     };
     axios.post(`http://localhost:5103/api/Sede`, {
       numeroSede: numeroSede,
       nombreSede: nombreSede,
-      ubicacionSede: ubicacionSede,
+      ubicacion: ubicacion,
       empresaId: empresaId
     })
     .then((response) => {
@@ -42,7 +42,7 @@ const InsertarSede = () => {
 
    useEffect(() => {
      setInsertSuccess(false);
-   }, [numeroSede,nombreSede,ubicacionSede,empresaId]);
+   }, [numeroSede,nombreSede,ubicacion,empresaId]);
  
 
   return (
@@ -89,7 +89,7 @@ const InsertarSede = () => {
             <FormControl>
               <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Ubicación</FormLabel>
               <Input
-                value={ubicacionSede}
+                value={ubicacion}
                 placeholder="Ingrese la ubicación"
                 onChange={(e) => setUbicacion(e.target.value)}
                 marginTop={0.5}

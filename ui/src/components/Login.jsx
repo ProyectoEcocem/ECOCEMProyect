@@ -26,13 +26,11 @@ const Login = ({manejoClick}) => {
         })
         .then((response) => {
             console.log(response);
-            alert("ok")
             alert("Inicio de sesión exitoso");
             manejoClick();
         }, (error) => {
             console.log(error);
-            alert("no ok")
-            setError("Nombre de usuario o contraseña inválidos.")
+            alert("Nombre de usuario o contraseña inválidos.")
         });
     };
   

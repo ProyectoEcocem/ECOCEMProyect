@@ -192,7 +192,7 @@ namespace ECOCEMProject.Migrations
                 {
                     RoturaId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nombre = table.Column<string>(type: "text", nullable: false)
+                    NombreRotura = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,7 +230,7 @@ namespace ECOCEMProject.Migrations
                 {
                     TipoEId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TipoE = table.Column<string>(type: "text", nullable: true)
+                    TipoE = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

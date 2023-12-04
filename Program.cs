@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Net.Http.Headers; 
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+
 
 using ECOCEMProject;
 
@@ -18,8 +20,6 @@ builder.Services.AddDbContext<MyContext>(opciones=>
     opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 
 );
-
-
 
 builder.Services.AddControllers();
 
@@ -69,18 +69,28 @@ builder.Services.AddIdentity<User, Role>(options =>
     {
         options.Password.RequiredLength = 8;
         options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireLowercase = true;
+        options.Password.RequireLowercase = false;
         options.Password.RequireUppercase = true;
         options.Password.RequireDigit = false;
-        options.Password.RequiredUniqueChars = 2;
     })
     .AddEntityFrameworkStores<MyContext>()
     .AddDefaultTokenProviders()
     .AddUserStore<UserStore<User,Role,MyContext,int>>()
     .AddRoleStore<RoleStore<Role, MyContext, int>>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ManageUsers", policy =>
+        policy.RequireClaim("CanManageUsers", "true"));
+});
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
+
 
 
 builder.Services.AddEndpointsApiExplorer();

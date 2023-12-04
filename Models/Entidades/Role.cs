@@ -5,8 +5,10 @@ using System.Text.Json.Serialization;
 
 namespace ECOCEMProject;
 
-public class Role: IdentityRole<int>
+public class Role
 {
+    public int RoleId { get; set; }
+    public string RoleName { get; set; }
 
     public string? Descripcion { get; set; }
 

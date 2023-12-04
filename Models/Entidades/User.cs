@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ECOCEMProject;
 
-public class User : IdentityUser<int>
+public class User 
 {
-    public string? Nombre { get { return UserName; } set { UserName = value; } }
+    public int UserId { get; set; }
+    public string UserName { get; set; }
 
+    public string? Email { get; set; }
     public List<Role> Roles {get; } = new();
 
 }

@@ -6,17 +6,18 @@ namespace ECOCEMProject;
 public class UserService
 {
     private readonly MyContext _context;
-    private readonly UserManager<User> _userManager;
+   
 
-    public UserService(MyContext context,UserManager<User> userManager)
+    public UserService(MyContext context)
     {
         _context = context;
-        _userManager = userManager;
     }
 
     public async Task<User> GetByName(string name)
     {
-        var current_entity = await _userManager.FindByNameAsync(name);
+        var current_entity = await _context.Users.FirstAsync(x => 
+        x.UserName == name
+        );
         
         if(current_entity == null!){
              throw new InvalidOperationException("Entidad no encontrada");
@@ -43,45 +44,36 @@ public class UserService
 
     }
 
-    public async Task Update(int user_id, [FromBody]RegistrationModel edited_model)
+    /*public async Task Update(int user_id, [FromBody]RegistrationModel edited_model)
         {
             var current_user = await Get(user_id);
             current_user.UserName = edited_model.Name;
 
             if (edited_model.Old_Password is not null && edited_model.Password is not null)
-                await _userManager.ChangePasswordAsync(
+                await _context.ChangePasswordAsync(
                     current_user, edited_model.Old_Password, edited_model.Password
                 );
 
 
-            await _userManager.UpdateAsync(current_user);
-        }
+            await _context.UpdateAsync(current_user);
+        }*/
 
     public  async Task<User> Create(RegistrationModel new_user)
+    {
+        if (await _context.Users.FirstAsync(x => x.UserName == new_user.Name) is not null)
+            throw new InvalidOperationException("The user already exists");
+
+        var user = new User()
         {
-            if (await _userManager.FindByNameAsync(new_user.Name!) is not null)
-                throw new InvalidOperationException("The user already exists");
+            UserName = new_user.Name,
+            Email = new_user.Email
+        };
 
-            var user = new User()
-            {
-                UserName = new_user.Name,
-                Email = new_user.Email
-            };
-
-            var result = await _userManager.CreateAsync(
-                user,
-                new_user.Password ?? throw new ArgumentException("Password required")
-            );
-
-            if (!result.Succeeded)
-                throw new ArgumentException("Fatal error");
-
-
-            //_context.Users.Add(user);
-            //await _context.SaveChangesAsync();
-
-            return user;
-        }
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+    
+        return user;
+    }
 
     public async Task DeleteByName(string name)
     {
@@ -93,8 +85,6 @@ public class UserService
         }
 
         _context.Users.Remove(user);
-
-        await _userManager.DeleteAsync(user);
 
         await _context.SaveChangesAsync();
     }
@@ -108,8 +98,6 @@ public class UserService
         }
 
         _context.Users.Remove(user);
-
-        await _userManager.DeleteAsync(user);
 
         await _context.SaveChangesAsync();
     }

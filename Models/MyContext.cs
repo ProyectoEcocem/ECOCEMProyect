@@ -15,7 +15,7 @@ public class MyContext: DbContext
 
     public DbSet<User>Users {get; set;}
     public DbSet<Role>Roles {get; set;}
-    public DbSet<UserRole>UserRoles {get; set;}
+    //public DbSet<UserRole>UserRoles {get; set;}
     public DbSet<Bascula>Basculas {get; set;}
     public DbSet<EntidadCompradora> EntidadCompradoras {get; set;}
     public DbSet<Fabrica>Fabricas {get; set;}
@@ -45,7 +45,7 @@ public class MyContext: DbContext
     public DbSet<MedicionSilo>MedicionesSilos{get;set;}
     public DbSet<OrdenTrabajoAtendida>OrdenesTrabajoAtendidas{get;set;}
     public DbSet<Venta>Ventas{get;set;}
-    public DbSet<IdentityUserClaim<int>> UserClaims { get; set; }
+    //public DbSet<IdentityUserClaim<int>> UserClaims { get; set; }
 
 
  
@@ -115,16 +115,16 @@ public class MyContext: DbContext
         modelBuilder.Entity<OrdenTrabajoRoturaEquipo>()
             .HasKey(key=> new {key.EquipoId, key.BrigadaId,key.TrabajadorId, key.FechaId});
 
-        modelBuilder.Entity<IdentityUserRole<int>>()
-            .HasKey(key => new { key.UserId, key.RoleId });
+        /*modelBuilder.Entity<IdentityUserRole<int>>()
+            .HasKey(key => new { key.UserId, key.RoleId });*/
 
 
         /*modelBuilder.Entity<UserRole>()
             .HasKey(key => new { key.UserId, key.RoleId } );*/
 
-        modelBuilder.Entity<User>()
+        /*modelBuilder.Entity<User>()
             .HasMany(e => e.Roles)
-            .WithMany(e => e.Users);
+            .WithMany(e => e.Users);*/
 
 
         modelBuilder.Entity<Empresa>()
@@ -144,13 +144,11 @@ public class MyContext: DbContext
             .HasForeignKey(e=>e.SedeId)
             .IsRequired();
                 
-        modelBuilder.Entity<IdentityRoleClaim<int>>(entity =>
+       /* modelBuilder.Entity<IdentityRoleClaim<int>>(entity =>
         {
             entity.ToTable("IdentityRoleClaims");
             entity.HasKey(p => new { p.RoleId, p.ClaimType });
-        });
-
-
+        });*/
 
 
     }

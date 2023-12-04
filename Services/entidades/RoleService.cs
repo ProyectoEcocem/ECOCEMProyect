@@ -5,18 +5,19 @@ namespace ECOCEMProject;
 public class RoleService
 {
     private readonly MyContext _context;
-    private readonly RoleManager<Role> _roleManager;
+    //private readonly context<Role> _context;
 
-    public RoleService(MyContext context,RoleManager<Role> roleManager)
+    public RoleService(MyContext context)
     {
         _context = context;
-        _roleManager = roleManager;
     }
 
     public async Task<Role> GetByName(string name)
     {
 
-        var current_entity = await _roleManager.FindByNameAsync(name);
+        var current_entity = await _context.Roles.FirstAsync(x => 
+        x.RoleName == name
+        );
 
         
         if(current_entity == null!){
@@ -40,44 +41,35 @@ public class RoleService
     {
 
         //var roles = await _context.Roles.Include(u=>u.Users).ToListAsync();
-        return await _roleManager.Roles.ToListAsync();
+        return await _context.Roles.ToListAsync();
         //return roles;
 
     }
 
-    public  async Task Update(int id,string? role_name, RoleModel edited_role)
+    /*public  async Task Update(int id,string? role_name, RoleModel edited_role)
     {
         var current_role = await Get(id);
+
         current_role.Name = edited_role.Name;
         current_role.Descripcion = edited_role.Description;
         await _context.SaveChangesAsync();
-        await _roleManager.UpdateAsync(current_role);
-    }
+         _context.Update(current_role);
+    }*/
 
     public async Task<Role> Create(RoleModel new_role)
         {
-            if (await _roleManager.RoleExistsAsync(new_role.Name!))
+            if (await _context.Roles.FirstAsync(x => x.RoleName == new_role.Name) is not null)
                 throw new InvalidOperationException("The role already exists");
 
             var role = new Role()
 
             {
-                Name = new_role.Name,
+                RoleName = new_role.Name,
                 Descripcion = new_role.Description
             };
 
-
-         
-            /*var result = await _roleManager.CreateAsync(role);
-
-            if (!result.Succeeded)
-                throw new ArgumentException("Fatal error");
-            */
-
-
-           // _context.Roles.Add(role);
-            //await _context.SaveChangesAsync();
-            await _roleManager.CreateAsync(role);
+            _context.Roles.Add(role);
+            await _context.SaveChangesAsync();
             return role;
 
         }
@@ -92,9 +84,6 @@ public class RoleService
         }
 
         _context.Roles.Remove(role);
-
-        await _roleManager.DeleteAsync(role);
-
         await _context.SaveChangesAsync();
     }
     public async Task Delete(int id)
@@ -107,9 +96,6 @@ public class RoleService
         }
 
         _context.Roles.Remove(role);
-
-        await _roleManager.DeleteAsync(role);
-
         await _context.SaveChangesAsync();
     }
 }

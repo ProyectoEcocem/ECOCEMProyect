@@ -34,8 +34,8 @@ builder.Services.AddDbContext<MyContext>(opciones=>
 
 
 // Servicios de entidades
-// builder.Services.AddScoped<UserService>();
-//builder.Services.AddScoped<RoleService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<BasculaService>();
 builder.Services.AddScoped<AccionMantenimientoService>();
 builder.Services.AddScoped<SedeService>();

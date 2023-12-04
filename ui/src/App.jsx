@@ -21,11 +21,7 @@ function App() {
    return (
     <ChakraProvider>
       <div>
-      {mostrarLogin ? (
-        <Login manejoClick={manejoClick} />
-      ) : (
-        <VentanaPrincipal /> //probando insertar roles
-      )}
+      <VentanaPrincipal/>
     </div>
   </ChakraProvider>
   )

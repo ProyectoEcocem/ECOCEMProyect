@@ -1,17 +1,16 @@
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Identity;
 
 namespace ECOCEMProject;
 
-public class UserRole : IdentityUserRole<int>
+/*public class UserRole 
 {
     [JsonIgnore]
-    public int IdUser { get { return UserId; } set { UserId = value; } }
+    public int UserId { get; set;} 
     [JsonIgnore]
-    public int IdRole { get { return RoleId; } set { RoleId = value; } }
+    public int RoleId { get ; set; }
 
     [JsonIgnore]
     public User User { get; set; }
     [JsonIgnore]
     public Role Role { get; set; }
-}
+}*/

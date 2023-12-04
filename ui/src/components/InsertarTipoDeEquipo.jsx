@@ -16,14 +16,10 @@ const InsertarTipoDeEquipo = () => {
     const createTipoEquipo = async (event) => {
       event.preventDefault();
 
-      const tipoEquipoData = {
-        tipoEquipoId: parseInt(tipoEquipoId),
-        tipoEquipo: tipoEquipo,
-      };
       
       axios.post(`http://localhost:5103/api/TipoEquipo`, {
-        tipoEquipoId: tipoEquipoId,
-        tipoEquipo: tipoEquipo
+        tipoEId: tipoEquipoId,
+        tipoE: tipoEquipo
       })
       .then((response) => {
         console.log(response);

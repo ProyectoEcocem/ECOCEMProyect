@@ -9,17 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
 
-
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : Controller
     {
-        // private readonly UserService _userService;
+         private readonly UserService _userService;
         // private readonly RoleService _roleService;
         // private readonly UserRoleServicio _userRoleService;
-        // private readonly IConfiguration _configuration;
-        // private readonly SignInManager<User> _signInManager;
-        // private readonly FiltroMantenimientoService _filtro;
+
         private readonly IAutorizacionService _autorizacionService;
 
         public LoginController(

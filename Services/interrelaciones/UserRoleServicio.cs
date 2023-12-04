@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ECOCEMProject;
 
-public class UserRoleServicio
+/*public class UserRoleServicio
 {
     private readonly MyContext _context;
 
@@ -63,3 +63,4 @@ public class UserRoleServicio
 
     
 }
+*/

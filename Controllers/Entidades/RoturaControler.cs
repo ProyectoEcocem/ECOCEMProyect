@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
@@ -23,6 +24,7 @@ public class RoturaController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IEnumerable<Rotura>> GetAll() => await _roturaService.GetAll();
 
     [HttpPost]

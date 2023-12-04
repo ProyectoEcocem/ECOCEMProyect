@@ -1,6 +1,20 @@
 
 import React from 'react';
-
+import {
+  Input,
+  Button,
+  Flex,
+  FormLabel,
+  Select,
+  Table,
+  TableContainer,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  //BackgroundImage
+} from "@chakra-ui/react";
 import axios from 'axios';
 export default class Equipo extends React.Component {
     state = {
@@ -18,9 +32,32 @@ export default class Equipo extends React.Component {
     render() {
       return (
         
-         <ul>
-           { this.state.Equipos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}
-         </ul>
+        <TableContainer>
+        <Table>
+          <Thead>
+            <Tr>
+              <Th>ID</Th>
+              <Th>Tipo de Equipo</Th>
+              <Th>Sede</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {
+              this.state.Equipos.map((equipo) => (
+                <Tr key={equipo.equipoId}>
+                  <Td>{equipo.equipoId}</Td>
+                  <Td>{equipo.tipoEId}</Td>
+                  <Td>{equipo.sedeId}</Td>
+                </Tr>
+              )
+              )
+            }
+          </Tbody>
+        </Table>
+      </TableContainer>
+        // <ul>
+          // { this.state.Equipos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}
+        // </ul>
       )
     }
   } 

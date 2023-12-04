@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 public class ReporteController : Controller
 {
     private readonly ReporteServicio _reporteServicio;
@@ -22,7 +22,7 @@ public class ReporteController : Controller
     }
 
     // GET by ID
-    [HttpGet("{id}")]
+    [HttpGet("{Id}")]
     public async Task<IActionResult> Get(int EquipoId,DateTime FechaId)
     {
         Reporte reporte=await _reporteServicio.Get(EquipoId,FechaId);
@@ -32,7 +32,7 @@ public class ReporteController : Controller
         return Ok(reporte);
     }
     // GETALL
-     [HttpGet]
+    [HttpGet]
     public async Task<IEnumerable<Reporte>> GetAll() => await _reporteServicio.GetAll();
 
     [HttpPut]

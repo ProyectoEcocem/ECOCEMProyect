@@ -50,7 +50,7 @@ const InsertarEquipo = () => {
       alert("ok")
     }, (error) => {
       console.log(error);
-      alert("no ok")
+      alert("Iserción fallida")
     });
   };
 

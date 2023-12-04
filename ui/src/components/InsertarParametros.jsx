@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import {
     Input,
     Button,
@@ -21,7 +22,7 @@ const InsertarParametros = () => {
 
   const [sede, setSede] = useState("");
 
- // const [equipoId, setEquipoId] = useState("");
+  const [equipoId, setEquipoId] = useState("");
 
   const [tiempoRealParoFalla, setTiempoRealParoFalla] = useState(""); //Tiempo real de paro por falla, en horas.
 
@@ -42,20 +43,60 @@ const InsertarParametros = () => {
   const [facturacion, setFacturacion] = useState(""); //Facturación de la empresa en el periodo analizado.
 
   const [costoMantContratado, setCostoMantContratado] = useState(""); //Costo de los mttos contratados.
+//Lista de equipos
+const [equipos, setEquipos] = useState([]);
+  
+useEffect(() => {
+  axios.get(`http://localhost:5103/api/Equipo`)
+    .then(res => {
+      setEquipos(res.data);
+    })
+    .catch(err => console.log(err));
+}, []);
 
-  //solo para testear, aquí irían las sedes en BD
-  const sedes = [
-    { id: 1, nombre: "Sede 1" },
-    { id: 2, nombre: "Sede 2" },
-    { id: 3, nombre: "Sede 3" },
-  ]
+  const createReporte = async () => {
+    const reporte = {
+      fecha: fecha,
+      equipoId : equipoId,
+      tiempoRealParoFall: tiempoRealParoFalla,
+      tiempoRealMant: tiempoRealMant,
+      tiempoOperacioReal: tiempoOperacioReal,
+      tiempoParoTrabajosPlan:tiempoParoTrabajosPlan,
+      tiempoParoMant: tiempoParoMant,
+      tiempoOperacionRequerido:tiempoOperacionRequerido,
+      tiempoRequeridoAccProgramadas:tiempoRequeridoAccProgramadas,
+      costoTotalMant:costoTotalMant,
+      facturacion:facturacion,
+      costoMantContratado:costoMantContratado
+    };
 
-  // ToDo: Necesariamente debo poner reporte acá
-  const equipos = [
-    {id: 1, tipoEquipo: "Tipo1"},
-     {id: 2, tipoEquipo: "Tipo2"},
-     {id: 3, tipoEquipo: "Tipo3"},
-  ]
+    
+    axios.post(`http://localhost:5103/api/Reporte`, {
+      fecha: fecha,
+      sede: sede,
+      tiempoRealParoFall: tiempoRealParoFalla,
+      tiempoRealMant: tiempoRealMant,
+      tiempoOperacioReal: tiempoOperacioReal,
+      tiempoParoTrabajosPlan:tiempoParoTrabajosPlan,
+      tiempoParoMant: tiempoParoMant,
+      tiempoOperacionRequerido:tiempoOperacionRequerido,
+      tiempoRequeridoAccProgramadas:tiempoRequeridoAccProgramadas,
+      costoTotalMant:costoTotalMant,
+      facturacion:facturacion,
+      costoMantContratado:costoMantContratado
+      
+    })
+    .then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
+
+    };
+   
+
+ 
+  
 
   return (
     <div style={{ borderRadius: 20,
@@ -75,15 +116,15 @@ const InsertarParametros = () => {
 
 
 <Select
-          value={sede}
-          onChange={(e) => setSede(e.target.value)}
+          value={equipoId}
+          onChange={(e) => setEquipoId(e.target.value)}
           width={150}
           marginBottom={30}
           marginLeft={10}
         >
-          {sedes.map((sede) => (
-            <option key={sede.id} value={sede.id}>
-              {sede.nombre}
+          {equipos.map((equipo) => (
+            <option key={equipo.equipoId} value={equipo.equipoId}>
+              {equipo.equipoId}
             </option>
           ))}
         </Select>

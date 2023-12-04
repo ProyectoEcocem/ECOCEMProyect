@@ -39,7 +39,7 @@ const Login = ({manejoClick}) => {
     return (
         <div style={{
             width: "400px",
-            height: "400px",
+            height: "580px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

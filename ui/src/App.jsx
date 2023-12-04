@@ -21,7 +21,11 @@ function App() {
    return (
     <ChakraProvider>
       <div>
-      <VentanaPrincipal/>
+      {mostrarLogin ? (
+        <Login manejoClick={manejoClick} />
+      ) : (
+        <VentanaPrincipal />
+      )}
     </div>
   </ChakraProvider>
   )

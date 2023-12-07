@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 const InsertarEmpresa = () => {
-  const [numeroEmpresa, setNumeroEmpresa] = useState("");
+  const [numeroEmpresa, setNumeroEmpresa] = useState("0");
   const [nombreEmpresa, setNombreEmpresa] = useState("");
   const [insertSuccess, setInsertSuccess] = useState(false);
 
@@ -52,7 +52,7 @@ const InsertarEmpresa = () => {
     >
       <FormLabel style={{ fontSize: 30 }}>Insertar Empresa</FormLabel>
 
-      <FormControl>
+      {/* <FormControl>
         <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
           Número de Empresa
         </FormLabel>
@@ -64,7 +64,7 @@ const InsertarEmpresa = () => {
           width={80}
           backgroundColor="white"
         />
-      </FormControl>
+      </FormControl> */}
 
       <FormControl>
         <FormLabel style={{ margin: "20px 0px 0px 40px" }}>

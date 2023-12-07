@@ -72,7 +72,7 @@ const InsertarEquipo = () => {
   Insertar Equipo
 </FormLabel>
 
-  <FormControl>
+  {/* <FormControl>
               <FormLabel style={{margin: "0px 20px 0px 40px"}}>Número de Serie del Equipo</FormLabel>
               <Input
                 value={EquipoId}
@@ -82,7 +82,7 @@ const InsertarEquipo = () => {
                 width={80}
                 backgroundColor= "white"
               />
-            </FormControl>
+            </FormControl> */}
       
             <FormLabel style={{margin: "20px 210px 0px 0px"}}>Tipo de Equipo</FormLabel>
 
@@ -110,6 +110,7 @@ const InsertarEquipo = () => {
           {sedes.map((sede) => (
             <option key={sede.sedeId} value={sede.sedeId}>
               {sede.nombreSede}
+              
             </option>
           ))}
         </Select>

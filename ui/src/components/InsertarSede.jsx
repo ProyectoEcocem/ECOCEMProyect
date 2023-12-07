@@ -11,10 +11,10 @@ import {
 //import { sedeController } from "../../../Controllers/Entidades"
 
 const InsertarSede = () => {
-  const [numeroSede, setNumeroSede] = useState("");
+  const [numeroSede, setNumeroSede] = useState(0);
   const [nombreSede, setNombreSede] = useState("");
   const [ubicacionSede, setUbicacion] = useState("");
-  const [empresaId, setEmpresaId] = useState("");
+  const [empresaId, setEmpresaId] = useState(1);
   const [insertSuccess, setInsertSuccess] = useState(false);
 
   const EnviarForm = async () => {
@@ -32,11 +32,11 @@ const InsertarSede = () => {
     })
     .then((response) => {
       console.log(response);
-      alert("se inserto")
+      alert("se insertó correctamente")
     }, (error) => {
       console.log(error);
       alert(console.log(error))
-      alert("noo se inserto")
+      alert("no se insertó")
     });
   };
 
@@ -62,17 +62,7 @@ const InsertarSede = () => {
   Insertar Sede
 </FormLabel>
 
-  <FormControl>
-              <FormLabel style={{margin: "0px 20px 0px 40px"}}>Número de Sede</FormLabel>
-              <Input
-                value={numeroSede}
-                placeholder="Ingrese el Número de la Sede"
-                onChange={(e) => setNumeroSede(e.target.value)}
-                marginTop={0.5}
-                width={80}
-                backgroundColor= "white"
-              />
-            </FormControl>
+ 
       
             <FormControl>
               <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Nombre de la Sede</FormLabel>

@@ -10,9 +10,9 @@ import {
 import axios from "axios";
 
 const InsertarRoturaEquipo = () => {
-  const [equipoId, setEquipoId] = useState(0);
-  const [roturaId, setRoturaId] = useState(0);
-  const [fecha, setFecha] = useState("");
+  const [equipoId, setEquipoId] = useState("");
+  const [roturaId, setRoturaId] = useState("");
+  const [fecha, setFecha] = useState(new Date());
 
     //Lista de roturas
     const [roturas, setRoturas] = useState([]);
@@ -25,7 +25,7 @@ const InsertarRoturaEquipo = () => {
         .catch(err => console.log(err));
     }, []);
 
-//Lista de equipos
+    //Lista de equipos
   const [equipos, setEquipos] = useState([]);
   
   useEffect(() => {
@@ -49,7 +49,7 @@ const InsertarRoturaEquipo = () => {
       console.log(error);
       alert("no ok")
     });
-};
+ };
 
 
 
@@ -66,29 +66,29 @@ const InsertarRoturaEquipo = () => {
       border: "2px solid #5F89C1",
     }}>
      
-<FormLabel style={{fontSize: 30}}>
-  Insertar Rotura de Equipo
-</FormLabel>
+ <FormLabel style={{fontSize: 30}}>
+   Insertar Rotura de Equipo
+ </FormLabel>
 
-<FormLabel style={{margin: "0px 260px 0px 0px"}}>Equipo</FormLabel>
+ <FormLabel style={{margin: "0px 260px 0px 0px"}}>Equipo</FormLabel>
 
-<Select
-value={equipoId}
-onChange={(e) => setEquipoId(e.target.value)}
-width={80}
-marginBottom={30}
->
-{equipos.map((equipo) => (
-<option key={equipo.equipoId} value={equipo.equipoId}>
+ <Select
+ value={equipoId}
+ onChange={(e) => setEquipoId(e.target.value)}
+ width={80}
+ marginBottom={30}
+ >
+ {equipos.map((equipo) => (
+ <option key={equipo.equipoId} value={equipo.equipoId}>
   {equipo.equipoId}
-</option>
-))}
-</Select>
+ </option>
+ ))}
+ </Select>
 
 
-<FormLabel style={{margin: "0px 250px 0px 40px"}}>Tipo de Rotura</FormLabel>
+ <FormLabel style={{margin: "0px 250px 0px 40px"}}>Tipo de Rotura</FormLabel>
   
-<Select
+ <Select
           value={roturaId}
           onChange={(e) => setRoturaId(e.target.value)}
           width={80}
@@ -106,8 +106,8 @@ marginBottom={30}
 
         <Input
           type="datetime-local"
-          value={fecha}
-          onChange={(e) => setFecha(e.target.value)}
+          value={fecha.toISOString().substring(0,16)}
+          onChange={(e) => setFecha(new Date(e.target.value))}
           width={80}
           marginBottom={30}
          

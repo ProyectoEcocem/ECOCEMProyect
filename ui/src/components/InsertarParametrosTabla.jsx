@@ -290,7 +290,7 @@ const InsertarParametrosTabla = () => {
   </TableContainer>
 
 {/*Tabla para indicadores*/}
-  <TableContainer marginLeft={10}>
+  {/* <TableContainer marginLeft={10}>
     <Table variant='simple'>
       <TableCaption>Indicadores</TableCaption>
       <Thead>
@@ -380,7 +380,7 @@ const InsertarParametrosTabla = () => {
         </Tr>
       </Tbody>
     </Table>
-  </TableContainer>
+  </TableContainer> */}
 
   </Flex>
 

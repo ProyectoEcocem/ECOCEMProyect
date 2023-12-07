@@ -4,16 +4,7 @@ public class Reporte
     public DateTime FechaId {get; set;}
 
 //ToDo: Revisar cada uno de los indicadores y parametros sujetos a cambios.
-// QUESTION: Hay intersección entre los parámetros e indicadores, ¿cómo se debe representar?
-
-    //Indicadores
-    public double IndiceParoFalla {get; set;} //Índice del % de paro por falla y Mantenimiento.
-    public double DisponibilidadRequerida {get; set;} //Disponibilidad Requerida.
-    public double DisponibilidadReal {get; set;} //Disponibilidad Real.
-    public double IndiceRotura{get; set;} //Índice de Roturas.
-    public double CostoTotalMantFact {get; set;} //Costo total de mantenimiento /Costo total de facturación.
-    public double CostoMantContratadoTotal {get; set;} //Costo de mantenimiento contratado /costo total de mnto
-    public double PerdidaIndisponibilidad {get; set;} //Pérdida por la indisponibilidad.
+// QUESTION: Hay intersección entre los parámetros e indicadores, ¿cómo se debe represent000000000000000000000000000000000000000ad.
 
     //Parámetros
     public double TiempoRealParoFalla {get; set;} //Tiempo real de paro por falla, en horas.

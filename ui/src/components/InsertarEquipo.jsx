@@ -11,9 +11,9 @@ import {
   } from "@chakra-ui/react"; 
 
 const InsertarEquipo = () => {
-  const [EquipoId, setEquipoId] = useState(0);
-  const [TipoEId, setTipoEId] = useState(0);
-  const [SedeId, setSedeId] = useState(0);
+  const [equipoId, setEquipoId] = useState(1);
+  const [tipoEId, setTipoEId] = useState(1);
+  const [sedeId, setSedeId] = useState(1);
 
   //Lista de tipos de equipos
     const [tiposEquipos, setTiposEquipos] = useState([]);
@@ -41,9 +41,9 @@ const InsertarEquipo = () => {
   const createEquipo = async () => {
 
     axios.post(`http://localhost:5103/api/Equipo`, {
-      EquipoId: EquipoId,
-      TipoEId: TipoEId,
-      SedeId: SedeId
+      equipoId: equipoId,
+      tipoEId: tipoEId,
+      sedeId: sedeId
     })
     .then((response) => {
       console.log(response);
@@ -72,22 +72,22 @@ const InsertarEquipo = () => {
   Insertar Equipo
 </FormLabel>
 
-  {/* <FormControl>
+  <FormControl>
               <FormLabel style={{margin: "0px 20px 0px 40px"}}>Número de Serie del Equipo</FormLabel>
               <Input
-                value={EquipoId}
+                value={equipoId}
                 placeholder="Ingrese el Número de serie del equipo"
                 onChange={(e) => setEquipoId(e.target.value)}
                 marginTop={0.5}
                 width={80}
                 backgroundColor= "white"
               />
-            </FormControl> */}
+            </FormControl>
       
             <FormLabel style={{margin: "20px 210px 0px 0px"}}>Tipo de Equipo</FormLabel>
 
             <Select
-          value={TipoEId}
+          value={tipoEId}
           onChange={(e) => setTipoEId(e.target.value)}
           width={80}
           marginBottom={30}
@@ -102,7 +102,7 @@ const InsertarEquipo = () => {
             <FormLabel style={{margin: "0px 140px 0px 0px"}}>Sede a la que pertenece</FormLabel>
 
             <Select
-          value={SedeId}
+          value={sedeId}
           onChange={(e) => setSedeId(e.target.value)}
           width={80}
           marginBottom={30}

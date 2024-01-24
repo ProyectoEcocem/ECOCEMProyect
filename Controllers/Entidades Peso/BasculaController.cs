@@ -5,51 +5,51 @@ namespace ECOCEMProject;
 [ApiController]
 public class BasculaController : Controller
 {
-    private readonly BasculaService _basculaService;
+    private readonly BasculaService _medidorService;
 
-    public BasculaController(BasculaService basculaService)
+    public BasculaController(BasculaService medidorService)
     {
-        _basculaService = basculaService;
+        _medidorService = medidorService;
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get( int id)
     {
-        Bascula bascula = await _basculaService.Get(id);
+        Bascula medidor = await _medidorService.Get(id);
 
-        if (bascula == null)
+        if (medidor == null)
         {
             return NotFound();
         }
 
-        return Ok(bascula);
+        return Ok(medidor);
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Bascula>> GetAll() => await _basculaService.GetAll();
+    public async Task<IEnumerable<Bascula>> GetAll() => await _medidorService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Bascula bascula)
+    public async Task<IActionResult> Post([FromBody] Bascula medidor)
     {
-        if (bascula == null)
+        if (medidor == null)
         {
             return BadRequest();
         }
 
-        Bascula createdBascula = await _basculaService.Create(bascula);
+        Bascula createdBascula = await _medidorService.Create(medidor);
 
         return CreatedAtRoute("Get", new { id = createdBascula.BasculaId }, createdBascula);
     }
 
     [HttpPut]
-    public async Task<IActionResult> Put( int id, Bascula bascula)
+    public async Task<IActionResult> Put( int id, Bascula medidor)
     {
-        if (bascula == null)
+        if (medidor == null)
         {
             return BadRequest();
         }
 
-        Bascula updatedBascula = await _basculaService.Update(id,bascula);
+        Bascula updatedBascula = await _medidorService.Update(id,medidor);
 
         if (updatedBascula == null)
         {
@@ -62,7 +62,7 @@ public class BasculaController : Controller
     [HttpDelete]
     public async Task<IActionResult> Delete(int id)
     {
-        await _basculaService.Delete(id);
+        await _medidorService.Delete(id);
 
         return NoContent();
     }

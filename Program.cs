@@ -21,14 +21,6 @@ builder.Services.AddDbContext<MyContext>(opciones=>
 
 
 
-builder.Services.AddControllers();
-
-//agregar el contexto de la base de datos como servicios
-builder.Services.AddDbContext<MyContext>(opciones=>
-    opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
-
-
 // Servicios de entidades
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<RoleService>();

@@ -5,58 +5,58 @@ namespace ECOCEMProject;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class MedicionMedidorController : Controller
+public class MedicionBasculaController : Controller
 {
-    private readonly MedicionMedidorServicio _medicionMedidorServicio;
+    private readonly MedicionBasculaServicio _medicionBasculaServicio;
 
-    public MedicionMedidorController(MedicionMedidorServicio medicionMedidorServicio)
+    public MedicionBasculaController(MedicionBasculaServicio medicionBasculaServicio)
     {
-        _medicionMedidorServicio = medicionMedidorServicio;
+        _medicionBasculaServicio = medicionBasculaServicio;
     }
 
     // POST
     [HttpPost]
-    public async Task<ActionResult> Post(MedicionMedidor medicionMedidor)
+    public async Task<ActionResult> Post(MedicionBascula medicionBascula)
     {
-        return Ok(await  _medicionMedidorServicio.Create(medicionMedidor));
+        return Ok(await  _medicionBasculaServicio.Create(medicionBascula));
     }
 
     // GET by ID
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int MedidorId,int VehiculoId,DateTime FechaBId)
+    public async Task<IActionResult> Get(int BasculaId,int VehiculoId,DateTime FechaBId)
     {
-        MedicionMedidor medicionMedidor=await _medicionMedidorServicio.Get(MedidorId, VehiculoId, FechaBId);
-        if(medicionMedidor == null){
+        MedicionBascula medicionBascula=await _medicionBasculaServicio.Get(BasculaId, VehiculoId, FechaBId);
+        if(medicionBascula == null){
             return NotFound();
         }
-        return Ok(medicionMedidor);
+        return Ok(medicionBascula);
     }
     // GETALL
      [HttpGet]
-    public async Task<IEnumerable<MedicionMedidor>> GetAll() => await _medicionMedidorServicio.GetAll();
+    public async Task<IEnumerable<MedicionBascula>> GetAll() => await _medicionBasculaServicio.GetAll();
 
     [HttpPut]
-    public async Task<IActionResult> Put(int MedidorId,int VehiculoId,DateTime FechaBId,MedicionMedidor medicionMedidor)
+    public async Task<IActionResult> Put(int BasculaId,int VehiculoId,DateTime FechaBId,MedicionBascula medicionBascula)
     {
-        if (medicionMedidor == null)
+        if (medicionBascula == null)
         {
             return BadRequest();
         }
 
-        MedicionMedidor medicionMedidorModificada = await _medicionMedidorServicio.Update(MedidorId,VehiculoId, FechaBId,medicionMedidor);
+        MedicionBascula medicionBasculaModificada = await _medicionBasculaServicio.Update(BasculaId,VehiculoId, FechaBId,medicionBascula);
 
-        if (medicionMedidorModificada == null)
+        if (medicionBasculaModificada == null)
         {
             return NotFound();
         }
 
-        return Ok(medicionMedidorModificada);
+        return Ok(medicionBasculaModificada);
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Delete(int MedidorId,int VehiculoId,DateTime FechaBId)
+    public async Task<IActionResult> Delete(int BasculaId,int VehiculoId,DateTime FechaBId)
     {
-        await _medicionMedidorServicio.Delete( MedidorId,VehiculoId,FechaBId);
+        await _medicionBasculaServicio.Delete( BasculaId,VehiculoId,FechaBId);
 
         return NoContent();
     }

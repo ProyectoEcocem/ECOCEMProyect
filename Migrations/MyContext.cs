@@ -43,6 +43,7 @@ public class MyContext: DbContext
     public DbSet<MantenimientoNecesario>MantenimientosNecesarios{get;set;} 
     public DbSet<MedicionBascula>MedicionesBasculas{get;set;}
     public DbSet<MedicionSilo>MedicionesSilos{get;set;}
+    public DbSet<OrdenTrabajo>OrdenTrabajos{get;set;}
     public DbSet<OrdenTrabajoAtendida>OrdenesTrabajoAtendidas{get;set;}
     public DbSet<Venta>Ventas{get;set;}
     public DbSet<IdentityUserClaim<int>> UserClaims { get; set; }

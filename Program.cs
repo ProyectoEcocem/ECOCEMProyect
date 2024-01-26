@@ -54,6 +54,7 @@ builder.Services.AddScoped<OrdenTrabajoAtendidaServicio>();
 builder.Services.AddScoped<RoturaEquipoServicio>();
 builder.Services.AddScoped<UserRoleServicio>();
 builder.Services.AddScoped<FiltroMantenimientoService>();
+builder.Services.AddScoped<OrdenTrabajoServicio>();
 
 
 // Agregar las clases User y Role usando el paquete Identity de .Net Core

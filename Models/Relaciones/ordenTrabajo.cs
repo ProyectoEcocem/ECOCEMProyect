@@ -10,7 +10,7 @@ public class OrdenTrabajo
    public DateTime FechaId {get; set;}
 
    [JsonIgnore]
-   public required List<OrdenTrabajoRoturaEquipo>OrdenTrabajoRoturaEquipo{get;set;}
+   public List<OrdenTrabajoRoturaEquipo>OrdenTrabajoRoturaEquipo{get; } = new();
    [JsonIgnore]
    public List<AccionMantenimiento> AccionesMantenimiento {get; } = new(); 
    [JsonIgnore]

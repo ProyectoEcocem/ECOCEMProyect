@@ -542,7 +542,7 @@ namespace ECOCEMProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrdenTrabajoAMRealizada",
+                name: "OrdenTrabajoAMRealizadas",
                 columns: table => new
                 {
                     AMId = table.Column<int>(type: "integer", nullable: false),
@@ -550,19 +550,19 @@ namespace ECOCEMProject.Migrations
                     BrigadaId = table.Column<int>(type: "integer", nullable: false),
                     TrabajadorId = table.Column<int>(type: "integer", nullable: false),
                     FechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Resultado = table.Column<string>(type: "text", nullable: true)
+                    Resultado = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrdenTrabajoAMRealizada", x => new { x.AMId, x.EquipoId, x.BrigadaId, x.TrabajadorId, x.FechaId });
+                    table.PrimaryKey("PK_OrdenTrabajoAMRealizadas", x => new { x.AMId, x.EquipoId, x.BrigadaId, x.TrabajadorId, x.FechaId });
                     table.ForeignKey(
-                        name: "FK_OrdenTrabajoAMRealizada_AccionesMantenimientos_AMId",
+                        name: "FK_OrdenTrabajoAMRealizadas_AccionesMantenimientos_AMId",
                         column: x => x.AMId,
                         principalTable: "AccionesMantenimientos",
                         principalColumn: "AMId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrdenTrabajoAMRealizada_OrdenTrabajos_EquipoId_BrigadaId_Tr~",
+                        name: "FK_OrdenTrabajoAMRealizadas_OrdenTrabajos_EquipoId_BrigadaId_T~",
                         columns: x => new { x.EquipoId, x.BrigadaId, x.TrabajadorId, x.FechaId },
                         principalTable: "OrdenTrabajos",
                         principalColumns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" },
@@ -601,7 +601,7 @@ namespace ECOCEMProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrdenTrabajoRoturaEquipo",
+                name: "OrdenTrabajoRoturaEquipos",
                 columns: table => new
                 {
                     EquipoId = table.Column<int>(type: "integer", nullable: false),
@@ -609,29 +609,27 @@ namespace ECOCEMProject.Migrations
                     TrabajadorId = table.Column<int>(type: "integer", nullable: false),
                     FechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     RoturaId = table.Column<int>(type: "integer", nullable: false),
-                    RoturaEquipoEquipoId = table.Column<int>(type: "integer", nullable: false),
-                    RoturaEquipoRoturaId = table.Column<int>(type: "integer", nullable: false),
-                    RoturaEquipoFechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    OrdenTrabajoEquipoId = table.Column<int>(type: "integer", nullable: false),
-                    OrdenTrabajoBrigadaId = table.Column<int>(type: "integer", nullable: false),
-                    OrdenTrabajoTrabajadorId = table.Column<int>(type: "integer", nullable: false),
-                    OrdenTrabajoFechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    OrdenTrabajoBrigadaId = table.Column<int>(type: "integer", nullable: true),
+                    OrdenTrabajoEquipoId = table.Column<int>(type: "integer", nullable: true),
+                    OrdenTrabajoFechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    OrdenTrabajoTrabajadorId = table.Column<int>(type: "integer", nullable: true),
+                    RoturaEquipoEquipoId = table.Column<int>(type: "integer", nullable: true),
+                    RoturaEquipoFechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    RoturaEquipoRoturaId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrdenTrabajoRoturaEquipo", x => new { x.EquipoId, x.BrigadaId, x.TrabajadorId, x.FechaId });
+                    table.PrimaryKey("PK_OrdenTrabajoRoturaEquipos", x => new { x.EquipoId, x.BrigadaId, x.TrabajadorId, x.FechaId });
                     table.ForeignKey(
-                        name: "FK_OrdenTrabajoRoturaEquipo_OrdenTrabajos_OrdenTrabajoEquipoId~",
+                        name: "FK_OrdenTrabajoRoturaEquipos_OrdenTrabajos_OrdenTrabajoEquipoI~",
                         columns: x => new { x.OrdenTrabajoEquipoId, x.OrdenTrabajoBrigadaId, x.OrdenTrabajoTrabajadorId, x.OrdenTrabajoFechaId },
                         principalTable: "OrdenTrabajos",
-                        principalColumns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" },
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" });
                     table.ForeignKey(
-                        name: "FK_OrdenTrabajoRoturaEquipo_RoturasEquipos_RoturaEquipoEquipoI~",
+                        name: "FK_OrdenTrabajoRoturaEquipos_RoturasEquipos_RoturaEquipoEquipo~",
                         columns: x => new { x.RoturaEquipoEquipoId, x.RoturaEquipoRoturaId, x.RoturaEquipoFechaId },
                         principalTable: "RoturasEquipos",
-                        principalColumns: new[] { "EquipoId", "RoturaId", "FechaId" },
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumns: new[] { "EquipoId", "RoturaId", "FechaId" });
                 });
 
             migrationBuilder.CreateTable(
@@ -848,8 +846,8 @@ namespace ECOCEMProject.Migrations
                 columns: new[] { "OrdenTrabajoEquipoId", "OrdenTrabajoBrigadaId", "OrdenTrabajoTrabajadorId", "OrdenTrabajoFechaId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdenTrabajoAMRealizada_EquipoId_BrigadaId_TrabajadorId_Fec~",
-                table: "OrdenTrabajoAMRealizada",
+                name: "IX_OrdenTrabajoAMRealizadas_EquipoId_BrigadaId_TrabajadorId_Fe~",
+                table: "OrdenTrabajoAMRealizadas",
                 columns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" });
 
             migrationBuilder.CreateIndex(
@@ -858,13 +856,13 @@ namespace ECOCEMProject.Migrations
                 columns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdenTrabajoRoturaEquipo_OrdenTrabajoEquipoId_OrdenTrabajoB~",
-                table: "OrdenTrabajoRoturaEquipo",
+                name: "IX_OrdenTrabajoRoturaEquipos_OrdenTrabajoEquipoId_OrdenTrabajo~",
+                table: "OrdenTrabajoRoturaEquipos",
                 columns: new[] { "OrdenTrabajoEquipoId", "OrdenTrabajoBrigadaId", "OrdenTrabajoTrabajadorId", "OrdenTrabajoFechaId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdenTrabajoRoturaEquipo_RoturaEquipoEquipoId_RoturaEquipoR~",
-                table: "OrdenTrabajoRoturaEquipo",
+                name: "IX_OrdenTrabajoRoturaEquipos_RoturaEquipoEquipoId_RoturaEquipo~",
+                table: "OrdenTrabajoRoturaEquipos",
                 columns: new[] { "RoturaEquipoEquipoId", "RoturaEquipoRoturaId", "RoturaEquipoFechaId" });
 
             migrationBuilder.CreateIndex(
@@ -930,13 +928,13 @@ namespace ECOCEMProject.Migrations
                 name: "OrdenesTrabajoAtendidas");
 
             migrationBuilder.DropTable(
-                name: "OrdenTrabajoAMRealizada");
+                name: "OrdenTrabajoAMRealizadas");
 
             migrationBuilder.DropTable(
                 name: "OrdenTrabajoHerramienta");
 
             migrationBuilder.DropTable(
-                name: "OrdenTrabajoRoturaEquipo");
+                name: "OrdenTrabajoRoturaEquipos");
 
             migrationBuilder.DropTable(
                 name: "Reportes");

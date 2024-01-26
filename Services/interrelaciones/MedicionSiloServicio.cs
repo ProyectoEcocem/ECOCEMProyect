@@ -30,7 +30,7 @@ public class MedicionSiloServicio
 
         if (medicionSiloExistente == null)
         {
-            return null;
+            return null!;
         }
         
         

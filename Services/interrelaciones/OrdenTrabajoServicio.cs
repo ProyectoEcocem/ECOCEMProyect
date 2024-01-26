@@ -28,7 +28,7 @@ public class OrdenTrabajoServicio
 
         if (OTExistente== null)
         {
-            return null;
+            return null!;
         }
         
        

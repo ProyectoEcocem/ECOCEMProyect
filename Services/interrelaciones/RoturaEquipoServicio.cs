@@ -31,9 +31,9 @@ public class RoturaEquipoServicio
 
         if (roturaEExistente== null)
         {
-            return null;
+            return null!;
         }
-        
+    
        
         await _context.SaveChangesAsync();
 

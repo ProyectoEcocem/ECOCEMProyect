@@ -30,7 +30,7 @@ public class OrdenTrabajoRoturaEquipoServicio
 
         if (ordenTrabajoRoturaEquipoExistente == null)
         {
-            return null;
+            return null!;
         }
         
         await _context.SaveChangesAsync();

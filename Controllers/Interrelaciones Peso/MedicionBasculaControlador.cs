@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 public class MedicionBasculaController : Controller
 {
     private readonly MedicionBasculaServicio _medicionBasculaServicio;

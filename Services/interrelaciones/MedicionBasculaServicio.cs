@@ -30,7 +30,7 @@ public class MedicionBasculaServicio
 
         if (medicionBasculaExistente == null)
         {
-            return null;
+            return null!;
         }
         
         await _context.SaveChangesAsync();

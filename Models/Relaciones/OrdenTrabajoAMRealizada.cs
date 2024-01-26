@@ -12,8 +12,8 @@ public class OrdenTrabajoAMRealizada
     public int TrabajadorId {get; set;}
     public DateTime FechaId {get; set;}
 
-    public OrdenTrabajo? OrdenTrabajo {get; set;} 
+    public OrdenTrabajo OrdenTrabajo {get; } = null!;
 
-    public string? Resultado {get ; set;} 
+    public string Resultado {get ; set;} = null!;
  
 }

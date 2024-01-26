@@ -13,6 +13,6 @@ public class HerramientaMantNecesario
 
     public MantenimientoNecesario? MantenimientoNecesario {get; set;}
 
-    public string UnidadMedidaR {get; set;}
+    public string UnidadMedidaR {get; set;} =null!;
     public int CantidadR {get; set;}
 }

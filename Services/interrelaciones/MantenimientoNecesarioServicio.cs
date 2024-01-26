@@ -28,7 +28,7 @@ public class MantenimientoNecesarioServicio
 
         if (MNExistente== null)
         {
-            return null;
+            return null!;
         }
         
        

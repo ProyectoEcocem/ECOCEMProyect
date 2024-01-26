@@ -47,6 +47,7 @@ public class MyContext: DbContext
     public DbSet<OrdenTrabajoAtendida>OrdenesTrabajoAtendidas{get;set;}
     public DbSet<Venta>Ventas{get;set;}
     public DbSet<OrdenTrabajoRoturaEquipo>OrdenTrabajoRoturaEquipos{get;set;}
+    public DbSet<OrdenTrabajoAMRealizada>OrdenTrabajoAMRealizadas{get;set;}
     public DbSet<IdentityUserClaim<int>> UserClaims { get; set; }
 
 

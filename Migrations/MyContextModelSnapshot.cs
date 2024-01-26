@@ -502,13 +502,14 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Resultado")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("AMId", "EquipoId", "BrigadaId", "TrabajadorId", "FechaId");
 
                     b.HasIndex("EquipoId", "BrigadaId", "TrabajadorId", "FechaId");
 
-                    b.ToTable("OrdenTrabajoAMRealizada");
+                    b.ToTable("OrdenTrabajoAMRealizadas");
                 });
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoAtendida", b =>
@@ -603,25 +604,25 @@ namespace ECOCEMProject.Migrations
                     b.Property<DateTime>("FechaId")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("OrdenTrabajoBrigadaId")
+                    b.Property<int?>("OrdenTrabajoBrigadaId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("OrdenTrabajoEquipoId")
+                    b.Property<int?>("OrdenTrabajoEquipoId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("OrdenTrabajoFechaId")
+                    b.Property<DateTime?>("OrdenTrabajoFechaId")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("OrdenTrabajoTrabajadorId")
+                    b.Property<int?>("OrdenTrabajoTrabajadorId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("RoturaEquipoEquipoId")
+                    b.Property<int?>("RoturaEquipoEquipoId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("RoturaEquipoFechaId")
+                    b.Property<DateTime?>("RoturaEquipoFechaId")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("RoturaEquipoRoturaId")
+                    b.Property<int?>("RoturaEquipoRoturaId")
                         .HasColumnType("integer");
 
                     b.Property<int>("RoturaId")
@@ -633,7 +634,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("OrdenTrabajoEquipoId", "OrdenTrabajoBrigadaId", "OrdenTrabajoTrabajadorId", "OrdenTrabajoFechaId");
 
-                    b.ToTable("OrdenTrabajoRoturaEquipo");
+                    b.ToTable("OrdenTrabajoRoturaEquipos");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Role", b =>
@@ -1173,15 +1174,13 @@ namespace ECOCEMProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ECOCEMProject.OrdenTrabajo", "OrdenTrabajo")
+                    b.HasOne("ECOCEMProject.OrdenTrabajo", null)
                         .WithMany("OrdenesAMRealizadas")
                         .HasForeignKey("EquipoId", "BrigadaId", "TrabajadorId", "FechaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AccionMantenimiento");
-
-                    b.Navigation("OrdenTrabajo");
                 });
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoAtendida", b =>
@@ -1214,21 +1213,13 @@ namespace ECOCEMProject.Migrations
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoRoturaEquipo", b =>
                 {
-                    b.HasOne("ECOCEMProject.RoturaEquipo", "RoturaEquipo")
+                    b.HasOne("ECOCEMProject.RoturaEquipo", null)
                         .WithMany("OrdenTrabajoRoturaEquipo")
-                        .HasForeignKey("RoturaEquipoEquipoId", "RoturaEquipoRoturaId", "RoturaEquipoFechaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoturaEquipoEquipoId", "RoturaEquipoRoturaId", "RoturaEquipoFechaId");
 
-                    b.HasOne("ECOCEMProject.OrdenTrabajo", "OrdenTrabajo")
+                    b.HasOne("ECOCEMProject.OrdenTrabajo", null)
                         .WithMany("OrdenTrabajoRoturaEquipo")
-                        .HasForeignKey("OrdenTrabajoEquipoId", "OrdenTrabajoBrigadaId", "OrdenTrabajoTrabajadorId", "OrdenTrabajoFechaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("OrdenTrabajo");
-
-                    b.Navigation("RoturaEquipo");
+                        .HasForeignKey("OrdenTrabajoEquipoId", "OrdenTrabajoBrigadaId", "OrdenTrabajoTrabajadorId", "OrdenTrabajoFechaId");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Sede", b =>

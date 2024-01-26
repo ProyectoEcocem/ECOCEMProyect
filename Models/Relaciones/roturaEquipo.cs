@@ -8,6 +8,6 @@ public class RoturaEquipo
     public DateTime FechaId {get; set;}
 
     [JsonIgnore]
-    public List<OrdenTrabajoRoturaEquipo>? OrdenTrabajoRoturaEquipo{get;set;}
+    public List<OrdenTrabajoRoturaEquipo> OrdenTrabajoRoturaEquipo { get; } =new();
 }
 

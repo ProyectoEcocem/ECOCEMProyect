@@ -8,8 +8,8 @@ public class OrdenTrabajoRoturaEquipo
     public DateTime FechaId {get; set;}
     public int RoturaId {get; set;}
 
-    public required RoturaEquipo RoturaEquipo {get; set;} 
-    public required OrdenTrabajo OrdenTrabajo {get; set;}
+    public  RoturaEquipo RoturaEquipo {get; } = null!;
+    public  OrdenTrabajo OrdenTrabajo {get; } = null!;
 
 
 }

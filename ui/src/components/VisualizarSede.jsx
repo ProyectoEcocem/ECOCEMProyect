@@ -13,12 +13,17 @@ import {
   Tr,
   Th,
   Td,
+  Modal,
+  Center,
+  AbsoluteCenter,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+import InsertarSede from './InsertarSede';
 export default class Sedes extends React.Component {
     state = {
-      sedes: []
+      sedes: [],
+      insertarSedeModalAbierto: false, //controlar si la pestana de insertar sede esta abierta
     }
   
     componentDidMount() {
@@ -29,9 +34,28 @@ export default class Sedes extends React.Component {
         })
     }
   
+    //Funcion para abrir el modal de Insertar Sede
+    manejarInsertarSedeModal = () => {
+      this.setState({ insertarSedeModalAbierto: true });
+    };
+
     render() {
       return (
         <div style={{height : 400}}>
+        <Button
+         onClick={this.manejarInsertarSedeModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Sede
+         </Button>
+
+         <Modal isOpen={this.state.insertarSedeModalAbierto} onClose={() => this.setState({ insertarSedeModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarSede onClose={() => this.setState({ insertarSedeModalAbierto: false })} />
+         </AbsoluteCenter>
+         </Modal>
+
         <TableContainer>
           <Table>
             <Thead>

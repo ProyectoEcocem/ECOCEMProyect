@@ -9,8 +9,7 @@ import {
 } from "@chakra-ui/react"; 
 
 const InsertarTipoDeEquipo = () => {
-    const [tipoEquipoId, setTipoEquipoId] = useState(8);
-    const [tipoEquipo, setTipoEquipo] = useState("te");
+    const [tipoEquipo, setTipoEquipo] = useState("");
 
   
     const createTipoEquipo = async (event) => {
@@ -22,7 +21,7 @@ const InsertarTipoDeEquipo = () => {
       };
       
       axios.post(`http://localhost:5103/api/TipoEquipo`, {
-        tipoEId: tipoEquipoId,
+        tipoEId: 0,
         tipoE: tipoEquipo
       })
       .then((response) => {
@@ -52,17 +51,6 @@ const InsertarTipoDeEquipo = () => {
 <FormLabel style={{fontSize: 30, marginTop: 20}}>
   Insertar Tipo de Equipo
 </FormLabel>
-          <FormControl>
-              <FormLabel style={{margin: "20px 20px 0px 40px"}}>ID del Tipo de Equipo</FormLabel>
-              <Input
-                value={tipoEquipoId}
-                placeholder="Ingrese el Id del Tipo de Equipo"
-                onChange={(e) => setTipoEquipoId(e.target.value)}
-                marginTop={0.5}
-                width={80}
-                backgroundColor= "white"
-              />
-            </FormControl>
       
             <FormControl>
               <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Tipo de Equipo</FormLabel>

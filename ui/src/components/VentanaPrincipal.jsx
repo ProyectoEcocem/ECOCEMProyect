@@ -34,7 +34,9 @@ import Medidor from './VisualizarMedidor';
 import InsertarCompra from './InsertarCompra';
 import InsertarVenta from './InsertarVenta';
 import InsertarEntidadCompradora from './InsertarEntidadCompradora';
-
+import EntidadCompradora from './VisualizarEntidadCompradora';
+import Venta from './VizualizarVenta';
+import Compra from './VisualizarCompra';
 
  const VentanaPrincipal = () => {
  return(
@@ -61,8 +63,11 @@ import InsertarEntidadCompradora from './InsertarEntidadCompradora';
             <Tab>Reporte</Tab>
             <Tab>Basculas</Tab>
             <Tab>Fabrica</Tab>
+            <Tab>Entidad Compradora</Tab>
             <Tab>Medidor</Tab>
-            <Tab>Silo</Tab>
+            <Tab>Compra</Tab>
+            <Tab>Venta</Tab>
+            <Tab>Visualizar Indicadores</Tab>
         </TabList>
 
         <TabIndicator
@@ -154,6 +159,16 @@ import InsertarEntidadCompradora from './InsertarEntidadCompradora';
                 </div>
             </TabPanel>
 
+            <TabPanel> {/*Panel para Fabrica*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <EntidadCompradora/>
+                </div>
+            </TabPanel>
+
             <TabPanel> {/*Panel para Medidor*/}
             <div style={{
                 display: "flex",
@@ -161,6 +176,36 @@ import InsertarEntidadCompradora from './InsertarEntidadCompradora';
                 alignItems: "center",
                 }}>
                 <Medidor/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Medidor*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <Compra/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Medidor*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <Venta/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Medidor*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <VisualizarIndicadores/>
                 </div>
             </TabPanel>
 
@@ -277,7 +322,7 @@ import InsertarEntidadCompradora from './InsertarEntidadCompradora';
                 </div>
             </TabPanel>
 
-            <TabPanel> {/*Panel para Insertar Fab */}
+            <TabPanel> {/*Panel para Insertar EC */}
                 <div style={{
                 display: "flex",
                 justifyContent: "center",

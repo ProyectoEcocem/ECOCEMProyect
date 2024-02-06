@@ -40,7 +40,7 @@ public class CompraServicio
     }
     public async Task<Compra> Create(CompraData compra)
     {
-       if(_context.Compras.Any(elemento => elemento.SedeId == compra.SedeId && elemento.FabricaId== compra.FabricaId && elemento.FabricaId==compra.FabricaId))
+       if(_context.Compras.Any(elemento => elemento.SedeId == compra.SedeId && elemento.FabricaId== compra.FabricaId && elemento.FechaId==compra.FechaId))
             return null!;
             
         Compra f1 = new Compra();

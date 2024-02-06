@@ -12,6 +12,8 @@ public class RoturaEquipoServicio
     }
     public async Task<RoturaEquipo> Get(int RoturaId,int EquipoId,DateTime FechaId)
     {
+        
+        
         var current_entity = await _context.RoturasEquipos.FindAsync(RoturaId,EquipoId,FechaId);
         
         if(current_entity == null!){
@@ -29,9 +31,9 @@ public class RoturaEquipoServicio
 
         if (roturaEExistente== null)
         {
-            return null!;
+            return null;
         }
-    
+        
        
         await _context.SaveChangesAsync();
 

@@ -27,7 +27,7 @@ const InsertarReporte = () => {
 
   const [tiempoRealMant, setTiempoRealMant] = useState(1); //Tiempo de operación real en horas.
 
-  const [tiempoOperacioReal, setTiempoOperacionReal] = useState(1); //Disponibilidad Real.
+  const [tiempoOperacionReal, setTiempoOperacionReal] = useState(1); //Disponibilidad Real.
 
   const [tiempoParoTrabajosPlan, setTiempoParoTrabajosPlan] = useState(1); //Tiempo de paro por ejecución de trabjos planificados.
 
@@ -42,6 +42,8 @@ const InsertarReporte = () => {
   const [facturacion, setFacturacion] = useState(1); //Facturación de la empresa en el periodo analizado.
 
   const [costoMantContratado, setCostoMantContratado] = useState(1); //Costo de los mttos contratados.
+  //temporal en verdad esto es un indicdor
+  const [perdidaIndisponibilidad, setPerdidaIndisponibilidad]=useState(1);//PerdidaIndisponibilidad
 
     //Lista de roturas
     const [roturas, setRoturas] = useState([]);
@@ -60,23 +62,24 @@ const InsertarReporte = () => {
     axios.post(`http://localhost:5103/api/Reporte`, {
       equipoId : equipoId,
       fechaId: fechaId,
-      tiempoRealParoFall: tiempoRealParoFalla,
+      tiempoRealParoFalla: tiempoRealParoFalla,
       tiempoRealMant: tiempoRealMant,
-      tiempoOperacioReal: tiempoOperacioReal,
+      tiempoOperacionReal: tiempoOperacionReal,
       tiempoParoTrabajosPlan:tiempoParoTrabajosPlan,
       tiempoParoMant: tiempoParoMant,
       tiempoOperacionRequerido:tiempoOperacionRequerido,
       tiempoRequeridoAccProgramadas:tiempoRequeridoAccProgramadas,
       costoTotalMant:costoTotalMant,
       facturacion:facturacion,
-      costoMantContratado:costoMantContratado
+      costoMantContratado:costoMantContratado,
+      perdidaIndisponibilidad: perdidaIndisponibilidad
     })
     .then((response) => {
       console.log(response);
       alert("Se insertó correctamente")
     }, (error) => {
       console.log(error);
-      alert("no insertó correctamente")
+      alert("no se insertó correctamente")
     });
  };
 
@@ -88,7 +91,7 @@ const InsertarReporte = () => {
        
      
  <FormLabel style={{fontSize: 30}}>
-   Insertar Rotura de Equipo
+   Insertar R
  </FormLabel>
  <Flex>
 
@@ -155,7 +158,7 @@ const InsertarReporte = () => {
           
           <Td isNumeric>
             <Input type="number"
-            value={tiempoOperacioReal}
+            value={tiempoOperacionReal}
             onChange={(e) => setTiempoOperacionReal(e.target.value)}
             width={150}
             />
@@ -232,6 +235,16 @@ const InsertarReporte = () => {
             <Input type="number"
             value={costoMantContratado}
             onChange={(e) => setCostoMantContratado(e.target.value)}
+            width={150}
+            />
+          </Td>
+        </Tr>
+        <Tr>
+          <Td>Perdida de la Indisponibilida</Td>
+          <Td isNumeric>
+            <Input type="number"
+            value={perdidaIndisponibilidad}
+            onChange={(e) => setPerdidaIndisponibilidad(e.target.value)}
             width={150}
             />
           </Td>

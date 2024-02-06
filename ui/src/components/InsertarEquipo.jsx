@@ -86,7 +86,7 @@ const InsertarEquipo = () => {
       
             <FormLabel style={{margin: "20px 210px 0px 0px"}}>Tipo de Equipo</FormLabel>
 
-          <Select
+            <Select
           value={tipoEId}
           onChange={(e) => setTipoEId(e.target.value)}
           width={80}

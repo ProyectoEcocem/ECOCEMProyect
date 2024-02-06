@@ -1,13 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
-public class TipoCementoData
-{
-    public int TipoCementoId { get; set; }
-    public string NombreTipoCemento { get; set; }
-}
-
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class TipoCementoController : Controller
 {
@@ -33,14 +27,14 @@ public class TipoCementoController : Controller
     public async Task<IEnumerable<TipoCemento>> GetAll() => await _tipoCementoService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] TipoCementoData tipoCemento)
+    public async Task<IActionResult> Post([FromBody] TipoCemento tipoCemento)
     {
         if (tipoCemento == null)
         {
             return BadRequest();
         }
         TipoCemento createdTipoCemento = await _tipoCementoService.Create(tipoCemento);
-        return Ok(createdTipoCemento);
+        return CreatedAtRoute("Get", new { id = createdTipoCemento.TipoCementoId }, createdTipoCemento);
     }
 
     [HttpPut]

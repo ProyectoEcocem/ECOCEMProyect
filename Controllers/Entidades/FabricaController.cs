@@ -1,13 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
-public class FabricaData
-{
-    public int FabricaId { get; set; }
-    public string Nombre { get; set; }
-}
-
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class FabricaController : Controller
 {
@@ -32,14 +26,14 @@ public class FabricaController : Controller
     public async Task<IEnumerable<Fabrica>> GetAll() => await _fabricaService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] FabricaData fabrica)
+    public async Task<IActionResult> Post([FromBody] Fabrica fabrica)
     {
         if (fabrica == null)
         {
             return BadRequest();
         }
         Fabrica createdFabrica = await _fabricaService.Create(fabrica);
-        return Ok(createdFabrica);
+        return CreatedAtRoute("Get", new { id = createdFabrica.FabricaId }, createdFabrica);
     }
 
     [HttpPut]

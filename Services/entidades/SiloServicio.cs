@@ -33,22 +33,16 @@ public class SiloServicio
         {
             return null;
         }
-        //siloExistente.EquipoId = silo.EquipoId;
+        siloExistente.EquipoId = silo.EquipoId;
         await _context.SaveChangesAsync();
         return silo;
     }
 
-    public async Task<Silo> Create(SiloData silo)
+    public async Task<Silo> Create(Silo silo)
     {
-       /* Silo t1 = new Silo();
-
-        t1.SiloId = silo.SiloId;
-        t1.EquipoId = silo.EquipoId;
-
-        _context.Silos.Add(t1);
+        _context.Silos.Add(silo);
         await _context.SaveChangesAsync();
-        return t1;*/
-        return null;
+        return silo;
     }
 
     public async Task Delete(int id)

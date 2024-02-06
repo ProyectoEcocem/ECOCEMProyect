@@ -36,19 +36,11 @@ public class TipoCementoService
         return tipoCemento;
     }
 
-    public async Task<TipoCemento> Create(TipoCementoData tipoCemento)
+    public async Task<TipoCemento> Create(TipoCemento tipoCemento)
     {
-        if(_context.TipoCementos.Any(elemento => elemento.NombreTipoCemento == tipoCemento.NombreTipoCemento))
-            return null!;
-
-        TipoCemento t1 = new TipoCemento();
-
-        t1.TipoCementoId = tipoCemento.TipoCementoId;
-        t1.NombreTipoCemento = tipoCemento.NombreTipoCemento;
-
-        _context.TipoCementos.Add(t1);
+        _context.TipoCementos.Add(tipoCemento);
         await _context.SaveChangesAsync();
-        return t1;
+        return tipoCemento;
     }
 
     public async Task Delete(int id)

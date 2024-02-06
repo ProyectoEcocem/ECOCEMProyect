@@ -32,6 +32,8 @@ const InsertarReporte = () => {
   const [facturacion, setFacturacion] = useState(1); //Facturación de la empresa en el periodo analizado.
 
   const [costoMantContratado, setCostoMantContratado] = useState(1); //Costo de los mttos contratados.
+  //temporal en verdad esto es un indicdor
+  const [perdidaIndisponibilidad, setPerdidaIndisponibilidad]=useState(1);//PerdidaIndisponibilidad
 
     //Lista de roturas
     const [roturas, setRoturas] = useState([]);
@@ -59,7 +61,8 @@ const InsertarReporte = () => {
       tiempoRequeridoAccProgramadas:tiempoRequeridoAccProgramadas,
       costoTotalMant:costoTotalMant,
       facturacion:facturacion,
-      costoMantContratado:costoMantContratado
+      costoMantContratado:costoMantContratado,
+      perdidaIndisponibilidad: perdidaIndisponibilidad
     })
     .then((response) => {
       console.log(response);

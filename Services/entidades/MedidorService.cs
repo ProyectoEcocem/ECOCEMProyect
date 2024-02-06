@@ -42,18 +42,12 @@ public class MedidorService
         return medidor;
     }
 
-    public async Task<Medidor> Create(MedidorData medidor)
+    public async Task<Medidor> Create(Medidor medidor)
     {
-        Medidor m1 = new Medidor();
-
-        if(_context.Medidores.Any(elemento => elemento.NoSerie == medidor.NoSerie))
-            return null;
-        m1.MedidorId = medidor.MedidorId;
-        m1.NoSerie = medidor.NoSerie;
-
-        _context.Medidores.Add(m1);
+        _context.Medidores.Add(medidor);
         await _context.SaveChangesAsync();
-        return m1;
+
+        return medidor;
     }
 
     public async Task Delete(int id)

@@ -1,16 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
-public class BasculaData
-{
-    public int BasculaId {get; set;}
-    public string NoSerie { get; set; }
-    public int SedeId {get; set;}
-    public string Descripcion { get; set; }
-
-}
-
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class BasculaController : Controller
 {
@@ -46,8 +37,8 @@ public class BasculaController : Controller
         }
 
         Bascula createdBascula = await _basculaService.Create(bascula);
-        return Ok(createdBascula);
-        //return CreatedAtRoute("Get", new { id = createdBascula.BasculaId }, createdBascula);
+
+        return CreatedAtRoute("Get", new { id = createdBascula.BasculaId }, createdBascula);
     }
 
     [HttpPut]

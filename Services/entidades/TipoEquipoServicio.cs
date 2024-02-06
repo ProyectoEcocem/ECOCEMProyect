@@ -32,9 +32,6 @@ public class TipoEquipoServicio
 
     public async Task<TipoEquipo> Create(TipoEData tipoEq)
     {
-        if(_context.TiposEquipos.Any(elemento => elemento.TipoE == tipoEq.TipoE))
-            return null!;
-
         TipoEquipo tipoE1=new TipoEquipo();
         tipoE1.TipoE=tipoEq.TipoE;
         tipoE1.TipoEId=tipoEq.TipoEId;

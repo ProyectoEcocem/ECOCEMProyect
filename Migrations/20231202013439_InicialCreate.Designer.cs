@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240206110949_InicialCreate")]
+    [Migration("20231202013439_InicialCreate")]
     partial class InicialCreate
     {
         /// <inheritdoc />
@@ -89,14 +89,6 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BasculaId"));
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("NoSerie")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("BasculaId");
 
@@ -229,10 +221,6 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EntidadCompradoraId"));
 
-                    b.Property<string>("NombreEntidadCompradora")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("EntidadCompradoraId");
 
                     b.ToTable("EntidadCompradoras");
@@ -268,10 +256,6 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FabricaId"));
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("FabricaId");
 
@@ -330,7 +314,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("MantenimientoNecesarioTipoEquipoId", "MantenimientoNecesarioAMId", "MantenimientoNecesarioHorasExpId");
 
-                    b.ToTable("HerramientaMantNecesarios");
+                    b.ToTable("HerramientaMantNecesario");
                 });
 
             modelBuilder.Entity("ECOCEMProject.MantenimientoNecesario", b =>
@@ -477,10 +461,6 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MedidorId"));
 
-                    b.Property<string>("NoSerie")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("MedidorId");
 
                     b.ToTable("Medidores");
@@ -504,7 +484,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("BrigadaId");
 
-                    b.ToTable("OrdenTrabajos");
+                    b.ToTable("OrdenTrabajo");
                 });
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoAMRealizada", b =>
@@ -525,14 +505,13 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Resultado")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("AMId", "EquipoId", "BrigadaId", "TrabajadorId", "FechaId");
 
                     b.HasIndex("EquipoId", "BrigadaId", "TrabajadorId", "FechaId");
 
-                    b.ToTable("OrdenTrabajoAMRealizadas");
+                    b.ToTable("OrdenTrabajoAMRealizada");
                 });
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoAtendida", b =>
@@ -610,7 +589,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("EquipoId", "BrigadaId", "TrabajadorId", "FechaId");
 
-                    b.ToTable("OrdenTrabajoHerramientas");
+                    b.ToTable("OrdenTrabajoHerramienta");
                 });
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoRoturaEquipo", b =>
@@ -627,25 +606,25 @@ namespace ECOCEMProject.Migrations
                     b.Property<DateTime>("FechaId")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("OrdenTrabajoBrigadaId")
+                    b.Property<int>("OrdenTrabajoBrigadaId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("OrdenTrabajoEquipoId")
+                    b.Property<int>("OrdenTrabajoEquipoId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("OrdenTrabajoFechaId")
+                    b.Property<DateTime>("OrdenTrabajoFechaId")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("OrdenTrabajoTrabajadorId")
+                    b.Property<int>("OrdenTrabajoTrabajadorId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("RoturaEquipoEquipoId")
+                    b.Property<int>("RoturaEquipoEquipoId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("RoturaEquipoFechaId")
+                    b.Property<DateTime>("RoturaEquipoFechaId")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("RoturaEquipoRoturaId")
+                    b.Property<int>("RoturaEquipoRoturaId")
                         .HasColumnType("integer");
 
                     b.Property<int>("RoturaId")
@@ -657,7 +636,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("OrdenTrabajoEquipoId", "OrdenTrabajoBrigadaId", "OrdenTrabajoTrabajadorId", "OrdenTrabajoFechaId");
 
-                    b.ToTable("OrdenTrabajoRoturaEquipos");
+                    b.ToTable("OrdenTrabajoRoturaEquipo");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Role", b =>
@@ -693,7 +672,7 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoturaId"));
 
-                    b.Property<string>("NombreRotura")
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -753,10 +732,6 @@ namespace ECOCEMProject.Migrations
                     b.Property<int>("EquipoId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("NoSilo")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("SiloId");
 
                     b.HasIndex("EquipoId");
@@ -772,10 +747,6 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TipoCementoId"));
 
-                    b.Property<string>("NombreTipoCemento")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("TipoCementoId");
 
                     b.ToTable("TipoCementos");
@@ -790,7 +761,6 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TipoEId"));
 
                     b.Property<string>("TipoE")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("TipoEId");
@@ -893,10 +863,6 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("VehiculoId"));
 
-                    b.Property<string>("NoSerie")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("VehiculoId");
 
                     b.ToTable("Vehiculos");
@@ -991,10 +957,31 @@ namespace ECOCEMProject.Migrations
                     b.Property<double>("CostoMantContratado")
                         .HasColumnType("double precision");
 
+                    b.Property<double>("CostoMantContratadoTotal")
+                        .HasColumnType("double precision");
+
                     b.Property<double>("CostoTotalMant")
                         .HasColumnType("double precision");
 
+                    b.Property<double>("CostoTotalMantFact")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("DisponibilidadReal")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("DisponibilidadRequerida")
+                        .HasColumnType("double precision");
+
                     b.Property<double>("Facturacion")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("IndiceParoFalla")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("IndiceRotura")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("PerdidaIndisponibilidad")
                         .HasColumnType("double precision");
 
                     b.Property<double>("TiempoOPeracionReal")
@@ -1209,13 +1196,15 @@ namespace ECOCEMProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ECOCEMProject.OrdenTrabajo", null)
+                    b.HasOne("ECOCEMProject.OrdenTrabajo", "OrdenTrabajo")
                         .WithMany("OrdenesAMRealizadas")
                         .HasForeignKey("EquipoId", "BrigadaId", "TrabajadorId", "FechaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AccionMantenimiento");
+
+                    b.Navigation("OrdenTrabajo");
                 });
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoAtendida", b =>
@@ -1248,13 +1237,21 @@ namespace ECOCEMProject.Migrations
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoRoturaEquipo", b =>
                 {
-                    b.HasOne("ECOCEMProject.RoturaEquipo", null)
+                    b.HasOne("ECOCEMProject.RoturaEquipo", "RoturaEquipo")
                         .WithMany("OrdenTrabajoRoturaEquipo")
-                        .HasForeignKey("RoturaEquipoEquipoId", "RoturaEquipoRoturaId", "RoturaEquipoFechaId");
+                        .HasForeignKey("RoturaEquipoEquipoId", "RoturaEquipoRoturaId", "RoturaEquipoFechaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("ECOCEMProject.OrdenTrabajo", null)
+                    b.HasOne("ECOCEMProject.OrdenTrabajo", "OrdenTrabajo")
                         .WithMany("OrdenTrabajoRoturaEquipo")
-                        .HasForeignKey("OrdenTrabajoEquipoId", "OrdenTrabajoBrigadaId", "OrdenTrabajoTrabajadorId", "OrdenTrabajoFechaId");
+                        .HasForeignKey("OrdenTrabajoEquipoId", "OrdenTrabajoBrigadaId", "OrdenTrabajoTrabajadorId", "OrdenTrabajoFechaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrdenTrabajo");
+
+                    b.Navigation("RoturaEquipo");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Sede", b =>

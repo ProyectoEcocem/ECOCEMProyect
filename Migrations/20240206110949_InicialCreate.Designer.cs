@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240206085255_InicialCreate")]
+    [Migration("20240206110949_InicialCreate")]
     partial class InicialCreate
     {
         /// <inheritdoc />
@@ -89,6 +89,10 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BasculaId"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("NoSerie")
                         .IsRequired()

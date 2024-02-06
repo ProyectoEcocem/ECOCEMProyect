@@ -39,6 +39,9 @@ public class VehiculoService
 
     public async Task<Vehiculo> Create(VehiculoData vehiculo)
     {
+        if(_context.Vehiculos.Any(elemento => elemento.NoSerie == vehiculo.NoSerie))
+            return null!;
+
         Vehiculo t1 = new Vehiculo();
 
         t1.VehiculoId = vehiculo.VehiculoId;

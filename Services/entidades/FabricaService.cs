@@ -40,6 +40,9 @@ public class FabricaService
 
     public async Task<Fabrica> Create(FabricaData fabrica)
     {
+        if(_context.Fabricas.Any(elemento => elemento.Nombre == fabrica.Nombre))
+            return null!;
+            
         Fabrica f1 = new Fabrica();
 
         f1.FabricaId = fabrica.FabricaId;

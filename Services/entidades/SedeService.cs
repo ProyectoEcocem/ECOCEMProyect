@@ -38,6 +38,9 @@ public class SedeService
 
     public async Task<Sede> Create(SedeData sede)
     {
+        if(_context.Sedes.Any(elemento => elemento.NombreSede == sede.nombreSede))
+            return null!;
+
         Sede sede1= new Sede();
         sede1.SedeId=sede.sedeid;
         sede1.NombreSede=sede.nombreSede;

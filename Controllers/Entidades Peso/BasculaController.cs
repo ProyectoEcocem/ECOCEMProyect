@@ -5,6 +5,8 @@ public class BasculaData
 {
     public int BasculaId {get; set;}
     public string NoSerie { get; set; }
+    public int SedeId {get; set;}
+    public string Descripcion { get; set; }
 
 }
 

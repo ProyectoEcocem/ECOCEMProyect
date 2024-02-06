@@ -38,6 +38,9 @@ public class TipoCementoService
 
     public async Task<TipoCemento> Create(TipoCementoData tipoCemento)
     {
+        if(_context.TipoCementos.Any(elemento => elemento.NombreTipoCemento == tipoCemento.NombreTipoCemento))
+            return null!;
+
         TipoCemento t1 = new TipoCemento();
 
         t1.TipoCementoId = tipoCemento.TipoCementoId;

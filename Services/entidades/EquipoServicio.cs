@@ -33,6 +33,7 @@ public class EquipoServicio
     {
         Equipo equipo1 = new Equipo();
 
+    
         equipo1.SedeId = equipo.SedeId;
         equipo1.EquipoId = equipo.EquipoId;
         equipo1.TipoEId = equipo.TipoEId;

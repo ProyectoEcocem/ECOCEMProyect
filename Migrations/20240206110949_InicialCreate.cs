@@ -35,7 +35,8 @@ namespace ECOCEMProject.Migrations
                 {
                     BasculaId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    NoSerie = table.Column<string>(type: "text", nullable: false)
+                    NoSerie = table.Column<string>(type: "text", nullable: false),
+                    Descripcion = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -763,8 +764,8 @@ namespace ECOCEMProject.Migrations
                 {
                     SiloId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EquipoId = table.Column<int>(type: "integer", nullable: false),
-                    NoSilo = table.Column<string>(type: "text", nullable: false)
+                    NoSilo = table.Column<string>(type: "text", nullable: false),
+                    EquipoId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

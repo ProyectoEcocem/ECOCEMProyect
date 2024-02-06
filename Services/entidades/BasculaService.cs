@@ -46,10 +46,20 @@ public class BasculaService
 
     public async Task<Bascula> Create(Bascula bascula)
     {
-        Bascula b1 = new Bascula();
+        if(_context.Basculas.Any(elemento => elemento.NoSerie == bascula.NoSerie))
+            return null!;
 
-        b1.BasculaId = bascula.BasculaId;
+        Bascula b1 = new Bascula();
+        Equipo e = new Equipo();
+
+
         b1.NoSerie = bascula.NoSerie;
+        b1.BasculaId = bascula.BasculaId;
+        b1.Descripcion = bascula.Descripcion;
+
+        e.EquipoId = bascula.BasculaId;
+        //e.SedeId = bascula.SedeId;
+        //falta ponerle el tipo de equipo
 
         _context.Basculas.Add(b1);
         await _context.SaveChangesAsync();

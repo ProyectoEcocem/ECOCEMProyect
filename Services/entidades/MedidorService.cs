@@ -46,6 +46,8 @@ public class MedidorService
     {
         Medidor m1 = new Medidor();
 
+        if(_context.Medidores.Any(elemento => elemento.NoSerie == medidor.NoSerie))
+            return null;
         m1.MedidorId = medidor.MedidorId;
         m1.NoSerie = medidor.NoSerie;
 

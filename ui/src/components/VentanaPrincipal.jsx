@@ -28,6 +28,9 @@ import InsertarMedidor from './InsertarMedidor';
 import InsertarTipoCemento from './InsertarTipoCemento';
 import InsertarVehiculo from './InsertarVehiculo';
 import InsertarSilo from './InsertarSilo';
+import Bascula from './VisualizarBascula';
+import Fabrica from './VisualizarFabrica';
+import Medidor from './VisualizarMedidor';
 
 
  const VentanaPrincipal = () => {
@@ -53,6 +56,10 @@ import InsertarSilo from './InsertarSilo';
             <Tab>Rotura</Tab>
             <Tab>Roturas de Equipos</Tab>
             <Tab>Reporte</Tab>
+            <Tab>Basculas</Tab>
+            <Tab>Fabrica</Tab>
+            <Tab>Medidor</Tab>
+            <Tab>Silo</Tab>
         </TabList>
 
         <TabIndicator
@@ -124,6 +131,37 @@ import InsertarSilo from './InsertarSilo';
                 </div>
             </TabPanel>
 
+            <TabPanel> {/*Panel para Bascula*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <Bascula/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Fabrica*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <Fabrica/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Medidor*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <Medidor/>
+                </div>
+            </TabPanel>
+
+           
         </TabPanels>
       </Tabs>
     </TabPanel>
@@ -143,7 +181,6 @@ import InsertarSilo from './InsertarSilo';
             <Tab>Insertar Medidor</Tab>
             <Tab>Insertar Tipo de Cemento</Tab>
             <Tab>Insertar Vehiculo</Tab>
-            <Tab>Insertar Silo</Tab>
         </TabList>
 
         <TabPanels>
@@ -234,7 +271,7 @@ import InsertarSilo from './InsertarSilo';
                 </div>
             </TabPanel>
 
-            <TabPanel> {/*Panel para Insertar Fab */}
+            <TabPanel> {/*Panel para Insertar Medidor */}
                 <div style={{
                 display: "flex",
                 justifyContent: "center",
@@ -244,7 +281,7 @@ import InsertarSilo from './InsertarSilo';
                 </div>
             </TabPanel>
 
-            <TabPanel> {/*Panel para Insertar Fab */}
+            <TabPanel> {/*Panel para Insertar Tipo Cemento */}
                 <div style={{
                 display: "flex",
                 justifyContent: "center",
@@ -254,7 +291,7 @@ import InsertarSilo from './InsertarSilo';
                 </div>
             </TabPanel>
 
-            <TabPanel> {/*Panel para Insertar Fab */}
+            <TabPanel> {/*Panel para Insertar vehiculo */}
                 <div style={{
                 display: "flex",
                 justifyContent: "center",
@@ -264,13 +301,12 @@ import InsertarSilo from './InsertarSilo';
                 </div>
             </TabPanel>
 
-            <TabPanel> {/*Panel para Insertar Fab */}
+            <TabPanel> {/*Panel para Insertar silo */}
                 <div style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 }}>
-                <InsertarSilo/>
                 </div>
             </TabPanel>
 

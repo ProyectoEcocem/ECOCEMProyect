@@ -37,11 +37,16 @@ public class VehiculoService
         return vehiculo;
     }
 
-    public async Task<Vehiculo> Create(Vehiculo vehiculo)
+    public async Task<Vehiculo> Create(VehiculoData vehiculo)
     {
-        _context.Vehiculos.Add(vehiculo);
+        Vehiculo t1 = new Vehiculo();
+
+        t1.VehiculoId = vehiculo.VehiculoId;
+        t1.NoSerie = vehiculo.NoSerie;
+
+        _context.Vehiculos.Add(t1);
         await _context.SaveChangesAsync();
-        return vehiculo;
+        return t1;
     }
 
     public async Task Delete(int id)

@@ -29,7 +29,7 @@ builder.Services.AddScoped<AccionMantenimientoService>();
 builder.Services.AddScoped<SedeService>();
 builder.Services.AddScoped<MedidorService>();
 builder.Services.AddScoped<EntidadCompradoraService>();
-builder.Services.AddScoped<Vehiculo>();
+builder.Services.AddScoped<VehiculoService>();
 builder.Services.AddScoped<TipoCementoService>();
 builder.Services.AddScoped<FabricaService>();
 builder.Services.AddScoped<EmpresaService>();

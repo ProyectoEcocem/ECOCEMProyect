@@ -8,15 +8,17 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-const InsertarBascula = () => {
-  const [numeroBascula, setNumeroBascula] = useState("");
+const InsertarSilo = () => {
+  const [numeroSilo, setNumeroSilo] = useState("");
+  const [numeroEquipo, setnumeroEquipo] = useState("");
   const [insertSuccess, setInsertSuccess] = useState(false);
 
-  const createBascula = async () => {
+  const createSilo = async () => {
   
-    axios.post(`http://localhost:5103/api/Bascula`, {
-        BasculaId: 0,
-        NoSerie: numeroBascula
+    axios.post(`http://localhost:5103/api/Silo`, {
+        SiloId: 0,
+        NoSilo: numeroSilo,
+        EquipoId: numeroEquipo
     })
     .then((response) => {
       console.log(response);
@@ -31,7 +33,7 @@ const InsertarBascula = () => {
 
   useEffect(() => {
     setInsertSuccess(false);
-  }, [numeroBascula]);
+  }, [numeroSilo]);
 
   return (
     <div
@@ -47,33 +49,45 @@ const InsertarBascula = () => {
         border: "2px solid #5F89C1",
       }}
     >
-      <FormLabel style={{ fontSize: 30 }}>Insertar Bascula</FormLabel>
+      <FormLabel style={{ fontSize: 30 }}>Insertar Silo</FormLabel>
 
      <FormControl>
         <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
-          Número de Serie de Bascula
+          Nombre de Silo
         </FormLabel>
         <Input
-          value={numeroBascula}
-          placeholder="Ingrese el Número de Serie de la Bascula"
-          onChange={(e) => setNumeroBascula(e.target.value)}
+          value={numeroSilo}
+          placeholder="Ingrese el Nombre de la Silo"
+          onChange={(e) => setNumeroSilo(e.target.value)}
           marginTop={0.5}
           width={80}
           backgroundColor="white"
         />
       </FormControl>
 
+      <Select
+          value={numeroEquipo}
+          onChange={(e) => setnumeroEquipo(e.target.value)}
+          width={80}
+          marginBottom={30}
+        >
+          {tiposEquipos.map((tipoEquipo) => (
+            <option key={tipoEquipo.tipoEId} value={tipoEquipo.tipoEId}>
+              {tipoEquipo.tipoE}
+            </option>
+          ))}
+        </Select>
 
         <Button
           variant="contained"
           color="primary"
           style={{ marginRight: 10, marginTop: 20 }}
-          onClick={createBascula}
+          onClick={createSilo}
           type="submit"
           >
           {insertSuccess && (
             <div style={{ marginTop: 20 }}>
-              <Alert status="success">La empresa se creó correctamente.</Alert>
+              <Alert status="success">La  se creó correctamente.</Alert>
             </div>
           )}
           Aceptar
@@ -84,4 +98,4 @@ const InsertarBascula = () => {
   );
 };
 
-export default InsertarBascula;
+export default InsertarSilo;

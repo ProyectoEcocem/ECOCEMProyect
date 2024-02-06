@@ -8,15 +8,15 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-const InsertarBascula = () => {
-  const [numeroBascula, setNumeroBascula] = useState("");
+const InsertarMedidor = () => {
+  const [numeroMedidor, setNumeroMedidor] = useState("");
   const [insertSuccess, setInsertSuccess] = useState(false);
 
-  const createBascula = async () => {
+  const createMedidor = async () => {
   
-    axios.post(`http://localhost:5103/api/Bascula`, {
-        BasculaId: 0,
-        NoSerie: numeroBascula
+    axios.post(`http://localhost:5103/api/Medidor`, {
+        MedidorId: 0,
+        NoSerie: numeroMedidor
     })
     .then((response) => {
       console.log(response);
@@ -31,7 +31,7 @@ const InsertarBascula = () => {
 
   useEffect(() => {
     setInsertSuccess(false);
-  }, [numeroBascula]);
+  }, [numeroMedidor]);
 
   return (
     <div
@@ -47,16 +47,16 @@ const InsertarBascula = () => {
         border: "2px solid #5F89C1",
       }}
     >
-      <FormLabel style={{ fontSize: 30 }}>Insertar Bascula</FormLabel>
+      <FormLabel style={{ fontSize: 30 }}>Insertar Medidor</FormLabel>
 
      <FormControl>
         <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
-          Número de Serie de Bascula
+          Nombre de Medidor
         </FormLabel>
         <Input
-          value={numeroBascula}
-          placeholder="Ingrese el Número de Serie de la Bascula"
-          onChange={(e) => setNumeroBascula(e.target.value)}
+          value={numeroMedidor}
+          placeholder="Ingrese el Nombre de la Medidor"
+          onChange={(e) => setNumeroMedidor(e.target.value)}
           marginTop={0.5}
           width={80}
           backgroundColor="white"
@@ -68,12 +68,12 @@ const InsertarBascula = () => {
           variant="contained"
           color="primary"
           style={{ marginRight: 10, marginTop: 20 }}
-          onClick={createBascula}
+          onClick={createMedidor}
           type="submit"
           >
           {insertSuccess && (
             <div style={{ marginTop: 20 }}>
-              <Alert status="success">La empresa se creó correctamente.</Alert>
+              <Alert status="success">La  se creó correctamente.</Alert>
             </div>
           )}
           Aceptar
@@ -84,4 +84,4 @@ const InsertarBascula = () => {
   );
 };
 
-export default InsertarBascula;
+export default InsertarMedidor;

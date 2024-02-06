@@ -46,10 +46,14 @@ public class BasculaService
 
     public async Task<Bascula> Create(Bascula bascula)
     {
-        _context.Basculas.Add(bascula);
-        await _context.SaveChangesAsync();
+        Bascula b1 = new Bascula();
 
-        return bascula;
+        b1.BasculaId = bascula.BasculaId;
+        b1.NoSerie = bascula.NoSerie;
+
+        _context.Basculas.Add(b1);
+        await _context.SaveChangesAsync();
+        return b1;
     }
 
     public async Task Delete(int id)

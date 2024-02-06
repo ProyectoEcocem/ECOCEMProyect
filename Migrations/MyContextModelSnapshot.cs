@@ -323,7 +323,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("MantenimientoNecesarioTipoEquipoId", "MantenimientoNecesarioAMId", "MantenimientoNecesarioHorasExpId");
 
-                    b.ToTable("HerramientaMantNecesario");
+                    b.ToTable("HerramientaMantNecesarios");
                 });
 
             modelBuilder.Entity("ECOCEMProject.MantenimientoNecesario", b =>
@@ -603,7 +603,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("EquipoId", "BrigadaId", "TrabajadorId", "FechaId");
 
-                    b.ToTable("OrdenTrabajoHerramienta");
+                    b.ToTable("OrdenTrabajoHerramientas");
                 });
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoRoturaEquipo", b =>
@@ -745,6 +745,10 @@ namespace ECOCEMProject.Migrations
 
                     b.Property<int>("EquipoId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("NoSilo")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("SiloId");
 

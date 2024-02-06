@@ -1,7 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
-[Route("api/[controller]/[action]")]
+public class VehiculoData
+{
+    public int VehiculoId { get; set; }
+    public string NoSerie { get; set; }
+}
+
+[Route("api/[controller]")]
 [ApiController]
 public class VehiculoController : Controller
 {
@@ -27,14 +33,14 @@ public class VehiculoController : Controller
     public async Task<IEnumerable<Vehiculo>> GetAll() => await _vehiculoService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Vehiculo vehiculo)
+    public async Task<IActionResult> Post([FromBody] VehiculoData vehiculo)
     {
         if (vehiculo == null)
         {
             return BadRequest();
         }
         Vehiculo createdVehiculo = await _vehiculoService.Create(vehiculo);
-        return CreatedAtRoute("Get", new { id = createdVehiculo.VehiculoId }, createdVehiculo);
+        return Ok(createdVehiculo);
     }
 
     [HttpPut]

@@ -38,11 +38,16 @@ public class SiloServicio
         return silo;
     }
 
-    public async Task<Silo> Create(Silo silo)
+    public async Task<Silo> Create(SiloData silo)
     {
-        _context.Silos.Add(silo);
+        Silo t1 = new Silo();
+
+        t1.SiloId = silo.SiloId;
+        t1.EquipoId = silo.EquipoId;
+
+        _context.Silos.Add(t1);
         await _context.SaveChangesAsync();
-        return silo;
+        return t1;
     }
 
     public async Task Delete(int id)

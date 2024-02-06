@@ -1,7 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
-[Route("api/[controller]/[action]")]
+public class MedidorData
+{
+    public int MedidorId { get; set; }
+    public string NoSerie { get; set; }
+}
+
+[Route("api/[controller]")]
 [ApiController]
 public class MedidorController : Controller
 {
@@ -29,7 +35,7 @@ public class MedidorController : Controller
     public async Task<IEnumerable<Medidor>> GetAll() => await _medidorService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Medidor medidor)
+    public async Task<IActionResult> Post([FromBody] MedidorData medidor)
     {
         if (medidor == null)
         {
@@ -38,7 +44,7 @@ public class MedidorController : Controller
 
         Medidor createdMedidor = await _medidorService.Create(medidor);
 
-        return CreatedAtRoute("Get", new { id = createdMedidor.MedidorId }, createdMedidor);
+        return Ok(createdMedidor);
     }
 
     [HttpPut]

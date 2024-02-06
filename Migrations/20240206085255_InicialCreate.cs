@@ -465,7 +465,7 @@ namespace ECOCEMProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HerramientaMantNecesario",
+                name: "HerramientaMantNecesarios",
                 columns: table => new
                 {
                     HerramientasId = table.Column<int>(type: "integer", nullable: false),
@@ -481,14 +481,14 @@ namespace ECOCEMProject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HerramientaMantNecesario", x => new { x.HerramientasId, x.TipoEquipoId, x.AMId, x.HorasExpId });
+                    table.PrimaryKey("PK_HerramientaMantNecesarios", x => new { x.HerramientasId, x.TipoEquipoId, x.AMId, x.HorasExpId });
                     table.ForeignKey(
-                        name: "FK_HerramientaMantNecesario_Herramientas_HerramientaId",
+                        name: "FK_HerramientaMantNecesarios_Herramientas_HerramientaId",
                         column: x => x.HerramientaId,
                         principalTable: "Herramientas",
                         principalColumn: "HerramientaId");
                     table.ForeignKey(
-                        name: "FK_HerramientaMantNecesario_MantenimientosNecesarios_Mantenimi~",
+                        name: "FK_HerramientaMantNecesarios_MantenimientosNecesarios_Mantenim~",
                         columns: x => new { x.MantenimientoNecesarioTipoEquipoId, x.MantenimientoNecesarioAMId, x.MantenimientoNecesarioHorasExpId },
                         principalTable: "MantenimientosNecesarios",
                         principalColumns: new[] { "TipoEquipoId", "AMId", "HorasExpId" });
@@ -576,7 +576,7 @@ namespace ECOCEMProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrdenTrabajoHerramienta",
+                name: "OrdenTrabajoHerramientas",
                 columns: table => new
                 {
                     HerramientasId = table.Column<int>(type: "integer", nullable: false),
@@ -591,15 +591,15 @@ namespace ECOCEMProject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrdenTrabajoHerramienta", x => new { x.HerramientasId, x.EquipoId, x.BrigadaId, x.TrabajadorId, x.FechaId });
+                    table.PrimaryKey("PK_OrdenTrabajoHerramientas", x => new { x.HerramientasId, x.EquipoId, x.BrigadaId, x.TrabajadorId, x.FechaId });
                     table.ForeignKey(
-                        name: "FK_OrdenTrabajoHerramienta_Herramientas_HerramientasId",
+                        name: "FK_OrdenTrabajoHerramientas_Herramientas_HerramientasId",
                         column: x => x.HerramientasId,
                         principalTable: "Herramientas",
                         principalColumn: "HerramientaId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrdenTrabajoHerramienta_OrdenTrabajos_EquipoId_BrigadaId_Tr~",
+                        name: "FK_OrdenTrabajoHerramientas_OrdenTrabajos_EquipoId_BrigadaId_T~",
                         columns: x => new { x.EquipoId, x.BrigadaId, x.TrabajadorId, x.FechaId },
                         principalTable: "OrdenTrabajos",
                         principalColumns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" },
@@ -763,7 +763,8 @@ namespace ECOCEMProject.Migrations
                 {
                     SiloId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EquipoId = table.Column<int>(type: "integer", nullable: false)
+                    EquipoId = table.Column<int>(type: "integer", nullable: false),
+                    NoSilo = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -802,13 +803,13 @@ namespace ECOCEMProject.Migrations
                 column: "TipoEId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HerramientaMantNecesario_HerramientaId",
-                table: "HerramientaMantNecesario",
+                name: "IX_HerramientaMantNecesarios_HerramientaId",
+                table: "HerramientaMantNecesarios",
                 column: "HerramientaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HerramientaMantNecesario_MantenimientoNecesarioTipoEquipoId~",
-                table: "HerramientaMantNecesario",
+                name: "IX_HerramientaMantNecesarios_MantenimientoNecesarioTipoEquipoI~",
+                table: "HerramientaMantNecesarios",
                 columns: new[] { "MantenimientoNecesarioTipoEquipoId", "MantenimientoNecesarioAMId", "MantenimientoNecesarioHorasExpId" });
 
             migrationBuilder.CreateIndex(
@@ -857,8 +858,8 @@ namespace ECOCEMProject.Migrations
                 columns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdenTrabajoHerramienta_EquipoId_BrigadaId_TrabajadorId_Fec~",
-                table: "OrdenTrabajoHerramienta",
+                name: "IX_OrdenTrabajoHerramientas_EquipoId_BrigadaId_TrabajadorId_Fe~",
+                table: "OrdenTrabajoHerramientas",
                 columns: new[] { "EquipoId", "BrigadaId", "TrabajadorId", "FechaId" });
 
             migrationBuilder.CreateIndex(
@@ -913,7 +914,7 @@ namespace ECOCEMProject.Migrations
                 name: "Fabricas");
 
             migrationBuilder.DropTable(
-                name: "HerramientaMantNecesario");
+                name: "HerramientaMantNecesarios");
 
             migrationBuilder.DropTable(
                 name: "IdentityRoleClaims");
@@ -937,7 +938,7 @@ namespace ECOCEMProject.Migrations
                 name: "OrdenTrabajoAMRealizadas");
 
             migrationBuilder.DropTable(
-                name: "OrdenTrabajoHerramienta");
+                name: "OrdenTrabajoHerramientas");
 
             migrationBuilder.DropTable(
                 name: "OrdenTrabajoRoturaEquipos");

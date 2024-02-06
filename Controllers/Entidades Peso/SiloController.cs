@@ -1,9 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
-[Route("api/[controller]/[action]")]
-[ApiController]
+public class SiloData
+{
+    public int SiloId {get; set;}
+    public string NoSilo {get; set;}
+    public int EquipoId {get; set;}
+}
 
+[Route("api/[controller]")]
+[ApiController]
 
 public class SiloController:Controller
 {
@@ -31,7 +37,7 @@ public class SiloController:Controller
     public async Task<IEnumerable<Silo>> GetAll() => await _siloServicio.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post( Silo silo)
+    public async Task<IActionResult> Post( SiloData silo)
     {
         if (silo == null)
         {
@@ -40,7 +46,7 @@ public class SiloController:Controller
 
         Silo siloCreado= await _siloServicio.Create(silo);
 
-        return CreatedAtRoute("Get", new { id = siloCreado.SiloId }, siloCreado);
+        return Ok(siloCreado);
     }
 
     [HttpPut]

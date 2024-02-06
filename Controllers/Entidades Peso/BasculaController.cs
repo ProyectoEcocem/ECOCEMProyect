@@ -1,55 +1,62 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
+public class BasculaData
+{
+    public int BasculaId {get; set;}
+    public string NoSerie { get; set; }
+
+}
+
 [Route("api/[controller]")]
 [ApiController]
 public class BasculaController : Controller
 {
-    private readonly BasculaService _medidorService;
+    private readonly BasculaService _basculaService;
 
-    public BasculaController(BasculaService medidorService)
+    public BasculaController(BasculaService basculaService)
     {
-        _medidorService = medidorService;
+        _basculaService = basculaService;
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get( int id)
     {
-        Bascula medidor = await _medidorService.Get(id);
+        Bascula bascula = await _basculaService.Get(id);
 
-        if (medidor == null)
+        if (bascula == null)
         {
             return NotFound();
         }
 
-        return Ok(medidor);
+        return Ok(bascula);
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Bascula>> GetAll() => await _medidorService.GetAll();
+    public async Task<IEnumerable<Bascula>> GetAll() => await _basculaService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Bascula medidor)
+    public async Task<IActionResult> Post([FromBody] Bascula bascula)
     {
-        if (medidor == null)
+        if (bascula == null)
         {
             return BadRequest();
         }
 
-        Bascula createdBascula = await _medidorService.Create(medidor);
-
-        return CreatedAtRoute("Get", new { id = createdBascula.BasculaId }, createdBascula);
+        Bascula createdBascula = await _basculaService.Create(bascula);
+        return Ok(createdBascula);
+        //return CreatedAtRoute("Get", new { id = createdBascula.BasculaId }, createdBascula);
     }
 
     [HttpPut]
-    public async Task<IActionResult> Put( int id, Bascula medidor)
+    public async Task<IActionResult> Put( int id, Bascula bascula)
     {
-        if (medidor == null)
+        if (bascula == null)
         {
             return BadRequest();
         }
 
-        Bascula updatedBascula = await _medidorService.Update(id,medidor);
+        Bascula updatedBascula = await _basculaService.Update(id,bascula);
 
         if (updatedBascula == null)
         {
@@ -62,7 +69,7 @@ public class BasculaController : Controller
     [HttpDelete]
     public async Task<IActionResult> Delete(int id)
     {
-        await _medidorService.Delete(id);
+        await _basculaService.Delete(id);
 
         return NoContent();
     }

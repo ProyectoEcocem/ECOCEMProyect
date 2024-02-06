@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240206065220_InicialCreate")]
+    [Migration("20240206085255_InicialCreate")]
     partial class InicialCreate
     {
         /// <inheritdoc />
@@ -326,7 +326,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("MantenimientoNecesarioTipoEquipoId", "MantenimientoNecesarioAMId", "MantenimientoNecesarioHorasExpId");
 
-                    b.ToTable("HerramientaMantNecesario");
+                    b.ToTable("HerramientaMantNecesarios");
                 });
 
             modelBuilder.Entity("ECOCEMProject.MantenimientoNecesario", b =>
@@ -606,7 +606,7 @@ namespace ECOCEMProject.Migrations
 
                     b.HasIndex("EquipoId", "BrigadaId", "TrabajadorId", "FechaId");
 
-                    b.ToTable("OrdenTrabajoHerramienta");
+                    b.ToTable("OrdenTrabajoHerramientas");
                 });
 
             modelBuilder.Entity("ECOCEMProject.OrdenTrabajoRoturaEquipo", b =>
@@ -748,6 +748,10 @@ namespace ECOCEMProject.Migrations
 
                     b.Property<int>("EquipoId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("NoSilo")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("SiloId");
 

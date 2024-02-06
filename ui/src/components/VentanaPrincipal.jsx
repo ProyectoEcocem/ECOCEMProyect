@@ -22,7 +22,12 @@ import VisualizarRoturaEquipo from './VisualizarRoturaEquipo';
 import VisualizarParametros from './VisualizarParametros';
 import VisualizarIndicadores from './VisualizarIndicadores';
 import InsertarBascula from './InsertarBascula';
+import InsertarFabrica from './InsertarFabrica';
 import Reporte from './Reporte';
+import InsertarMedidor from './InsertarMedidor';
+import InsertarTipoCemento from './InsertarTipoCemento';
+import InsertarVehiculo from './InsertarVehiculo';
+import InsertarSilo from './InsertarSilo';
 
 
  const VentanaPrincipal = () => {
@@ -134,6 +139,11 @@ import Reporte from './Reporte';
             <Tab>Insertar Rotura de Equipo</Tab>
             <Tab>Insertar Parámetros</Tab>
             <Tab>Insertar Bascula</Tab>
+            <Tab>Insertar Fabrica</Tab>
+            <Tab>Insertar Medidor</Tab>
+            <Tab>Insertar Tipo de Cemento</Tab>
+            <Tab>Insertar Vehiculo</Tab>
+            <Tab>Insertar Silo</Tab>
         </TabList>
 
         <TabPanels>
@@ -211,6 +221,56 @@ import Reporte from './Reporte';
                 alignItems: "center",
                 }}>
                 <InsertarBascula/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Fab */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarFabrica/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Fab */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarMedidor/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Fab */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarTipoCemento/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Fab */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarVehiculo/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Fab */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarSilo/>
                 </div>
             </TabPanel>
 

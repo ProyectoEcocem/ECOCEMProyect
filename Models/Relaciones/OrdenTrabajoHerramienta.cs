@@ -1,9 +1,12 @@
 
+using System.Text.Json.Serialization;
+
 namespace ECOCEMProject;
 
 public class OrdenTrabajoHerramienta
 {
     public int HerramientasId {get; set; }
+    [JsonIgnore]
     public Herramienta? Herramientas {get; set;}
     
     //llaves de Orden de trabajo
@@ -11,6 +14,7 @@ public class OrdenTrabajoHerramienta
     public int BrigadaId {get; set;}
     public int TrabajadorId {get; set;}
     public DateTime FechaId {get; set;}
+    [JsonIgnore]
 
     public OrdenTrabajo? OrdenTrabajo {get; set;}
 

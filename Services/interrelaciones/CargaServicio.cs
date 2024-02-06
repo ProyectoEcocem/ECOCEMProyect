@@ -24,7 +24,7 @@ public class CargaServicio
     {
         return await _context.Cargas.ToListAsync();
     }
-    public async Task<Carga> Update(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaCargaId,Carga carga)
+    public async Task<Carga> Update(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaCargaId,Carga ordenTrabajoHerramienta)
     {
         var CargaExistente = await Get(TipoCementoId,SiloId,VehiculoId,FechaCargaId);
 
@@ -35,25 +35,25 @@ public class CargaServicio
         
         await _context.SaveChangesAsync();
 
-        return carga;
+        return ordenTrabajoHerramienta;
     }
-    public async Task<Carga> Create(Carga carga)
+    public async Task<Carga> Create(Carga ordenTrabajoHerramienta)
     {
-        _context.Cargas.Add(carga);
+        _context.Cargas.Add(ordenTrabajoHerramienta);
         await _context.SaveChangesAsync();
 
-        return carga;
+        return ordenTrabajoHerramienta;
     }
      public async Task Delete(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaCargaId)
     {
-        var carga = await Get(TipoCementoId,SiloId,VehiculoId,FechaCargaId);
+        var ordenTrabajoHerramienta = await Get(TipoCementoId,SiloId,VehiculoId,FechaCargaId);
 
-        if (carga == null)
+        if (ordenTrabajoHerramienta == null)
         {
             return;
         }
 
-        _context.Cargas.Remove(carga);
+        _context.Cargas.Remove(ordenTrabajoHerramienta);
         await _context.SaveChangesAsync();
     }
 

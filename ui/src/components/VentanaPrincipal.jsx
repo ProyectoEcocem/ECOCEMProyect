@@ -21,6 +21,7 @@ import VisualizarRotura from './VisualizarRotura';
 import VisualizarRoturaEquipo from './VisualizarRoturaEquipo';
 import VisualizarParametros from './VisualizarParametros';
 import VisualizarIndicadores from './VisualizarIndicadores';
+import InsertarBascula from './InsertarBascula';
 import Reporte from './Reporte';
 
 
@@ -132,6 +133,7 @@ import Reporte from './Reporte';
             <Tab>Insertar Tipo de Rotura</Tab>
             <Tab>Insertar Rotura de Equipo</Tab>
             <Tab>Insertar Parámetros</Tab>
+            <Tab>Insertar Bascula</Tab>
         </TabList>
 
         <TabPanels>
@@ -199,6 +201,16 @@ import Reporte from './Reporte';
             <TabPanel> {/*Panel para Insertar Parámetros */}
             <div>
                 <InsertarParametrosTabla/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Bascula */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarBascula/>
                 </div>
             </TabPanel>
 

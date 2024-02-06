@@ -13,8 +13,6 @@ public class Equipo
     public Sede Sede {get; }
     
     //public List<Reporte> Reportes = null!;
-
-
     //public List<RoturaEquipo> RoturasEquipos {get; set;}
     //public List<OrdenTrabajo> OrdenesTrabajo {get; } = new();
 }

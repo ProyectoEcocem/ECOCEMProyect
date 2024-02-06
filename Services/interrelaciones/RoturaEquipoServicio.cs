@@ -12,8 +12,6 @@ public class RoturaEquipoServicio
     }
     public async Task<RoturaEquipo> Get(int RoturaId,int EquipoId,DateTime FechaId)
     {
-        
-        
         var current_entity = await _context.RoturasEquipos.FindAsync(RoturaId,EquipoId,FechaId);
         
         if(current_entity == null!){

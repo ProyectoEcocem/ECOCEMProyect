@@ -87,6 +87,10 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BasculaId"));
 
+                    b.Property<string>("NoSerie")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("BasculaId");
 
                     b.ToTable("Basculas");
@@ -218,6 +222,10 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EntidadCompradoraId"));
 
+                    b.Property<string>("NombreEntidadCompradora")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("EntidadCompradoraId");
 
                     b.ToTable("EntidadCompradoras");
@@ -253,6 +261,10 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FabricaId"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("FabricaId");
 
@@ -457,6 +469,10 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MedidorId"));
+
+                    b.Property<string>("NoSerie")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("MedidorId");
 
@@ -745,6 +761,10 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TipoCementoId"));
 
+                    b.Property<string>("NombreTipoCemento")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("TipoCementoId");
 
                     b.ToTable("TipoCementos");
@@ -861,6 +881,10 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("VehiculoId"));
+
+                    b.Property<string>("NoSerie")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("VehiculoId");
 

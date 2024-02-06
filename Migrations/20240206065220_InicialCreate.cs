@@ -34,7 +34,8 @@ namespace ECOCEMProject.Migrations
                 columns: table => new
                 {
                     BasculaId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NoSerie = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,7 +85,8 @@ namespace ECOCEMProject.Migrations
                 columns: table => new
                 {
                     EntidadCompradoraId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NombreEntidadCompradora = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,7 +98,8 @@ namespace ECOCEMProject.Migrations
                 columns: table => new
                 {
                     FabricaId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nombre = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,7 +137,8 @@ namespace ECOCEMProject.Migrations
                 columns: table => new
                 {
                     MedidorId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NoSerie = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -210,7 +214,8 @@ namespace ECOCEMProject.Migrations
                 columns: table => new
                 {
                     TipoCementoId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NombreTipoCemento = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -277,7 +282,8 @@ namespace ECOCEMProject.Migrations
                 columns: table => new
                 {
                     VehiculoId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NoSerie = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

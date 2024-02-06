@@ -11,10 +11,9 @@ public class CargaController : Controller
 
     public CargaController(CargaServicio cargaServicio)
     {
-        _cargaServicio =cargaServicio;
+        _cargaServicio = cargaServicio;
     }
 
-    // POST
     [HttpPost]
     public async Task<ActionResult> Post(Carga carga)
     {
@@ -25,7 +24,7 @@ public class CargaController : Controller
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaCargaId)
     {
-        Carga carga=await _cargaServicio.Get(TipoCementoId, SiloId, VehiculoId, FechaCargaId);
+        Carga carga = await _cargaServicio.Get(TipoCementoId, SiloId, VehiculoId, FechaCargaId);
         if(carga == null){
             return NotFound();
         }

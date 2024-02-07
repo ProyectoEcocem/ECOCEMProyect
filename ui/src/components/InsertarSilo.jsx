@@ -5,27 +5,41 @@ import {
   FormLabel,
   Input,
   Button,
+  Select,
   Flex,
 } from "@chakra-ui/react";
 
 const InsertarSilo = () => {
   const [numeroSilo, setNumeroSilo] = useState("");
-  const [numeroEquipo, setnumeroEquipo] = useState("");
+  const [radio, setRadio] = useState(1);
+  const [noSede, setSedeId] = useState(1);
+  const [altura, setAltura] = useState(1);
   const [insertSuccess, setInsertSuccess] = useState(false);
-
+  //Lista de sedes
+  const [sedes, setSedes] = useState([]);
+  
+  useEffect(() => {
+  axios.get(`http://localhost:5103/api/Sede`)
+    .then(res => {
+      setSedes(res.data);
+    })
+    .catch(err => console.log(err));
+  }, []);
   const createSilo = async () => {
   
     axios.post(`http://localhost:5103/api/Silo`, {
-        SiloId: 0,
-        NoSilo: numeroSilo,
-        EquipoId: numeroEquipo
+        siloId: 0,
+        noSilo: numeroSilo,
+        noSede:noSede,
+        radio:radio,
+        altura:altura,
     })
     .then((response) => {
       console.log(response);
-      alert("Se inserto")
+      alert("Se insertó correctamente")
     }, (error) => {
       console.log(error);
-      alert("no")
+      alert("no se ha insertado, comprueba los datos de entrada")
     });
   };
  
@@ -63,21 +77,48 @@ const InsertarSilo = () => {
           width={80}
           backgroundColor="white"
         />
-      </FormControl>
-
+        <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
+          altura
+        </FormLabel>
+        <Input
+          value={altura}
+          placeholder="Ingrese la altura"
+          onChange={(e) => setAltura(e.target.value)}
+          marginTop={0.5}
+          width={80}
+          backgroundColor="white"
+        />
+        <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
+          radio
+        </FormLabel>
+        <Input
+          value={radio}
+          placeholder="Ingrese el radio"
+          onChange={(e) => setRadio(e.target.value)}
+          marginTop={0.5}
+          width={80}
+          backgroundColor="white"
+        />
+     
+      <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
+          Seleccione la sede
+        </FormLabel>
+        </FormControl>
       <Select
-          value={numeroEquipo}
-          onChange={(e) => setnumeroEquipo(e.target.value)}
+          value={noSede}
+          onChange={(e) => setSedeId(e.target.value)}
           width={80}
           marginBottom={30}
         >
-          {tiposEquipos.map((tipoEquipo) => (
-            <option key={tipoEquipo.tipoEId} value={tipoEquipo.tipoEId}>
-              {tipoEquipo.tipoE}
+          {sedes.map((sede) => (
+            <option key={sede.sedeId} value={sede.sedeId}>
+              {sede.nombreSede}
+              
             </option>
           ))}
         </Select>
-
+        
+        <Flex>    
         <Button
           variant="contained"
           color="primary"
@@ -92,7 +133,7 @@ const InsertarSilo = () => {
           )}
           Aceptar
         </Button>
-      
+        </Flex>
 
     </div>
   );

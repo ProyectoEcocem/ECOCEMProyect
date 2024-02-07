@@ -14,6 +14,7 @@ const InsertarTipoDeEquipo = () => {
   
     const createTipoEquipo = async (event) => {
       event.preventDefault();
+
       
       axios.post(`http://localhost:5103/api/TipoEquipo`, {
         tipoEId: 0,

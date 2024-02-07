@@ -39,6 +39,7 @@ import Venta from './VizualizarVenta';
 import Compra from './VisualizarCompra';
 import Resumenes from './ResumenesParametrosIndicadores';
 
+
  const VentanaPrincipal = () => {
  return(
 <div>
@@ -233,7 +234,9 @@ import Resumenes from './ResumenesParametrosIndicadores';
             <Tab>Insertar Vehiculo</Tab>
             <Tab>Insertar Compra</Tab>
             <Tab>Insertar Venta</Tab>
+            <Tab>Insertar Silo</Tab>
             <Tab>Resum</Tab>
+
         </TabList>
 
         <TabPanels>
@@ -376,13 +379,22 @@ import Resumenes from './ResumenesParametrosIndicadores';
                 </div>
             </TabPanel>
 
-            <TabPanel> {/*Panel para Insertar compra */}
+            <TabPanel> {/*Panel para Insertar venta */}
                 <div style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 }}>
                 <InsertarVenta/>
+                </div>
+            </TabPanel>
+            <TabPanel> {/*Panel para Insertar silo */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarSilo/>
                 </div>
             </TabPanel>
 

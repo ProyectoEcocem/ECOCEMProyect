@@ -14,7 +14,7 @@ public class FiltroMantenimientoController : Controller
     }
 
 
-    [HttpGet("Roturas")]
+    [HttpGet]
     public async Task<IActionResult> GetRoturas( int? dia, int? mes, int? anno)
     {
         var result = await _filtroMantenimientoService.GetRoturas(dia,mes,anno);
@@ -27,15 +27,16 @@ public class FiltroMantenimientoController : Controller
         return Ok(result);
     }
 
-    [HttpGet("Reporte")]
-    public async Task<IActionResult> GetReportes( int? dia, int? mes, int? anno)
+    [HttpGet]
+    public async Task<IActionResult> GetReportes( int? dia, int? mes, int? anno, int equipoId)
     {
-        var result = await _filtroMantenimientoService.GetReportes(dia,mes,anno);
+        var result = await _filtroMantenimientoService.GetReportes(dia,mes,anno,equipoId);
 
         if (result == null)
         {
             return NotFound();
         }
+
 
         return Ok(result);
     }

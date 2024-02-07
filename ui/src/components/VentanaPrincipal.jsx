@@ -37,6 +37,11 @@ import InsertarEntidadCompradora from './InsertarEntidadCompradora';
 import EntidadCompradora from './VisualizarEntidadCompradora';
 import Venta from './VizualizarVenta';
 import Compra from './VisualizarCompra';
+import InsertarBrigada from './InsertarBrigada';
+import VisualizarBrigada from './VisualizarBrigada';
+import InsertarAccionMantenimiento from './InsertarAccionMantenimiento';
+import VisualizarAccionMantenimiento from './VisualizarAccionmantenimiento';
+
 
  const VentanaPrincipal = () => {
  return(
@@ -68,6 +73,8 @@ import Compra from './VisualizarCompra';
             <Tab>Compra</Tab>
             <Tab>Venta</Tab>
             <Tab>Visualizar Indicadores</Tab>
+            <Tab>Visualizar Brigadas</Tab>
+            <Tab>Visualizar A. de Mtto</Tab>
         </TabList>
 
         <TabIndicator
@@ -209,6 +216,26 @@ import Compra from './VisualizarCompra';
                 </div>
             </TabPanel>
 
+            <TabPanel> {/*Panel para Visualizar Brigada*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <VisualizarBrigada/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Visualizar Acciones de Mantenimiento*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <VisualizarAccionMantenimiento/>
+                </div>
+            </TabPanel>
+
            
         </TabPanels>
       </Tabs>
@@ -232,6 +259,8 @@ import Compra from './VisualizarCompra';
             <Tab>Insertar Vehiculo</Tab>
             <Tab>Insertar Compra</Tab>
             <Tab>Insertar Venta</Tab>
+            <Tab>Insertar Brigada</Tab>
+            <Tab>Insertar Accion de Mantenimiento</Tab>
         </TabList>
 
         <TabPanels>
@@ -381,6 +410,26 @@ import Compra from './VisualizarCompra';
                 alignItems: "center",
                 }}>
                 <InsertarVenta/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Brigada */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarBrigada/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Accion de mantenimiento */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarAccionMantenimiento/>
                 </div>
             </TabPanel>
 

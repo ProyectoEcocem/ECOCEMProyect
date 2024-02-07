@@ -5,14 +5,15 @@ import {
   Input,
   Button,
   Flex,
+  Modal,
   //BackgroundImage
 } from "@chakra-ui/react"; 
 import axios from "axios";
 
-const InsertarRotura = () => {
+const InsertarRotura = ({onClose}) => {
     const [roturaId, setRoturaId] = useState("");
     const [nombreRotura, setNombreRotura] = useState("");
-  
+    const [insertarRoturaModalAbierto, setInsertarRoturaModalAbierto] = useState(false);
 
     const createRotura = async () => {
       const rotura = {
@@ -25,14 +26,19 @@ const InsertarRotura = () => {
         nombreRotura: nombreRotura
       })
       .then((response) => {
-        console.log(response);
-        alert("ok")
+       // console.log(response);
+        alert("La Rotura se ha insertado correctamente")
+        setInsertarRoturaModalAbierto(false);
       }, (error) => {
         console.log(error);
-        alert("no ok")
+        alert("La Rotura no se ha insertado.")
       });
     };
 
+    const handleCancelar = () => {
+      // Cierra la ventana modal desde el componente padre.
+      onClose();
+    };
 
     return (
         <div style={{
@@ -75,16 +81,20 @@ const InsertarRotura = () => {
               />
             </FormControl>
             
+            <Flex justifyContent="space-between">
         <Button 
-        variant="contained" 
-        color="primary" 
-        style={{ marginRight: 10 }}
+        variant="outline"
+        colorScheme="blue"
+        style={{ marginRight: 10, marginTop: 15}}
         onClick={createRotura}
         type="submit"
         >
           Aceptar
         </Button>
-       
+        <Button variant="outline" colorScheme="red" marginTop={4} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
       </div>
   );
 };

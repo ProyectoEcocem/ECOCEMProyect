@@ -97,7 +97,7 @@ const InsertarVenta = () => {
         >
           {entidadCompradoras.map((entidadCompradora) => (
             <option key={entidadCompradora.entidadCompradoraId} value={entidadCompradora.entidadCompradoraId}>
-              {entidadCompradora.nombre}
+              {entidadCompradora.nombreEntidadCompradora}
             </option>
           ))}
         </Select>

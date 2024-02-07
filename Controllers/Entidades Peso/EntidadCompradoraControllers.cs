@@ -7,7 +7,7 @@ public class EntidadCompradoraData
     public string NombreEntidadCompradora {get; set;}
 }
 
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 [ApiController]
 public class EntidadCompradoraController : Controller
 {

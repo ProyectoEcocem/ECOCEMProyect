@@ -1,5 +1,6 @@
 
 import React from 'react';
+import InsertarRotura from './InsertarRotura';
 import {
   Input,
   Button,
@@ -13,12 +14,15 @@ import {
   Tr,
   Th,
   Td,
+  Modal,
+  AbsoluteCenter,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
 export default class TiposEquipo extends React.Component {
     state = {
-      Roturas: []
+      Roturas: [],
+      insertarRoturaModalAbierto: false, //controlar si la pestana de insertar rotura esta abierta
     }
   
     componentDidMount() {
@@ -28,10 +32,30 @@ export default class TiposEquipo extends React.Component {
           this.setState({ Roturas });
         })
     }
+
+    manejarInsertarRoturaModal = () => {
+      this.setState({ insertarRoturaModalAbierto: true });
+    };
   
     render() {
       return (
         <div style={{height : 400}}>
+
+          <Button
+         onClick={this.manejarInsertarRoturaModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Rotura
+         </Button>
+
+         <Modal isOpen={this.state.insertarRoturaModalAbierto} onClose={() => this.setState({ insertarRoturaModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarRotura onClose={() => this.setState({ insertarRoturaModalAbierto: false })} />
+         </AbsoluteCenter>
+         </Modal>
+
+
         <TableContainer>
           <Table>
             <Thead>

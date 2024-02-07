@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 
 const Resumenes = ({ lista }) => {
+  const [equipoId, setEquipoId] = useState(0);
   const [fechaSeleccionada, setFechaSeleccionada] = useState({
     dia: '',
     mes: '',
@@ -24,6 +25,17 @@ const Resumenes = ({ lista }) => {
   });
   
   const [reportes, setReportes] = useState([]);
+
+    //Lista de equipos
+    const [Equipos, setEquipos] = useState([]);
+  
+    useEffect(() => {
+      axios.get(`http://localhost:5103/api/Equipo`)
+        .then(res => {
+          setEquipos(res.data);
+        })
+        .catch(err => console.log(err));
+    }, []);
 
 // Lista de días
 const dias = Array.from({ length:  31 }, (_, i) => i +  1);
@@ -42,13 +54,13 @@ const anos = Array.from({ length:  100 }, (_, i) => new Date().getFullYear() - i
   };
 
   const filtrarLista = async () => {
-    alert(fechaSeleccionada.ano)
     try {
       const response = await axios.get('http://localhost:5103/api/FiltroMantenimiento/GetReportes',{
         params: {
             dia: fechaSeleccionada.dia,
             mes: fechaSeleccionada.mes,
             anno: fechaSeleccionada.ano,
+            equipoId: equipoId,
           },
       });
       setReportes(response.data);
@@ -66,6 +78,17 @@ const anos = Array.from({ length:  100 }, (_, i) => new Date().getFullYear() - i
   return (
     <Box>
       <Stack spacing={4}>
+      <FormControl id="equipo">
+        <FormLabel>Equipo</FormLabel>
+        <Select placeholder="Selecciona un equipo" value={equipoId} onChange={(e) => setEquipoId(e.target.value)}>
+            {Equipos.map((equipo) => (
+            <option key={equipo.equipoId} value={equipo.equipoId}>
+                {equipo.equipoId}
+            </option>
+            ))}
+        </Select>
+        </FormControl>
+
       <FormControl id="dia">
         <FormLabel>Día</FormLabel>
         <Select placeholder="Selecciona un día" value={fechaSeleccionada.dia} onChange={(e) => handleChange(e, 'dia')}>
@@ -96,6 +119,9 @@ const anos = Array.from({ length:  100 }, (_, i) => new Date().getFullYear() - i
             ))}
         </Select>
         </FormControl>
+
+            
+
         <Button onClick={filtrarLista}>Filtrar</Button>
       </Stack>
       <Text>Resultados</Text>

@@ -30,22 +30,43 @@ public class FiltroMantenimientoService
         return null!;
     }
 
-    public async Task<IEnumerable<Reporte>> GetReportes(int? dia, int? mes, int? anno)
+    public async Task<IEnumerable<Reporte>> GetReportes(int? dia, int? mes, int? anno,int equipoId)
     {
-        if (dia != null && mes != null && anno != null)
-        {
-            var reportesDia =   myContext.Reportes.Where(r=>r.FechaId.Day == dia && r.FechaId.Month == mes && r.FechaId.Year == anno);
-            return reportesDia;
+        if(equipoId == 0){
+            if (dia != null && mes != null && anno != null)
+            {
+                var reportesDia =   myContext.Reportes.Where(r=>r.FechaId.Day == dia && r.FechaId.Month == mes && r.FechaId.Year == anno);
+                return reportesDia;
+            }
+            if (dia == null && mes != null && anno != null)
+            {
+                var reportesMes = myContext.Reportes.Where(r=>r.FechaId.Month == mes && r.FechaId.Year == anno);
+                return reportesMes;
+            }
+            if (dia == null && mes == null && anno != null)
+            {
+                var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Year == anno );
+                return reportesAnno;
+            }
         }
-        if (dia == null && mes != null && anno != null)
-        {
-            var reportesMes = myContext.Reportes.Where(r=>r.FechaId.Month == mes && r.FechaId.Year == anno);
-            return reportesMes;
-        }
-        if (dia == null && mes == null && anno != null)
-        {
-            var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Year == anno);
-            return reportesAnno;
+        else{
+
+            if (dia != null && mes != null && anno != null)
+            {
+                var reportesDia =   myContext.Reportes.Where(r=>r.FechaId.Day == dia && r.FechaId.Month == mes && r.FechaId.Year == anno && r.EquipoId==equipoId);
+                return reportesDia;
+            }
+            if (dia == null && mes != null && anno != null)
+            {
+                var reportesMes = myContext.Reportes.Where(r=>r.FechaId.Month == mes && r.FechaId.Year == anno && r.EquipoId==equipoId);
+                return reportesMes;
+            }
+            if (dia == null && mes == null && anno != null)
+            {
+                var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Year == anno && r.EquipoId==equipoId);
+                return reportesAnno;
+            }
+
         }
         return null!;
     }

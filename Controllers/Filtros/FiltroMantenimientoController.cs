@@ -28,14 +28,15 @@ public class FiltroMantenimientoController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetReportes( int? dia, int? mes, int? anno)
+    public async Task<IActionResult> GetReportes( int? dia, int? mes, int? anno, int equipoId)
     {
-        var result = await _filtroMantenimientoService.GetReportes(dia,mes,anno);
+        var result = await _filtroMantenimientoService.GetReportes(dia,mes,anno,equipoId);
 
         if (result == null)
         {
             return NotFound();
         }
+
 
         return Ok(result);
     }

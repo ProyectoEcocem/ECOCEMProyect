@@ -6,16 +6,18 @@ import {
     Input,
     Button,
     Flex,
+    Modal,
     //BackgroundImage
   } from "@chakra-ui/react"; 
 //import { sedeController } from "../../../Controllers/Entidades"
 
-const InsertarSede = () => {
+const InsertarSede = ({onClose}) => {
   const [numeroSede, setNumeroSede] = useState(0);
   const [nombreSede, setNombreSede] = useState("");
   const [ubicacionSede, setUbicacion] = useState("");
   const [empresaId, setEmpresaId] = useState(1);
   const [insertSuccess, setInsertSuccess] = useState(false);
+  const [insertarSedeModalAbierto, setInsertarSedeModalAbierto] = useState(false);
 
   const EnviarForm = async () => {
     const sede = {
@@ -31,8 +33,9 @@ const InsertarSede = () => {
       empresaId: empresaId
     })
     .then((response) => {
-      console.log(response);
-      alert("se insertó correctamente")
+      //console.log(response);
+      alert("Se insertó correctamente")
+      setInsertarSedeModalAbierto(false); // Cierra el modal
     }, (error) => {
       console.log(error);
       alert(console.log(error))
@@ -40,10 +43,17 @@ const InsertarSede = () => {
     });
   };
 
+
    useEffect(() => {
      setInsertSuccess(false);
    }, [numeroSede,nombreSede,ubicacionSede,empresaId]);
  
+
+   const handleCancelar = () => {
+    // Cierra la ventana modal desde el componente padre.
+    onClose();
+   
+  };
 
   return (
     <div style={{
@@ -101,10 +111,10 @@ const InsertarSede = () => {
                 marginBottom={1}
               />
             </FormControl>
-        <Flex>
+        <Flex justifyContent="space-between">
         <Button 
-          variant="contained" 
-          color="primary" 
+          variant="outline"
+          colorScheme="blue" 
           style={{ marginRight: 10 }}
           onClick = {EnviarForm}
           type="submit"
@@ -112,11 +122,14 @@ const InsertarSede = () => {
           >
           {insertSuccess && (
             <div style={{ marginTop: 5 }}>
-              <Alert status="success">La empresa se creó correctamente.</Alert>
+              <Alert status="success">La sede se creó correctamente.</Alert>
             </div>
           )}
           Aceptar
         </Button>
+        <Button variant="outline" colorScheme="red" marginTop={4} onClick={handleCancelar}>
+    Cancelar
+  </Button>
         </Flex>
         
     
@@ -126,6 +139,5 @@ const InsertarSede = () => {
 
 export default InsertarSede;
 
-// ToDo: Verificar que ya no exista la sede creada (por el Id)
-// ToDo: Evento con los botones.
-// Question: Las sedes tienen un id propio en la vida real o es asignado por el programa?
+// TODO:   Verificar que la ventana desaparezca al hacer click en aceptar
+// TODO: Cambiar para que Empresa sea un seleccionable, no un input

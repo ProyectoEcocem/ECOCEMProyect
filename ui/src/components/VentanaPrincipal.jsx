@@ -38,6 +38,7 @@ import EntidadCompradora from './VisualizarEntidadCompradora';
 import Venta from './VizualizarVenta';
 import Compra from './VisualizarCompra';
 
+
  const VentanaPrincipal = () => {
  return(
 <div>
@@ -232,6 +233,8 @@ import Compra from './VisualizarCompra';
             <Tab>Insertar Vehiculo</Tab>
             <Tab>Insertar Compra</Tab>
             <Tab>Insertar Venta</Tab>
+            <Tab>Insertar Silo</Tab>
+
         </TabList>
 
         <TabPanels>
@@ -374,13 +377,22 @@ import Compra from './VisualizarCompra';
                 </div>
             </TabPanel>
 
-            <TabPanel> {/*Panel para Insertar compra */}
+            <TabPanel> {/*Panel para Insertar venta */}
                 <div style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 }}>
                 <InsertarVenta/>
+                </div>
+            </TabPanel>
+            <TabPanel> {/*Panel para Insertar silo */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarSilo/>
                 </div>
             </TabPanel>
 

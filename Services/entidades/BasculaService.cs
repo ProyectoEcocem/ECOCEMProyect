@@ -11,9 +11,9 @@ public class BasculaService
 
     public BasculaService(MyContext context, TipoEquipoServicio tipoEServicio,EquipoServicio equipoServicio)
     {
-        _equipoServicio=equipoServicio;
         _context = context;
         _tipoEServicio=tipoEServicio;
+        _equipoServicio=equipoServicio;
     }
 
     public async Task<Bascula> Get(int id)

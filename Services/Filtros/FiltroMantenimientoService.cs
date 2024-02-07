@@ -49,7 +49,7 @@ public class FiltroMantenimientoService
             var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Year == anno);
             return reportesAnno;
         }
-        return null;
+        return null!;
     }
 
     public async Task<IEnumerable<Role>> GetRoles(int id)
@@ -57,10 +57,11 @@ public class FiltroMantenimientoService
         List<Role>roles =new();
         var userRoles = myContext.UserRoles.Where(userRole => userRole.IdUser == id);
         var idRoles = userRoles.Select(userRole => userRole.IdRole).ToList();
+        
         foreach(var idR in idRoles)
         {
-            var role =  myContext.Roles.Find(idR);
-            roles.Add(role);
+            var role = await myContext.Roles.FindAsync(idR);
+            roles.Add(role!);
         }
         return roles;
     }

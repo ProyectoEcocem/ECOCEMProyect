@@ -162,7 +162,8 @@ namespace ECOCEMProject.Migrations
                     TiempoRequeridoAccProgramadas = table.Column<double>(type: "double precision", nullable: false),
                     CostoTotalMant = table.Column<double>(type: "double precision", nullable: false),
                     Facturacion = table.Column<double>(type: "double precision", nullable: false),
-                    CostoMantContratado = table.Column<double>(type: "double precision", nullable: false)
+                    CostoMantContratado = table.Column<double>(type: "double precision", nullable: false),
+                    PerdidaIndisponibilidad = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -748,9 +749,6 @@ namespace ECOCEMProject.Migrations
                     Nivel = table.Column<int>(type: "integer", nullable: false),
                     PesoM = table.Column<int>(type: "integer", nullable: false),
                     Volumen = table.Column<int>(type: "integer", nullable: false),
-                    TipoCementoId = table.Column<int>(type: "integer", nullable: false),
-                    VehiculoId = table.Column<int>(type: "integer", nullable: false),
-                    FechaCargaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CargaTipoCementoId = table.Column<int>(type: "integer", nullable: true),
                     CargaSiloId = table.Column<int>(type: "integer", nullable: true),
                     CargaVehiculoId = table.Column<int>(type: "integer", nullable: true),

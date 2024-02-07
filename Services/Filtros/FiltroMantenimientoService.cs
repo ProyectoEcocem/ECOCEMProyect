@@ -1,5 +1,3 @@
-using System;
-
 using Microsoft.EntityFrameworkCore;
 namespace ECOCEMProject;
 
@@ -29,14 +27,14 @@ public class FiltroMantenimientoService
             var roturasAnno = myContext.RoturasEquipos.Where(r=>r.FechaId.Year == anno);
             return roturasAnno;
         }
-        return null;
+        return null!;
     }
 
     public async Task<IEnumerable<Reporte>> GetReportes(int? dia, int? mes, int? anno)
     {
         if (dia != null && mes != null && anno != null)
         {
-            var reportesDia =  myContext.Reportes.Where(r=>r.FechaId.Day == dia && r.FechaId.Month == mes && r.FechaId.Year == anno);
+            var reportesDia =   myContext.Reportes.Where(r=>r.FechaId.Day == dia && r.FechaId.Month == mes && r.FechaId.Year == anno);
             return reportesDia;
         }
         if (dia == null && mes != null && anno != null)

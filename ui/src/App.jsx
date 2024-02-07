@@ -7,6 +7,7 @@ import Login from './components/Login'
 import VentanaPrincipal from './components/VentanaPrincipal'
 import InsertarRoles from './components/InsertarRoles'
 import { useState } from 'react'
+import Resumenes from './components/ResumenesParametrosIndicadores'
 
 function App() {
  // const [count, setCount] = useState(0)

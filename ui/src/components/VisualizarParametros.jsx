@@ -49,7 +49,7 @@ const VisualizarParametros = () => {
 
 
 
-<Select
+        <Select
           value={sede}
           onChange={(e) => setSede(e.target.value)}
           width={150}

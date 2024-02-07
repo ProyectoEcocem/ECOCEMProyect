@@ -86,3 +86,7 @@ export default class Reporte extends React.Component {
       )
     }
   } 
+
+
+
+

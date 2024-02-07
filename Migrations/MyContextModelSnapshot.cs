@@ -442,19 +442,10 @@ namespace ECOCEMProject.Migrations
                     b.Property<int?>("DescargaVehiculoId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("FechaCargaId")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<int>("Nivel")
                         .HasColumnType("integer");
 
                     b.Property<int>("PesoM")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TipoCementoId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("VehiculoId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Volumen")
@@ -999,6 +990,9 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<double>("Facturacion")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("PerdidaIndisponibilidad")
                         .HasColumnType("double precision");
 
                     b.Property<double>("TiempoOPeracionReal")

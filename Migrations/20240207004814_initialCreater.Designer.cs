@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240206235837_InicialCreate")]
-    partial class InicialCreate
+    [Migration("20240207004814_initialCreater")]
+    partial class initialCreater
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -445,19 +445,10 @@ namespace ECOCEMProject.Migrations
                     b.Property<int?>("DescargaVehiculoId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("FechaCargaId")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<int>("Nivel")
                         .HasColumnType("integer");
 
                     b.Property<int>("PesoM")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TipoCementoId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("VehiculoId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Volumen")
@@ -1002,6 +993,9 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<double>("Facturacion")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("PerdidaIndisponibilidad")
                         .HasColumnType("double precision");
 
                     b.Property<double>("TiempoOPeracionReal")

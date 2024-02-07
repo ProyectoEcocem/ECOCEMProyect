@@ -7,8 +7,10 @@ public class Sede
     public int SedeId {get; set;}
     public string? NombreSede {get; set;}
     public string? UbicacionSede {get; set;}
-     [JsonIgnore]
+    
+    [JsonIgnore]
     public int EmpresaId {get; set;}
+    
     [JsonIgnore]
     public virtual  Empresa Empresa {get; set;} = null!;
     //[JsonIgnore]

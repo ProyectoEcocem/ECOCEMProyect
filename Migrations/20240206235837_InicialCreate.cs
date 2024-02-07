@@ -36,6 +36,7 @@ namespace ECOCEMProject.Migrations
                     BasculaId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     NoSerie = table.Column<string>(type: "text", nullable: false),
+                    NoSede = table.Column<int>(type: "integer", nullable: false),
                     Descripcion = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -208,6 +209,22 @@ namespace ECOCEMProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RoturasEquipos", x => new { x.EquipoId, x.RoturaId, x.FechaId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Silos",
+                columns: table => new
+                {
+                    SiloId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NoSilo = table.Column<string>(type: "text", nullable: false),
+                    NoSede = table.Column<int>(type: "integer", nullable: false),
+                    radio = table.Column<int>(type: "integer", nullable: false),
+                    altura = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Silos", x => x.SiloId);
                 });
 
             migrationBuilder.CreateTable(
@@ -758,26 +775,6 @@ namespace ECOCEMProject.Migrations
                         principalColumns: new[] { "TipoCementoId", "SiloId", "VehiculoId", "FechaId" });
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Silos",
-                columns: table => new
-                {
-                    SiloId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    NoSilo = table.Column<string>(type: "text", nullable: false),
-                    EquipoId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Silos", x => x.SiloId);
-                    table.ForeignKey(
-                        name: "FK_Silos_Equipos_EquipoId",
-                        column: x => x.EquipoId,
-                        principalTable: "Equipos",
-                        principalColumn: "EquipoId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AccionMantenimientoOrdenTrabajo_OrdenesTrabajoEquipoId_Orde~",
                 table: "AccionMantenimientoOrdenTrabajo",
@@ -889,11 +886,6 @@ namespace ECOCEMProject.Migrations
                 column: "EmpresaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Silos_EquipoId",
-                table: "Silos",
-                column: "EquipoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Trabajadores_SedeId",
                 table: "Trabajadores",
                 column: "SedeId");
@@ -910,6 +902,9 @@ namespace ECOCEMProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "EntidadCompradoras");
+
+            migrationBuilder.DropTable(
+                name: "Equipos");
 
             migrationBuilder.DropTable(
                 name: "Fabricas");
@@ -969,6 +964,9 @@ namespace ECOCEMProject.Migrations
                 name: "Vehiculos");
 
             migrationBuilder.DropTable(
+                name: "TiposEquipos");
+
+            migrationBuilder.DropTable(
                 name: "MantenimientosNecesarios");
 
             migrationBuilder.DropTable(
@@ -993,7 +991,7 @@ namespace ECOCEMProject.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Equipos");
+                name: "Sedes");
 
             migrationBuilder.DropTable(
                 name: "AccionesMantenimientos");
@@ -1006,12 +1004,6 @@ namespace ECOCEMProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Brigadas");
-
-            migrationBuilder.DropTable(
-                name: "Sedes");
-
-            migrationBuilder.DropTable(
-                name: "TiposEquipos");
 
             migrationBuilder.DropTable(
                 name: "Empresas");

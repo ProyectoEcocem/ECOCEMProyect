@@ -3,6 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
 
+public class CompraData
+{
+    public int SedeId {get; set;}
+    public int FabricaId { get; set; }
+    public DateTime FechaId {get; set;}
+
+}
+
 [ApiController]
 [Route("api/[controller]")]
 public class CompraController : Controller
@@ -16,9 +24,14 @@ public class CompraController : Controller
 
     // POST
     [HttpPost]
-    public async Task<ActionResult> Post(Compra compra)
+    public async Task<ActionResult> Post(CompraData compra)
     {
-        return Ok(await  _compraServicio.Create(compra));
+        if (compra == null)
+        {
+            return BadRequest();
+        }
+        Compra createdCompra =  await  _compraServicio.Create(compra);
+        return Ok(createdCompra);
     }
 
     // GET by ID

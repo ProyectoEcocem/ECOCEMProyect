@@ -91,6 +91,9 @@ namespace ECOCEMProject.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("NoSede")
+                        .HasColumnType("integer");
+
                     b.Property<string>("NoSerie")
                         .IsRequired()
                         .HasColumnType("text");
@@ -747,16 +750,20 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SiloId"));
 
-                    b.Property<int>("EquipoId")
+                    b.Property<int>("NoSede")
                         .HasColumnType("integer");
 
                     b.Property<string>("NoSilo")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("SiloId");
+                    b.Property<int>("altura")
+                        .HasColumnType("integer");
 
-                    b.HasIndex("EquipoId");
+                    b.Property<int>("radio")
+                        .HasColumnType("integer");
+
+                    b.HasKey("SiloId");
 
                     b.ToTable("Silos");
                 });
@@ -1263,17 +1270,6 @@ namespace ECOCEMProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Empresa");
-                });
-
-            modelBuilder.Entity("ECOCEMProject.Silo", b =>
-                {
-                    b.HasOne("ECOCEMProject.Equipo", "Equipo")
-                        .WithMany()
-                        .HasForeignKey("EquipoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Equipo");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Trabajador", b =>

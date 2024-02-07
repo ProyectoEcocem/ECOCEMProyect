@@ -31,6 +31,9 @@ import InsertarSilo from './InsertarSilo';
 import Bascula from './VisualizarBascula';
 import Fabrica from './VisualizarFabrica';
 import Medidor from './VisualizarMedidor';
+import InsertarCompra from './InsertarCompra';
+import InsertarVenta from './InsertarVenta';
+import InsertarEntidadCompradora from './InsertarEntidadCompradora';
 
 
  const VentanaPrincipal = () => {
@@ -178,9 +181,12 @@ import Medidor from './VisualizarMedidor';
             <Tab>Insertar Parámetros</Tab>
             <Tab>Insertar Bascula</Tab>
             <Tab>Insertar Fabrica</Tab>
+            <Tab>Insertar Entidad Compradora</Tab>
             <Tab>Insertar Medidor</Tab>
             <Tab>Insertar Tipo de Cemento</Tab>
             <Tab>Insertar Vehiculo</Tab>
+            <Tab>Insertar Compra</Tab>
+            <Tab>Insertar Venta</Tab>
         </TabList>
 
         <TabPanels>
@@ -271,6 +277,16 @@ import Medidor from './VisualizarMedidor';
                 </div>
             </TabPanel>
 
+            <TabPanel> {/*Panel para Insertar Fab */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarEntidadCompradora/>
+                </div>
+            </TabPanel>
+
             <TabPanel> {/*Panel para Insertar Medidor */}
                 <div style={{
                 display: "flex",
@@ -301,12 +317,25 @@ import Medidor from './VisualizarMedidor';
                 </div>
             </TabPanel>
 
-            <TabPanel> {/*Panel para Insertar silo */}
+          
+
+            <TabPanel> {/*Panel para Insertar compra */}
                 <div style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 }}>
+                <InsertarCompra/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar compra */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarVenta/>
                 </div>
             </TabPanel>
 

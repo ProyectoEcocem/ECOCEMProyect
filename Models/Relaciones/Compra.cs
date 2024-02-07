@@ -1,4 +1,6 @@
 
+using System.Text.Json.Serialization;
+
 namespace ECOCEMProject;
 
 public class Compra
@@ -7,5 +9,6 @@ public class Compra
     public int FabricaId { get; set; }
     public DateTime FechaId {get; set;}
 
-    public required ICollection<Descarga> Descargas {get; set; }
+    [JsonIgnore]
+    public  ICollection<Descarga> Descargas {get; set; } = null!;
 }

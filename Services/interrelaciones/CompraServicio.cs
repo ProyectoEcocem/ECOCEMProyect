@@ -38,12 +38,20 @@ public class CompraServicio
 
         return compra;
     }
-    public async Task<Compra> Create(Compra compra)
+    public async Task<Compra> Create(CompraData compra)
     {
-        _context.Compras.Add(compra);
-        await _context.SaveChangesAsync();
+       if(_context.Compras.Any(elemento => elemento.SedeId == compra.SedeId && elemento.FabricaId== compra.FabricaId && elemento.FabricaId==compra.FabricaId))
+            return null!;
+            
+        Compra f1 = new Compra();
 
-        return compra;
+        f1.SedeId = compra.SedeId;
+        f1.FabricaId = compra.FabricaId;
+        f1.FechaId = compra.FechaId;
+
+        _context.Compras.Add(f1);
+        await _context.SaveChangesAsync();
+        return f1;
     }
      public async Task Delete(int SedeId,int FabricaId,DateTime FechaCompraId)
     {

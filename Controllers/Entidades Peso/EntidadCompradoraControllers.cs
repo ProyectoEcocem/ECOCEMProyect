@@ -1,6 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
+public class EntidadCompradoraData
+{
+    public int EntidadCompradoraId {get; set;}
+    public string NombreEntidadCompradora {get; set;}
+}
+
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class EntidadCompradoraController : Controller
@@ -27,14 +33,14 @@ public class EntidadCompradoraController : Controller
     public async Task<IEnumerable<EntidadCompradora>> GetAll() => await _entidadCompradoraService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] EntidadCompradora entidadCompradora)
+    public async Task<IActionResult> Post([FromBody] EntidadCompradoraData entidadCompradora)
     {
         if (entidadCompradora == null)
         {
             return BadRequest();
         }
         EntidadCompradora createdEntidadCompradora = await _entidadCompradoraService.Create(entidadCompradora);
-        return CreatedAtRoute("Get", new { id = createdEntidadCompradora.EntidadCompradoraId }, createdEntidadCompradora);
+        return Ok(createdEntidadCompradora);
     }
 
     [HttpPut]

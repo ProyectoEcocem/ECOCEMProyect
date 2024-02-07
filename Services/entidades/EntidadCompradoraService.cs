@@ -29,11 +29,19 @@ public class EntidadCompradoraService
         await _context.SaveChangesAsync();
         return entidadCompradora;
     }
-    public async Task<EntidadCompradora> Create(EntidadCompradora entidadCompradora)
+    public async Task<EntidadCompradora> Create(EntidadCompradoraData entidadCompradora)
     {
-        _context.EntidadCompradoras.Add(entidadCompradora);
+        if(_context.EntidadCompradoras.Any(elemento => elemento.NombreEntidadCompradora == entidadCompradora.NombreEntidadCompradora))
+            return null!;
+            
+        EntidadCompradora f1 = new EntidadCompradora();
+
+        f1.EntidadCompradoraId = entidadCompradora.EntidadCompradoraId;
+        f1.NombreEntidadCompradora = entidadCompradora.NombreEntidadCompradora;
+
+        _context.EntidadCompradoras.Add(f1);
         await _context.SaveChangesAsync();
-        return entidadCompradora;
+        return f1;
     }
     public async Task Delete(int id)
     {

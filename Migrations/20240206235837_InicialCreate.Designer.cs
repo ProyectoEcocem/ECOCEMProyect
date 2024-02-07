@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240206110949_InicialCreate")]
+    [Migration("20240206235837_InicialCreate")]
     partial class InicialCreate
     {
         /// <inheritdoc />
@@ -93,6 +93,9 @@ namespace ECOCEMProject.Migrations
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("NoSede")
+                        .HasColumnType("integer");
 
                     b.Property<string>("NoSerie")
                         .IsRequired()
@@ -750,16 +753,20 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SiloId"));
 
-                    b.Property<int>("EquipoId")
+                    b.Property<int>("NoSede")
                         .HasColumnType("integer");
 
                     b.Property<string>("NoSilo")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("SiloId");
+                    b.Property<int>("altura")
+                        .HasColumnType("integer");
 
-                    b.HasIndex("EquipoId");
+                    b.Property<int>("radio")
+                        .HasColumnType("integer");
+
+                    b.HasKey("SiloId");
 
                     b.ToTable("Silos");
                 });
@@ -1266,17 +1273,6 @@ namespace ECOCEMProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Empresa");
-                });
-
-            modelBuilder.Entity("ECOCEMProject.Silo", b =>
-                {
-                    b.HasOne("ECOCEMProject.Equipo", "Equipo")
-                        .WithMany()
-                        .HasForeignKey("EquipoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Equipo");
                 });
 
             modelBuilder.Entity("ECOCEMProject.Trabajador", b =>

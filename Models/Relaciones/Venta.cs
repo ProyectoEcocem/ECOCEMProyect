@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System;
+using System.Text.Json.Serialization;
 namespace ECOCEMProject;
 
 public class Venta
@@ -8,5 +7,6 @@ public class Venta
     public int EntidadCompradoraId {get; set;}
     public DateTime FechaVentaId {get; set;}
 
-    public required List<Carga> Cargas {get; set;}
+    [JsonIgnore]
+    public List<Carga> Cargas {get; set;} = null!;
 }

@@ -37,7 +37,14 @@ import InsertarEntidadCompradora from './InsertarEntidadCompradora';
 import EntidadCompradora from './VisualizarEntidadCompradora';
 import Venta from './VizualizarVenta';
 import Compra from './VisualizarCompra';
+
+import InsertarBrigada from './InsertarBrigada';
+import VisualizarBrigada from './VisualizarBrigada';
+import InsertarAccionMantenimiento from './InsertarAccionMantenimiento';
+import VisualizarAccionMantenimiento from './VisualizarAccionmantenimiento';
+
 import Resumenes from './ResumenesParametrosIndicadores';
+
 
 
  const VentanaPrincipal = () => {
@@ -70,6 +77,8 @@ import Resumenes from './ResumenesParametrosIndicadores';
             <Tab>Compra</Tab>
             <Tab>Venta</Tab>
             <Tab>Visualizar Indicadores</Tab>
+            <Tab>Visualizar Brigadas</Tab>
+            <Tab>Visualizar A. de Mtto</Tab>
         </TabList>
 
         <TabIndicator
@@ -211,6 +220,26 @@ import Resumenes from './ResumenesParametrosIndicadores';
                 </div>
             </TabPanel>
 
+            <TabPanel> {/*Panel para Visualizar Brigada*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <VisualizarBrigada/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Visualizar Acciones de Mantenimiento*/}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <VisualizarAccionMantenimiento/>
+                </div>
+            </TabPanel>
+
            
         </TabPanels>
       </Tabs>
@@ -234,6 +263,10 @@ import Resumenes from './ResumenesParametrosIndicadores';
             <Tab>Insertar Vehiculo</Tab>
             <Tab>Insertar Compra</Tab>
             <Tab>Insertar Venta</Tab>
+
+            <Tab>Insertar Brigada</Tab>
+            <Tab>Insertar Accion de Mantenimiento</Tab>
+
             <Tab>Insertar Silo</Tab>
             <Tab>Resum</Tab>
 
@@ -405,6 +438,26 @@ import Resumenes from './ResumenesParametrosIndicadores';
                 alignItems: "center",
                 }}>
                 <Resumenes/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Brigada */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarBrigada/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Accion de mantenimiento */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarAccionMantenimiento/>
                 </div>
             </TabPanel>
 

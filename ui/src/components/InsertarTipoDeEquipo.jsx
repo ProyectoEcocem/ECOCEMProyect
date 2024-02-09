@@ -6,10 +6,12 @@ import {
   Input,
   Button,
   Flex,
+  Modal,
 } from "@chakra-ui/react"; 
 
-const InsertarTipoDeEquipo = () => {
+const InsertarTipoDeEquipo = ({onClose}) => {
     const [tipoEquipo, setTipoEquipo] = useState("");
+    const [insertarTipoEquipoModalAbierto, setInsertarTipoEquipoModalAbierto] = useState(false);
 
   
     const createTipoEquipo = async (event) => {
@@ -21,15 +23,20 @@ const InsertarTipoDeEquipo = () => {
         tipoE: tipoEquipo
       })
       .then((response) => {
-        console.log(response);
-        alert("ok")
+        //console.log(response);
+        alert("El Tipo de Equipo ha sido insertado correctamente")
+        setInsertarTipoEquipoModalAbierto(false)
       }, (error) => {
         console.log(error);
-        alert("no ok")
+        alert("El Tipo de Equipo no se ha insertado correctamente")
       });
     };
 
-  
+    const handleCancelar = () => {
+      // Cierra la ventana modal desde el componente padre.
+      onClose();
+     
+    };
 
     return (
         <div style={{
@@ -60,17 +67,22 @@ const InsertarTipoDeEquipo = () => {
                 marginBottom={30}
               />
             </FormControl>
-            
+
+           <Flex justifyContent="space-between"> 
         <Button 
-          variant="contained" 
-          color="primary" 
-          style={{ marginRight: 10 }}
+          variant="outline" 
+          colorScheme="blue" 
+          style={{ marginRight: 10,  marginTop: 15}}
           onClick={createTipoEquipo}
           type="submit"
           >
           Aceptar
         </Button>
       
+        <Button variant="outline" colorScheme="red" marginTop={4} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
       </div>
   );
 };

@@ -17,10 +17,6 @@ const InsertarTipoDeEquipo = ({onClose}) => {
     const createTipoEquipo = async (event) => {
       event.preventDefault();
 
-      const tipoEquipoData = {
-        tipoEquipoId: parseInt(tipoEquipoId),
-        tipoEquipo: tipoEquipo,
-      };
       
       axios.post(`http://localhost:5103/api/TipoEquipo`, {
         tipoEId: 0,
@@ -55,9 +51,9 @@ const InsertarTipoDeEquipo = ({onClose}) => {
             border: "2px solid #5F89C1",
           }}>
           
-<FormLabel style={{fontSize: 30, marginTop: 20}}>
-  Insertar Tipo de Equipo
-</FormLabel>
+          <FormLabel style={{fontSize: 30, marginTop: 20}}>
+            Insertar Tipo de Equipo
+          </FormLabel>
       
             <FormControl>
               <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Tipo de Equipo</FormLabel>

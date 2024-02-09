@@ -5,25 +5,42 @@ import {
   FormLabel,
   Input,
   Button,
+  Select,
   Flex,
 } from "@chakra-ui/react";
 
 const InsertarBascula = () => {
   const [numeroBascula, setNumeroBascula] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [noSede, setSedeId] = useState(1);
   const [insertSuccess, setInsertSuccess] = useState(false);
+  //Lista de sedes
+  const [sedes, setSedes] = useState([]);
+  
+useEffect(() => {
+  axios.get(`http://localhost:5103/api/Sede`)
+    .then(res => {
+      setSedes(res.data);
+    })
+    .catch(err => console.log(err));
+}, []);
 
   const createBascula = async () => {
   
     axios.post(`http://localhost:5103/api/Bascula`, {
-        BasculaId: 0,
-        NoSerie: numeroBascula
+        
+        basculaId: 0,
+        noSerie: numeroBascula,
+        noSede:noSede,
+        descripcion:descripcion
+
     })
     .then((response) => {
       console.log(response);
-      alert("Se inserto")
+      alert("Se insertó")
     }, (error) => {
       console.log(error);
-      alert("no")
+      alert("Revise que no exista otra bascula con ese número de serie")
     });
   };
  
@@ -32,6 +49,9 @@ const InsertarBascula = () => {
   useEffect(() => {
     setInsertSuccess(false);
   }, [numeroBascula]);
+
+
+
 
   return (
     <div
@@ -49,7 +69,7 @@ const InsertarBascula = () => {
     >
       <FormLabel style={{ fontSize: 30 }}>Insertar Bascula</FormLabel>
 
-     <FormControl>
+     
         <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
           Número de Serie de Bascula
         </FormLabel>
@@ -61,9 +81,40 @@ const InsertarBascula = () => {
           width={80}
           backgroundColor="white"
         />
-      </FormControl>
+       
+      
+        <FormLabel style={{ margin: "0px 20px 0px 40px"  }}>
+        Descripción..
+        </FormLabel>  
+        <Input
+          value={descripcion}
+          placeholder="Descripción"
+          onChange={(e) => setDescripcion(e.target.value)}
+          marginTop={0.5}
+          width={80}
+          backgroundColor="white"
+        />
+         <FormLabel style={{ margin: "0px 20px 0px 40px"  }}>
+        Sede a la que pertenece
+      </FormLabel>
 
+        <Select
+          value={noSede}
+          onChange={(e) => setSedeId(e.target.value)}
+          width={80}
+          marginBottom={30}
+        >
+          {sedes.map((sede) => (
+            <option key={sede.sedeId} value={sede.sedeId}>
+              {sede.nombreSede}
+              
+            </option>
+          ))}
+        </Select>
 
+      
+
+        <Flex>    
         <Button
           variant="contained"
           color="primary"
@@ -78,7 +129,7 @@ const InsertarBascula = () => {
           )}
           Aceptar
         </Button>
-      
+        </Flex>
 
     </div>
   );

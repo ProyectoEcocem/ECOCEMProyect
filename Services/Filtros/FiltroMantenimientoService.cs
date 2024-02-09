@@ -1,5 +1,3 @@
-using System;
-
 using Microsoft.EntityFrameworkCore;
 namespace ECOCEMProject;
 
@@ -29,27 +27,48 @@ public class FiltroMantenimientoService
             var roturasAnno = myContext.RoturasEquipos.Where(r=>r.FechaId.Year == anno);
             return roturasAnno;
         }
-        return null;
+        return null!;
     }
 
-    public async Task<IEnumerable<Reporte>> GetReportes(int? dia, int? mes, int? anno)
+    public async Task<IEnumerable<Reporte>> GetReportes(int? dia, int? mes, int? anno,int equipoId)
     {
-        if (dia != null && mes != null && anno != null)
-        {
-            var reportesDia =  myContext.Reportes.Where(r=>r.FechaId.Day == dia && r.FechaId.Month == mes && r.FechaId.Year == anno);
-            return reportesDia;
+        if(equipoId == 0){
+            if (dia != null && mes != null && anno != null)
+            {
+                var reportesDia =   myContext.Reportes.Where(r=>r.FechaId.Day == dia && r.FechaId.Month == mes && r.FechaId.Year == anno);
+                return reportesDia;
+            }
+            if (dia == null && mes != null && anno != null)
+            {
+                var reportesMes = myContext.Reportes.Where(r=>r.FechaId.Month == mes && r.FechaId.Year == anno);
+                return reportesMes;
+            }
+            if (dia == null && mes == null && anno != null)
+            {
+                var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Year == anno );
+                return reportesAnno;
+            }
         }
-        if (dia == null && mes != null && anno != null)
-        {
-            var reportesMes = myContext.Reportes.Where(r=>r.FechaId.Month == mes && r.FechaId.Year == anno);
-            return reportesMes;
+        else{
+
+            if (dia != null && mes != null && anno != null)
+            {
+                var reportesDia =   myContext.Reportes.Where(r=>r.FechaId.Day == dia && r.FechaId.Month == mes && r.FechaId.Year == anno && r.EquipoId==equipoId);
+                return reportesDia;
+            }
+            if (dia == null && mes != null && anno != null)
+            {
+                var reportesMes = myContext.Reportes.Where(r=>r.FechaId.Month == mes && r.FechaId.Year == anno && r.EquipoId==equipoId);
+                return reportesMes;
+            }
+            if (dia == null && mes == null && anno != null)
+            {
+                var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Year == anno && r.EquipoId==equipoId);
+                return reportesAnno;
+            }
+
         }
-        if (dia == null && mes == null && anno != null)
-        {
-            var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Year == anno);
-            return reportesAnno;
-        }
-        return null;
+        return null!;
     }
 
     public async Task<IEnumerable<Role>> GetRoles(int id)
@@ -57,10 +76,11 @@ public class FiltroMantenimientoService
         List<Role>roles =new();
         var userRoles = myContext.UserRoles.Where(userRole => userRole.IdUser == id);
         var idRoles = userRoles.Select(userRole => userRole.IdRole).ToList();
+        
         foreach(var idR in idRoles)
         {
-            var role =  myContext.Roles.Find(idR);
-            roles.Add(role);
+            var role = await myContext.Roles.FindAsync(idR);
+            roles.Add(role!);
         }
         return roles;
     }

@@ -6,10 +6,14 @@ namespace ECOCEMProject;
 public class BasculaService
 {
     private readonly MyContext _context;
+    private readonly TipoEquipoServicio _tipoEServicio;
+     private readonly EquipoServicio _equipoServicio;
 
-    public BasculaService(MyContext context)
+    public BasculaService(MyContext context, TipoEquipoServicio tipoEServicio,EquipoServicio equipoServicio)
     {
         _context = context;
+        _tipoEServicio=tipoEServicio;
+        _equipoServicio=equipoServicio;
     }
 
     public async Task<Bascula> Get(int id)
@@ -50,17 +54,31 @@ public class BasculaService
             return null!;
 
         Bascula b1 = new Bascula();
-        Equipo e = new Equipo();
+        EquipoData e = new EquipoData();
 
 
         b1.NoSerie = bascula.NoSerie;
         b1.BasculaId = bascula.BasculaId;
         b1.Descripcion = bascula.Descripcion;
-
+        b1.NoSede=bascula.NoSede;
         e.EquipoId = bascula.BasculaId;
-        //e.SedeId = bascula.SedeId;
+        e.SedeId = bascula.NoSede;
         //falta ponerle el tipo de equipo
-
+        if(await _context.TiposEquipos.AnyAsync(elemento => elemento.TipoE == "bascula")) 
+        {
+            e.TipoEId =  _context.TiposEquipos.First(elem => elem.TipoE == "bascula").TipoEId;
+            await _equipoServicio.Create(e); 
+        }
+        else{
+           TipoEData tipoBascula=new TipoEData();
+           tipoBascula.TipoE="bascula";
+           tipoBascula.TipoEId=0;
+           TipoEquipo TE = await _tipoEServicio.Create(tipoBascula);
+           e.TipoEId=TE.TipoEId;
+           await _equipoServicio.Create(e);
+           //cuando se borre esa bascula se debe borrar ese equipo
+        }
+           
         _context.Basculas.Add(b1);
         await _context.SaveChangesAsync();
         return b1;

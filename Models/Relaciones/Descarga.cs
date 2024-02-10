@@ -1,4 +1,4 @@
-
+using System.Text.Json.Serialization;
 namespace ECOCEMProject;
 
 public class Descarga
@@ -7,7 +7,7 @@ public class Descarga
     public int SiloId {get; set;}
     public int VehiculoId { get; set; }
     public DateTime FechaId {get; set;}
-
+    [JsonIgnore]
     public required Compra compra {get; set; }
     public required ICollection<MedicionSilo> MedicionesSilo {get; set; }
     public required ICollection<MedicionBascula> MedicionesBascula {get; set; }

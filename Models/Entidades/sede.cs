@@ -8,7 +8,7 @@ public class Sede
     public string? NombreSede {get; set;}
     public string? UbicacionSede {get; set;}
     
-    [JsonIgnore]
+    
     public int EmpresaId {get; set;}
     
     [JsonIgnore]

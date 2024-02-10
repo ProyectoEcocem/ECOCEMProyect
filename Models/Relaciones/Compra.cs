@@ -9,6 +9,7 @@ public class Compra
     public int FabricaId { get; set; }
     public DateTime FechaId {get; set;}
 
+    
     [JsonIgnore]
     public  ICollection<Descarga> Descargas {get; set; } = null!;
 }

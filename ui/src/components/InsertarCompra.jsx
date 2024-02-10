@@ -45,10 +45,10 @@ const InsertarCompra = () => {
     })
     .then((response) => {
       console.log(response);
-      alert("ok")
+      alert("Se insertó correctamente")
     }, (error) => {
       console.log(error);
-      alert("no ok")
+      alert("Revise los datos insertados")
     });
  };
 
@@ -68,10 +68,10 @@ const InsertarCompra = () => {
     }}>
      
         <FormLabel style={{fontSize: 30}}>
-        Insertar Compra
+        Insertar Compra:
         </FormLabel>
 
-        <FormLabel style={{margin: "0px 260px 0px 0px"}}>Sede</FormLabel>
+        <FormLabel style={{margin: "0px 260px 0px 0px"}}>Granelera:</FormLabel>
 
         <Select
         value={sedeId}
@@ -87,7 +87,7 @@ const InsertarCompra = () => {
         </Select>
 
 
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar fabrica</FormLabel>
+        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar fabrica:</FormLabel>
   
         <Select
           value={fabricaId}
@@ -103,7 +103,7 @@ const InsertarCompra = () => {
         </Select>
       
            
-        <FormLabel style={{margin: "0px 180px 0px 0px"}}>Fecha de la compra</FormLabel>
+        <FormLabel style={{margin: "0px 180px 0px 0px"}}>Fecha de la compra:</FormLabel>
 
         <Input
           type="datetime-local"

@@ -5,14 +5,16 @@ import {
     Flex,
     Select,
     Input,
+    Modal,
     //BackgroundImage
   } from "@chakra-ui/react"; 
 import axios from "axios";
 
-const InsertarRoturaEquipo = () => {
+const InsertarRoturaEquipo = ({onClose}) => {
   const [equipoId, setEquipoId] = useState("");
   const [roturaId, setRoturaId] = useState("");
   const [fecha, setFecha] = useState(new Date());
+  const [insertarRoturaEModalAbierto, setInsertarRoturaEModalAbierto] = useState(false);
 
     //Lista de roturas
     const [roturas, setRoturas] = useState([]);
@@ -43,14 +45,20 @@ const InsertarRoturaEquipo = () => {
       fecha: fecha
     })
     .then((response) => {
-      console.log(response);
-      alert("ok")
+      //console.log(response);
+      alert("La Rotura de Equipo se ha insertado correctamente.")
+      setInsertarRoturaEModalAbierto(false);
     }, (error) => {
       console.log(error);
-      alert("no ok")
+      alert("La Rotura de Equipo no se ha insertado.")
     });
  };
 
+ const handleCancelar = () => {
+  // Cierra la ventana modal desde el componente padre.
+  onClose();
+ 
+};
 
 
   return (
@@ -113,15 +121,22 @@ const InsertarRoturaEquipo = () => {
          
         />
 
+<Flex justifyContent="space-between">
         <Button 
-        variant="contained" 
-        color="primary" 
+       variant="outline"
+       colorScheme="blue"
         style={{ marginRight: 10 }}
         onClick={createRE}
         type="submit"
         >
           Aceptar
         </Button>
+
+        <Button variant="outline" colorScheme="red" marginTop={0} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
+
       </div>
   );
 };

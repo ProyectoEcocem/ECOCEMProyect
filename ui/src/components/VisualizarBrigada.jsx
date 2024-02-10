@@ -1,6 +1,6 @@
 
 import React from 'react';
-import InsertarRotura from './InsertarRotura';
+import InsertarBrigada from './InsertarBrigada';
 import {
   Input,
   Button,
@@ -19,22 +19,22 @@ import {
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
-export default class TiposEquipo extends React.Component {
+export default class VisualizarBrigada extends React.Component {
     state = {
-      Roturas: [],
-      insertarRoturaModalAbierto: false, //controlar si la pestana de insertar rotura esta abierta
+      Brigadas: [],
+      insertarBrigadaModalAbierto: false, //controlar si la pestana de insertar brigada esta abierta
     }
   
     componentDidMount() {
-      axios.get(`http://localhost:5103/api/Rotura`)
+      axios.get(`http://localhost:5103/api/Brigada`)
         .then(res => {
-          const Roturas= res.data;
-          this.setState({ Roturas });
+          const Brigadas = res.data;
+          this.setState({ Brigadas });
         })
     }
 
-    manejarInsertarRoturaModal = () => {
-      this.setState({ insertarRoturaModalAbierto: true });
+    manejarInsertarBrigadaModal = () => {
+      this.setState({ insertarBrigadaModalAbierto: true });
     };
   
     render() {
@@ -42,16 +42,16 @@ export default class TiposEquipo extends React.Component {
         <div style={{height : 400}}>
 
           <Button
-         onClick={this.manejarInsertarRoturaModal}
+         onClick={this.manejarInsertarBrigadaModal}
          marginBottom={5}
          marginTop={5}
          >
-          Agregar Rotura
+          Agregar Brigada
          </Button>
 
-         <Modal isOpen={this.state.insertarRoturaModalAbierto} onClose={() => this.setState({ insertarRoturaModalAbierto: false })}>
+         <Modal isOpen={this.state.insertarBrigadaModalAbierto} onClose={() => this.setState({ insertarBrigadaModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarRotura onClose={() => this.setState({ insertarRoturaModalAbierto: false })} />
+         <InsertarBrigada onClose={() => this.setState({ insertarBrigadaModalAbierto: false })} />
          </AbsoluteCenter>
          </Modal>
 
@@ -61,15 +61,14 @@ export default class TiposEquipo extends React.Component {
             <Thead>
               <Tr>
                 <Th>ID</Th>
-                <Th>Nombre</Th>
               </Tr>
             </Thead>
             <Tbody>
               {
-                this.state.Roturas.map((rotura) => (
-                  <Tr key={rotura.RoturaId}>
-                    <Td>{rotura.RoturaId}</Td>
-                    <Td>{rotura.nombreRotura}</Td>
+                this.state.Brigadas.map((brigada) => (
+                  <Tr key={brigada.BrigadaId}>
+                    <Td>{brigada.BrigadaId}</Td>
+
                   </Tr>
                 )
                 )

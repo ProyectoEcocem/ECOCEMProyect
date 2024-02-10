@@ -7,6 +7,7 @@ import {
     Button,
     Flex,
     Modal,
+    Select,
     //BackgroundImage
   } from "@chakra-ui/react"; 
 //import { sedeController } from "../../../Controllers/Entidades"
@@ -18,6 +19,16 @@ const InsertarSede = ({onClose}) => {
   const [empresaId, setEmpresaId] = useState(1);
   const [insertSuccess, setInsertSuccess] = useState(false);
   const [insertarSedeModalAbierto, setInsertarSedeModalAbierto] = useState(false);
+  const [empresas, setEmpresas] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:5103/api/Empresa`)
+      .then(res => {
+        setEmpresas(res.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
 
   const EnviarForm = async () => {
     const sede = {
@@ -34,12 +45,12 @@ const InsertarSede = ({onClose}) => {
     })
     .then((response) => {
       //console.log(response);
-      alert("Se insertó correctamente")
+      alert("La sede ha sido insertada correctamente")
       setInsertarSedeModalAbierto(false); // Cierra el modal
     }, (error) => {
       console.log(error);
       alert(console.log(error))
-      alert("no se insertó")
+      alert("La sede no se ha insertado.")
     });
   };
 
@@ -99,18 +110,20 @@ const InsertarSede = ({onClose}) => {
               />
             </FormControl>
 
-            <FormControl>
               <FormLabel style = {{margin: "20px 0px 0px 40px"}}>ID de la Empresa</FormLabel>
-              <Input
-                value={empresaId}
-                placeholder="Ingrese el ID de la empresa"
-                onChange={(e) => setEmpresaId(e.target.value)}
-                marginTop={0.5}
-                width={80}
-                backgroundColor= "white"
-                marginBottom={1}
-              />
-            </FormControl>
+              <Select
+          value={empresaId}
+          onChange={(e) => setEmpresaId(e.target.value)}
+          width={80}
+          marginBottom={30}
+        >
+          {empresas.map((empresa) => (
+            <option key={empresa.empresaId} value={empresa.empresaId}>
+              {empresa.nombreEmpresa}
+            </option>
+          ))}
+        </Select>
+            
         <Flex justifyContent="space-between">
         <Button 
           variant="outline"

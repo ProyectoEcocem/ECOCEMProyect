@@ -6,32 +6,30 @@ import {
   Button,
   Flex,
   Modal,
+  AbsoluteCenter,
   //BackgroundImage
 } from "@chakra-ui/react"; 
 import axios from "axios";
 
-const InsertarRotura = ({onClose}) => {
-    const [roturaId, setRoturaId] = useState("");
-    const [nombreRotura, setNombreRotura] = useState("");
-    const [insertarRoturaModalAbierto, setInsertarRoturaModalAbierto] = useState(false);
+const InsertarBrigada = ({onClose}) => {
+    const [brigadaId, setBrigadaId] = useState("");
+    const [insertarBrigadaModalAbierto, setInsertarBrigadaModalAbierto] = useState(false);
 
-    const createRotura = async () => {
-      const rotura = {
-        roturaId: roturaId,
-        nombreRotura: nombreRotura
+    const createBrigada = async () => {
+      const brigada = {
+        brigadaId: brigadaId,
       };
       
-        axios.post(`http://localhost:5103/api/Rotura`, {
-        roturaId: roturaId,
-        nombreRotura: nombreRotura
+        axios.post(`http://localhost:5103/api/Brigada`, {
+        brigadaId: brigadaId,
       })
       .then((response) => {
        // console.log(response);
-        alert("La Rotura se ha insertado correctamente")
-        setInsertarRoturaModalAbierto(false);
+        alert("La Brigada se ha insertado correctamente")
+        setInsertarBrigadaModalAbierto(false);
       }, (error) => {
         console.log(error);
-        alert("La Rotura no se ha insertado.")
+        alert("La Brigada no se ha insertado.")
       });
     };
 
@@ -54,15 +52,15 @@ const InsertarRotura = ({onClose}) => {
           }}>
           
 <FormLabel style={{fontSize: 30, marginTop: 20}}>
-  Insertar Tipo de Rotura
+  Insertar Brigada
 </FormLabel>
       
             <FormControl>
-              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Nombre de la Rotura</FormLabel>
+              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Número de la Brigada</FormLabel>
               <Input
-                value={nombreRotura}
-                placeholder="Ingrese el nombre de la Rotura"
-                onChange={(a) => setNombreRotura(a.target.value)}
+                value={brigadaId}
+                placeholder="Ingrese el número de la Brigada"
+                onChange={(a) => setBrigadaId(a.target.value)}
                 marginTop={0.5}
                 marginLeft={10}
                 width={80}
@@ -76,7 +74,7 @@ const InsertarRotura = ({onClose}) => {
         variant="outline"
         colorScheme="blue"
         style={{ marginRight: 10, marginTop: 15}}
-        onClick={createRotura}
+        onClick={createBrigada}
         type="submit"
         >
           Aceptar
@@ -89,4 +87,4 @@ const InsertarRotura = ({onClose}) => {
   );
 };
 
-export default InsertarRotura;
+export default InsertarBrigada;

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import InsertarEquipo from './InsertarEquipo';
 import {
   Input,
   Button,
@@ -13,12 +14,15 @@ import {
   Tr,
   Th,
   Td,
+  Modal,
+  AbsoluteCenter,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
 export default class Equipo extends React.Component {
     state = {
-      Equipos: []
+      Equipos: [],
+      insertarEquipoModalAbierto: false, //controlar si la pestana de insertar equipo esta abierta
     }
   
     componentDidMount() {
@@ -29,9 +33,29 @@ export default class Equipo extends React.Component {
         })
     }
   
+    //Funcion para abrir el modal de Insertar Sede
+    manejarInsertarEquipoModal = () => {
+      this.setState({ insertarEquipoModalAbierto: true });
+    };
+
     render() {
       return (
         <div style={{height : 400}}>
+
+<Button
+         onClick={this.manejarInsertarEquipoModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Equipo
+         </Button>
+
+         <Modal isOpen={this.state.insertarEquipoModalAbierto} onClose={() => this.setState({ insertarEquipoModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarEquipo onClose={() => this.setState({ insertarEquipoModalAbierto: false })} />
+         </AbsoluteCenter>
+         </Modal>
+
         <TableContainer>
         <Table>
           <Thead>

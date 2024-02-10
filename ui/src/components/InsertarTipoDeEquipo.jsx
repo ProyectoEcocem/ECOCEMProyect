@@ -6,31 +6,37 @@ import {
   Input,
   Button,
   Flex,
+  Modal,
 } from "@chakra-ui/react"; 
 
-const InsertarTipoDeEquipo = () => {
+const InsertarTipoDeEquipo = ({onClose}) => {
     const [tipoEquipo, setTipoEquipo] = useState("");
+    const [insertarTipoEquipoModalAbierto, setInsertarTipoEquipoModalAbierto] = useState(false);
 
   
     const createTipoEquipo = async (event) => {
       event.preventDefault();
 
       
-      
       axios.post(`http://localhost:5103/api/TipoEquipo`, {
         tipoEId: 0,
         tipoE: tipoEquipo
       })
       .then((response) => {
-        console.log(response);
-        alert("ok")
+        //console.log(response);
+        alert("El Tipo de Equipo ha sido insertado correctamente")
+        setInsertarTipoEquipoModalAbierto(false)
       }, (error) => {
         console.log(error);
-        alert("no ok")
+        alert("El Tipo de Equipo no se ha insertado correctamente")
       });
     };
 
-  
+    const handleCancelar = () => {
+      // Cierra la ventana modal desde el componente padre.
+      onClose();
+     
+    };
 
     return (
         <div style={{
@@ -45,9 +51,9 @@ const InsertarTipoDeEquipo = () => {
             border: "2px solid #5F89C1",
           }}>
           
-<FormLabel style={{fontSize: 30, marginTop: 20}}>
-  Insertar Tipo de Equipo
-</FormLabel>
+          <FormLabel style={{fontSize: 30, marginTop: 20}}>
+            Insertar Tipo de Equipo
+          </FormLabel>
       
             <FormControl>
               <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Tipo de Equipo</FormLabel>
@@ -61,17 +67,22 @@ const InsertarTipoDeEquipo = () => {
                 marginBottom={30}
               />
             </FormControl>
-            
+
+           <Flex justifyContent="space-between"> 
         <Button 
-          variant="contained" 
-          color="primary" 
-          style={{ marginRight: 10 }}
+          variant="outline" 
+          colorScheme="blue" 
+          style={{ marginRight: 10,  marginTop: 15}}
           onClick={createTipoEquipo}
           type="submit"
           >
           Aceptar
         </Button>
       
+        <Button variant="outline" colorScheme="red" marginTop={4} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
       </div>
   );
 };

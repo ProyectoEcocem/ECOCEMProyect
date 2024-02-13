@@ -11,18 +11,13 @@ import {
 import axios from "axios";
 
 const InsertarRotura = ({onClose}) => {
-    const [roturaId, setRoturaId] = useState("");
     const [nombreRotura, setNombreRotura] = useState("");
     const [insertarRoturaModalAbierto, setInsertarRoturaModalAbierto] = useState(false);
 
     const createRotura = async () => {
-      const rotura = {
-        roturaId: roturaId,
-        nombreRotura: nombreRotura
-      };
       
         axios.post(`http://localhost:5103/api/Rotura`, {
-        roturaId: roturaId,
+        roturaId: 0,
         nombreRotura: nombreRotura
       })
       .then((response) => {

@@ -3,6 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
 
+public class DescargaData
+{
+    public int TipoCementoId { get; set; }
+    public int SiloId {get; set;}
+    public int VehiculoId { get; set; }
+    public DateTime FechaId {get; set;}
+
+    //public required Compra compra {get; set; }
+    //public required ICollection<MedicionSilo> MedicionesSilo {get; set; }
+    public int MedidorId { get; set; }
+
+    public int Nivel {get; set; }
+    public int PesoM {get; set; }
+    public int Volumen {get; set; }
+    //public required ICollection<MedicionBascula> MedicionesBascula {get; set; }
+    public int BasculaId { get; set; }
+    public int PesoB {get; set; }
+}
+
 [ApiController]
 [Route("api/[controller]")]
 public class DescargaController : Controller
@@ -16,7 +35,7 @@ public class DescargaController : Controller
 
     // POST
     [HttpPost]
-    public async Task<ActionResult> Post(Descarga descarga)
+    public async Task<ActionResult> Post(DescargaData descarga)
     {
         return Ok(await  _descargaServicio.Create(descarga));
     }

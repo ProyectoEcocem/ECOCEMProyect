@@ -44,6 +44,7 @@ import InsertarAccionMantenimiento from './InsertarAccionMantenimiento';
 import VisualizarAccionMantenimiento from './VisualizarAccionmantenimiento';
 
 import Resumenes from './ResumenesParametrosIndicadores';
+import InsertarDescarga from './InsertarInicioDescarga';
 
 
 
@@ -269,6 +270,7 @@ import Resumenes from './ResumenesParametrosIndicadores';
 
             <Tab>Insertar Silo</Tab>
             <Tab>Resum</Tab>
+            <Tab>Insertar Descarga</Tab>
 
         </TabList>
 
@@ -458,6 +460,17 @@ import Resumenes from './ResumenesParametrosIndicadores';
                 alignItems: "center",
                 }}>
                 <InsertarAccionMantenimiento/>
+                </div>
+            </TabPanel>
+
+
+            <TabPanel> {/*Panel para Insertar Accion de mantenimiento */}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarDescarga/>
                 </div>
             </TabPanel>
 

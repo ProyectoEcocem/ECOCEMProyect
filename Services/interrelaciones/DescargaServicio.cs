@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 namespace ECOCEMProject;
 
@@ -38,12 +37,41 @@ public class DescargaServicio
 
         return descarga;
     }
-    public async Task<Descarga> Create(Descarga descarga)
+    public async Task<Descarga> Create(DescargaData descarga)
     {
-        _context.Descargas.Add(descarga);
-        await _context.SaveChangesAsync();
+         if(_context.Descargas.Any(elemento => elemento.TipoCementoId == descarga.TipoCementoId && elemento.SiloId== descarga.SiloId && elemento.FechaId==descarga.FechaId && elemento.VehiculoId==descarga.VehiculoId))
+            return null!;
+            
+        Descarga d = new Descarga();
+        MedicionSilo ms = new MedicionSilo();
+        MedicionBascula mb = new MedicionBascula();
 
-        return descarga;
+        //creacion de descarga
+        d.TipoCementoId = descarga.TipoCementoId;
+        d.SiloId = descarga.SiloId;
+        d.VehiculoId = descarga.VehiculoId;
+        d.FechaId = descarga.FechaId;
+
+        //creacion de medicion bascula
+        mb.VehiculoId = descarga.VehiculoId;
+        mb.BasculaId = descarga.BasculaId;
+        mb.FechaBId = descarga.FechaId;
+        mb.PesoB = descarga.PesoB;
+
+        //creacion de medicion silo
+        ms.SiloId = descarga.SiloId;
+        ms.MedidorId = descarga.MedidorId;
+        ms.FechaMId = descarga.FechaId;
+        ms.Nivel = descarga.Nivel;
+        ms.PesoM = descarga.PesoM;
+        ms.Volumen = descarga.Volumen;
+        
+
+        _context.Descargas.Add(d);
+        _context.MedicionesSilos.Add(ms);
+        _context.MedicionesBasculas.Add(mb);
+        await _context.SaveChangesAsync();
+        return d;
     }
      public async Task Delete(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaId)
     {

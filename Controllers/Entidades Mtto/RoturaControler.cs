@@ -1,6 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
+public class RoturaData
+{
+    public int RoturaId {get; set;}
+    public string NombreRotura {get; set;}
+
+}
+
+
 [Route("api/[controller]")]
 [ApiController]
 public class RoturaController : Controller
@@ -26,7 +34,7 @@ public class RoturaController : Controller
     public async Task<IEnumerable<Rotura>> GetAll() => await _roturaService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Rotura rotura)
+    public async Task<IActionResult> Post([FromBody] RoturaData rotura)
     {
         if (rotura == null)
         {
@@ -34,6 +42,8 @@ public class RoturaController : Controller
         }
         Rotura createdRotura = await _roturaService.Create(rotura);
         return Ok(createdRotura);
+
+        
     }
 
     [HttpPut]

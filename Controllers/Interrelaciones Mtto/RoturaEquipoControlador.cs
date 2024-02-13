@@ -3,6 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
 
+public class RoturaEquipoData
+{
+    public int EquipoId {get; set;}
+    public int RoturaId {get; set;}
+    public DateTime FechaId {get; set;}
+
+}
+
+
 [ApiController]
 [Route("api/[controller]")]
 public class RoturaEquipoController : Controller
@@ -16,9 +25,14 @@ public class RoturaEquipoController : Controller
 
     
     [HttpPost]
-    public async Task<ActionResult> Post(RoturaEquipo roturaE)
+    public async Task<ActionResult> Post(RoturaEquipoData roturaE)
     {
-        return Ok(await  _roturaEquipoServicio.Create(roturaE));
+        if (roturaE == null)
+        {
+            return BadRequest();
+        }
+        RoturaEquipo RECreada = await _roturaEquipoServicio.Create(roturaE);
+        return Ok(RECreada);
     }
 
     // GET by ID

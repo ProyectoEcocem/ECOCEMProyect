@@ -9,7 +9,7 @@ public class EquipoData
 }
 
 [Route("api/[controller]")]
-[ApiController] 
+[ApiController]
 public class EquipoController : Controller
 {
     private readonly EquipoServicio _equipoServicio;

@@ -3,6 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
 
+public class MedicionSiloData
+{
+    public int SiloId {get; set;}
+    public int MedidorId { get; set; }
+    public DateTime FechaMId {get; set;}
+
+    public int Nivel {get; set; }
+    public int PesoM {get; set; }
+    public int Volumen {get; set; }
+}
+
 [ApiController]
 [Route("api/[controller]")]
 public class MedicionSiloController : Controller
@@ -16,7 +27,7 @@ public class MedicionSiloController : Controller
 
     // POST
     [HttpPost]
-    public async Task<ActionResult> Post(MedicionSilo medicionSilo)
+    public async Task<ActionResult> Post(MedicionSiloData medicionSilo)
     {
         return Ok(await  _medicionSiloServicio.Create(medicionSilo));
     }

@@ -33,7 +33,7 @@ public class BrigadaController : Controller
             return BadRequest();
         }
         Brigada brigadaCreada = await _brigadaServicio.Create(brigada);
-        return CreatedAtRoute("Get", new { id = brigadaCreada.BrigadaId}, brigadaCreada);
+        return Ok(brigadaCreada);
     }
 
     [HttpPut]

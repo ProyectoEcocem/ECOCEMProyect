@@ -37,11 +37,18 @@ public class RoturaService
         return rotura;
     }
 
-    public async Task<Rotura> Create(Rotura rotura)
+    public async Task<Rotura> Create(RoturaData rotura)
     {
-        _context.Roturas.Add(rotura);
+         if(_context.Roturas.Any(elemento => elemento.NombreRotura == rotura.NombreRotura))
+            return null!;
+            
+        Rotura f1 = new Rotura();
+
+        f1.NombreRotura = rotura.NombreRotura;
+
+        _context.Roturas.Add(f1);
         await _context.SaveChangesAsync();
-        return rotura;
+        return f1;
     }
 
     public async Task Delete(int id)

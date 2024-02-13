@@ -68,7 +68,7 @@ export default class TiposEquipo extends React.Component {
               {
                 this.state.Roturas.map((rotura) => (
                   <Tr key={rotura.RoturaId}>
-                    <Td>{rotura.RoturaId}</Td>
+                    <Td>{rotura.roturaId}</Td>
                     <Td>{rotura.nombreRotura}</Td>
                   </Tr>
                 )

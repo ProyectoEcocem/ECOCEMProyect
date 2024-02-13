@@ -42,7 +42,7 @@ const InsertarRoturaEquipo = ({onClose}) => {
     axios.post(`http://localhost:5103/api/RoturaEquipo`, {
       equipoId: equipoId,
       roturaId: roturaId,
-      fecha: fecha
+      fechaId: fecha
     })
     .then((response) => {
       //console.log(response);
@@ -61,42 +61,42 @@ const InsertarRoturaEquipo = ({onClose}) => {
 };
 
 
-  return (
-    <div style={{
-      width: "400px",
-      height: "430px",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "white",
-      flexDirection: "column",
-      borderRadius: 20,
-      border: "2px solid #5F89C1",
-    }}>
-     
- <FormLabel style={{fontSize: 30}}>
-   Insertar Rotura de Equipo
- </FormLabel>
+          return (
+            <div style={{
+              width: "400px",
+              height: "430px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "white",
+              flexDirection: "column",
+              borderRadius: 20,
+              border: "2px solid #5F89C1",
+            }}>
+            
+        <FormLabel style={{fontSize: 30}}>
+          Insertar Rotura de Equipo
+        </FormLabel>
 
- <FormLabel style={{margin: "0px 260px 0px 0px"}}>Equipo</FormLabel>
+        <FormLabel style={{margin: "0px 260px 0px 0px"}}>Equipo</FormLabel>
 
- <Select
- value={equipoId}
- onChange={(e) => setEquipoId(e.target.value)}
- width={80}
- marginBottom={30}
- >
- {equipos.map((equipo) => (
- <option key={equipo.equipoId} value={equipo.equipoId}>
-  {equipo.equipoId}
- </option>
- ))}
- </Select>
+        <Select
+        value={equipoId}
+        onChange={(e) => setEquipoId(e.target.value)}
+        width={80}
+        marginBottom={30}
+        >
+        {equipos.map((equipo) => (
+        <option key={equipo.equipoId} value={equipo.equipoId}>
+          {equipo.equipoId}
+        </option>
+        ))}
+        </Select>
 
 
- <FormLabel style={{margin: "0px 250px 0px 40px"}}>Tipo de Rotura</FormLabel>
-  
- <Select
+        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Tipo de Rotura</FormLabel>
+          
+        <Select
           value={roturaId}
           onChange={(e) => setRoturaId(e.target.value)}
           width={80}

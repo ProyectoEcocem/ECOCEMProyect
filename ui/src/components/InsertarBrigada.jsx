@@ -12,16 +12,15 @@ import {
 import axios from "axios";
 
 const InsertarBrigada = ({onClose}) => {
-    const [brigadaId, setBrigadaId] = useState("");
+    //const [brigadaId, setBrigadaId] = useState("");
+    const [descripcion, setDescripcion] = useState("");
     const [insertarBrigadaModalAbierto, setInsertarBrigadaModalAbierto] = useState(false);
 
     const createBrigada = async () => {
-      const brigada = {
-        brigadaId: brigadaId,
-      };
       
         axios.post(`http://localhost:5103/api/Brigada`, {
-        brigadaId: brigadaId,
+        brigadaId: 0,
+        descripcion: descripcion
       })
       .then((response) => {
        // console.log(response);
@@ -55,12 +54,13 @@ const InsertarBrigada = ({onClose}) => {
   Insertar Brigada
 </FormLabel>
       
+
             <FormControl>
-              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Número de la Brigada</FormLabel>
+              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Descripcion</FormLabel>
               <Input
-                value={brigadaId}
-                placeholder="Ingrese el número de la Brigada"
-                onChange={(a) => setBrigadaId(a.target.value)}
+                value={descripcion}
+                placeholder="Ingrese la descripcion de la Brigada"
+                onChange={(a) => setDescripcion(a.target.value)}
                 marginTop={0.5}
                 marginLeft={10}
                 width={80}

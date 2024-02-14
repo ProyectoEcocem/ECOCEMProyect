@@ -38,11 +38,15 @@ public class BrigadaServicio
         return brigada;
     }
 
-    public async Task<Brigada> Create(Brigada brigada)
+    public async Task<Brigada> Create(BrigadaData brigada)
     {
-        _context.Brigadas.Add(brigada);
+        Brigada b = new Brigada();
+
+        b.Descripcion = brigada.Descripcion;
+
+        _context.Brigadas.Add(b);
         await _context.SaveChangesAsync();
-        return brigada;
+        return b;
     }
 
     public async Task Delete(int id)

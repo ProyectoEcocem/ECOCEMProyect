@@ -1,4 +1,3 @@
-
 using System.Text.Json.Serialization;
 
 namespace ECOCEMProject;
@@ -9,6 +8,11 @@ public class Descarga
     public int SiloId {get; set;}
     public int VehiculoId { get; set; }
     public DateTime FechaId {get; set;}
+
+    //llaves foraneas de compra
+    public int SedeId {get; set;}
+    public int FabricaId { get; set; }
+    public DateTime FechaCompraId {get; set;}
 
     [JsonIgnore]
     public  Compra Compra {get; set; }

@@ -38,12 +38,21 @@ public class MedicionSiloServicio
 
         return medicionSilo;
     }
-    public async Task<MedicionSilo> Create(MedicionSilo medicionSilo)
+    public async Task<MedicionSilo> Create(MedicionSiloData medicionSilo)
     {
-        _context.MedicionesSilos.Add(medicionSilo);
-        await _context.SaveChangesAsync();
+        MedicionSilo ms = new MedicionSilo();
 
-        return medicionSilo;
+        //creacion de medicion silo
+        ms.SiloId = medicionSilo.SiloId;
+        ms.MedidorId = medicionSilo.MedidorId;
+        ms.FechaMId = medicionSilo.FechaMId;
+        ms.Nivel = medicionSilo.Nivel;
+        ms.PesoM = medicionSilo.PesoM;
+        ms.Volumen = medicionSilo.Volumen;
+
+        _context.MedicionesSilos.Add(ms);
+        await _context.SaveChangesAsync();
+        return ms;
     }
      public async Task Delete(int SiloId,int MedidorId,DateTime FechaMId)
     {

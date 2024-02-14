@@ -3,6 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
 
+public class CargaData
+{
+    public int TipoCementoId { get; set; }
+    public int SiloId {get; set;}
+    public int VehiculoId { get; set; }
+    public DateTime FechaId {get; set;}
+
+    //public required Venta venta {get; set; }
+    //public required ICollection<MedicionSilo> MedicionesSilo {get; set; }
+    public int MedidorId { get; set; }
+
+    public int Nivel {get; set; }
+    public int PesoM {get; set; }
+    public int Volumen {get; set; }
+    //public required ICollection<MedicionBascula> MedicionesBascula {get; set; }
+    public int BasculaId { get; set; }
+    public int PesoB {get; set; }
+}
+
 [ApiController]
 [Route("api/[controller]")]
 public class CargaController : Controller
@@ -15,7 +34,7 @@ public class CargaController : Controller
     }
 
     [HttpPost]
-    public async Task<ActionResult> Post(Carga carga)
+    public async Task<ActionResult> Post(CargaData carga)
     {
         return Ok(await  _cargaServicio.Create(carga));
     }

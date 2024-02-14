@@ -44,7 +44,10 @@ import InsertarAccionMantenimiento from './InsertarAccionMantenimiento';
 import VisualizarAccionMantenimiento from './VisualizarAccionmantenimiento';
 
 import Resumenes from './ResumenesParametrosIndicadores';
-import InsertarDescarga from './InsertarInicioDescarga';
+import InsertarDescarga from './InsertarDescarga';
+import InsertarCarga from './InsertarCarga';
+import InsertarMedicionSilo from './InsertarMedicionSilo';
+import InsertarMedicionBascula from './InsertarMedicionBascula';
 
 
 
@@ -271,6 +274,9 @@ import InsertarDescarga from './InsertarInicioDescarga';
             <Tab>Insertar Silo</Tab>
             <Tab>Resum</Tab>
             <Tab>Insertar Descarga</Tab>
+            <Tab>Insertar Carga</Tab>
+            <Tab>Insertar Medicion Silo</Tab>
+            <Tab>Insertar Medicion Bascula</Tab>
 
         </TabList>
 
@@ -464,13 +470,43 @@ import InsertarDescarga from './InsertarInicioDescarga';
             </TabPanel>
 
 
-            <TabPanel> {/*Panel para Insertar Accion de mantenimiento */}
+            <TabPanel> {/*Panel para Insertar Descarga*/}
                 <div style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 }}>
                 <InsertarDescarga/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar Carga*/}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarCarga/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar MS*/}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarMedicionSilo/>
+                </div>
+            </TabPanel>
+
+            <TabPanel> {/*Panel para Insertar MB*/}
+                <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                }}>
+                <InsertarMedicionBascula/>
                 </div>
             </TabPanel>
 

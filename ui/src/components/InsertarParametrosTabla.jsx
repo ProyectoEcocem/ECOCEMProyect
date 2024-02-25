@@ -45,6 +45,8 @@ const InsertarReporte = () => {
   //temporal en verdad esto es un indicdor
   const [perdidaIndisponibilidad, setPerdidaIndisponibilidad]=useState(1);//PerdidaIndisponibilidad
 
+  const [horasTotal, setHorasTotal] = useState(0); //horas total del equipo para mantenimiento
+
     //Lista de roturas
     const [roturas, setRoturas] = useState([]);
   
@@ -57,6 +59,8 @@ const InsertarReporte = () => {
        })
        .catch(err => console.log(err));
     }, []);
+
+
 
   const createRt = async () => {
     axios.post(`http://localhost:5103/api/Reporte`, {
@@ -81,8 +85,23 @@ const InsertarReporte = () => {
       console.log(error);
       alert("no se insertó correctamente")
     });
- };
 
+    try {
+      const response = await axios.get('http://localhost:5103/api/FiltroMantenimiento/GetHoras',{
+        params: {
+            equipoId: equipoId,
+          },
+      });
+      setHorasTotal(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+
+    if( horasTotal > 10)
+    {
+      alert("Este equipo necesita mantenimiento urgentemente")
+    }
+ };
 
 
   return (

@@ -84,7 +84,20 @@ public class FiltroMantenimientoService
         }
         return roles;
     }
+    
+    public double GetHoras(int equipoId)
+    {
+        
+        double horaTotal = 0;
+        var reporte = myContext.Reportes.Where(r => r.EquipoId == equipoId);
 
+        foreach(var h in reporte)
+        {
+            horaTotal += h.TiempoOPeracionReal;
+        }
+
+        return horaTotal;
+    }
 
     /*public async Task<IEnumerable<Role>> GetAllRoles()
     {

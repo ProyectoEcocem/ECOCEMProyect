@@ -1,474 +1,264 @@
+import React, {state, useState} from 'react';
 import { 
-    Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel,
-    TabIndicator
+    useDisclosure,
+    Button,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+    Box,
+    Input,
+    Flex,
+    List,
+    ListItem,
+    ListIcon,
+    OrderedList,
+    UnorderedList,
+    Modal,
+    AbsoluteCenter,
+    Stack,
+    Center,
+    Text,
  } from '@chakra-ui/react'
-import InsertarSede from './InsertarSede';
-import InsertarTipoDeEquipo from './InsertarTipoDeEquipo';
-import InsertarEquipo from './InsertarEquipo';
-import InsertarRotura from './InsertarRotura';
-import InsertarRoturaEquipo from './InsertarRoturaEquipo';
-import InsertarParametros from './InsertarParametros';
-import InsertarParametrosTabla from './InsertarParametrosTabla';
-import InsertarEmpresa from './InsertarEmpresa';
-import VisualizarSede from './VisualizarSede';
-import VisualizarTipoEquipo from './VisualizarTipoEquipo';
-import VisualizarEquipo from './VisualizarEquipo';
-import VisualizarRotura from './VisualizarRotura';
-import VisualizarRoturaEquipo from './VisualizarRoturaEquipo';
-import VisualizarParametros from './VisualizarParametros';
-import VisualizarIndicadores from './VisualizarIndicadores';
-import InsertarBascula from './InsertarBascula';
-import InsertarFabrica from './InsertarFabrica';
-import Reporte from './Reporte';
-import InsertarMedidor from './InsertarMedidor';
-import InsertarTipoCemento from './InsertarTipoCemento';
-import InsertarVehiculo from './InsertarVehiculo';
-import InsertarSilo from './InsertarSilo';
-import Bascula from './VisualizarBascula';
-import Fabrica from './VisualizarFabrica';
-import Medidor from './VisualizarMedidor';
-import InsertarCompra from './InsertarCompra';
-import InsertarVenta from './InsertarVenta';
-import InsertarEntidadCompradora from './InsertarEntidadCompradora';
-import EntidadCompradora from './VisualizarEntidadCompradora';
-import Venta from './VizualizarVenta';
-import Compra from './VisualizarCompra';
-
-import InsertarBrigada from './InsertarBrigada';
-import VisualizarBrigada from './VisualizarBrigada';
-import InsertarAccionMantenimiento from './InsertarAccionMantenimiento';
-import VisualizarAccionMantenimiento from './VisualizarAccionmantenimiento';
-
-import Resumenes from './ResumenesParametrosIndicadores';
-
-
+ import VisualizarAccionMantenimiento from './VisualizarAccionmantenimiento';
+ import Equipo from './VisualizarEquipo';
+ import VisualizarOrdenTrabajo from './VisualizarOrdenTrabajo';
+ import RoturaEquipo from './VisualizarRoturaEquipo';
+ import Rotura from './VisualizarRotura';
 
  const VentanaPrincipal = () => {
+
+        const { isOpen, onOpen, onClose } = useDisclosure()
+        const btnRef = React.useRef()
+
+        //Manejo de estado de los modales
+        const [visualizarAccionMantenimientoEModalAbierto, setVisualizarAccionMantenimientoEModalAbierto] = useState(false);
+        const [visualizarEquipoModalAbierto, setVisualizarEquipoModalAbierto] = useState(false);
+        const [visualizarHerramientaModalAbierto, setVisualizarHerramientaModalAbierto] = useState(false);
+        const [visualizarOrdenTrabajoModalAbierto, setVisualizarOrdenTrabajoModalAbierto] = useState(false);
+        const [visualizarRoturaEquipoModalAbierto, setVisualizarRoturaEquipoModalAbierto] = useState(false);
+        const [visualizarRoturaModalAbierto, setVisualizarRoturaModalAbierto] = useState(false);
+        
+
+        const abrirVisualizarAccionMantenimientoModal = () => {
+          setVisualizarAccionMantenimientoEModalAbierto(true);
+          setVisualizarEquipoModalAbierto(false);
+          setVisualizarHerramientaModalAbierto(false);
+          setVisualizarOrdenTrabajoModalAbierto(false);
+          setVisualizarRoturaEquipoModalAbierto(false);
+          setVisualizarRoturaModalAbierto(false);
+         };
+
+         const abrirVisualizarEquipoModal = () => {
+          setVisualizarAccionMantenimientoEModalAbierto(false);
+          setVisualizarEquipoModalAbierto(true);
+          setVisualizarHerramientaModalAbierto(false);
+          setVisualizarOrdenTrabajoModalAbierto(false);
+          setVisualizarRoturaEquipoModalAbierto(false);
+          setVisualizarRoturaModalAbierto(false);
+         };
+
+         const abrirVisualizarHerramientaModal = () => {
+          setVisualizarAccionMantenimientoEModalAbierto(false);
+          setVisualizarEquipoModalAbierto(false);
+          setVisualizarHerramientaModalAbierto(true);
+          setVisualizarOrdenTrabajoModalAbierto(false);
+          setVisualizarRoturaEquipoModalAbierto(false);
+          setVisualizarRoturaModalAbierto(false);
+         }
+
+         const abrirVisualizarOrdenTrabajoModal = () => {
+          setVisualizarAccionMantenimientoEModalAbierto(false);
+          setVisualizarEquipoModalAbierto(false);
+          setVisualizarHerramientaModalAbierto(false);
+          setVisualizarOrdenTrabajoModalAbierto(true);
+          setVisualizarRoturaEquipoModalAbierto(false);
+          setVisualizarRoturaModalAbierto(false);
+         }
+
+         const abrirVisualizarRoturaEquipoModal = () => {
+          setVisualizarAccionMantenimientoEModalAbierto(false);
+          setVisualizarEquipoModalAbierto(false);
+          setVisualizarHerramientaModalAbierto(false);
+          setVisualizarOrdenTrabajoModalAbierto(false);
+          setVisualizarRoturaEquipoModalAbierto(true);
+          setVisualizarRoturaModalAbierto(false);
+         }
+
+         const abrirVisualizarRoturaModal = () => {
+          setVisualizarAccionMantenimientoEModalAbierto(false);
+          setVisualizarEquipoModalAbierto(false);
+          setVisualizarHerramientaModalAbierto(false);
+          setVisualizarOrdenTrabajoModalAbierto(false);
+          setVisualizarRoturaEquipoModalAbierto(false);
+          setVisualizarRoturaModalAbierto(true);
+         }
+
  return(
-<div>
- <Tabs isFitted variant="enclosed">
+<Flex width="100vw" height="100vh">
+      {/* Panel fijo a la izquierda */}
+      <Box flex="1" bg="white"  borderRight="2px solid gray" >
+      <img
+        src="/public/ecocemlogo.png"
+        alt="Logo"
+        width={100}
+        height={100}
+        style={{ margin: "auto" }}
+      />
+      <p style={{ textAlign: "center", fontSize: 40 }}>ECOCEM</p>
+      <p style={{ textAlign: "center", fontSize: 20, marginTop: "5px", marginBottom: "10px"}}>Nombre de Usuario</p>
 
-  <TabList>
-    <Tab fontSize={24}>Visualizar Tablas</Tab>
-    <Tab fontSize={24}>Introducir Datos</Tab>
-  </TabList>
+      <Accordion defaultIndex={[0]} allowMultiple>
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box as="span" flex='1' textAlign='left' >
+          Gestión de Mantenimiento
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+    <Stack direction='column' spacing={2} align="flex-start">
+  <Button colorScheme='teal' variant='link' onClick= { abrirVisualizarAccionMantenimientoModal }
+  >
+    Acción de Mantenimiento
+  </Button>
+  
+  <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarEquipoModal }
+  >
+    Equipo
+  </Button>
+  <Button colorScheme='teal' variant='link'>Herramienta</Button>
+  <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarOrdenTrabajoModal }
+  >
+    Orden de Trabajo</Button>
+  <Button colorScheme='teal' variant='link'>Reporte</Button>
+  <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarRoturaEquipoModal }
+  >
+    Rotura de Equipo</Button>
+  <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarRoturaModal }>Tipo de Rotura</Button> 
+  </Stack>
+    </AccordionPanel>
+  </AccordionItem>
 
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box as="span" flex='1' textAlign='left'>
+          Cálculo del peso
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </AccordionPanel>
+  </AccordionItem>
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box as="span" flex='1' textAlign='left' >
+          Gestión de Admin
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+    <UnorderedList textAlign='left'>
+  <ListItem>Brigada</ListItem>
+  <ListItem>Sede</ListItem>
+  <ListItem>Sucursal</ListItem>
+  <ListItem>Tipo de Equipo</ListItem>
+  <ListItem>Trabajador</ListItem>
+</UnorderedList>
+    </AccordionPanel>
+  </AccordionItem>
+</Accordion>
+      </Box>
 
+      {/* Panel más grande a la derecha */}
+      <Box flex="3" bg="white" flexDirection="column" justifyContent="flex-start">
+      <Modal
+      isOpen={visualizarAccionMantenimientoEModalAbierto}
+      onClose={() => setVisualizarAccionMantenimientoEModalAbierto(false)}
+      position="absolute"
+      left="50%"
+      top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+    >
+      <VisualizarAccionMantenimiento
+        onClose={() => setVisualizarAccionMantenimientoEModalAbierto(false)}
+      />
+ </Modal>
+ <Modal
+ isOpen={visualizarEquipoModalAbierto}
+ onClose={() => setVisualizarEquipoModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Equipo 
+ onClose={() => setVisualizarEquipoModalAbierto(false)}/>
+ </Modal>
 
-  <TabPanels>
+ <Modal
+ isOpen={visualizarOrdenTrabajoModalAbierto}
+ onClose={() => setVisualizarOrdenTrabajoModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <VisualizarOrdenTrabajo 
+ onClose={() => setVisualizarOrdenTrabajoModalAbierto(false)}/>
+ </Modal>
 
-    <TabPanel> {/*Panel para Visualizar Tablas*/}
-      <Tabs isFitted variant="enclosed" colorScheme='orange'>
-        <TabList>
-            <Tab>Sedes</Tab>
-            <Tab>Tipos de Equipo</Tab>
-            <Tab>Equipos</Tab>
-            <Tab>Rotura</Tab>
-            <Tab>Roturas de Equipos</Tab>
-            <Tab>Reporte</Tab>
-            <Tab>Basculas</Tab>
-            <Tab>Fabrica</Tab>
-            <Tab>Entidad Compradora</Tab>
-            <Tab>Medidor</Tab>
-            <Tab>Compra</Tab>
-            <Tab>Venta</Tab>
-            <Tab>Visualizar Indicadores</Tab>
-            <Tab>Visualizar Brigadas</Tab>
-            <Tab>Visualizar A. de Mtto</Tab>
-        </TabList>
+ <Modal
+ isOpen={visualizarRoturaEquipoModalAbierto}
+ onClose={() => setVisualizarRoturaEquipoModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <RoturaEquipo
+ onClose={() => setVisualizarRoturaEquipoModalAbierto(false)}/>
+ </Modal>
 
-        <TabIndicator
-      mt="-1.5px"
-      height="2px"
-      bg="blue.500"
-      borderRadius="1px"
-    />
-
-        <TabPanels>
-
-            <TabPanel> {/*Panel para Visualizar Sede*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <VisualizarSede/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Visualizar Tipo de Equipo*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <VisualizarTipoEquipo/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Visualizar Equipo*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <VisualizarEquipo/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Visualizar Rotura*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <VisualizarRotura/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Visualizar Roturas de Equipos*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <VisualizarRoturaEquipo/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Reporte*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <Reporte/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Bascula*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <Bascula/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Fabrica*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <Fabrica/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Fabrica*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <EntidadCompradora/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Medidor*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <Medidor/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Medidor*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <Compra/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Medidor*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <Venta/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Medidor*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <VisualizarIndicadores/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Visualizar Brigada*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <VisualizarBrigada/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Visualizar Acciones de Mantenimiento*/}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <VisualizarAccionMantenimiento/>
-                </div>
-            </TabPanel>
-
-           
-        </TabPanels>
-      </Tabs>
-    </TabPanel>
-
-    <TabPanel> {/*Panel para Introducir Datos*/}
-        <Tabs isFitted variant="enclosed" colorScheme='orange'>
-        <TabList>
-            <Tab>InsertarEmpresa</Tab>
-            <Tab>Insertar Sede</Tab>
-            <Tab>Insertar Tipo de Equipo</Tab>
-            <Tab>Insertar Equipo</Tab>
-            <Tab>Insertar Tipo de Rotura</Tab>
-            <Tab>Insertar Rotura de Equipo</Tab>
-            <Tab>Insertar Parámetros</Tab>
-            <Tab>Insertar Bascula</Tab>
-            <Tab>Insertar Fabrica</Tab>
-            <Tab>Insertar Entidad Compradora</Tab>
-            <Tab>Insertar Medidor</Tab>
-            <Tab>Insertar Tipo de Cemento</Tab>
-            <Tab>Insertar Vehiculo</Tab>
-            <Tab>Insertar Compra</Tab>
-            <Tab>Insertar Venta</Tab>
-
-            <Tab>Insertar Brigada</Tab>
-            <Tab>Insertar Accion de Mantenimiento</Tab>
-
-            <Tab>Insertar Silo</Tab>
-            <Tab>Resum</Tab>
-
-        </TabList>
-
-        <TabPanels>
-
-        <TabPanel> {/*Panel para Insertar Empresa */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarEmpresa/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Sede */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarSede/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Tipo de Equipo */}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarTipoDeEquipo/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Equipo */}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarEquipo/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Rotura */}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                    <InsertarRotura/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Rotura de Equipo */}
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarRoturaEquipo/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Parámetros */}
-            <div>
-                <InsertarParametrosTabla/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Bascula */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarBascula/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Fab */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarFabrica/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar EC */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarEntidadCompradora/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Medidor */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarMedidor/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Tipo Cemento */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarTipoCemento/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar vehiculo */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarVehiculo/>
-                </div>
-            </TabPanel>
-
-          
-
-            <TabPanel> {/*Panel para Insertar compra */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarCompra/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar venta */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarVenta/>
-                </div>
-            </TabPanel>
-            <TabPanel> {/*Panel para Insertar silo */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarSilo/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar compra */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <Resumenes/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Brigada */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarBrigada/>
-                </div>
-            </TabPanel>
-
-            <TabPanel> {/*Panel para Insertar Accion de mantenimiento */}
-                <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                }}>
-                <InsertarAccionMantenimiento/>
-                </div>
-            </TabPanel>
-
-        </TabPanels>
-        </Tabs>
-    </TabPanel>
-
-  </TabPanels>
-</Tabs>
-</div>
+ <Modal
+ isOpen={visualizarRoturaModalAbierto}
+ onClose={() => setVisualizarRoturaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Rotura
+ onClose={() => setVisualizarRoturaModalAbierto(false)}/>
+ </Modal>
+      </Box>
+    </Flex>
  );
  };
-
  export default VentanaPrincipal;

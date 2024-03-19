@@ -13,12 +13,14 @@ import axios from "axios";
 const InsertarRotura = ({onClose}) => {
     const [nombreRotura, setNombreRotura] = useState("");
     const [insertarRoturaModalAbierto, setInsertarRoturaModalAbierto] = useState(false);
+    const [descripcion, setDescripcion] = useState("")
 
     const createRotura = async () => {
       
         axios.post(`http://localhost:5103/api/Rotura`, {
         roturaId: 0,
-        nombreRotura: nombreRotura
+        nombreRotura: nombreRotura,
+        descripcion: descripcion
       })
       .then((response) => {
        // console.log(response);
@@ -58,6 +60,20 @@ const InsertarRotura = ({onClose}) => {
                 value={nombreRotura}
                 placeholder="Ingrese el nombre de la Rotura"
                 onChange={(a) => setNombreRotura(a.target.value)}
+                marginTop={0.5}
+                marginLeft={10}
+                width={80}
+                backgroundColor= "white"
+                marginBottom={30}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Descripción de la Rotura</FormLabel>
+              <Input
+                value={descripcion}
+                placeholder="Ingrese una descripción"
+                onChange={(a) => setDescripcion(a.target.value)}
                 marginTop={0.5}
                 marginLeft={10}
                 width={80}

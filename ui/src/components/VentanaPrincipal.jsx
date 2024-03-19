@@ -26,6 +26,8 @@ import {
  import VisualizarOrdenTrabajo from './VisualizarOrdenTrabajo';
  import RoturaEquipo from './VisualizarRoturaEquipo';
  import Rotura from './VisualizarRotura';
+ import VisualizarHerramienta from './VisualizarHerramienta';
+ import Reporte from './Reporte';
 
  const VentanaPrincipal = () => {
 
@@ -39,61 +41,40 @@ import {
         const [visualizarOrdenTrabajoModalAbierto, setVisualizarOrdenTrabajoModalAbierto] = useState(false);
         const [visualizarRoturaEquipoModalAbierto, setVisualizarRoturaEquipoModalAbierto] = useState(false);
         const [visualizarRoturaModalAbierto, setVisualizarRoturaModalAbierto] = useState(false);
+        const [visualizarReporteModalAbierto, setVisualizarReporteModalAbierto] = useState(false);
         
 
-        const abrirVisualizarAccionMantenimientoModal = () => {
-          setVisualizarAccionMantenimientoEModalAbierto(true);
-          setVisualizarEquipoModalAbierto(false);
-          setVisualizarHerramientaModalAbierto(false);
-          setVisualizarOrdenTrabajoModalAbierto(false);
-          setVisualizarRoturaEquipoModalAbierto(false);
-          setVisualizarRoturaModalAbierto(false);
+         const abrirModal = (modalAbierto, setModalAbierto) => {
+          // Lista de todos los modales
+          const modales = [
+             ['VisualizarAccionMantenimientoEModalAbierto', setVisualizarAccionMantenimientoEModalAbierto],
+             ['VisualizarEquipoModalAbierto',  setVisualizarEquipoModalAbierto],
+             ['VisualizarHerramientaModalAbierto',  setVisualizarHerramientaModalAbierto],
+             ['VisualizarOrdenTrabajoModalAbierto',  setVisualizarOrdenTrabajoModalAbierto],
+             ['VisualizarRoturaEquipoModalAbierto', setVisualizarRoturaEquipoModalAbierto],
+             ['VisualizarRoturaModalAbierto', setVisualizarRoturaModalAbierto],
+             ['VisualizarReporteModalAbierto', setVisualizarReporteModalAbierto]
+          ];
+         
+          // Función para establecer el estado de todos los modales en false
+          const cerrarTodosLosModales = () => {
+            modales.forEach(([nombreModal, setModal]) => {
+              // Si el nombre del modal actual coincide con el modalAbierto, establece su estado en true
+              if (nombreModal === modalAbierto) {
+                setModal(true);
+              } else {
+                // De lo contrario, establece su estado en false
+                setModal(false);
+              }
+           });
+          };
+         
+          // Establecer el estado del modal especificado en true
+          setModalAbierto(true);
+         
+          // Cerrar todos los demás modales
+          cerrarTodosLosModales();
          };
-
-         const abrirVisualizarEquipoModal = () => {
-          setVisualizarAccionMantenimientoEModalAbierto(false);
-          setVisualizarEquipoModalAbierto(true);
-          setVisualizarHerramientaModalAbierto(false);
-          setVisualizarOrdenTrabajoModalAbierto(false);
-          setVisualizarRoturaEquipoModalAbierto(false);
-          setVisualizarRoturaModalAbierto(false);
-         };
-
-         const abrirVisualizarHerramientaModal = () => {
-          setVisualizarAccionMantenimientoEModalAbierto(false);
-          setVisualizarEquipoModalAbierto(false);
-          setVisualizarHerramientaModalAbierto(true);
-          setVisualizarOrdenTrabajoModalAbierto(false);
-          setVisualizarRoturaEquipoModalAbierto(false);
-          setVisualizarRoturaModalAbierto(false);
-         }
-
-         const abrirVisualizarOrdenTrabajoModal = () => {
-          setVisualizarAccionMantenimientoEModalAbierto(false);
-          setVisualizarEquipoModalAbierto(false);
-          setVisualizarHerramientaModalAbierto(false);
-          setVisualizarOrdenTrabajoModalAbierto(true);
-          setVisualizarRoturaEquipoModalAbierto(false);
-          setVisualizarRoturaModalAbierto(false);
-         }
-
-         const abrirVisualizarRoturaEquipoModal = () => {
-          setVisualizarAccionMantenimientoEModalAbierto(false);
-          setVisualizarEquipoModalAbierto(false);
-          setVisualizarHerramientaModalAbierto(false);
-          setVisualizarOrdenTrabajoModalAbierto(false);
-          setVisualizarRoturaEquipoModalAbierto(true);
-          setVisualizarRoturaModalAbierto(false);
-         }
-
-         const abrirVisualizarRoturaModal = () => {
-          setVisualizarAccionMantenimientoEModalAbierto(false);
-          setVisualizarEquipoModalAbierto(false);
-          setVisualizarHerramientaModalAbierto(false);
-          setVisualizarOrdenTrabajoModalAbierto(false);
-          setVisualizarRoturaEquipoModalAbierto(false);
-          setVisualizarRoturaModalAbierto(true);
-         }
 
  return(
 <Flex width="100vw" height="100vh">
@@ -121,24 +102,31 @@ import {
     </h2>
     <AccordionPanel pb={4}>
     <Stack direction='column' spacing={2} align="flex-start">
-  <Button colorScheme='teal' variant='link' onClick= { abrirVisualizarAccionMantenimientoModal }
+  <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarAccionMantenimientoEModalAbierto', setVisualizarAccionMantenimientoEModalAbierto) }
   >
     Acción de Mantenimiento
   </Button>
   
-  <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarEquipoModal }
+  <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarEquipoModalAbierto', setVisualizarEquipoModalAbierto) }
   >
     Equipo
   </Button>
-  <Button colorScheme='teal' variant='link'>Herramienta</Button>
-  <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarOrdenTrabajoModal }
+  <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarHerramientaModalAbierto', setVisualizarHerramientaModalAbierto) }
+  >
+    Herramienta 
+  </Button>
+  <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarOrdenTrabajoModalAbierto', setVisualizarOrdenTrabajoModalAbierto) }
   >
     Orden de Trabajo</Button>
-  <Button colorScheme='teal' variant='link'>Reporte</Button>
-  <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarRoturaEquipoModal }
+  <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarReporteModalAbierto', setVisualizarReporteModalAbierto) }
+  >
+    Reporte
+  </Button>
+
+  <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarRoturaEquipoModalAbierto', setVisualizarRoturaEquipoModalAbierto) }
   >
     Rotura de Equipo</Button>
-  <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarRoturaModal }>Tipo de Rotura</Button> 
+  <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarRoturaModalAbierto', setVisualizarRoturaModalAbierto) }>Tipo de Rotura</Button> 
   </Stack>
     </AccordionPanel>
   </AccordionItem>
@@ -153,10 +141,13 @@ import {
       </AccordionButton>
     </h2>
     <AccordionPanel pb={4}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
+      <Button colorScheme='teal' variant='link'>Báscula</Button>
+      <Button colorScheme='teal' variant='link'>Entidad Compradora</Button>
+      <Button colorScheme='teal' variant='link'>Fábrica</Button>
+      <Button colorScheme='teal' variant='link'>Medidor</Button>
+      <Button colorScheme='teal' variant='link'>Silo</Button>
+      <Button colorScheme='teal' variant='link'>Tipo de Cemento</Button>
+      <Button colorScheme='teal' variant='link'>Vehículo</Button>
     </AccordionPanel>
   </AccordionItem>
   <AccordionItem>
@@ -214,6 +205,22 @@ import {
  </Modal>
 
  <Modal
+ isOpen={visualizarHerramientaModalAbierto}
+ onClose={() => setVisualizarHerramientaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <VisualizarHerramienta 
+ onClose={() => setVisualizarHerramientaModalAbierto(false)}/>
+ </Modal>
+
+
+ <Modal
  isOpen={visualizarOrdenTrabajoModalAbierto}
  onClose={() => setVisualizarOrdenTrabajoModalAbierto(false)}
  position="absolute"
@@ -256,6 +263,21 @@ import {
  >
  <Rotura
  onClose={() => setVisualizarRoturaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarReporteModalAbierto}
+ onClose={() => setVisualizarReporteModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Reporte
+ onClose={() => setVisualizarReporteModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

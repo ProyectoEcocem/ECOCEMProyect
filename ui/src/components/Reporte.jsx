@@ -13,6 +13,7 @@ import {
   Tr,
   Th,
   Td,
+  AbsoluteCenter,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
@@ -32,6 +33,7 @@ export default class Reporte extends React.Component {
     render() {
       return (
         <div style={{height : 400}}>
+          <AbsoluteCenter top={"80px"} left={"900px"}>
         <TableContainer>
         <Table>
           <Thead>
@@ -79,6 +81,7 @@ export default class Reporte extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
+      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Equipos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

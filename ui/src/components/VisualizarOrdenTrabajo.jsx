@@ -1,6 +1,6 @@
 
 import React from 'react';
-import InsertarRoturaEquipo from './InsertarRoturaEquipo';
+import InsertarOrdenTrabajo from './InsertarOrdenTrabajo';
 import {
   Input,
   Button,
@@ -19,59 +19,61 @@ import {
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
-export default class RoturaEquipo extends React.Component {
+export default class VisualizarOrdenTrabajo extends React.Component {
     state = {
-      roturasE: [],
-      insertarRoturaEModalAbierto: false,
+      ordenesTrabajo: [],
+      insertarOrdenTrabajoModalAbierto: false,
     }
   
     componentDidMount() {
-      axios.get(`http://localhost:5103/api/RoturaEquipo`)
+      axios.get(`http://localhost:5103/api/OrdenTrabajo`)
         .then(res => {
           const roturasE= res.data;
-          this.setState({ roturasE });
+          this.setState({ ordenesTrabajo });
         })
     }
 
-    manejarInsertarRoturaEModal = () => {
-      this.setState({ insertarRoturaEModalAbierto: true });
+    manejarInsertarOrdenesTrabajoModal = () => {
+      this.setState({ insertarOrdenTrabajoModalAbierto: true });
     };
   
     render() {
       return (
         <div style={{height : 400}}>
 
-<AbsoluteCenter top={"80px"} left={"650px"}>
+<AbsoluteCenter top={"80px"} left={"750px"}>
 <Button
-         onClick={this.manejarInsertarRoturaEModal}
+         onClick={this.manejarInsertarOrdenesTrabajoModal}
          marginBottom={5}
          marginTop={5}
          >
-          Agregar Rotura de Equipo
+          Agregar Orden de Trabajo
          </Button>
 
-         <Modal isOpen={this.state.insertarRoturaEModalAbierto} onClose={() => this.setState({ insertarRoturaEModalAbierto: false })}>
+         <Modal isOpen={this.state.insertarOrdenTrabajoModalAbierto} onClose={() => this.setState({ insertarOrdenTrabajoModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarRoturaEquipo onClose={() => this.setState({ insertarRoturaEModalAbierto: false })} />
+         <InsertarOrdenTrabajo onClose={() => this.setState({ insertarOrdenTrabajoModalAbierto: false })} />
          </AbsoluteCenter>
          </Modal>
 
         <TableContainer>
           <Table>
             <Thead>
-              <Tr>
-                <Th>ID de la Rotura</Th>
+              <Tr> 
                 <Th>ID del Equipo</Th>
+                <Th>ID de la Brigada</Th>
+                <Th>Id del Trabajador</Th>
                 <Th>Fecha</Th>
               </Tr>
             </Thead>
             <Tbody>
               {
-                this.state.roturasE.map((roturaE) => (
-                  <Tr key={roturaE.roturaId}>
-                    <Td>{roturaE.roturaId}</Td>
+                this.state.ordenesTrabajo.map((ordenTrabajo) => (
+                  <Tr key={ordenTrabajo.equipoId}>
                     <Td>{roturaE.equipoId}</Td>
-                    <Td>{roturaE.fechaId}</Td>
+                    <Td>{ordenTrabajo.brigadaId}</Td>
+                    <Td>{ordenTrabajo.trabajadorId}</Td>
+                    <Td>{ordenTrabajo.fechaId}</Td>
                   </Tr>
                 ))
               }

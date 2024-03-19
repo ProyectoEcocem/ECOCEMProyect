@@ -4,6 +4,14 @@ namespace ECOCEMProject;
 
 [ApiController]
 [Route("api/[controller]")]
+
+public class OrdenTrabajoData
+{
+   public int EquipoId {get; set;} 
+   public int BrigadaId {get; set;}
+   public int TrabajadorId {get; set;}
+   public DateTime FechaId {get; set;}
+}
 public class OrdenTrabajoController : Controller
 {
     private readonly OrdenTrabajoServicio _ordenTrabajoServicio;
@@ -15,9 +23,14 @@ public class OrdenTrabajoController : Controller
 
     
     [HttpPost]
-    public async Task<ActionResult> Post(OrdenTrabajo OT)
+    public async Task<ActionResult> Post(OrdenTrabajoData OT)
     {
-        return Ok(await  _ordenTrabajoServicio.Create(OT));
+        if (OT == null)
+        {
+            return BadRequest();
+        }
+        OrdenTrabajo OTCrada = await  _ordenTrabajoServicio.Create(OT);
+        return Ok(OTCrada);
     }
 
     // GET by ID

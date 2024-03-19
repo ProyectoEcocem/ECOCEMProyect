@@ -37,18 +37,23 @@ public class HerramientaService
             return null;
         }
         
-        //existingBascula.BasculaId = bascula.BasculaId;
         await _context.SaveChangesAsync();
 
         return herramienta;
     }
 
-    public async Task<Herramienta> Create(Herramienta herramienta)
+    public async Task<Herramienta> Create(HerramientaData herramienta)
     {
-        _context.Herramientas.Add(herramienta);
+        Herramienta h = new Herramienta();
+
+        h.HerramientaId = herramienta.HerramientaId;
+        h.Nombre = herramienta.Nombre;
+        h.Descripcion = herramienta.Descripcion;
+
+        _context.Herramientas.Add(h);
         await _context.SaveChangesAsync();
 
-        return herramienta;
+        return h;
     }
 
     public async Task Delete(int id)

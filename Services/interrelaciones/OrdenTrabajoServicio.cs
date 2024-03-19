@@ -36,12 +36,19 @@ public class OrdenTrabajoServicio
 
         return OT;
     }
-    public async Task<OrdenTrabajo> Create(OrdenTrabajo OT)
+    public async Task<OrdenTrabajo> Create(OrdenTrabajoData OT)
     {
-        _context.OrdenTrabajos.Add(OT);
+        OrdenTrabajo ot = new OrdenTrabajo();
+
+        ot.EquipoId = OT.EquipoId;
+        ot.BrigadaId = OT.BrigadaId;
+        ot.TrabajadorId = OT.TrabajadorId;
+        ot.FechaId = OT.FechaId;
+
+        _context.OrdenTrabajos.Add(ot);
         await _context.SaveChangesAsync();
 
-        return OT;
+        return ot;
     }
      public async Task Delete(int EquipoId,int BrigadaId,int TrabajadorId,DateTime FechaId)
     {

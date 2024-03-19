@@ -42,6 +42,7 @@ export default class Equipo extends React.Component {
       return (
         <div style={{height : 400}}>
 
+<AbsoluteCenter top={"80px"} left={"600px"}>
 <Button
          onClick={this.manejarInsertarEquipoModal}
          marginBottom={5}
@@ -79,6 +80,7 @@ export default class Equipo extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
+      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Equipos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

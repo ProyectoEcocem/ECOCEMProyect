@@ -40,11 +40,11 @@ export default class VisualizarAccionMantenimiento extends React.Component {
     render() {
       return (
         <div style={{height : 400}}>
-
+<AbsoluteCenter top={"80px"} left={"700px"}>
 <Button
          onClick={this. manejarInsertarAccionMantenimientoModal}
-         marginBottom={5}
-         marginTop={5}
+         marginBottom={10}
+         marginLeft={10}
          >
           Agregar Accion de Mantenimiento
          </Button>
@@ -79,6 +79,7 @@ export default class VisualizarAccionMantenimiento extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
+        </AbsoluteCenter>
         </div>
         // <ul>
           // { this.state.roturasE.map(roturaE => <li key={roturaE.roturaId}> Id:{roturaE.roturaId} Equipo: {roturaE.equipoId} Fecha:  Equipo: {roturaE.fechaId} </li>)}

@@ -26,6 +26,7 @@ import {
  import VisualizarOrdenTrabajo from './VisualizarOrdenTrabajo';
  import RoturaEquipo from './VisualizarRoturaEquipo';
  import Rotura from './VisualizarRotura';
+ import VisualizarHerramienta from './VisualizarHerramienta';
 
  const VentanaPrincipal = () => {
 
@@ -130,7 +131,10 @@ import {
   >
     Equipo
   </Button>
-  <Button colorScheme='teal' variant='link'>Herramienta</Button>
+  <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarHerramientaModal }
+  >
+    Herramienta 
+  </Button>
   <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarOrdenTrabajoModal }
   >
     Orden de Trabajo</Button>
@@ -212,6 +216,22 @@ import {
  <Equipo 
  onClose={() => setVisualizarEquipoModalAbierto(false)}/>
  </Modal>
+
+ <Modal
+ isOpen={visualizarHerramientaModalAbierto}
+ onClose={() => setVisualizarHerramientaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <VisualizarHerramienta 
+ onClose={() => setVisualizarHerramientaModalAbierto(false)}/>
+ </Modal>
+
 
  <Modal
  isOpen={visualizarOrdenTrabajoModalAbierto}

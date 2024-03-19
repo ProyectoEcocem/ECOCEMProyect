@@ -13,6 +13,7 @@ const InsertarBascula = () => {
   const [numeroBascula, setNumeroBascula] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [noSede, setSedeId] = useState(1);
+  const [insertarBasculaModalAbierto, setInsertarBasculaModalAbierto] = useState(false);
   const [insertSuccess, setInsertSuccess] = useState(false);
   //Lista de sedes
   const [sedes, setSedes] = useState([]);
@@ -37,11 +38,17 @@ useEffect(() => {
     })
     .then((response) => {
       console.log(response);
-      alert("Se insertó")
+      alert("La Báscula se ha insertado correctamente")
+      setInsertarBasculaModalAbierto(false);
     }, (error) => {
       console.log(error);
       alert("Revise que no exista otra bascula con ese número de serie")
     });
+  };
+
+  const handleCancelar = () => {
+    // Cierra la ventana modal desde el componente padre.
+    onClose();
   };
  
   
@@ -57,7 +64,7 @@ useEffect(() => {
     <div
       style={{
         width: "400px",
-        height: "400px",
+        height: "500px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -70,7 +77,7 @@ useEffect(() => {
       <FormLabel style={{ fontSize: 30 }}>Insertar Bascula</FormLabel>
 
      
-        <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
+        <FormLabel style={{ marginLeft: 0, marginRight: 100 }}>
           Número de Serie de Bascula
         </FormLabel>
         <Input
@@ -83,8 +90,8 @@ useEffect(() => {
         />
        
       
-        <FormLabel style={{ margin: "0px 20px 0px 40px"  }}>
-        Descripción..
+        <FormLabel style={{ marginTop: 20, marginRight: 230 }}>
+        Descripción
         </FormLabel>  
         <Input
           value={descripcion}
@@ -94,7 +101,7 @@ useEffect(() => {
           width={80}
           backgroundColor="white"
         />
-         <FormLabel style={{ margin: "0px 20px 0px 40px"  }}>
+         <FormLabel style={{ marginTop:20, marginRight: 130 }}>
         Sede a la que pertenece
       </FormLabel>
 
@@ -114,7 +121,7 @@ useEffect(() => {
 
       
 
-        <Flex>    
+        <Flex justifyContent="space-between">    
         <Button
           variant="contained"
           color="primary"
@@ -129,6 +136,10 @@ useEffect(() => {
           )}
           Aceptar
         </Button>
+
+        <Button variant="outline" colorScheme="red" marginTop={5} onClick={handleCancelar}>
+    Cancelar
+  </Button>
         </Flex>
 
     </div>

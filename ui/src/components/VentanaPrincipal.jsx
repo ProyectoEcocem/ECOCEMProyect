@@ -28,6 +28,7 @@ import {
  import Rotura from './VisualizarRotura';
  import VisualizarHerramienta from './VisualizarHerramienta';
  import Reporte from './Reporte';
+ import Bascula from './VisualizarBascula';
 
  const VentanaPrincipal = () => {
 
@@ -42,6 +43,7 @@ import {
         const [visualizarRoturaEquipoModalAbierto, setVisualizarRoturaEquipoModalAbierto] = useState(false);
         const [visualizarRoturaModalAbierto, setVisualizarRoturaModalAbierto] = useState(false);
         const [visualizarReporteModalAbierto, setVisualizarReporteModalAbierto] = useState(false);
+        const [visualizarBasculaModalAbierto, setVisualizarBasculaModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -54,6 +56,7 @@ import {
              ['VisualizarRoturaEquipoModalAbierto', setVisualizarRoturaEquipoModalAbierto],
              ['VisualizarRoturaModalAbierto', setVisualizarRoturaModalAbierto],
              ['VisualizarReporteModalAbierto', setVisualizarReporteModalAbierto]
+             ['visualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -141,13 +144,15 @@ import {
       </AccordionButton>
     </h2>
     <AccordionPanel pb={4}>
-      <Button colorScheme='teal' variant='link'>Báscula</Button>
+    <Stack direction='column' spacing={2} align="flex-start">
+      <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto) } >Báscula</Button>
       <Button colorScheme='teal' variant='link'>Entidad Compradora</Button>
       <Button colorScheme='teal' variant='link'>Fábrica</Button>
       <Button colorScheme='teal' variant='link'>Medidor</Button>
       <Button colorScheme='teal' variant='link'>Silo</Button>
       <Button colorScheme='teal' variant='link'>Tipo de Cemento</Button>
       <Button colorScheme='teal' variant='link'>Vehículo</Button>
+      </Stack>
     </AccordionPanel>
   </AccordionItem>
   <AccordionItem>
@@ -278,6 +283,21 @@ import {
  >
  <Reporte
  onClose={() => setVisualizarReporteModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarBasculaModalAbierto}
+ onClose={() => setVisualizarBasculaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Bascula
+ onClose={() => setVisualizarBasculaModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

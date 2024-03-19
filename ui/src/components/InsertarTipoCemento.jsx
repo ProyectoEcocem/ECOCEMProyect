@@ -8,9 +8,10 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-const InsertarTipoCemento = () => {
+const InsertarTipoCemento = ({onClose}) => {
   const [numeroTipoCemento, setNumeroTipoCemento] = useState("");
   const [insertSuccess, setInsertSuccess] = useState(false);
+  const [insertarTipoCementoModalAbierto, setInsertarTipoCementoModalAbierto] = useState(false);
 
   const createTipoCemento = async () => {
   
@@ -20,14 +21,19 @@ const InsertarTipoCemento = () => {
     })
     .then((response) => {
       console.log(response);
-      alert("Se inserto")
+      alert("El Tipo de Cemento se ha insertado")
+      setInsertarTipoCementoModalAbierto(false);
     }, (error) => {
       console.log(error);
-      alert("no")
+      alert("El Tipo de Cemento no se ha insertado")
     });
   };
  
-  
+  const handleCancelar = () => {
+    // Cierra la ventana modal desde el componente padre.
+    onClose();
+  };
+
 
   useEffect(() => {
     setInsertSuccess(false);
@@ -47,38 +53,43 @@ const InsertarTipoCemento = () => {
         border: "2px solid #5F89C1",
       }}
     >
-      <FormLabel style={{ fontSize: 30 }}>Insertar TipoCemento</FormLabel>
+      <FormLabel style={{ fontSize: 30, marginBottom: 20 }}>Insertar Tipo Cemento</FormLabel>
 
      <FormControl>
-        <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
+        <FormLabel style={{ marginLeft: 40}}>
           Nombre de TipoCemento
         </FormLabel>
         <Input
           value={numeroTipoCemento}
-          placeholder="Ingrese el Nombre de la TipoCemento"
+          placeholder="Ingrese el Nombre del Tipo Cemento"
           onChange={(e) => setNumeroTipoCemento(e.target.value)}
           marginTop={0.5}
+          marginLeft={10}
           width={80}
           backgroundColor="white"
         />
       </FormControl>
 
-
+      <Flex>
         <Button
           variant="contained"
           color="primary"
-          style={{ marginRight: 10, marginTop: 20 }}
+          style={{ marginRight: 10, marginTop: 40 }}
           onClick={createTipoCemento}
           type="submit"
           >
           {insertSuccess && (
-            <div style={{ marginTop: 20 }}>
+            <div style={{ marginTop: 40 }}>
               <Alert status="success">La  se creó correctamente.</Alert>
             </div>
           )}
           Aceptar
         </Button>
       
+        <Button variant="outline" colorScheme="red" marginTop={10} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
 
     </div>
   );

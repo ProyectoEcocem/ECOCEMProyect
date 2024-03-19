@@ -33,6 +33,7 @@ import {
  import Fabrica from './VisualizarFabrica';
  import Medidor from './VisualizarMedidor';
  import Silo from './VisualizarSilo';
+ import TipoCemento from './VisualizarTipoCemento';
 
  const VentanaPrincipal = () => {
 
@@ -52,6 +53,7 @@ import {
         const [visualizarFabricaModalAbierto, setVisualizarFabricaModalAbierto] = useState(false);
         const [visualizarMedidorModalAbierto, setVisualizarMedidorModalAbierto] = useState(false);
         const [visualizarSiloModalAbierto, setVisualizarSiloModalAbierto] = useState(false);
+        const [visualizarTipoCementoModalAbierto, setVisualizarTipoCementoModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -68,7 +70,8 @@ import {
              ['VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto],
              ['VisualizarFabricaModalAbierto', setVisualizarFabricaModalAbierto],
              ['VisualizarMedidorModalAbierto', setVisualizarMedidorModalAbierto],
-             ['VisualizarSiloModalAbierto', setVisualizarSiloModalAbierto]
+             ['VisualizarSiloModalAbierto', setVisualizarSiloModalAbierto],
+             ['VisualizarTipoCementoModalAbierto', setVisualizarTipoCementoModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -175,7 +178,10 @@ import {
       >
         Silo
       </Button>
-      <Button colorScheme='teal' variant='link'>Tipo de Cemento</Button>
+      <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarTipoCementoModalAbierto', setVisualizarTipoCementoModalAbierto)}
+      >
+        Tipo de Cemento
+        </Button>
       <Button colorScheme='teal' variant='link'>Vehículo</Button>
       </Stack>
     </AccordionPanel>
@@ -383,6 +389,21 @@ import {
  >
  <Silo
  onClose={() => setVisualizarSiloModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarTipoCementoModalAbierto}
+ onClose={() => setVisualizarTipoCementoModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <TipoCemento
+ onClose={() => setVisualizarTipoCementoModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

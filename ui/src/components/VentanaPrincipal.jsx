@@ -29,6 +29,7 @@ import {
  import VisualizarHerramienta from './VisualizarHerramienta';
  import Reporte from './Reporte';
  import Bascula from './VisualizarBascula';
+ import EntidadCompradora from './VisualizarEntidadCompradora';
 
  const VentanaPrincipal = () => {
 
@@ -44,6 +45,7 @@ import {
         const [visualizarRoturaModalAbierto, setVisualizarRoturaModalAbierto] = useState(false);
         const [visualizarReporteModalAbierto, setVisualizarReporteModalAbierto] = useState(false);
         const [visualizarBasculaModalAbierto, setVisualizarBasculaModalAbierto] = useState(false);
+        const [visualizarEntidadCompradoraModalAbierto, setVisualizarEntidadCompradoraModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -55,8 +57,9 @@ import {
              ['VisualizarOrdenTrabajoModalAbierto',  setVisualizarOrdenTrabajoModalAbierto],
              ['VisualizarRoturaEquipoModalAbierto', setVisualizarRoturaEquipoModalAbierto],
              ['VisualizarRoturaModalAbierto', setVisualizarRoturaModalAbierto],
-             ['VisualizarReporteModalAbierto', setVisualizarReporteModalAbierto]
-             ['visualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto]
+             ['VisualizarReporteModalAbierto', setVisualizarReporteModalAbierto],
+             ['VisualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto],
+             ['VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -145,8 +148,14 @@ import {
     </h2>
     <AccordionPanel pb={4}>
     <Stack direction='column' spacing={2} align="flex-start">
-      <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto) } >Báscula</Button>
-      <Button colorScheme='teal' variant='link'>Entidad Compradora</Button>
+      <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto) }
+       >
+        Báscula
+        </Button>
+      <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto)}
+      >
+        Entidad Compradora
+        </Button>
       <Button colorScheme='teal' variant='link'>Fábrica</Button>
       <Button colorScheme='teal' variant='link'>Medidor</Button>
       <Button colorScheme='teal' variant='link'>Silo</Button>
@@ -298,6 +307,21 @@ import {
  >
  <Bascula
  onClose={() => setVisualizarBasculaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarEntidadCompradoraModalAbierto}
+ onClose={() => setVisualizarEntidadCompradoraModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <EntidadCompradora
+ onClose={() => setVisualizarEntidadCompradoraModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

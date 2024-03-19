@@ -9,7 +9,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-const InsertarBascula = () => {
+const InsertarBascula = ({onClose}) => {
   const [numeroBascula, setNumeroBascula] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [noSede, setSedeId] = useState(1);

@@ -30,6 +30,7 @@ import {
  import Reporte from './Reporte';
  import Bascula from './VisualizarBascula';
  import EntidadCompradora from './VisualizarEntidadCompradora';
+ import Fabrica from './VisualizarFabrica';
 
  const VentanaPrincipal = () => {
 
@@ -46,6 +47,7 @@ import {
         const [visualizarReporteModalAbierto, setVisualizarReporteModalAbierto] = useState(false);
         const [visualizarBasculaModalAbierto, setVisualizarBasculaModalAbierto] = useState(false);
         const [visualizarEntidadCompradoraModalAbierto, setVisualizarEntidadCompradoraModalAbierto] = useState(false);
+        const [visualizarFabricaModalAbierto, setVisualizarFabricaModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -59,7 +61,8 @@ import {
              ['VisualizarRoturaModalAbierto', setVisualizarRoturaModalAbierto],
              ['VisualizarReporteModalAbierto', setVisualizarReporteModalAbierto],
              ['VisualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto],
-             ['VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto]
+             ['VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto],
+             ['VisualizarFabricaModalAbierto', setVisualizarFabricaModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -156,7 +159,9 @@ import {
       >
         Entidad Compradora
         </Button>
-      <Button colorScheme='teal' variant='link'>Fábrica</Button>
+      <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarFabricaModalAbierto', setVisualizarFabricaModalAbierto)}>
+        Fábrica
+        </Button>
       <Button colorScheme='teal' variant='link'>Medidor</Button>
       <Button colorScheme='teal' variant='link'>Silo</Button>
       <Button colorScheme='teal' variant='link'>Tipo de Cemento</Button>
@@ -322,6 +327,21 @@ import {
  >
  <EntidadCompradora
  onClose={() => setVisualizarEntidadCompradoraModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarFabricaModalAbierto}
+ onClose={() => setVisualizarFabricaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Fabrica
+ onClose={() => setVisualizarFabricaModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

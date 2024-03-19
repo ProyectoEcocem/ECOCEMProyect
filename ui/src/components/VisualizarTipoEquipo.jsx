@@ -43,6 +43,7 @@ export default class TiposEquipo extends React.Component {
       return (
        <div style={{height : 400}}>
 
+<AbsoluteCenter top={"80px"} left={"600px"}>
         <Button
          onClick={this.manejarInsertarTipoEquipoModal}
          marginBottom={5}
@@ -78,7 +79,7 @@ export default class TiposEquipo extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-       
+        </AbsoluteCenter>
        </div>
       )
     }

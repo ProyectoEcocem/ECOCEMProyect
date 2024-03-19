@@ -37,6 +37,7 @@ import {
  import Vehiculo from './VisualizarVehiculo';
  import VisualizarBrigada from './VisualizarBrigada';
  import Sedes from './VisualizarSede';
+import TiposEquipo from './VisualizarTipoEquipo';
 
  const VentanaPrincipal = () => {
 
@@ -60,6 +61,7 @@ import {
         const [visualizarVehiculoModalAbierto, setVisualizarVehiculoModalAbierto] = useState(false);
         const [visualizarBrigadaModalAbierto, setVisualizarBrigadaModalAbierto] = useState(false);
         const [visualizarSedeModalAbierto, setVisualizarSedeModalAbierto] = useState(false);
+        const [visualizarTipoEquipoModalAbierto, setVisualizarTipoEquipoModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -80,7 +82,8 @@ import {
              ['VisualizarTipoCementoModalAbierto', setVisualizarTipoCementoModalAbierto],
              ['VisualizarVehiculoModalAbierto', setVisualizarVehiculoModalAbierto],
              ['VisualizarBrigadaModalAbierto', setVisualizarBrigadaModalAbierto],
-             ['VisualizarSedeModalAbierto', setVisualizarSedeModalAbierto]
+             ['VisualizarSedeModalAbierto', setVisualizarSedeModalAbierto],
+             ['VisualizarTipoEquipoModalAbierto', setVisualizarTipoEquipoModalAbierto],
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -209,7 +212,6 @@ import {
     </h2>
     <AccordionPanel pb={4}>
     <Stack direction='column' spacing={2} align="flex-start">
-    <UnorderedList textAlign='left'>
     <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'VisualizarBrigadaModalAbierto', setVisualizarBrigadaModalAbierto )}
       >
         Brigada
@@ -219,10 +221,13 @@ import {
       >
         Sede
         </Button>
-  <ListItem>Sucursal</ListItem>
-  <ListItem>Tipo de Equipo</ListItem>
-  <ListItem>Trabajador</ListItem>
-</UnorderedList>
+  
+        <Button colorScheme='teal' variant='link'>Sucursal</Button>
+        <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'VisualizarTipoEquipoModalAbierto', setVisualizarTipoEquipoModalAbierto )}
+        >
+          Tipo de Equipo
+          </Button>
+        <Button colorScheme='teal' variant='link'>Trabajador</Button>
 </Stack>
     </AccordionPanel>
   </AccordionItem>
@@ -470,6 +475,22 @@ import {
  >
  <Sedes
  onClose={() => setVisualizarSedeModalAbierto(false)}/>
+ </Modal>
+
+ 
+ <Modal
+ isOpen={visualizarTipoEquipoModalAbierto}
+ onClose={() => setVisualizarTipoEquipoModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <TiposEquipo
+ onClose={() => setVisualizarTipoEquipoModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

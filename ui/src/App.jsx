@@ -3,9 +3,11 @@
 //import viteLogo from '/vite.svg'
 import './App.css'
 import { ChakraProvider } from '@chakra-ui/react'
+import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import Login from './components/Login'
 import VentanaPrincipal from './components/VentanaPrincipal'
 import InsertarRoles from './components/InsertarRoles'
+import VisualizarAccionMantenimiento from './components/VisualizarAccionmantenimiento';
 import { useState } from 'react'
 import Resumenes from './components/ResumenesParametrosIndicadores'
 

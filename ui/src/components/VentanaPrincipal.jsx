@@ -36,6 +36,7 @@ import {
  import TipoCemento from './VisualizarTipoCemento';
  import Vehiculo from './VisualizarVehiculo';
  import VisualizarBrigada from './VisualizarBrigada';
+ import Sedes from './VisualizarSede';
 
  const VentanaPrincipal = () => {
 
@@ -58,6 +59,7 @@ import {
         const [visualizarTipoCementoModalAbierto, setVisualizarTipoCementoModalAbierto] = useState(false);
         const [visualizarVehiculoModalAbierto, setVisualizarVehiculoModalAbierto] = useState(false);
         const [visualizarBrigadaModalAbierto, setVisualizarBrigadaModalAbierto] = useState(false);
+        const [visualizarSedeModalAbierto, setVisualizarSedeModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -77,7 +79,8 @@ import {
              ['VisualizarSiloModalAbierto', setVisualizarSiloModalAbierto],
              ['VisualizarTipoCementoModalAbierto', setVisualizarTipoCementoModalAbierto],
              ['VisualizarVehiculoModalAbierto', setVisualizarVehiculoModalAbierto],
-             ['VisualizarBrigadaModalAbierto', setVisualizarBrigadaModalAbierto] 
+             ['VisualizarBrigadaModalAbierto', setVisualizarBrigadaModalAbierto],
+             ['VisualizarSedeModalAbierto', setVisualizarSedeModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -211,8 +214,11 @@ import {
       >
         Brigada
         </Button>
-  <ListItem>Brigada</ListItem>
-  <ListItem>Sede</ListItem>
+  
+        <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'VisualizarSedeModalAbierto', setVisualizarSedeModalAbierto )}
+      >
+        Sede
+        </Button>
   <ListItem>Sucursal</ListItem>
   <ListItem>Tipo de Equipo</ListItem>
   <ListItem>Trabajador</ListItem>
@@ -449,6 +455,21 @@ import {
  >
  <VisualizarBrigada
  onClose={() => setVisualizarBrigadaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarSedeModalAbierto}
+ onClose={() => setVisualizarSedeModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Sedes
+ onClose={() => setVisualizarSedeModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

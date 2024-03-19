@@ -19,7 +19,7 @@ import {
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
-export default class TiposEquipo extends React.Component {
+export default class Rotura extends React.Component {
     state = {
       Roturas: [],
       insertarRoturaModalAbierto: false, //controlar si la pestana de insertar rotura esta abierta
@@ -40,7 +40,7 @@ export default class TiposEquipo extends React.Component {
     render() {
       return (
         <div style={{height : 400}}>
-
+          <AbsoluteCenter top={"80px"} left={"550px"}>
           <Button
          onClick={this.manejarInsertarRoturaModal}
          marginBottom={5}
@@ -77,6 +77,7 @@ export default class TiposEquipo extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
+        </AbsoluteCenter>
 </div>
 
         // <ul>

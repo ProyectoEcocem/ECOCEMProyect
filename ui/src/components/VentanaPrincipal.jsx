@@ -27,6 +27,7 @@ import {
  import RoturaEquipo from './VisualizarRoturaEquipo';
  import Rotura from './VisualizarRotura';
  import VisualizarHerramienta from './VisualizarHerramienta';
+ import Reporte from './Reporte';
 
  const VentanaPrincipal = () => {
 
@@ -40,6 +41,7 @@ import {
         const [visualizarOrdenTrabajoModalAbierto, setVisualizarOrdenTrabajoModalAbierto] = useState(false);
         const [visualizarRoturaEquipoModalAbierto, setVisualizarRoturaEquipoModalAbierto] = useState(false);
         const [visualizarRoturaModalAbierto, setVisualizarRoturaModalAbierto] = useState(false);
+        const [visualizarReporteModalAbierto, setVisualizarReporteModalAbierto] = useState(false);
         
 
         const abrirVisualizarAccionMantenimientoModal = () => {
@@ -49,6 +51,7 @@ import {
           setVisualizarOrdenTrabajoModalAbierto(false);
           setVisualizarRoturaEquipoModalAbierto(false);
           setVisualizarRoturaModalAbierto(false);
+          setVisualizarReporteModalAbierto(false);
          };
 
          const abrirVisualizarEquipoModal = () => {
@@ -58,6 +61,7 @@ import {
           setVisualizarOrdenTrabajoModalAbierto(false);
           setVisualizarRoturaEquipoModalAbierto(false);
           setVisualizarRoturaModalAbierto(false);
+          setVisualizarReporteModalAbierto(false);
          };
 
          const abrirVisualizarHerramientaModal = () => {
@@ -67,6 +71,7 @@ import {
           setVisualizarOrdenTrabajoModalAbierto(false);
           setVisualizarRoturaEquipoModalAbierto(false);
           setVisualizarRoturaModalAbierto(false);
+          setVisualizarReporteModalAbierto(false);
          }
 
          const abrirVisualizarOrdenTrabajoModal = () => {
@@ -76,6 +81,7 @@ import {
           setVisualizarOrdenTrabajoModalAbierto(true);
           setVisualizarRoturaEquipoModalAbierto(false);
           setVisualizarRoturaModalAbierto(false);
+          setVisualizarReporteModalAbierto(false);
          }
 
          const abrirVisualizarRoturaEquipoModal = () => {
@@ -85,6 +91,7 @@ import {
           setVisualizarOrdenTrabajoModalAbierto(false);
           setVisualizarRoturaEquipoModalAbierto(true);
           setVisualizarRoturaModalAbierto(false);
+          setVisualizarReporteModalAbierto(false);
          }
 
          const abrirVisualizarRoturaModal = () => {
@@ -94,6 +101,17 @@ import {
           setVisualizarOrdenTrabajoModalAbierto(false);
           setVisualizarRoturaEquipoModalAbierto(false);
           setVisualizarRoturaModalAbierto(true);
+          setVisualizarReporteModalAbierto(false);
+         }
+
+         const abrirVisualizarReporteModal = () => {
+          setVisualizarAccionMantenimientoEModalAbierto(false);
+          setVisualizarEquipoModalAbierto(false);
+          setVisualizarHerramientaModalAbierto(false);
+          setVisualizarOrdenTrabajoModalAbierto(false);
+          setVisualizarRoturaEquipoModalAbierto(false);
+          setVisualizarRoturaModalAbierto(false);
+          setVisualizarReporteModalAbierto(true);
          }
 
  return(
@@ -138,7 +156,11 @@ import {
   <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarOrdenTrabajoModal }
   >
     Orden de Trabajo</Button>
-  <Button colorScheme='teal' variant='link'>Reporte</Button>
+  <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarReporteModal }
+  >
+    Reporte
+  </Button>
+
   <Button colorScheme='teal' variant='link' onClick={ abrirVisualizarRoturaEquipoModal }
   >
     Rotura de Equipo</Button>
@@ -276,6 +298,21 @@ import {
  >
  <Rotura
  onClose={() => setVisualizarRoturaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarReporteModalAbierto}
+ onClose={() => setVisualizarReporteModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Reporte
+ onClose={() => setVisualizarReporteModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

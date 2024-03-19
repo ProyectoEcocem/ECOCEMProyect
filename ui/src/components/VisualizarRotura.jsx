@@ -40,7 +40,7 @@ export default class Rotura extends React.Component {
     render() {
       return (
         <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"550px"}>
+          <AbsoluteCenter top={"80px"} left={"600px"}>
           <Button
          onClick={this.manejarInsertarRoturaModal}
          marginBottom={5}
@@ -62,6 +62,7 @@ export default class Rotura extends React.Component {
               <Tr>
                 <Th>ID</Th>
                 <Th>Nombre</Th>
+                <Th>Descripción</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -70,6 +71,7 @@ export default class Rotura extends React.Component {
                   <Tr key={rotura.RoturaId}>
                     <Td>{rotura.RoturaId}</Td>
                     <Td>{rotura.nombreRotura}</Td>
+                    <Td>{rotura.descripcion}</Td>
                   </Tr>
                 )
                 )

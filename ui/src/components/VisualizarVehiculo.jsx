@@ -13,12 +13,16 @@ import {
   Tr,
   Th,
   Td,
+  Modal, 
+  AbsoluteCenter,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+import InsertarVehiculo from  './InsertarVehiculo'
 export default class Vehiculo extends React.Component {
     state = {
-      Vehiculos: []
+      Vehiculos: [],
+      insertarVehiculoModalAbierto: false,
     }
   
     componentDidMount() {
@@ -28,10 +32,27 @@ export default class Vehiculo extends React.Component {
           this.setState({ Vehiculos });
         })
     }
+
+    manejarInsertarVehiculoModal = () => {
+      this.setState({ insertarVehiculoModalAbierto: true });
+    };
   
     render() {
       return (
         <div style={{height : 400}}>
+          <AbsoluteCenter top={"80px"} left={"550px"}>
+          <Button
+         onClick={this.manejarInsertarVehiculoModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Vehículo
+         </Button>
+         <Modal isOpen={this.state.insertarVehiculoModalAbierto} onClose={() => this.setState({ insertarVehiculoModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarVehiculo onClose={() => this.setState({ insertarVehiculoModalAbierto: false })} />
+         </AbsoluteCenter>
+         </Modal>
         <TableContainer>
         <Table>
           <Thead>
@@ -53,6 +74,7 @@ export default class Vehiculo extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
+      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Vehiculos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

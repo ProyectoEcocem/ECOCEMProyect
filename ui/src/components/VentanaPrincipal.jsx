@@ -34,6 +34,7 @@ import {
  import Medidor from './VisualizarMedidor';
  import Silo from './VisualizarSilo';
  import TipoCemento from './VisualizarTipoCemento';
+ import Vehiculo from './VisualizarVehiculo';
 
  const VentanaPrincipal = () => {
 
@@ -54,6 +55,7 @@ import {
         const [visualizarMedidorModalAbierto, setVisualizarMedidorModalAbierto] = useState(false);
         const [visualizarSiloModalAbierto, setVisualizarSiloModalAbierto] = useState(false);
         const [visualizarTipoCementoModalAbierto, setVisualizarTipoCementoModalAbierto] = useState(false);
+        const [visualizarVehiculoModalAbierto, setVisualizarVehiculoModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -71,7 +73,8 @@ import {
              ['VisualizarFabricaModalAbierto', setVisualizarFabricaModalAbierto],
              ['VisualizarMedidorModalAbierto', setVisualizarMedidorModalAbierto],
              ['VisualizarSiloModalAbierto', setVisualizarSiloModalAbierto],
-             ['VisualizarTipoCementoModalAbierto', setVisualizarTipoCementoModalAbierto]
+             ['VisualizarTipoCementoModalAbierto', setVisualizarTipoCementoModalAbierto],
+             ['VisualizarVehiculoModalAbierto', setVisualizarVehiculoModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -182,7 +185,10 @@ import {
       >
         Tipo de Cemento
         </Button>
-      <Button colorScheme='teal' variant='link'>Vehículo</Button>
+      <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarVehiculoModalAbierto', setVisualizarVehiculoModalAbierto)}
+      >
+        Vehículo
+        </Button>
       </Stack>
     </AccordionPanel>
   </AccordionItem>
@@ -404,6 +410,21 @@ import {
  >
  <TipoCemento
  onClose={() => setVisualizarTipoCementoModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarVehiculoModalAbierto}
+ onClose={() => setVisualizarVehiculoModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Vehiculo
+ onClose={() => setVisualizarVehiculoModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

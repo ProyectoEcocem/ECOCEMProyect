@@ -35,6 +35,7 @@ import {
  import Silo from './VisualizarSilo';
  import TipoCemento from './VisualizarTipoCemento';
  import Vehiculo from './VisualizarVehiculo';
+ import VisualizarBrigada from './VisualizarBrigada';
 
  const VentanaPrincipal = () => {
 
@@ -56,6 +57,7 @@ import {
         const [visualizarSiloModalAbierto, setVisualizarSiloModalAbierto] = useState(false);
         const [visualizarTipoCementoModalAbierto, setVisualizarTipoCementoModalAbierto] = useState(false);
         const [visualizarVehiculoModalAbierto, setVisualizarVehiculoModalAbierto] = useState(false);
+        const [visualizarBrigadaModalAbierto, setVisualizarBrigadaModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -74,7 +76,8 @@ import {
              ['VisualizarMedidorModalAbierto', setVisualizarMedidorModalAbierto],
              ['VisualizarSiloModalAbierto', setVisualizarSiloModalAbierto],
              ['VisualizarTipoCementoModalAbierto', setVisualizarTipoCementoModalAbierto],
-             ['VisualizarVehiculoModalAbierto', setVisualizarVehiculoModalAbierto]
+             ['VisualizarVehiculoModalAbierto', setVisualizarVehiculoModalAbierto],
+             ['VisualizarBrigadaModalAbierto', setVisualizarBrigadaModalAbierto] 
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -202,13 +205,19 @@ import {
       </AccordionButton>
     </h2>
     <AccordionPanel pb={4}>
+    <Stack direction='column' spacing={2} align="flex-start">
     <UnorderedList textAlign='left'>
+    <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'VisualizarBrigadaModalAbierto', setVisualizarBrigadaModalAbierto )}
+      >
+        Brigada
+        </Button>
   <ListItem>Brigada</ListItem>
   <ListItem>Sede</ListItem>
   <ListItem>Sucursal</ListItem>
   <ListItem>Tipo de Equipo</ListItem>
   <ListItem>Trabajador</ListItem>
 </UnorderedList>
+</Stack>
     </AccordionPanel>
   </AccordionItem>
 </Accordion>
@@ -425,6 +434,21 @@ import {
  >
  <Vehiculo
  onClose={() => setVisualizarVehiculoModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarBrigadaModalAbierto}
+ onClose={() => setVisualizarBrigadaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <VisualizarBrigada
+ onClose={() => setVisualizarBrigadaModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

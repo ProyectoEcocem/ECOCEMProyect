@@ -31,6 +31,8 @@ import {
  import Bascula from './VisualizarBascula';
  import EntidadCompradora from './VisualizarEntidadCompradora';
  import Fabrica from './VisualizarFabrica';
+ import Medidor from './VisualizarMedidor';
+ import Silo from './VisualizarSilo';
 
  const VentanaPrincipal = () => {
 
@@ -48,6 +50,8 @@ import {
         const [visualizarBasculaModalAbierto, setVisualizarBasculaModalAbierto] = useState(false);
         const [visualizarEntidadCompradoraModalAbierto, setVisualizarEntidadCompradoraModalAbierto] = useState(false);
         const [visualizarFabricaModalAbierto, setVisualizarFabricaModalAbierto] = useState(false);
+        const [visualizarMedidorModalAbierto, setVisualizarMedidorModalAbierto] = useState(false);
+        const [visualizarSiloModalAbierto, setVisualizarSiloModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -62,7 +66,9 @@ import {
              ['VisualizarReporteModalAbierto', setVisualizarReporteModalAbierto],
              ['VisualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto],
              ['VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto],
-             ['VisualizarFabricaModalAbierto', setVisualizarFabricaModalAbierto]
+             ['VisualizarFabricaModalAbierto', setVisualizarFabricaModalAbierto],
+             ['VisualizarMedidorModalAbierto', setVisualizarMedidorModalAbierto],
+             ['VisualizarSiloModalAbierto', setVisualizarSiloModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -162,8 +168,13 @@ import {
       <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarFabricaModalAbierto', setVisualizarFabricaModalAbierto)}>
         Fábrica
         </Button>
-      <Button colorScheme='teal' variant='link'>Medidor</Button>
-      <Button colorScheme='teal' variant='link'>Silo</Button>
+      <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarMedidorModalAbierto', setVisualizarMedidorModalAbierto)}>
+        Medidor
+        </Button>
+      <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarSiloModalAbierto', setVisualizarSiloModalAbierto)}
+      >
+        Silo
+      </Button>
       <Button colorScheme='teal' variant='link'>Tipo de Cemento</Button>
       <Button colorScheme='teal' variant='link'>Vehículo</Button>
       </Stack>
@@ -342,6 +353,36 @@ import {
  >
  <Fabrica
  onClose={() => setVisualizarFabricaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarMedidorModalAbierto}
+ onClose={() => setVisualizarMedidorModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Medidor
+ onClose={() => setVisualizarMedidorModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarSiloModalAbierto}
+ onClose={() => setVisualizarSiloModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Silo
+ onClose={() => setVisualizarSiloModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

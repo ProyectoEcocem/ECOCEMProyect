@@ -37,12 +37,20 @@ public class RoturaEquipoServicio
 
         return roturaE;
     }
-    public async Task<RoturaEquipo> Create(RoturaEquipo roturaE)
+    public async Task<RoturaEquipo> Create(RoturaEquipoData roturaE)
     {
-        _context.RoturasEquipos.Add(roturaE);
-        await _context.SaveChangesAsync();
+         if(_context.RoturasEquipos.Any(elemento => elemento.EquipoId == roturaE.EquipoId && elemento.RoturaId== roturaE.RoturaId && elemento.FechaId==roturaE.FechaId))
+            return null!;
+            
+        RoturaEquipo f1 = new RoturaEquipo();
 
-        return roturaE;
+        f1.RoturaId = roturaE.RoturaId;
+        f1.EquipoId = roturaE.EquipoId;
+        f1.FechaId = roturaE.FechaId;
+
+        _context.RoturasEquipos.Add(f1);
+        await _context.SaveChangesAsync();
+        return f1;
     }
      public async Task Delete(int RoturaId,int EquipoId,DateTime FechaId)
     {

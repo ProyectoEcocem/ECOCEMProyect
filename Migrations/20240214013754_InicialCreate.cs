@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreater : Migration
+    public partial class InicialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,7 +49,8 @@ namespace ECOCEMProject.Migrations
                 columns: table => new
                 {
                     BrigadaId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Descripcion = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -369,16 +370,19 @@ namespace ECOCEMProject.Migrations
                     SiloId = table.Column<int>(type: "integer", nullable: false),
                     VehiculoId = table.Column<int>(type: "integer", nullable: false),
                     FechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    compraSedeId = table.Column<int>(type: "integer", nullable: false),
-                    compraFabricaId = table.Column<int>(type: "integer", nullable: false),
-                    compraFechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    SedeId = table.Column<int>(type: "integer", nullable: false),
+                    FabricaId = table.Column<int>(type: "integer", nullable: false),
+                    FechaCompraId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CompraSedeId = table.Column<int>(type: "integer", nullable: false),
+                    CompraFabricaId = table.Column<int>(type: "integer", nullable: false),
+                    CompraFechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Descargas", x => new { x.TipoCementoId, x.SiloId, x.VehiculoId, x.FechaId });
                     table.ForeignKey(
-                        name: "FK_Descargas_Compras_compraSedeId_compraFabricaId_compraFechaId",
-                        columns: x => new { x.compraSedeId, x.compraFabricaId, x.compraFechaId },
+                        name: "FK_Descargas_Compras_CompraSedeId_CompraFabricaId_CompraFechaId",
+                        columns: x => new { x.CompraSedeId, x.CompraFabricaId, x.CompraFechaId },
                         principalTable: "Compras",
                         principalColumns: new[] { "SedeId", "FabricaId", "FechaId" },
                         onDelete: ReferentialAction.Cascade);
@@ -712,17 +716,14 @@ namespace ECOCEMProject.Migrations
                     BasculaId = table.Column<int>(type: "integer", nullable: false),
                     FechaBId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     PesoB = table.Column<int>(type: "integer", nullable: false),
-                    TipoCementoId = table.Column<int>(type: "integer", nullable: false),
-                    SiloId = table.Column<int>(type: "integer", nullable: false),
-                    FechaCargaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CargaTipoCementoId = table.Column<int>(type: "integer", nullable: true),
-                    CargaSiloId = table.Column<int>(type: "integer", nullable: true),
-                    CargaVehiculoId = table.Column<int>(type: "integer", nullable: true),
-                    CargaFechaCargaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     DescargaTipoCementoId = table.Column<int>(type: "integer", nullable: true),
                     DescargaSiloId = table.Column<int>(type: "integer", nullable: true),
                     DescargaVehiculoId = table.Column<int>(type: "integer", nullable: true),
-                    DescargaFechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    DescargaFechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CargaFechaCargaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CargaSiloId = table.Column<int>(type: "integer", nullable: true),
+                    CargaTipoCementoId = table.Column<int>(type: "integer", nullable: true),
+                    CargaVehiculoId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -784,9 +785,9 @@ namespace ECOCEMProject.Migrations
                 columns: new[] { "VentaSedeId", "VentaEntidadCompradoraId", "VentaFechaVentaId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Descargas_compraSedeId_compraFabricaId_compraFechaId",
+                name: "IX_Descargas_CompraSedeId_CompraFabricaId_CompraFechaId",
                 table: "Descargas",
-                columns: new[] { "compraSedeId", "compraFabricaId", "compraFechaId" });
+                columns: new[] { "CompraSedeId", "CompraFabricaId", "CompraFechaId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Equipos_SedeId",

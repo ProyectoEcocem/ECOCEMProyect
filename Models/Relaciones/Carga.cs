@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace ECOCEMProject;
 
 public class Carga
@@ -13,8 +15,13 @@ public class Carga
     public int SedeId {get; set;}
     public int EntidadCompradoraId {get; set;}
     public DateTime FechaVentaId {get; set;}
-    public required Venta Venta {get; set; }
+  
+    [JsonIgnore]
+    public Venta Venta {get; set; }
 
-    public required ICollection<MedicionSilo> MedicionesSilo {get; set; }
-    public required ICollection<MedicionBascula> MedicionesBascula {get; set; }
+    [JsonIgnore]
+    public ICollection<MedicionSilo> MedicionesSilo {get; set; }
+
+    [JsonIgnore]
+    public ICollection<MedicionBascula> MedicionesBascula {get; set; }
 }

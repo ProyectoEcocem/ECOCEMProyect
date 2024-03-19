@@ -1,7 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
-[Route("api/[controller]/[action]")]
+
+public class BrigadaData
+{
+    public int BrigadaId { get; set; }
+    public string Descripcion { get; set; }
+}
+
+[Route("api/[controller]")]
 [ApiController]
 public class BrigadaController : Controller
 {
@@ -26,14 +33,14 @@ public class BrigadaController : Controller
     public async Task<IEnumerable<Brigada>> GetAll() => await _brigadaServicio.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Brigada brigada)
+    public async Task<IActionResult> Post([FromBody] BrigadaData brigada)
     {
         if (brigada == null)
         {
             return BadRequest();
         }
         Brigada brigadaCreada = await _brigadaServicio.Create(brigada);
-        return CreatedAtRoute("Get", new { id = brigadaCreada.BrigadaId}, brigadaCreada);
+        return Ok(brigadaCreada);
     }
 
     [HttpPut]

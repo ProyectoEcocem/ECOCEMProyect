@@ -3,9 +3,6 @@ public class Reporte
     public int EquipoId {get; set;}
     public DateTime FechaId {get; set;}
 
-//ToDo: Revisar cada uno de los indicadores y parametros sujetos a cambios.
-// QUESTION: Hay intersección entre los parámetros e indicadores, ¿cómo se debe represent000000000000000000000000000000000000000ad.
-
     //Parámetros
     public double TiempoRealParoFalla {get; set;} //tr Tiempo real de paro por falla, en horas.
     public double TiempoRealMant {get; set;} //tm Tiempo real mtto, en horas-hombres.

@@ -37,12 +37,21 @@ public class MedicionBasculaServicio
 
         return medicionBascula;
     }
-    public async Task<MedicionBascula> Create(MedicionBascula medicionBascula)
+    public async Task<MedicionBascula> Create(MedicionBasculaData medicionBascula)
     {
-        _context.MedicionesBasculas.Add(medicionBascula);
-        await _context.SaveChangesAsync();
+        
+        MedicionBascula mb = new MedicionBascula();
 
-        return medicionBascula;
+        //creacion de medicion bascula
+        mb.VehiculoId = medicionBascula.VehiculoId;
+        mb.BasculaId = medicionBascula.BasculaId;
+        mb.FechaBId = medicionBascula.FechaBId;
+        mb.PesoB = medicionBascula.PesoB;
+
+
+        _context.MedicionesBasculas.Add(mb);
+        await _context.SaveChangesAsync();
+        return mb;
     }
      public async Task Delete(int BasculaId,int VehiculoId,DateTime FechaBId)
     {

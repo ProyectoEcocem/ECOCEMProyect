@@ -41,6 +41,7 @@ export default class RoturaEquipo extends React.Component {
       return (
         <div style={{height : 400}}>
 
+<AbsoluteCenter top={"80px"} left={"650px"}>
 <Button
          onClick={this.manejarInsertarRoturaEModal}
          marginBottom={5}
@@ -77,6 +78,7 @@ export default class RoturaEquipo extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
+        </AbsoluteCenter>
         </div>
         // <ul>
           // { this.state.roturasE.map(roturaE => <li key={roturaE.roturaId}> Id:{roturaE.roturaId} Equipo: {roturaE.equipoId} Fecha:  Equipo: {roturaE.fechaId} </li>)}

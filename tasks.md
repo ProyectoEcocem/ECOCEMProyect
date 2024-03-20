@@ -30,17 +30,17 @@ Peso del cemento:
 
 Gestión del mantenimiento:
 
--YA Monitorear el tiempo de operación de los equipos, emitiendo avisos de la cercanía de los distintos tipos de mantenimiento industrial de acuerdo al tiempo de explotación. 
+- YA Monitorear el tiempo de operación de los equipos, emitiendo avisos de la cercanía de los distintos tipos de mantenimiento industrial de acuerdo al tiempo de explotación. 
 
--YA Advertir con la antelación apropiada los tipos y las cantidades de piezas e insumos necesarios para realizar los mantenimientos industriales, así como las acciones que se requieren de acuerdo a las horas de explotación.
+- YA Advertir con la antelación apropiada los tipos y las cantidades de piezas e insumos necesarios para realizar los mantenimientos industriales, así como las acciones que se requieren de acuerdo a las horas de explotación.
 
--DIANA Emitir las órdenes de trabajo para la solicitud del servicio de los mantenimientos respectivos de forma oportuna y de modo que puedan ser completadas pertinentemente por los ejecutores del mantenimiento.
+- DIANA Emitir las órdenes de trabajo para la solicitud del servicio de los mantenimientos respectivos de forma oportuna y de modo que puedan ser completadas pertinentemente por los ejecutores del mantenimiento.
 
 - Registrar las acciones que se requiere realizar para ejecutar cada tipo de mantenimiento industrial, de acuerdo con los tipos de equipos y las horas de explotación.
 
 -  Emitir los registros de cierre mensual del mantenimiento industrial, sus costos y el modelo de ejecución del cronograma de mantenimiento semanal, mensual y anual.
 
-- Registrar las horas de roturas y los costos del mantenimiento industrial de los equipos tecnológicos más importantes de cada UEB y de la Empresa en su totalidad.
+- Registrar las horas de roturas y los costos del mantenimiento industrial de los equipos tecnológicos más importantes de cada UEB y de la Empresa en su totalidad.()
 
 - Visualizar los resultados más importantes relacionados con la gestión del mantenimiento en los puestos de operaciones y en los móviles habilitados de las UEB y de la Oficina Central a partir de resúmenes diarios, mensuales y anuales de los mantenimientos de los equipos tecnológicos en todas las graneleras de ECOCEM.
 

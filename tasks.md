@@ -36,9 +36,9 @@ Gestión del mantenimiento:
 
 - DIANA Emitir las órdenes de trabajo para la solicitud del servicio de los mantenimientos respectivos de forma oportuna y de modo que puedan ser completadas pertinentemente por los ejecutores del mantenimiento.
 
-- Registrar las acciones que se requiere realizar para ejecutar cada tipo de mantenimiento industrial, de acuerdo con los tipos de equipos y las horas de explotación.
+- Registrar las acciones que se requiere realizar para ejecutar cada tipo de mantenimiento industrial, de acuerdo con los tipos de equipos y las horas de explotación.(Mantenimiento Necesario)
 
--  Emitir los registros de cierre mensual del mantenimiento industrial, sus costos y el modelo de ejecución del cronograma de mantenimiento semanal, mensual y anual.
+- Ya  Emitir los registros de cierre mensual del mantenimiento industrial, sus costos y el modelo de ejecución del cronograma de mantenimiento semanal, mensual y anual.(Esto debe ser lo del resumen d los parametros)
 
 - Registrar las horas de roturas y los costos del mantenimiento industrial de los equipos tecnológicos más importantes de cada UEB y de la Empresa en su totalidad.()
 

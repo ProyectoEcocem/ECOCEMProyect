@@ -38,6 +38,7 @@ import {
  import VisualizarBrigada from './VisualizarBrigada';
  import Sedes from './VisualizarSede';
 import TiposEquipo from './VisualizarTipoEquipo';
+import Trabajador from './VisualizarTrabajador';
 
  const VentanaPrincipal = () => {
 
@@ -62,6 +63,7 @@ import TiposEquipo from './VisualizarTipoEquipo';
         const [visualizarBrigadaModalAbierto, setVisualizarBrigadaModalAbierto] = useState(false);
         const [visualizarSedeModalAbierto, setVisualizarSedeModalAbierto] = useState(false);
         const [visualizarTipoEquipoModalAbierto, setVisualizarTipoEquipoModalAbierto] = useState(false);
+        const [visualizarTrabajadorModalAbierto, setVisualizarTrabajadorModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -84,6 +86,7 @@ import TiposEquipo from './VisualizarTipoEquipo';
              ['VisualizarBrigadaModalAbierto', setVisualizarBrigadaModalAbierto],
              ['VisualizarSedeModalAbierto', setVisualizarSedeModalAbierto],
              ['VisualizarTipoEquipoModalAbierto', setVisualizarTipoEquipoModalAbierto],
+             ['VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -227,7 +230,10 @@ import TiposEquipo from './VisualizarTipoEquipo';
         >
           Tipo de Equipo
           </Button>
-        <Button colorScheme='teal' variant='link'>Trabajador</Button>
+        <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto )}
+        >
+          Trabajador
+          </Button>
 </Stack>
     </AccordionPanel>
   </AccordionItem>
@@ -491,6 +497,21 @@ import TiposEquipo from './VisualizarTipoEquipo';
  >
  <TiposEquipo
  onClose={() => setVisualizarTipoEquipoModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarTrabajadorModalAbierto}
+ onClose={() => setVisualizarTrabajadorModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Trabajador
+ onClose={() => setVisualizarTrabajadorModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

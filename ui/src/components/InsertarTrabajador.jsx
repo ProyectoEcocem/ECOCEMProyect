@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import {
     FormControl,
     FormLabel,
@@ -9,17 +10,43 @@ import {
     //BackgroundImage
   } from "@chakra-ui/react"; 
 
-const InsertarTrabajador = () => {
+const InsertarTrabajador = ({onClose}) => {
   const [trabajadorId, setTrabajadorId] = useState("");
   const [nombre, setNombre] = useState("");
   const [sede, setSede] = useState("");
+  const [insertarTrabajadorModalAbierto, setInsertarTrabajadorModalAbierto] = useState(false);
 
-  //solo para testear, aquí irían las sedes en BD
-  const sedes = [
-    { id: 1, nombre: "Sede 1" },
-    { id: 2, nombre: "Sede 2" },
-    { id: 3, nombre: "Sede 3" },
-  ]
+  const [sedes, setSedes] = useState([]);
+  
+  useEffect(() => {
+    axios.get(`http://localhost:5103/api/Sede`)
+      .then(res => {
+        setSedes(res.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  const createTrabajador = async () => {
+
+    axios.post(`http://localhost:5103/api/Trabajador`, {
+      trabajadorId: trabajadorId,
+      nombre: nombre,
+      sedeId: sedeId
+    })
+    .then((response) => {
+      console.log(response);
+      alert("El Trabajador ha sido insertado correctamente.")
+      setInsertarTrabajadorModalAbierto(false);
+    }, (error) => {
+      console.log(error);
+      alert("El Trabajador no se ha insertado.")
+    });
+  };
+
+  const handleCancelar = () => {
+    // Cierra la ventana modal desde el componente padre.
+    onClose();
+  };
 
   return (
     <div style={{
@@ -50,6 +77,7 @@ const InsertarTrabajador = () => {
                 placeholder="Ingrese el ID del trabajador"
                 onChange={(e) => setTrabajadorId(e.target.value)}
                 marginTop={0.5}
+                marginLeft={8}
                 width={80}
                 backgroundColor= "white"
               />
@@ -62,6 +90,7 @@ const InsertarTrabajador = () => {
                 placeholder="Ingrese el nombre del trabajador"
                 onChange={(e) => setNombre(e.target.value)}
                 marginTop={0.5}
+                marginLeft={8}
                 width={80}
                 backgroundColor= "white"
               />
@@ -84,12 +113,18 @@ const InsertarTrabajador = () => {
         </Select>
            
         <Flex>
-        <Button variant="contained" color="primary" style={{ marginRight: 10 }}>
+        <Button 
+        variant="outline"
+        colorScheme="blue" 
+        style={{ marginRight: 10 }}
+        onClick={createTrabajador}
+        type="submit"
+        >
           Aceptar
         </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
-        </Button>
+        <Button variant="outline" colorScheme="red" marginTop={0} onClick={handleCancelar}>
+    Cancelar
+  </Button>
         </Flex>
       </div>
   );

@@ -26,11 +26,15 @@ export default class Fabrica extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Fabrica`)
-        .then(res => {
-          const Fabricas= res.data;
-          this.setState({ Fabricas });
-        })
+      .then(res => {
+        const Fabricas= res.data;
+        this.setState({ Fabricas });
+      })
     }
 
     manejarInsertarFabricaModal = () => {
@@ -40,8 +44,7 @@ export default class Fabrica extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"550px"}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarFabricaModal}
          marginBottom={5}
@@ -51,7 +54,7 @@ export default class Fabrica extends React.Component {
          </Button>
          <Modal isOpen={this.state.insertarFabricaModalAbierto} onClose={() => this.setState({ insertarFabricaModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarFabrica onClose={() => this.setState({ insertarFabricaModalAbierto: false })} />
+         <InsertarFabrica onClose={() => {this.setState({ insertarFabricaModalAbierto: false }); this.cargarBD();} }/>
          </AbsoluteCenter>
          </Modal>
         <TableContainer>
@@ -75,7 +78,6 @@ export default class Fabrica extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
-      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Fabricas.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

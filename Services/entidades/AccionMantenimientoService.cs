@@ -38,12 +38,20 @@ public class AccionMantenimientoService
 
         return accionM;
     }
-    public async Task<AccionMantenimiento> Create(AccionMantenimiento accionM)
+    public async Task<AccionMantenimiento> Create(AccionMantenimientoData accionM)
     {
-        _context.AccionesMantenimientos.Add(accionM);
+        AccionMantenimiento am = new AccionMantenimiento();
+
+        am.AMId = accionM.AMId;
+        am.BrigadaId = accionM.BrigadaId;
+        am.EquipoId = accionM.EquipoId;
+        am.FechaId = accionM.FechaId;
+        am.TrabajadorId = accionM.TrabajadorId;
+
+        _context.AccionesMantenimientos.Add(am);
         await _context.SaveChangesAsync();
 
-        return accionM;
+        return am;
     }
      public async Task Delete(int id)
     {

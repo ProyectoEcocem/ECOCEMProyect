@@ -27,13 +27,16 @@ export default class VisualizarHerramienta extends React.Component {
     }
   
     componentDidMount() {
-      axios.get(`http://localhost:5103/api/Herramienta`)
-        .then(res => {
-          const herramientas = res.data;
-          this.setState({ herramientas });
-        })
+      this.cargarBD();
     }
   
+    cargarBD(){
+      axios.get(`http://localhost:5103/api/Herramienta`)
+      .then(res => {
+        const herramientas = res.data;
+        this.setState({ herramientas });
+      })
+    }
 
     //Funcion para abrir el modal de Insertar Sede
     manejarInsertarHerramientaModal = () => {
@@ -42,8 +45,7 @@ export default class VisualizarHerramienta extends React.Component {
 
     render() {
       return (
-        <div style={{height : 400}}>
-            <AbsoluteCenter top={"80px"} left={"600px"}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
         <Button
          onClick={this.manejarInsertarHerramientaModal}
          marginBottom={5}
@@ -54,7 +56,7 @@ export default class VisualizarHerramienta extends React.Component {
 
          <Modal isOpen={this.state.insertarHerramientaModalAbierto} onClose={() => this.setState({ insertarHerramientaModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarHerramienta onClose={() => this.setState({ insertarHerramientaModalAbierto: false })} />
+         <InsertarHerramienta onClose={() => {this.setState({ insertarHerramientaModalAbierto: false }); this.cargarBD();}} />
          </AbsoluteCenter>
          </Modal>
 
@@ -81,7 +83,6 @@ export default class VisualizarHerramienta extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-        </AbsoluteCenter>
         </div>
 
         // <ul>

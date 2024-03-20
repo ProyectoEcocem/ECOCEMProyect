@@ -26,11 +26,15 @@ export default class Equipo extends React.Component {
     }
   
     componentDidMount() {
+     this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Equipo`)
-        .then(res => {
-          const Equipos= res.data;
-          this.setState({ Equipos });
-        })
+      .then(res => {
+        const Equipos= res.data;
+        this.setState({ Equipos });
+      })
     }
   
     //Funcion para abrir el modal de Insertar Sede
@@ -40,9 +44,8 @@ export default class Equipo extends React.Component {
 
     render() {
       return (
-        <div style={{height : 400}}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
 
-<AbsoluteCenter top={"80px"} left={"600px"}>
 <Button
          onClick={this.manejarInsertarEquipoModal}
          marginBottom={5}
@@ -53,7 +56,7 @@ export default class Equipo extends React.Component {
 
          <Modal isOpen={this.state.insertarEquipoModalAbierto} onClose={() => this.setState({ insertarEquipoModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarEquipo onClose={() => this.setState({ insertarEquipoModalAbierto: false })} />
+         <InsertarEquipo onClose={() => {this.setState({ insertarEquipoModalAbierto: false }); this.cargarBD();}} />
          </AbsoluteCenter>
          </Modal>
 
@@ -80,7 +83,6 @@ export default class Equipo extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
-      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Equipos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

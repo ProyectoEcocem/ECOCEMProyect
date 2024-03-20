@@ -26,21 +26,27 @@ export default class TipoCemento extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/TipoCemento`)
-        .then(res => {
-          const TipoCementos= res.data;
-          this.setState({ TipoCementos });
-        })
+      .then(res => {
+        const TipoCementos= res.data;
+        this.setState({ TipoCementos });
+      })
     }
 
     manejarInsertarTipoCementoModal = () => {
       this.setState({ insertarTipoCementoModalAbierto: true });
+      this.cargarBD();
     };
   
     render() {
       return (
-        <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"600px"}>
+       
+        <div style={{ position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)" }}>
+          
           <Button
          onClick={this.manejarInsertarTipoCementoModal}
          marginBottom={5}
@@ -48,9 +54,9 @@ export default class TipoCemento extends React.Component {
          >
           Agregar Tipo de Cemento
          </Button>
-         <Modal isOpen={this.state.insertarTipoCementoModalAbierto} onClose={() => this.setState({ insertarTipoCementoModalAbierto: false })}>
+         <Modal isOpen={this.state.insertarTipoCementoModalAbierto} onClose={() => {this.setState({ insertarTipoCementoModalAbierto: false }); this.cargarBD();}}>
          <AbsoluteCenter>
-         <InsertarTipoCemento onClose={() => this.setState({ insertarTipoCementoModalAbierto: false })} />
+         <InsertarTipoCemento onClose={() =>  {this.setState({ insertarTipoCementoModalAbierto: false }); this.cargarBD();}} />
          </AbsoluteCenter>
          </Modal>
         <TableContainer>
@@ -74,8 +80,9 @@ export default class TipoCemento extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
-      </AbsoluteCenter>
+      
       </div>
+  
         // <ul>
           // { this.state.TipoCementos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}
         // </ul>

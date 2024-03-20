@@ -35,7 +35,7 @@ const InsertarSede = ({onClose}) => {
       numeroSede: numeroSede,
       nombreSede: nombreSede,
       ubicacionSede: ubicacionSede,
-      empresaId: 1
+      empresaId: empresaId
     };
     axios.post(`http://localhost:5103/api/Sede`, {
       numeroSede: numeroSede,

@@ -51,6 +51,7 @@ import Trabajador from './VisualizarTrabajador';
 import InsertarEmpresa from './InsertarEmpresa';
 import Resumenes from './ResumenesParametrosIndicadores';
 import Venta from './VizualizarVenta';
+import Carga from './VisualizarCarga';
 
  const VentanaPrincipal = () => {
 
@@ -78,6 +79,7 @@ import Venta from './VizualizarVenta';
         const [visualizarTrabajadorModalAbierto, setVisualizarTrabajadorModalAbierto] = useState(false);
         const [insertarEmpresaModalAbierto, setInsertarEmpresaModalAbierto] = useState(false);
         const [visualizarVentaModalAbierto, setVisualizarVentaModalAbierto] = useState(false);
+        const [visualizarCargaModalAbierto, setVisualizarCargaModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -102,7 +104,8 @@ import Venta from './VizualizarVenta';
              ['VisualizarTipoEquipoModalAbierto', setVisualizarTipoEquipoModalAbierto],
              ['VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto],
              ['InsertarEmpresaModalAbierto', setInsertarEmpresaModalAbierto],
-             ['VisualizarVentaModalAbierto', setVisualizarVentaModalAbierto]
+             ['VisualizarVentaModalAbierto', setVisualizarVentaModalAbierto],
+             ['VisualizarCargaModalAbierto', setVisualizarCargaModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -223,6 +226,10 @@ import Venta from './VizualizarVenta';
       <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto) }
        >
         Báscula
+        </Button>
+        <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarCargaModalAbierto', setVisualizarCargaModalAbierto) }
+       >
+        Carga
         </Button>
       <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto)}
       >
@@ -482,9 +489,7 @@ import Venta from './VizualizarVenta';
  isOpen={visualizarTipoCementoModalAbierto}
  onClose={() => setVisualizarTipoCementoModalAbierto(false)}
  position="absolute"
- left="50%"
- top="50%"
-      transform="translate(-50%, -50%)"
+    
       width="500px"
       height="500px"
       zIndex={100}
@@ -597,6 +602,21 @@ import Venta from './VizualizarVenta';
  >
  <Venta
  onClose={() => setVisualizarVentaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarCargaModalAbierto}
+ onClose={() => setVisualizarCargaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Carga
+ onClose={() => setVisualizarCargaModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

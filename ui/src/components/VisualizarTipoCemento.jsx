@@ -13,12 +13,16 @@ import {
   Tr,
   Th,
   Td,
+  Modal, 
+  AbsoluteCenter
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+import InsertarTipoCemento  from './InsertarTipoCemento'
 export default class TipoCemento extends React.Component {
     state = {
-      TipoCementos: []
+      TipoCementos: [],
+      insertarTipoCementoModalAbierto: false,
     }
   
     componentDidMount() {
@@ -28,10 +32,27 @@ export default class TipoCemento extends React.Component {
           this.setState({ TipoCementos });
         })
     }
+
+    manejarInsertarTipoCementoModal = () => {
+      this.setState({ insertarTipoCementoModalAbierto: true });
+    };
   
     render() {
       return (
         <div style={{height : 400}}>
+          <AbsoluteCenter top={"80px"} left={"600px"}>
+          <Button
+         onClick={this.manejarInsertarTipoCementoModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Tipo de Cemento
+         </Button>
+         <Modal isOpen={this.state.insertarTipoCementoModalAbierto} onClose={() => this.setState({ insertarTipoCementoModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarTipoCemento onClose={() => this.setState({ insertarTipoCementoModalAbierto: false })} />
+         </AbsoluteCenter>
+         </Modal>
         <TableContainer>
         <Table>
           <Thead>
@@ -53,6 +74,7 @@ export default class TipoCemento extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
+      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.TipoCementos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

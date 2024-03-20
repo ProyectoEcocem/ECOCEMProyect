@@ -13,12 +13,16 @@ import {
   Tr,
   Th,
   Td,
+  AbsoluteCenter,
+  Modal,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+import InsertarBascula from './InsertarBascula';
 export default class Bascula extends React.Component {
     state = {
-      Basculas: []
+      Basculas: [],
+      insertarBasculaModalAbierto: false,
     }
   
     componentDidMount() {
@@ -28,10 +32,29 @@ export default class Bascula extends React.Component {
           this.setState({ Basculas });
         })
     }
+
+    manejarInsertarBasculaModal = () => {
+      this.setState({ insertarBasculaModalAbierto: true });
+    };
   
     render() {
       return (
         <div style={{height : 400}}>
+          <AbsoluteCenter top={"80px"} left={"520px"}>
+          <Button
+         onClick={this.manejarInsertarBasculaModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Bascula
+         </Button>
+
+         <Modal isOpen={this.state.insertarBasculaModalAbierto} onClose={() => this.setState({ insertarBasculaModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarBascula onClose={() => this.setState({ insertarBasculaModalAbierto: false })} />
+         </AbsoluteCenter>
+         </Modal>
+
         <TableContainer>
         <Table>
           <Thead>
@@ -53,6 +76,7 @@ export default class Bascula extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
+      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Basculas.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

@@ -40,7 +40,7 @@ export default class VisualizarBrigada extends React.Component {
     render() {
       return (
         <div style={{height : 400}}>
-
+ <AbsoluteCenter top={"80px"} left={"550px"}>
           <Button
          onClick={this.manejarInsertarBrigadaModal}
          marginBottom={5}
@@ -61,6 +61,7 @@ export default class VisualizarBrigada extends React.Component {
             <Thead>
               <Tr>
                 <Th>ID</Th>
+                <Th>Descripción</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -68,7 +69,7 @@ export default class VisualizarBrigada extends React.Component {
                 this.state.Brigadas.map((brigada) => (
                   <Tr key={brigada.BrigadaId}>
                     <Td>{brigada.BrigadaId}</Td>
-
+                    <Td>{brigada.descripcion}</Td>
                   </Tr>
                 )
                 )
@@ -76,6 +77,7 @@ export default class VisualizarBrigada extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
+        </AbsoluteCenter>
 </div>
 
         // <ul>

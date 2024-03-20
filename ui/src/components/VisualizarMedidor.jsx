@@ -13,12 +13,16 @@ import {
   Tr,
   Th,
   Td,
+  AbsoluteCenter,
+  Modal,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+import InsertarMedidor from  './InsertarMedidor'
 export default class Medidor extends React.Component {
     state = {
-      Medidors: []
+      Medidors: [],
+      insertarMedidorModalAbierto: false,
     }
   
     componentDidMount() {
@@ -28,10 +32,27 @@ export default class Medidor extends React.Component {
           this.setState({ Medidors });
         })
     }
+
+    manejarInsertarMedidorModal = () => {
+      this.setState({ insertarMedidorModalAbierto: true });
+    };
   
     render() {
       return (
         <div style={{height : 400}}>
+          <AbsoluteCenter top={"80px"} left={"550px"}>
+          <Button
+         onClick={this.manejarInsertarMedidorModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Medidor
+         </Button>
+         <Modal isOpen={this.state.insertarMedidorModalAbierto} onClose={() => this.setState({ insertarMedidorModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarMedidor onClose={() => this.setState({ insertarMedidorModalAbierto: false })} />
+         </AbsoluteCenter>
+         </Modal>
         <TableContainer>
         <Table>
           <Thead>
@@ -53,6 +74,7 @@ export default class Medidor extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
+      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Medidors.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

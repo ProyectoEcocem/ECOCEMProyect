@@ -70,8 +70,6 @@ const InsertarAccionMantenimiento = ({onClose}) => {
 
  const handleCancelar = () => {
   // Cierra la ventana modal desde el componente padre.
-  onClose();
- 
 };
 
 
@@ -133,7 +131,7 @@ const InsertarAccionMantenimiento = ({onClose}) => {
         >
           {trabajadores.map((trabajador) => (
             <option key={trabajador.trabajadorId} value={trabajador.trabajadorId}>
-              {trabajador.trabajadorId}
+              {trabajador.nombreTrabajador}
             </option>
           ))}
         </Select>

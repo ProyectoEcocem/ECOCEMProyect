@@ -26,13 +26,11 @@ export default class VisualizarAccionMantenimiento extends React.Component {
     }
   
     componentDidMount() {
-      cargarBD = () =>{
       axios.get(`http://localhost:5103/api/AccionMantenimiento`)
         .then(res => {
           const accionesMantenimiento= res.data;
           this.setState({ accionesMantenimiento });
         })
-      }
     }
 
     manejarInsertarAccionMantenimientoModal = () => {

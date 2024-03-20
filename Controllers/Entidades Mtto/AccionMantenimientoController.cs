@@ -2,9 +2,19 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
+public class AccionMantenimientoData
+{
+    public int AMId { get; set; }
+
+    public int EquipoId {get; set;} 
+    public int BrigadaId {get; set;}
+    public int TrabajadorId {get; set;}
+    public DateTime FechaId {get; set;}
+}
 
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
+
 public class AccionMantenimientoController : Controller
 {
     private readonly AccionMantenimientoService _accionMantenimientoService;
@@ -16,9 +26,10 @@ public class AccionMantenimientoController : Controller
 
     // POST
     [HttpPost]
-    public async Task<ActionResult> Post(AccionMantenimiento accionMantenimiento)
+    public async Task<ActionResult> Post(AccionMantenimientoData accionMantenimiento)
     {
-        return Ok(await _accionMantenimientoService.Create(accionMantenimiento));
+        AccionMantenimiento am = await _accionMantenimientoService.Create(accionMantenimiento);
+        return Ok(am);
     }
 
     // GET by ID

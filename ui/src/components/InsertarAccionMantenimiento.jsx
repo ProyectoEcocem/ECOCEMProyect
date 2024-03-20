@@ -12,9 +12,9 @@ import {
 import axios from "axios";
 
 const InsertarAccionMantenimiento = ({onClose}) => {
-  const [equipoId, setEquipoId] = useState("");
-  const [brigadaId, setBrigadaId] = useState("");
-  const [trabajadorId, setTrabajadorId] = useState("");
+  const [equipoId, setEquipoId] = useState(0);
+  const [brigadaId, setBrigadaId] = useState(0);
+  const [trabajadorId, setTrabajadorId] = useState(0);
   const [fecha, setFecha] = useState(new Date());
   const [insertarAccionMantenimientoEModalAbierto, setInsertarAccionMantenimientoEModalAbierto] = useState(false);
 
@@ -70,8 +70,6 @@ const InsertarAccionMantenimiento = ({onClose}) => {
 
  const handleCancelar = () => {
   // Cierra la ventana modal desde el componente padre.
-  onClose();
- 
 };
 
 
@@ -133,7 +131,7 @@ const InsertarAccionMantenimiento = ({onClose}) => {
         >
           {trabajadores.map((trabajador) => (
             <option key={trabajador.trabajadorId} value={trabajador.trabajadorId}>
-              {trabajador.trabajadorId}
+              {trabajador.nombreTrabajador}
             </option>
           ))}
         </Select>

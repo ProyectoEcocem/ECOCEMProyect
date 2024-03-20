@@ -13,12 +13,18 @@ import {
   Tr,
   Th,
   Td,
+  AbsoluteCenter,
+  Modal,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+import InsertarVenta from './InsertarVenta'
+import InsertarCarga from './InsertarCarga'
 export default class Venta extends React.Component {
     state = {
-      Ventas: []
+      Ventas: [],
+      insertarVentaModalAbierto: false,
+      insertarCargaModalAbierto: false,
     }
   
     componentDidMount() {
@@ -28,10 +34,39 @@ export default class Venta extends React.Component {
           this.setState({ Ventas });
         })
     }
+
+    manejarInsertarVentaModal = () => {
+      this.setState({ insertarVentaModalAbierto: true });
+    };
+
+    manejarClickACarga = (venta) => {
+      this.setState({ insertarCargaModalAbierto: true });
+    }
   
     render() {
       return (
         <div style={{height : 400}}>
+          <AbsoluteCenter top={"80px"} left={"1000px"}>
+          <Button
+         onClick={this.manejarInsertarVentaModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Venta
+         </Button>
+         <Modal isOpen={this.state.insertarVentaModalAbierto} onClose={() => this.setState({ insertarVentaModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarVenta onClose={() => this.setState({ insertarVentaModalAbierto: false })} />
+
+         </AbsoluteCenter>
+         </Modal>
+
+         <Modal isOpen={this.state.insertarCargaModalAbierto} onClose={() => this.setState({ insertarCargaModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarCarga onClose={() => this.setState({ insertarCargaModalAbierto: false })} />
+         
+         </AbsoluteCenter>
+         </Modal>
         <TableContainer>
         <Table>
           <Thead>
@@ -39,15 +74,19 @@ export default class Venta extends React.Component {
               <Th>Sede Id</Th>
               <Th>Entidad Compradora Id</Th>
               <Th>Fecha</Th>
+              <Th>Asociar Carga</Th>
             </Tr>
           </Thead>
           <Tbody>
             {
-              this.state.Ventas.map((b) => (
-                <Tr key={b.VentaId}>
-                  <Td>{b.sedeId}</Td>
-                  <Td>{b.entidadCompradoraId}</Td>
-                  <Td>{b.fechaVentaId}</Td>
+              this.state.Ventas.map((venta) => (
+                <Tr key={venta.VentaId}>
+                  <Td>{venta.sedeId}</Td>
+                  <Td>{venta.entidadCompradoraId}</Td>
+                  <Td>{venta.fechaVentaId}</Td>
+                  <Td>
+                    <Button onClick={() => this.manejarClickACarga(venta)}>+ Carga</Button>
+                  </Td>
                 </Tr>
               )
               )
@@ -55,6 +94,7 @@ export default class Venta extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
+      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Ventas.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

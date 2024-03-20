@@ -107,7 +107,7 @@ const InsertarTrabajador = ({onClose}) => {
         >
           {sedes.map((sede) => (
             <option key={sede.id} value={sede.id}>
-              {sede.nombre}
+              {sede.nombreSede}
             </option>
           ))}
         </Select>

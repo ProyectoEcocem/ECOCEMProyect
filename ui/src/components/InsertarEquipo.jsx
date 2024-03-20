@@ -12,9 +12,9 @@ import {
   } from "@chakra-ui/react"; 
 
 const InsertarEquipo = ({onClose}) => {
-  const [equipoId, setEquipoId] = useState(1);
-  const [tipoEId, setTipoEId] = useState(1);
-  const [sedeId, setSedeId] = useState(1);
+  const [equipoId, setEquipoId] = useState(0);
+  const [tipoEId, setTipoEId] = useState(0);
+  const [sedeId, setSedeId] = useState(0);
   const [insertarEquipoModalAbierto, setInsertarEquipoModalAbierto] = useState(false);
 
   //Lista de tipos de equipos

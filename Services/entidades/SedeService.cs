@@ -42,7 +42,7 @@ public class SedeService
             return null!;
 
         Sede sede1= new Sede();
-        sede1.SedeId=sede.sedeid;
+        sede1.SedeId=sede.sedeId;
         sede1.NombreSede=sede.nombreSede;
         sede1.EmpresaId=sede.empresaId;
         sede1.UbicacionSede=sede.ubicacionSede;

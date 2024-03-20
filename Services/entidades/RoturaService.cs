@@ -44,7 +44,9 @@ public class RoturaService
             
         Rotura f1 = new Rotura();
 
+        f1.RoturaId = rotura.RoturaId;
         f1.NombreRotura = rotura.NombreRotura;
+        f1.Descripcion = rotura.Descripcion;
 
         _context.Roturas.Add(f1);
         await _context.SaveChangesAsync();

@@ -13,7 +13,7 @@ import {
 //import { sedeController } from "../../../Controllers/Entidades"
 
 const InsertarHerramienta = ({onClose}) => {
-  const [herramientaId, setHerramientaId] = useState(0);
+  // const [herramientaId, setHerramientaId] = useState(0);
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [insertSuccess, setInsertSuccess] = useState(false);
@@ -21,13 +21,9 @@ const InsertarHerramienta = ({onClose}) => {
 
 
   const EnviarForm = async () => {
-    const sede = {
-      herramientaId: herramientaId,
-      nombre: nombre,
-      descripcion: descripcion,
-    };
+
     axios.post(`http://localhost:5103/api/Herramienta`, {
-      herramientaId: herramientaId,
+      herramientaId: 0,
       nombre: nombre,
       descripcion: descripcion
     })
@@ -50,7 +46,7 @@ const InsertarHerramienta = ({onClose}) => {
 
    useEffect(() => {
      setInsertSuccess(false);
-   }, [herramientaId,nombre,descripcion]);
+   }, [nombre,descripcion]);
  
 
    const handleCancelar = () => {

@@ -131,7 +131,7 @@ const InsertarOrdenTrabajo = ({onClose}) => {
         >
           {trabajadores.map((trabajador) => (
             <option key={trabajador.trabajadorId} value={trabajador.trabajadorId}>
-              {trabajador.trabajadorId}
+              {trabajador.nombreTrabajador}
             </option>
           ))}
         </Select>

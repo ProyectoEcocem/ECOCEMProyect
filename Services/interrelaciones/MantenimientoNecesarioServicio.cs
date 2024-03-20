@@ -30,18 +30,22 @@ public class MantenimientoNecesarioServicio
         {
             return null!;
         }
-        
        
         await _context.SaveChangesAsync();
-
         return MN;
     }
-    public async Task<MantenimientoNecesario> Create(MantenimientoNecesario MN)
+    public async Task<MantenimientoNecesario> Create(MantenimientoNecesarioData MN)
     {
-        _context.MantenimientosNecesarios.Add(MN);
+        MantenimientoNecesario mn = new MantenimientoNecesario();
+
+        mn.AMId = MN.AMId;
+        mn.TipoEquipoId = MN.TipoEId;
+        mn.HorasExpId = MN.HorasExpId;
+
+        _context.MantenimientosNecesarios.Add(mn);
         await _context.SaveChangesAsync();
 
-        return MN;
+        return mn;
     }
      public async Task Delete(int TipoEquipoId,int AMId,double HorasExpId)
     {

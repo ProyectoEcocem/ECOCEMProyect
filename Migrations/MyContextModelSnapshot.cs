@@ -696,6 +696,10 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoturaId"));
 
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("NombreRotura")
                         .IsRequired()
                         .HasColumnType("text");

@@ -24,7 +24,7 @@ Peso del cemento:
 
 - Conocer el peso del cemento despachado a los autosilos antes de pasar por la báscula de camiones, evitando así el movimiento reiterado entre el silo y la báscula para completar el peso del cemento planificado o para la extracción del cemento vertido en exceso. (podríamos crear alguna funcionalidad para entre dos fechas que el usuario indique, o desde la última a la anterior medición detecte el cambio de volumen como estimación para una compra o venta a silo o autosilo.)
 
-- Alertar en los puestos de operaciones y móviles habilitados de las UEB y de la Oficina Central, sobre el inventario de cemento disponible en todas y cada una de las graneleras de ECOCEM a través de la VPN de la empresa o a través de Internet. (vista para visualizar el total de cemento actualmente en la empresa por tipo, silo, total, etc, ver excell Demostración autoguardado)
+- YA Alertar en los puestos de operaciones y móviles habilitados de las UEB y de la Oficina Central, sobre el inventario de cemento disponible en todas y cada una de las graneleras de ECOCEM a través de la VPN de la empresa o a través de Internet. (vista para visualizar el total de cemento actualmente en la empresa por tipo, silo, total, etc, ver excell Demostración autoguardado)
 
 - Visualizar los resultados más importantes relacionados con la descarga de los ferrosilos, autosilos y la venta de cemento, a partir de resúmenes como: Tabla de Control de la Descarga Real de Ferrosilos o Autosilos de Cemento y Tabla de Control de la Venta de Cemento. (ver excell "Demostración 8.09.23 para apoyar")
 
@@ -40,7 +40,7 @@ Gestión del mantenimiento:
 
 - Ya  Emitir los registros de cierre mensual del mantenimiento industrial, sus costos y el modelo de ejecución del cronograma de mantenimiento semanal, mensual y anual.(Esto debe ser lo del resumen d los parametros)
 
-- Registrar las horas de roturas y los costos del mantenimiento industrial de los equipos tecnológicos más importantes de cada UEB y de la Empresa en su totalidad.()
+- Registrar las horas de roturas y los costos del mantenimiento industrial de los equipos tecnológicos más importantes de cada UEB y de la Empresa en su totalidad.
 
 - Visualizar los resultados más importantes relacionados con la gestión del mantenimiento en los puestos de operaciones y en los móviles habilitados de las UEB y de la Oficina Central a partir de resúmenes diarios, mensuales y anuales de los mantenimientos de los equipos tecnológicos en todas las graneleras de ECOCEM.
 

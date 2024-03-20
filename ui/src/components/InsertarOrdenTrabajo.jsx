@@ -54,7 +54,7 @@ const InsertarOrdenTrabajo = ({onClose}) => {
     axios.post(`http://localhost:5103/api/OrdenTrabajo`, {
       equipoId: equipoId,
       brigadaId: brigadaId,
-      trabajadorId: 1,
+      trabajadorId: trabajadorId,
       fecha: fecha
     })
     .then((response) => {

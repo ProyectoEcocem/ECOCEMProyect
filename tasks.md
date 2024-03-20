@@ -34,7 +34,7 @@ Gestión del mantenimiento:
 
 -YA Advertir con la antelación apropiada los tipos y las cantidades de piezas e insumos necesarios para realizar los mantenimientos industriales, así como las acciones que se requieren de acuerdo a las horas de explotación.
 
-- Emitir las órdenes de trabajo para la solicitud del servicio de los mantenimientos respectivos de forma oportuna y de modo que puedan ser completadas pertinentemente por los ejecutores del mantenimiento.
+-DIANA Emitir las órdenes de trabajo para la solicitud del servicio de los mantenimientos respectivos de forma oportuna y de modo que puedan ser completadas pertinentemente por los ejecutores del mantenimiento.
 
 - Registrar las acciones que se requiere realizar para ejecutar cada tipo de mantenimiento industrial, de acuerdo con los tipos de equipos y las horas de explotación.
 
@@ -44,17 +44,3 @@ Gestión del mantenimiento:
 
 - Visualizar los resultados más importantes relacionados con la gestión del mantenimiento en los puestos de operaciones y en los móviles habilitados de las UEB y de la Oficina Central a partir de resúmenes diarios, mensuales y anuales de los mantenimientos de los equipos tecnológicos en todas las graneleras de ECOCEM.
 
-
-Entregables:
-
-1-Documento con los requisitos enumerados y una breve descripción de cada uno de ellos, incluyendo las referencias. (DONE)
-
-2-Documento con la primera versión del modelo entidad-relacionalidad extendido (Done, solo queda unir en un mismo archivo).
-
-2.1-Documento con el diseño detallado de la base de datos en correspondencia con el MER/X concertado con los interlocutores.  (Por pulir y unir al MERX en un mismo archivo)
-
-3- Documento con la propuesta debidamente fundamentada de la arquitectura del sistema a desarrollar, su esquema de seguridad, funcionalidades por cada tipo de usuarios y esquema de navegación. (Por pulir)
-
-4- Prototipo refinado. (Considero que deberíamos proponer una entrega intermedia para valorar los resultados obtenidos y pulirlos con el feedback del cliente, o una posterior, hasta el 12 de abril por ejemplo que es cuando culmina el semestre)
-
-5- Primera versión de la documentación del sistema.

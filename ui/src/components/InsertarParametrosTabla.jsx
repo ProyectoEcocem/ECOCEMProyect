@@ -45,12 +45,14 @@ const InsertarReporte = () => {
   //temporal en verdad esto es un indicdor
   const [perdidaIndisponibilidad, setPerdidaIndisponibilidad]=useState(1);//PerdidaIndisponibilidad
 
-  const [horasTotal, setHorasTotal] = useState(0); //horas total del equipo para mantenimiento
+  const [horasTotal, setHorasTotal] = useState([]); //horas total del equipo para mantenimiento
 
     //Lista de roturas
     const [roturas, setRoturas] = useState([]);
   
     const [equipos, setEquipos] = useState([]);
+  
+    const [equiposPorTE, setEquiposPorTE] = useState([]);
   
     useEffect(() => {
      axios.get(`http://localhost:5103/api/Equipo`)
@@ -97,28 +99,42 @@ const InsertarReporte = () => {
       console.error('Error fetching data:', error);
     }
 
-    //if (equipoId == "compresor beltico") # FIXME esto no es asi buscar el id de compresor beltico
-        if( horasTotal % 8 == 0) {
+    try {
+      const response = await axios.get('http://localhost:5103/api/FiltroMantenimiento/GetEquipos',{
+        params: {
+          TipoE: "compresor beltico",
+          },
+      });
+      setEquiposPorTE(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+
+    if (equiposPorTE.includes(equipoId) != null)
+    {
+        // Aviso con una semana de antelacion 7 dias = 168h
+        if( horasTotal % 8 <= 168) {
         alert("Verificar nivel de aceite/n Verificar test de lámparas indicadores de panel");
         }
-        if( horasTotal % 50 == 0) {
+        if( horasTotal % 50 <= 168) {
         alert("Purgar con densado del recipiente de aceite después de una parada de 4h minimo\nLimpiar filtro de aspiración");
         }
-        if( horasTotal % 100 == 0) {
+        if( horasTotal % 100 <= 168) {
         alert("Cambiar filtros de aspiración y aceite");
         }
-        if( horasTotal % 200 == 0) {
+        if( horasTotal % 200 <= 168) {
         alert("Cambiar aceite del cárter cuando sea necesario\nRevisar, limpiar y cambiar filtros de aspiración y aceite.\nCambiar aceite del cárter y filtro de aceite");
         }
-        if( horasTotal % 1000 == 0) {
+        if( horasTotal % 1000 <= 168) {
         alert("Revisión válvulas de seguridad\nCambiar filtros de aspiración y aceite\nLimpiar radiadores\nLimpiar filtro de aspiración");
         }
-        if( horasTotal % 6000 == 0) {
+        if( horasTotal % 6000 <= 168) {
         alert("Revisar y cambiar metales de las bielas\nChequear y/o corregir holgura de aros del pistón\nChequear y/o calibrar camisa del desplazamiento del cilindro.\nChequear y rectificar medidas de los muñones del cigüeñal\nChequeo y/o cambio del rodamiento del motor(serviciar motor)\nChequeo de los contadores eléctricos\nChequeo del funcionamiento correcto de las seguridades da cornictors\nChequeo y/o cambio de a instrumentacion\n(manómetros, termómetros, presostatos, etc\nLimpieza, revisión y barnizado del enrollado.\nCalibración de protecciones térmicas");
         }
-        if( horasTotal % 8000 == 0) {
+        if( horasTotal % 8000 <= 168) {
         alert("Sustituir segmentos\nDesarme y revisión total del compresor");
         }
+      }
     
  };
 

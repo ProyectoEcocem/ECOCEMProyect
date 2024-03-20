@@ -84,6 +84,20 @@ public class FiltroMantenimientoService
         }
         return roles;
     }
+
+    public async Task<IEnumerable<int>> GetEquipos(string TipoE)
+    {
+        var result = await myContext.Equipos.Join(myContext.TiposEquipos,
+                                                equipo =>equipo.TipoEId,
+                                                tipoEquipo => tipoEquipo.TipoEId,
+                                                (equipo,tipoEquipo)=> new { EquipoId = equipo.EquipoId, TipoE = tipoEquipo.TipoE })
+                                                .Where(x => x.TipoE == TipoE)
+                                                .Select(x => x.EquipoId)
+                                                .ToListAsync();
+                                                
+
+        return result;
+    }
     
     public double GetHoras(int equipoId)
     {

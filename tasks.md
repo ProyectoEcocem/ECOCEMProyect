@@ -30,13 +30,12 @@ Peso del cemento:
 
 Gestión del mantenimiento:
 
-- Monitorear el tiempo de operación de los equipos, emitiendo avisos de la cercanía de los distintos tipos de mantenimiento industrial de acuerdo al tiempo de explotación. 
+-YA Monitorear el tiempo de operación de los equipos, emitiendo avisos de la cercanía de los distintos tipos de mantenimiento industrial de acuerdo al tiempo de explotación. 
 
-- Advertir con la antelación apropiada los tipos y las cantidades de piezas e insumos necesarios para realizar los mantenimientos industriales, así como las acciones que se requieren de acuerdo a las horas de explotación.
+-YA Advertir con la antelación apropiada los tipos y las cantidades de piezas e insumos necesarios para realizar los mantenimientos industriales, así como las acciones que se requieren de acuerdo a las horas de explotación.
 
 - Emitir las órdenes de trabajo para la solicitud del servicio de los mantenimientos respectivos de forma oportuna y de modo que puedan ser completadas pertinentemente por los ejecutores del mantenimiento.
 
-Gabriela, [2/27/2024 5:37 PM]
 - Registrar las acciones que se requiere realizar para ejecutar cada tipo de mantenimiento industrial, de acuerdo con los tipos de equipos y las horas de explotación.
 
 -  Emitir los registros de cierre mensual del mantenimiento industrial, sus costos y el modelo de ejecución del cronograma de mantenimiento semanal, mensual y anual.

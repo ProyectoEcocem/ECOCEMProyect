@@ -44,6 +44,18 @@ public class FiltroMantenimientoController : Controller
     {
         var result =  _filtroMantenimientoService.GetHoras(equipoId);
 
+        // if (result == null)
+        // {
+        //     return NotFound();
+        // }
+
+        return Ok(result);
+    }
+    [HttpGet]
+    public async Task<IActionResult> GetEquipos(string TipoE)
+    {
+        var result =  await _filtroMantenimientoService.GetEquipos(TipoE);
+
         if (result == null)
         {
             return NotFound();

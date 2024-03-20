@@ -48,6 +48,7 @@ const InsertarEmpresa = () => {
         flexDirection: "column",
         borderRadius: 20,
         border: "2px solid #5F89C1",
+        position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)"
       }}
     >
       <FormLabel style={{ fontSize: 30 }}>Insertar Empresa</FormLabel>

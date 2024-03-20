@@ -26,11 +26,15 @@ export default class RoturaEquipo extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/RoturaEquipo`)
-        .then(res => {
-          const roturasE= res.data;
-          this.setState({ roturasE });
-        })
+      .then(res => {
+        const roturasE= res.data;
+        this.setState({ roturasE });
+      })
     }
 
     manejarInsertarRoturaEModal = () => {
@@ -39,9 +43,8 @@ export default class RoturaEquipo extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
+        <div style={{ position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)" }}>
 
-<AbsoluteCenter top={"80px"} left={"650px"}>
 <Button
          onClick={this.manejarInsertarRoturaEModal}
          marginBottom={5}
@@ -52,7 +55,7 @@ export default class RoturaEquipo extends React.Component {
 
          <Modal isOpen={this.state.insertarRoturaEModalAbierto} onClose={() => this.setState({ insertarRoturaEModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarRoturaEquipo onClose={() => this.setState({ insertarRoturaEModalAbierto: false })} />
+         <InsertarRoturaEquipo onClose={() => {this.setState({ insertarRoturaEModalAbierto: false }); this.cargarBD();} }/>
          </AbsoluteCenter>
          </Modal>
 
@@ -78,7 +81,6 @@ export default class RoturaEquipo extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-        </AbsoluteCenter>
         </div>
         // <ul>
           // { this.state.roturasE.map(roturaE => <li key={roturaE.roturaId}> Id:{roturaE.roturaId} Equipo: {roturaE.equipoId} Fecha:  Equipo: {roturaE.fechaId} </li>)}

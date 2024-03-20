@@ -14,6 +14,7 @@ import {
   Th,
   Td,
   Text,
+  AbsoluteCenter,
 } from '@chakra-ui/react';
 
 const Resumenes = ({ lista }) => {
@@ -77,6 +78,7 @@ const anos = Array.from({ length:  100 }, (_, i) => new Date().getFullYear() - i
 
   return (
     <Box>
+      <AbsoluteCenter top={"300px"} left={"900px"}>
       <Stack spacing={4}>
       <FormControl id="equipo">
         <FormLabel>Equipo</FormLabel>
@@ -161,6 +163,7 @@ const anos = Array.from({ length:  100 }, (_, i) => new Date().getFullYear() - i
           ))}
         </Tbody>
       </Table>
+      </AbsoluteCenter>
     </Box>
   );
 };

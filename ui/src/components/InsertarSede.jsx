@@ -97,6 +97,7 @@ const InsertarSede = ({onClose}) => {
                 placeholder="Ingrese el nombre de la Sede"
                 onChange={(e) => setNombreSede(e.target.value)}
                 marginTop={0.5}
+                marginLeft={10}
                 width={80}
                 backgroundColor= "white"
               />
@@ -109,13 +110,14 @@ const InsertarSede = ({onClose}) => {
                 placeholder="Ingrese la ubicación"
                 onChange={(e) => setUbicacion(e.target.value)}
                 marginTop={0.5}
+                marginLeft={10}
                 width={80}
                 backgroundColor= "white"
                 marginBottom={1}
               />
             </FormControl>
 
-              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>ID de la Empresa</FormLabel>
+              <FormLabel style = {{marginLeft: 10, marginTop: 10, marginRight:200}}>ID de la Empresa</FormLabel>
               <Select
           value={empresaId}
           onChange={(e) => setEmpresaId(e.target.value)}

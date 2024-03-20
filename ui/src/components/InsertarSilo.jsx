@@ -9,12 +9,14 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-const InsertarSilo = () => {
+const InsertarSilo = ({onClose}) => {
   const [numeroSilo, setNumeroSilo] = useState("");
   const [radio, setRadio] = useState(1);
   const [noSede, setSedeId] = useState(1);
   const [altura, setAltura] = useState(1);
   const [insertSuccess, setInsertSuccess] = useState(false);
+  const [insertarSiloModalAbierto, setInsertarSiloModalAbierto] = useState(false);
+
   //Lista de sedes
   const [sedes, setSedes] = useState([]);
   
@@ -36,14 +38,18 @@ const InsertarSilo = () => {
     })
     .then((response) => {
       console.log(response);
-      alert("Se insertó correctamente")
+      alert("El Silo se ha insertado correctamente")
+      setInsertarSiloModalAbierto(false);
     }, (error) => {
       console.log(error);
-      alert("no se ha insertado, comprueba los datos de entrada")
+      alert("No se ha insertado, comprueba los datos de entrada")
     });
   };
  
-  
+  const handleCancelar = () => {
+    // Cierra la ventana modal desde el componente padre.
+    onClose();
+  };
 
   useEffect(() => {
     setInsertSuccess(false);
@@ -53,7 +59,7 @@ const InsertarSilo = () => {
     <div
       style={{
         width: "400px",
-        height: "400px",
+        height: "500px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -74,33 +80,36 @@ const InsertarSilo = () => {
           placeholder="Ingrese el Nombre de la Silo"
           onChange={(e) => setNumeroSilo(e.target.value)}
           marginTop={0.5}
+          marginLeft={10}
           width={80}
           backgroundColor="white"
         />
-        <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
-          altura
+        <FormLabel style={{ marginTop: 20, marginLeft: 40, marginBottom:0}}>
+          Altura
         </FormLabel>
         <Input
           value={altura}
-          placeholder="Ingrese la altura"
+          placeholder="Ingrese la Altura"
           onChange={(e) => setAltura(e.target.value)}
           marginTop={0.5}
+          marginLeft={10}
           width={80}
           backgroundColor="white"
         />
-        <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
-          radio
+        <FormLabel style={{ marginTop: 20, marginLeft: 40, marginBottom:0}}>
+          Radio
         </FormLabel>
         <Input
           value={radio}
           placeholder="Ingrese el radio"
           onChange={(e) => setRadio(e.target.value)}
           marginTop={0.5}
+          marginLeft={10}
           width={80}
           backgroundColor="white"
         />
      
-      <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
+      <FormLabel style={{ marginTop: 20, marginLeft: 40, marginBottom:0}}>
           Seleccione la sede
         </FormLabel>
         </FormControl>
@@ -133,6 +142,10 @@ const InsertarSilo = () => {
           )}
           Aceptar
         </Button>
+
+        <Button variant="outline" colorScheme="red" marginTop={5} onClick={handleCancelar}>
+    Cancelar
+  </Button>
         </Flex>
 
     </div>

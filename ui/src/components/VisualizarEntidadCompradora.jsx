@@ -13,12 +13,17 @@ import {
   Tr,
   Th,
   Td,
+  AbsoluteCenter,
+  Modal,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+import InsertarEntidadCompradora  from './InsertarEntidadCompradora'
+
 export default class EntidadCompradora extends React.Component {
     state = {
-      EntidadCompradoras: []
+      EntidadCompradoras: [],
+      insertarEntidadCompradoraModalAbierto: false,
     }
   
     componentDidMount() {
@@ -28,10 +33,27 @@ export default class EntidadCompradora extends React.Component {
           this.setState({ EntidadCompradoras });
         })
     }
+
+    manejarInsertarEntidadCompradoraModal = () => {
+      this.setState({ insertarEntidadCompradoraModalAbierto: true });
+    };
   
     render() {
       return (
         <div style={{height : 400}}>
+          <AbsoluteCenter top={"80px"} left={"550px"}>
+          <Button
+         onClick={this.manejarInsertarEntidadCompradoraModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Entidad Compradora
+         </Button>
+         <Modal isOpen={this.state.insertarEntidadCompradoraModalAbierto} onClose={() => this.setState({ insertarEntidadCompradoraModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarEntidadCompradora onClose={() => this.setState({ insertarEntidadCompradoraModalAbierto: false })} />
+         </AbsoluteCenter>
+         </Modal>
         <TableContainer>
         <Table>
           <Thead>
@@ -53,6 +75,7 @@ export default class EntidadCompradora extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
+      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.EntidadCompradoras.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

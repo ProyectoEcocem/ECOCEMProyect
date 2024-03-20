@@ -42,6 +42,7 @@ export default class Sedes extends React.Component {
     render() {
       return (
         <div style={{height : 400}}>
+          <AbsoluteCenter top={"80px"} left={"600px"}>
         <Button
          onClick={this.manejarInsertarSedeModal}
          marginBottom={5}
@@ -79,6 +80,7 @@ export default class Sedes extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
+        </AbsoluteCenter>
         </div>
 
         // <ul>

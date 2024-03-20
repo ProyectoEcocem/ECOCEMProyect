@@ -28,6 +28,17 @@ import {
  import Rotura from './VisualizarRotura';
  import VisualizarHerramienta from './VisualizarHerramienta';
  import Reporte from './Reporte';
+ import Bascula from './VisualizarBascula';
+ import EntidadCompradora from './VisualizarEntidadCompradora';
+ import Fabrica from './VisualizarFabrica';
+ import Medidor from './VisualizarMedidor';
+ import Silo from './VisualizarSilo';
+ import TipoCemento from './VisualizarTipoCemento';
+ import Vehiculo from './VisualizarVehiculo';
+ import VisualizarBrigada from './VisualizarBrigada';
+ import Sedes from './VisualizarSede';
+import TiposEquipo from './VisualizarTipoEquipo';
+import Trabajador from './VisualizarTrabajador';
 
  const VentanaPrincipal = () => {
 
@@ -42,6 +53,17 @@ import {
         const [visualizarRoturaEquipoModalAbierto, setVisualizarRoturaEquipoModalAbierto] = useState(false);
         const [visualizarRoturaModalAbierto, setVisualizarRoturaModalAbierto] = useState(false);
         const [visualizarReporteModalAbierto, setVisualizarReporteModalAbierto] = useState(false);
+        const [visualizarBasculaModalAbierto, setVisualizarBasculaModalAbierto] = useState(false);
+        const [visualizarEntidadCompradoraModalAbierto, setVisualizarEntidadCompradoraModalAbierto] = useState(false);
+        const [visualizarFabricaModalAbierto, setVisualizarFabricaModalAbierto] = useState(false);
+        const [visualizarMedidorModalAbierto, setVisualizarMedidorModalAbierto] = useState(false);
+        const [visualizarSiloModalAbierto, setVisualizarSiloModalAbierto] = useState(false);
+        const [visualizarTipoCementoModalAbierto, setVisualizarTipoCementoModalAbierto] = useState(false);
+        const [visualizarVehiculoModalAbierto, setVisualizarVehiculoModalAbierto] = useState(false);
+        const [visualizarBrigadaModalAbierto, setVisualizarBrigadaModalAbierto] = useState(false);
+        const [visualizarSedeModalAbierto, setVisualizarSedeModalAbierto] = useState(false);
+        const [visualizarTipoEquipoModalAbierto, setVisualizarTipoEquipoModalAbierto] = useState(false);
+        const [visualizarTrabajadorModalAbierto, setVisualizarTrabajadorModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -53,7 +75,18 @@ import {
              ['VisualizarOrdenTrabajoModalAbierto',  setVisualizarOrdenTrabajoModalAbierto],
              ['VisualizarRoturaEquipoModalAbierto', setVisualizarRoturaEquipoModalAbierto],
              ['VisualizarRoturaModalAbierto', setVisualizarRoturaModalAbierto],
-             ['VisualizarReporteModalAbierto', setVisualizarReporteModalAbierto]
+             ['VisualizarReporteModalAbierto', setVisualizarReporteModalAbierto],
+             ['VisualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto],
+             ['VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto],
+             ['VisualizarFabricaModalAbierto', setVisualizarFabricaModalAbierto],
+             ['VisualizarMedidorModalAbierto', setVisualizarMedidorModalAbierto],
+             ['VisualizarSiloModalAbierto', setVisualizarSiloModalAbierto],
+             ['VisualizarTipoCementoModalAbierto', setVisualizarTipoCementoModalAbierto],
+             ['VisualizarVehiculoModalAbierto', setVisualizarVehiculoModalAbierto],
+             ['VisualizarBrigadaModalAbierto', setVisualizarBrigadaModalAbierto],
+             ['VisualizarSedeModalAbierto', setVisualizarSedeModalAbierto],
+             ['VisualizarTipoEquipoModalAbierto', setVisualizarTipoEquipoModalAbierto],
+             ['VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -77,7 +110,12 @@ import {
          };
 
  return(
-<Flex width="100vw" height="100vh">
+<Flex
+ width={{ base: "100%", md: "80vw" }}
+ height={{ base: "auto", md: "1000" }}
+ direction={{ base: "column", md: "row" }}
+ position="relative"
+>
       {/* Panel fijo a la izquierda */}
       <Box flex="1" bg="white"  borderRight="2px solid gray" >
       <img
@@ -141,13 +179,34 @@ import {
       </AccordionButton>
     </h2>
     <AccordionPanel pb={4}>
-      <Button colorScheme='teal' variant='link'>Báscula</Button>
-      <Button colorScheme='teal' variant='link'>Entidad Compradora</Button>
-      <Button colorScheme='teal' variant='link'>Fábrica</Button>
-      <Button colorScheme='teal' variant='link'>Medidor</Button>
-      <Button colorScheme='teal' variant='link'>Silo</Button>
-      <Button colorScheme='teal' variant='link'>Tipo de Cemento</Button>
-      <Button colorScheme='teal' variant='link'>Vehículo</Button>
+    <Stack direction='column' spacing={2} align="flex-start">
+      <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarBasculaModalAbierto', setVisualizarBasculaModalAbierto) }
+       >
+        Báscula
+        </Button>
+      <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto)}
+      >
+        Entidad Compradora
+        </Button>
+      <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarFabricaModalAbierto', setVisualizarFabricaModalAbierto)}>
+        Fábrica
+        </Button>
+      <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarMedidorModalAbierto', setVisualizarMedidorModalAbierto)}>
+        Medidor
+        </Button>
+      <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarSiloModalAbierto', setVisualizarSiloModalAbierto)}
+      >
+        Silo
+      </Button>
+      <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarTipoCementoModalAbierto', setVisualizarTipoCementoModalAbierto)}
+      >
+        Tipo de Cemento
+        </Button>
+      <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarVehiculoModalAbierto', setVisualizarVehiculoModalAbierto)}
+      >
+        Vehículo
+        </Button>
+      </Stack>
     </AccordionPanel>
   </AccordionItem>
   <AccordionItem>
@@ -160,13 +219,27 @@ import {
       </AccordionButton>
     </h2>
     <AccordionPanel pb={4}>
-    <UnorderedList textAlign='left'>
-  <ListItem>Brigada</ListItem>
-  <ListItem>Sede</ListItem>
-  <ListItem>Sucursal</ListItem>
-  <ListItem>Tipo de Equipo</ListItem>
-  <ListItem>Trabajador</ListItem>
-</UnorderedList>
+    <Stack direction='column' spacing={2} align="flex-start">
+    <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'VisualizarBrigadaModalAbierto', setVisualizarBrigadaModalAbierto )}
+      >
+        Brigada
+        </Button>
+  
+        <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'VisualizarSedeModalAbierto', setVisualizarSedeModalAbierto )}
+      >
+        Sede
+        </Button>
+  
+        <Button colorScheme='teal' variant='link'>Sucursal</Button>
+        <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'VisualizarTipoEquipoModalAbierto', setVisualizarTipoEquipoModalAbierto )}
+        >
+          Tipo de Equipo
+          </Button>
+        <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto )}
+        >
+          Trabajador
+          </Button>
+</Stack>
     </AccordionPanel>
   </AccordionItem>
 </Accordion>
@@ -278,6 +351,172 @@ import {
  >
  <Reporte
  onClose={() => setVisualizarReporteModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarBasculaModalAbierto}
+ onClose={() => setVisualizarBasculaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Bascula
+ onClose={() => setVisualizarBasculaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarEntidadCompradoraModalAbierto}
+ onClose={() => setVisualizarEntidadCompradoraModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <EntidadCompradora
+ onClose={() => setVisualizarEntidadCompradoraModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarFabricaModalAbierto}
+ onClose={() => setVisualizarFabricaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Fabrica
+ onClose={() => setVisualizarFabricaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarMedidorModalAbierto}
+ onClose={() => setVisualizarMedidorModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Medidor
+ onClose={() => setVisualizarMedidorModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarSiloModalAbierto}
+ onClose={() => setVisualizarSiloModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Silo
+ onClose={() => setVisualizarSiloModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarTipoCementoModalAbierto}
+ onClose={() => setVisualizarTipoCementoModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <TipoCemento
+ onClose={() => setVisualizarTipoCementoModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarVehiculoModalAbierto}
+ onClose={() => setVisualizarVehiculoModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Vehiculo
+ onClose={() => setVisualizarVehiculoModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarBrigadaModalAbierto}
+ onClose={() => setVisualizarBrigadaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <VisualizarBrigada
+ onClose={() => setVisualizarBrigadaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarSedeModalAbierto}
+ onClose={() => setVisualizarSedeModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Sedes
+ onClose={() => setVisualizarSedeModalAbierto(false)}/>
+ </Modal>
+
+ 
+ <Modal
+ isOpen={visualizarTipoEquipoModalAbierto}
+ onClose={() => setVisualizarTipoEquipoModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <TiposEquipo
+ onClose={() => setVisualizarTipoEquipoModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarTrabajadorModalAbierto}
+ onClose={() => setVisualizarTrabajadorModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Trabajador
+ onClose={() => setVisualizarTrabajadorModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

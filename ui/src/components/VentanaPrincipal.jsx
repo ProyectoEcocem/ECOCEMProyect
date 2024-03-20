@@ -20,7 +20,16 @@ import {
     Stack,
     Center,
     Text,
+    IconButton,
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
  } from '@chakra-ui/react'
+ import { BellIcon } from '@chakra-ui/icons'
  import VisualizarAccionMantenimiento from './VisualizarAccionmantenimiento';
  import Equipo from './VisualizarEquipo';
  import VisualizarOrdenTrabajo from './VisualizarOrdenTrabajo';
@@ -41,6 +50,7 @@ import TiposEquipo from './VisualizarTipoEquipo';
 import Trabajador from './VisualizarTrabajador';
 import InsertarEmpresa from './InsertarEmpresa';
 import Resumenes from './ResumenesParametrosIndicadores';
+import Venta from './VizualizarVenta';
 
  const VentanaPrincipal = () => {
 
@@ -67,6 +77,7 @@ import Resumenes from './ResumenesParametrosIndicadores';
         const [visualizarTipoEquipoModalAbierto, setVisualizarTipoEquipoModalAbierto] = useState(false);
         const [visualizarTrabajadorModalAbierto, setVisualizarTrabajadorModalAbierto] = useState(false);
         const [insertarEmpresaModalAbierto, setInsertarEmpresaModalAbierto] = useState(false);
+        const [visualizarVentaModalAbierto, setVisualizarVentaModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -90,7 +101,8 @@ import Resumenes from './ResumenesParametrosIndicadores';
              ['VisualizarSedeModalAbierto', setVisualizarSedeModalAbierto],
              ['VisualizarTipoEquipoModalAbierto', setVisualizarTipoEquipoModalAbierto],
              ['VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto],
-             ['InsertarEmpresaModalAbierto', setInsertarEmpresaModalAbierto]
+             ['InsertarEmpresaModalAbierto', setInsertarEmpresaModalAbierto],
+             ['VisualizarVentaModalAbierto', setVisualizarVentaModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -122,6 +134,29 @@ import Resumenes from './ResumenesParametrosIndicadores';
 >
       {/* Panel fijo a la izquierda */}
       <Box flex="1" bg="white"  borderRight="2px solid gray" >
+      <Flex justifyContent="flex-end">
+    <IconButton label="Notificaciones" size="lg" icon={<BellIcon />} onClick={onOpen} />
+    <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Muro de Notificaciones</DrawerHeader>
+
+          <DrawerBody>
+            <Input placeholder='Type here...' />
+          </DrawerBody>
+
+          <DrawerFooter>
+            
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+  </Flex>
       <img
         src="/public/ecocemlogo.png"
         alt="Logo"
@@ -129,9 +164,10 @@ import Resumenes from './ResumenesParametrosIndicadores';
         height={100}
         style={{ margin: "auto" }}
       />
+      
       <p style={{ textAlign: "center", fontSize: 40 }}>ECOCEM</p>
       <p style={{ textAlign: "center", fontSize: 20, marginTop: "5px", marginBottom: "10px"}}>Nombre de Usuario</p>
-
+      
       <Accordion defaultIndex={[0]} allowMultiple>
   <AccordionItem>
     <h2>
@@ -210,6 +246,11 @@ import Resumenes from './ResumenesParametrosIndicadores';
       >
         Vehículo
         </Button>
+
+        <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarVentaModalAbierto', setVisualizarVentaModalAbierto)}
+      >
+        Venta
+        </Button>
       </Stack>
     </AccordionPanel>
   </AccordionItem>
@@ -255,6 +296,7 @@ import Resumenes from './ResumenesParametrosIndicadores';
 
       {/* Panel más grande a la derecha */}
       <Box flex="3" bg="white" flexDirection="column" justifyContent="flex-start">
+      
       <Modal
       isOpen={visualizarAccionMantenimientoEModalAbierto}
       onClose={() => setVisualizarAccionMantenimientoEModalAbierto(false)}
@@ -540,6 +582,21 @@ import Resumenes from './ResumenesParametrosIndicadores';
  >
  <InsertarEmpresa
  onClose={() => setInsertarEmpresaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarVentaModalAbierto}
+ onClose={() => setVisualizarVentaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Venta
+ onClose={() => setVisualizarVentaModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

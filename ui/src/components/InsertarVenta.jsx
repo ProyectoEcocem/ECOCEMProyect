@@ -9,10 +9,11 @@ import {
   } from "@chakra-ui/react"; 
 import axios from "axios";
 
-const InsertarVenta = () => {
+const InsertarVenta = ({onClose}) => {
   const [sedeId, setSedeId] = useState(1);
   const [entidadCompradoraId, setEntidadCompradoraId] = useState(1);
   const [fechaId, setFecha] = useState(new Date());
+  const [insertarVentaModalAbierto, setInsertarVentaModalAbierto] = useState(false);
 
     //Lista de sedes
     const [sedes, setSedes] = useState([]);
@@ -45,19 +46,24 @@ const InsertarVenta = () => {
     })
     .then((response) => {
       console.log(response);
-      alert("ok")
+      alert("La Venta se ha insertado correctamente.")
+      setInsertarVentaModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
-      alert("no ok")
+      alert("La Venta no se ha insertado correctamente.")
     });
  };
 
-
+ const handleCancelar = () => {
+  // Cierra la ventana modal desde el componente padre.
+  onClose();
+};
 
   return (
     <div style={{
       width: "400px",
-      height: "430px",
+      height: "500px",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -71,12 +77,14 @@ const InsertarVenta = () => {
         Insertar Venta
         </FormLabel>
 
-        <FormLabel style={{margin: "0px 260px 0px 0px"}}>Sede</FormLabel>
+        <FormLabel style={{marginLeft: 0, marginRight:270}}>Sede</FormLabel>
 
         <Select
         value={sedeId}
         onChange={(e) => setSedeId(e.target.value)}
         width={80}
+        marginRight={10}
+        marginLeft={10}
         marginBottom={30}
         >
         {sedes.map((sede) => (
@@ -87,7 +95,7 @@ const InsertarVenta = () => {
         </Select>
 
 
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar entidadCompradora</FormLabel>
+        <FormLabel style={{marginLeft: 2, marginRight:70}}>Seleccionar Entidad Compradora</FormLabel>
   
         <Select
           value={entidadCompradoraId}
@@ -113,7 +121,7 @@ const InsertarVenta = () => {
           marginBottom={30}
          
         />
-
+        <Flex>
         <Button 
         variant="contained" 
         color="primary" 
@@ -123,6 +131,11 @@ const InsertarVenta = () => {
         >
           Aceptar
         </Button>
+
+        <Button variant="outline" colorScheme="red" marginTop={0} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
       </div>
   );
 };

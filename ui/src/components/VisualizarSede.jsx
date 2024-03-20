@@ -27,12 +27,15 @@ export default class Sedes extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+    cargarBD = () =>{
       axios.get(`http://localhost:5103/api/Sede`)
         .then(res => {
           const sedes = res.data;
           this.setState({ sedes });
         })
-    }
+      }
   
     //Funcion para abrir el modal de Insertar Sede
     manejarInsertarSedeModal = () => {
@@ -53,7 +56,7 @@ export default class Sedes extends React.Component {
 
          <Modal isOpen={this.state.insertarSedeModalAbierto} onClose={() => this.setState({ insertarSedeModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarSede onClose={() => this.setState({ insertarSedeModalAbierto: false })} />
+         <InsertarSede onClose={() => {this.setState({ insertarSedeModalAbierto: false }); cargarBD();}} />
          </AbsoluteCenter>
          </Modal>
 

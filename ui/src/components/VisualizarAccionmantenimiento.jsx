@@ -26,11 +26,13 @@ export default class VisualizarAccionMantenimiento extends React.Component {
     }
   
     componentDidMount() {
+      cargarBD = () =>{
       axios.get(`http://localhost:5103/api/AccionMantenimiento`)
         .then(res => {
           const accionesMantenimiento= res.data;
           this.setState({ accionesMantenimiento });
         })
+      }
     }
 
     manejarInsertarAccionMantenimientoModal = () => {
@@ -51,7 +53,7 @@ export default class VisualizarAccionMantenimiento extends React.Component {
 
          <Modal isOpen={this.state.insertarAccionMantenimientoEModalAbierto} onClose={() => this.setState({ insertarAccionMantenimientoEModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarAccionMantenimiento onClose={() => this.setState({ insertarAccionMantenimientoEModalAbierto: false })} />
+         <InsertarAccionMantenimiento onClose={() => {this.setState({ insertarAccionMantenimientoEModalAbierto: false }); cargarBD();} } />
          </AbsoluteCenter>
          </Modal>
 

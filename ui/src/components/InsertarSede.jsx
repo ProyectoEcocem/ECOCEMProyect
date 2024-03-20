@@ -52,6 +52,11 @@ const InsertarSede = ({onClose}) => {
       alert(console.log(error))
       alert("La sede no se ha insertado.")
     });
+
+    useEffect(() => {
+      
+  }, []); // El array vacío significa que este efecto se ejecuta solo una vez al montar el componente
+
   };
 
 

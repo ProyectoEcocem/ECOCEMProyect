@@ -97,11 +97,31 @@ const InsertarReporte = () => {
       console.error('Error fetching data:', error);
     }
 
-    if( horasTotal > 10)
-    {
-      alert("Este equipo necesita mantenimiento urgentemente")
-    }
+    //if (equipoId == "compresor beltico") # FIXME esto no es asi buscar el id de compresor beltico
+        if( horasTotal % 8 == 0) {
+        alert("Verificar nivel de aceite/n Verificar test de lámparas indicadores de panel");
+        }
+        if( horasTotal % 50 == 0) {
+        alert("Purgar con densado del recipiente de aceite después de una parada de 4h minimo\nLimpiar filtro de aspiración");
+        }
+        if( horasTotal % 100 == 0) {
+        alert("Cambiar filtros de aspiración y aceite");
+        }
+        if( horasTotal % 200 == 0) {
+        alert("Cambiar aceite del cárter cuando sea necesario\nRevisar, limpiar y cambiar filtros de aspiración y aceite.\nCambiar aceite del cárter y filtro de aceite");
+        }
+        if( horasTotal % 1000 == 0) {
+        alert("Revisión válvulas de seguridad\nCambiar filtros de aspiración y aceite\nLimpiar radiadores\nLimpiar filtro de aspiración");
+        }
+        if( horasTotal % 6000 == 0) {
+        alert("Revisar y cambiar metales de las bielas\nChequear y/o corregir holgura de aros del pistón\nChequear y/o calibrar camisa del desplazamiento del cilindro.\nChequear y rectificar medidas de los muñones del cigüeñal\nChequeo y/o cambio del rodamiento del motor(serviciar motor)\nChequeo de los contadores eléctricos\nChequeo del funcionamiento correcto de las seguridades da cornictors\nChequeo y/o cambio de a instrumentacion\n(manómetros, termómetros, presostatos, etc\nLimpieza, revisión y barnizado del enrollado.\nCalibración de protecciones térmicas");
+        }
+        if( horasTotal % 8000 == 0) {
+        alert("Sustituir segmentos\nDesarme y revisión total del compresor");
+        }
+    
  };
+
 
 
   return (

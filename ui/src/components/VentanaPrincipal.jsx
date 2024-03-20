@@ -39,6 +39,7 @@ import {
  import Sedes from './VisualizarSede';
 import TiposEquipo from './VisualizarTipoEquipo';
 import Trabajador from './VisualizarTrabajador';
+import InsertarEmpresa from './InsertarEmpresa';
 
  const VentanaPrincipal = () => {
 
@@ -64,6 +65,7 @@ import Trabajador from './VisualizarTrabajador';
         const [visualizarSedeModalAbierto, setVisualizarSedeModalAbierto] = useState(false);
         const [visualizarTipoEquipoModalAbierto, setVisualizarTipoEquipoModalAbierto] = useState(false);
         const [visualizarTrabajadorModalAbierto, setVisualizarTrabajadorModalAbierto] = useState(false);
+        const [insertarEmpresaModalAbierto, setInsertarEmpresaModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -86,7 +88,8 @@ import Trabajador from './VisualizarTrabajador';
              ['VisualizarBrigadaModalAbierto', setVisualizarBrigadaModalAbierto],
              ['VisualizarSedeModalAbierto', setVisualizarSedeModalAbierto],
              ['VisualizarTipoEquipoModalAbierto', setVisualizarTipoEquipoModalAbierto],
-             ['VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto]
+             ['VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto],
+             ['InsertarEmpresaModalAbierto', setInsertarEmpresaModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -238,6 +241,10 @@ import Trabajador from './VisualizarTrabajador';
         <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto )}
         >
           Trabajador
+          </Button>
+          <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'InsertarEmpresaModalAbierto', setInsertarEmpresaModalAbierto )}
+        >
+          Empresa
           </Button>
 </Stack>
     </AccordionPanel>
@@ -517,6 +524,21 @@ import Trabajador from './VisualizarTrabajador';
  >
  <Trabajador
  onClose={() => setVisualizarTrabajadorModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={insertarEmpresaModalAbierto}
+ onClose={() => setInsertarEmpresaModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <InsertarEmpresa
+ onClose={() => setInsertarEmpresaModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

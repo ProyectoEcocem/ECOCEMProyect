@@ -1,8 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
+public class HerramientaData
+{
+    public int HerramientaId { get; set; }
+    public string Nombre { get; set; }
+    public string Descripcion {get; set;}
+}
+
 [Route("api/[controller]")]
 [ApiController]
+
 public class HerramientaController : Controller
 {
     private readonly HerramientaService _herramientaService;
@@ -29,7 +37,7 @@ public class HerramientaController : Controller
     public async Task<IEnumerable<Herramienta>> GetAll() => await _herramientaService.GetAll();
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Herramienta herramienta)
+    public async Task<IActionResult> Post([FromBody] HerramientaData herramienta)
     {
         if (herramienta == null)
         {
@@ -37,8 +45,7 @@ public class HerramientaController : Controller
         }
 
         Herramienta herramientaCreada = await _herramientaService.Create(herramienta);
-
-        return CreatedAtRoute("Get", new { id = herramientaCreada.HerramientaId }, herramientaCreada);
+        return Ok(herramientaCreada);
     }
 
     [HttpPut]

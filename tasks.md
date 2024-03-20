@@ -24,21 +24,21 @@ Peso del cemento:
 
 - Conocer el peso del cemento despachado a los autosilos antes de pasar por la báscula de camiones, evitando así el movimiento reiterado entre el silo y la báscula para completar el peso del cemento planificado o para la extracción del cemento vertido en exceso. (podríamos crear alguna funcionalidad para entre dos fechas que el usuario indique, o desde la última a la anterior medición detecte el cambio de volumen como estimación para una compra o venta a silo o autosilo.)
 
-- Alertar en los puestos de operaciones y móviles habilitados de las UEB y de la Oficina Central, sobre el inventario de cemento disponible en todas y cada una de las graneleras de ECOCEM a través de la VPN de la empresa o a través de Internet. (vista para visualizar el total de cemento actualmente en la empresa por tipo, silo, total, etc, ver excell Demostración autoguardado)
+- YA Alertar en los puestos de operaciones y móviles habilitados de las UEB y de la Oficina Central, sobre el inventario de cemento disponible en todas y cada una de las graneleras de ECOCEM a través de la VPN de la empresa o a través de Internet. (vista para visualizar el total de cemento actualmente en la empresa por tipo, silo, total, etc, ver excell Demostración autoguardado)
 
 - Visualizar los resultados más importantes relacionados con la descarga de los ferrosilos, autosilos y la venta de cemento, a partir de resúmenes como: Tabla de Control de la Descarga Real de Ferrosilos o Autosilos de Cemento y Tabla de Control de la Venta de Cemento. (ver excell "Demostración 8.09.23 para apoyar")
 
 Gestión del mantenimiento:
 
--YA Monitorear el tiempo de operación de los equipos, emitiendo avisos de la cercanía de los distintos tipos de mantenimiento industrial de acuerdo al tiempo de explotación. 
+- YA Monitorear el tiempo de operación de los equipos, emitiendo avisos de la cercanía de los distintos tipos de mantenimiento industrial de acuerdo al tiempo de explotación. 
 
--YA Advertir con la antelación apropiada los tipos y las cantidades de piezas e insumos necesarios para realizar los mantenimientos industriales, así como las acciones que se requieren de acuerdo a las horas de explotación.
+- YA Advertir con la antelación apropiada los tipos y las cantidades de piezas e insumos necesarios para realizar los mantenimientos industriales, así como las acciones que se requieren de acuerdo a las horas de explotación.
 
--DIANA Emitir las órdenes de trabajo para la solicitud del servicio de los mantenimientos respectivos de forma oportuna y de modo que puedan ser completadas pertinentemente por los ejecutores del mantenimiento.
+- DIANA Emitir las órdenes de trabajo para la solicitud del servicio de los mantenimientos respectivos de forma oportuna y de modo que puedan ser completadas pertinentemente por los ejecutores del mantenimiento.
 
-- Registrar las acciones que se requiere realizar para ejecutar cada tipo de mantenimiento industrial, de acuerdo con los tipos de equipos y las horas de explotación.
+- Registrar las acciones que se requiere realizar para ejecutar cada tipo de mantenimiento industrial, de acuerdo con los tipos de equipos y las horas de explotación.(Mantenimiento Necesario)
 
--  Emitir los registros de cierre mensual del mantenimiento industrial, sus costos y el modelo de ejecución del cronograma de mantenimiento semanal, mensual y anual.
+- Ya  Emitir los registros de cierre mensual del mantenimiento industrial, sus costos y el modelo de ejecución del cronograma de mantenimiento semanal, mensual y anual.(Esto debe ser lo del resumen d los parametros)
 
 - Registrar las horas de roturas y los costos del mantenimiento industrial de los equipos tecnológicos más importantes de cada UEB y de la Empresa en su totalidad.
 

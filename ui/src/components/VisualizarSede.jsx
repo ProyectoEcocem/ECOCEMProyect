@@ -27,14 +27,15 @@ export default class Sedes extends React.Component {
     }
   
     componentDidMount() {
-      cargarBD = () =>{
+      this.cargarBD();
+    }
+    cargarBD = () =>{
       axios.get(`http://localhost:5103/api/Sede`)
         .then(res => {
           const sedes = res.data;
           this.setState({ sedes });
         })
       }
-    }
   
     //Funcion para abrir el modal de Insertar Sede
     manejarInsertarSedeModal = () => {

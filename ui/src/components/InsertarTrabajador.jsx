@@ -11,7 +11,7 @@ import {
   } from "@chakra-ui/react"; 
 
 const InsertarTrabajador = ({onClose}) => {
-  const [trabajadorId, setTrabajadorId] = useState(0);
+  // const [trabajadorId, setTrabajadorId] = useState(0);
   const [nombre, setNombre] = useState("");
   const [sede, setSede] = useState(0);
   const [insertarTrabajadorModalAbierto, setInsertarTrabajadorModalAbierto] = useState(false);
@@ -29,8 +29,8 @@ const InsertarTrabajador = ({onClose}) => {
   const createTrabajador = async () => {
 
     axios.post(`http://localhost:5103/api/Trabajador`, {
-      trabajadorId: trabajadorId,
-      nombre: nombre,
+      trabajadorId: 0,
+      nombreTrabajador: nombre,
       sedeId: sede
     })
     .then((response) => {
@@ -93,7 +93,7 @@ const InsertarTrabajador = ({onClose}) => {
           marginBottom={30}
         >
           {sedes.map((sede) => (
-            <option key={sede.sedeId} value={sede.SedeId}>
+            <option key={sede.sedeId} value={sede.sedeId}>
               {sede.nombreSede}
             </option>
           ))}

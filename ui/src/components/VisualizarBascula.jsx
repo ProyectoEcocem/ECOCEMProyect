@@ -26,11 +26,15 @@ export default class Bascula extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Bascula`)
-        .then(res => {
-          const Basculas= res.data;
-          this.setState({ Basculas });
-        })
+      .then(res => {
+        const Basculas= res.data;
+        this.setState({ Basculas });
+      })
     }
 
     manejarInsertarBasculaModal = () => {
@@ -39,8 +43,7 @@ export default class Bascula extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"520px"}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarBasculaModal}
          marginBottom={5}
@@ -51,7 +54,7 @@ export default class Bascula extends React.Component {
 
          <Modal isOpen={this.state.insertarBasculaModalAbierto} onClose={() => this.setState({ insertarBasculaModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarBascula onClose={() => this.setState({ insertarBasculaModalAbierto: false })} />
+         <InsertarBascula onClose={() => {this.setState({ insertarBasculaModalAbierto: false }); this.cargarBD();} }/>
          </AbsoluteCenter>
          </Modal>
 
@@ -76,7 +79,6 @@ export default class Bascula extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
-      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Basculas.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

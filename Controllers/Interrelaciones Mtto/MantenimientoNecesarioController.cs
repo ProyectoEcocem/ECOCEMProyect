@@ -3,6 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
 
+public class MantenimientoNecesarioData
+{
+    public int TipoEId {get; set;}
+    public int AMId {get; set;}
+    public double HorasExpId {get; set; }
+}
+
 [ApiController]
 [Route("api/[controller]")]
 public class MantenimientoNecesarioController : Controller
@@ -16,7 +23,7 @@ public class MantenimientoNecesarioController : Controller
 
     
     [HttpPost]
-    public async Task<ActionResult> Post(MantenimientoNecesario mn)
+    public async Task<ActionResult> Post(MantenimientoNecesarioData mn)
     {
         return Ok(await  _mantenimientoNecesarioServicio.Create(mn));
     }

@@ -110,7 +110,12 @@ import Trabajador from './VisualizarTrabajador';
          };
 
  return(
-<Flex width="100vw" height="100vh">
+<Flex
+ width={{ base: "100%", md: "80vw" }}
+ height={{ base: "auto", md: "1000" }}
+ direction={{ base: "column", md: "row" }}
+ position="relative"
+>
       {/* Panel fijo a la izquierda */}
       <Box flex="1" bg="white"  borderRight="2px solid gray" >
       <img

@@ -27,11 +27,15 @@ export default class TiposEquipo extends React.Component {
     }
   
     componentDidMount() {
+     this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/TipoEquipo`)
-        .then(res => {
-          const tipoEquipos= res.data;
-          this.setState({ tipoEquipos });
-        })
+      .then(res => {
+        const tipoEquipos= res.data;
+        this.setState({ tipoEquipos });
+      })
     }
 
     //Funcion para abrir el modal de Insertar Tipo de Equipo
@@ -41,9 +45,7 @@ export default class TiposEquipo extends React.Component {
   
     render() {
       return (
-       <div style={{height : 400}}>
-
-<AbsoluteCenter top={"80px"} left={"600px"}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
         <Button
          onClick={this.manejarInsertarTipoEquipoModal}
          marginBottom={5}
@@ -54,7 +56,7 @@ export default class TiposEquipo extends React.Component {
 
          <Modal isOpen={this.state.insertarTipoEquipoModalAbierto} onClose={() => this.setState({ insertarTipoEquipoModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarTipoDeEquipo onClose={() => this.setState({ insertarTipoEquipoModalAbierto: false })} />
+         <InsertarTipoDeEquipo onClose={() => {this.setState({ insertarTipoEquipoModalAbierto: false }); this.cargarBD();} } />
          </AbsoluteCenter>
          </Modal>
 
@@ -79,7 +81,6 @@ export default class TiposEquipo extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-        </AbsoluteCenter>
        </div>
       )
     }

@@ -26,11 +26,15 @@ export default class Rotura extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBd();
+    }
+
+    cargarBd() {
       axios.get(`http://localhost:5103/api/Rotura`)
-        .then(res => {
-          const Roturas= res.data;
-          this.setState({ Roturas });
-        })
+      .then(res => {
+        const Roturas= res.data;
+        this.setState({ Roturas });
+      })
     }
 
     manejarInsertarRoturaModal = () => {
@@ -39,8 +43,7 @@ export default class Rotura extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"600px"}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarRoturaModal}
          marginBottom={5}
@@ -51,7 +54,7 @@ export default class Rotura extends React.Component {
 
          <Modal isOpen={this.state.insertarRoturaModalAbierto} onClose={() => this.setState({ insertarRoturaModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarRotura onClose={() => this.setState({ insertarRoturaModalAbierto: false })} />
+         <InsertarRotura onClose={() => {this.setState({ insertarRoturaModalAbierto: false }); this.cargarBd();}} />
          </AbsoluteCenter>
          </Modal>
 
@@ -79,7 +82,6 @@ export default class Rotura extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-        </AbsoluteCenter>
 </div>
 
         // <ul>

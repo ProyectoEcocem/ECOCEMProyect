@@ -28,11 +28,15 @@ export default class Venta extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Venta`)
-        .then(res => {
-          const Ventas= res.data;
-          this.setState({ Ventas });
-        })
+      .then(res => {
+        const Ventas= res.data;
+        this.setState({ Ventas });
+      })
     }
 
     manejarInsertarVentaModal = () => {
@@ -45,8 +49,7 @@ export default class Venta extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"1000px"}>
+        <div style={{ position: "absolute", top: "5%", left: "55%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarVentaModal}
          marginBottom={5}
@@ -56,17 +59,20 @@ export default class Venta extends React.Component {
          </Button>
          <Modal isOpen={this.state.insertarVentaModalAbierto} onClose={() => this.setState({ insertarVentaModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarVenta onClose={() => this.setState({ insertarVentaModalAbierto: false })} />
+         <InsertarVenta onClose={() => {this.setState({ insertarVentaModalAbierto: false }); this.cargarBD();} }/>
 
          </AbsoluteCenter>
          </Modal>
 
-         <Modal isOpen={this.state.insertarCargaModalAbierto} onClose={() => this.setState({ insertarCargaModalAbierto: false })}>
          <AbsoluteCenter>
+         <Modal isOpen={this.state.insertarCargaModalAbierto} onClose={() => this.setState({ insertarCargaModalAbierto: false })}>
+         
          <InsertarCarga onClose={() => this.setState({ insertarCargaModalAbierto: false })} />
          
-         </AbsoluteCenter>
+         
          </Modal>
+         </AbsoluteCenter>
+
         <TableContainer>
         <Table>
           <Thead>
@@ -94,7 +100,6 @@ export default class Venta extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
-      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Ventas.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

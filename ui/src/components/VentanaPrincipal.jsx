@@ -40,6 +40,7 @@ import {
 import TiposEquipo from './VisualizarTipoEquipo';
 import Trabajador from './VisualizarTrabajador';
 import InsertarEmpresa from './InsertarEmpresa';
+import Resumenes from './ResumenesParametrosIndicadores';
 
  const VentanaPrincipal = () => {
 
@@ -356,7 +357,7 @@ import InsertarEmpresa from './InsertarEmpresa';
       height="500px"
       zIndex={100}
  >
- <Reporte
+ <Resumenes
  onClose={() => setVisualizarReporteModalAbierto(false)}/>
  </Modal>
 

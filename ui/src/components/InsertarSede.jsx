@@ -13,7 +13,7 @@ import {
 //import { sedeController } from "../../../Controllers/Entidades"
 
 const InsertarSede = ({onClose}) => {
-  const [numeroSede, setNumeroSede] = useState(0);
+  // const [sedeId, setNumeroSede] = useState(0);
   const [nombreSede, setNombreSede] = useState("");
   const [ubicacionSede, setUbicacion] = useState("");
   const [empresaId, setEmpresaId] = useState(1);
@@ -31,14 +31,9 @@ const InsertarSede = ({onClose}) => {
 
 
   const EnviarForm = async () => {
-    const sede = {
-      numeroSede: numeroSede,
-      nombreSede: nombreSede,
-      ubicacionSede: ubicacionSede,
-      empresaId: 1
-    };
+
     axios.post(`http://localhost:5103/api/Sede`, {
-      numeroSede: numeroSede,
+      sedeId: 0,
       nombreSede: nombreSede,
       ubicacionSede: ubicacionSede,
       empresaId: empresaId
@@ -62,7 +57,7 @@ const InsertarSede = ({onClose}) => {
 
    useEffect(() => {
      setInsertSuccess(false);
-   }, [numeroSede,nombreSede,ubicacionSede,empresaId]);
+   }, [nombreSede,ubicacionSede,empresaId]);
  
 
    const handleCancelar = () => {
@@ -158,6 +153,3 @@ const InsertarSede = ({onClose}) => {
 };
 
 export default InsertarSede;
-
-// TODO:   Verificar que la ventana desaparezca al hacer click en aceptar
-// TODO: Cambiar para que Empresa sea un seleccionable, no un input

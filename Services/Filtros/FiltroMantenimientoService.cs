@@ -99,6 +99,25 @@ public class FiltroMantenimientoService
         return result;
     }
     
+    public async Task<IEnumerable<CargaSiloResultado>> ObtenerCargaSiloJoin()
+{
+    var resultado = await myContext.Cargas
+        .Join(myContext.Silos,
+              carga => carga.SiloId,
+              silo => silo.SiloId,
+              (carga, silo) => new CargaSiloResultado
+              {
+                NoSilo = silo.NoSilo,
+                TipoCementoId = carga.TipoCementoId,
+                FechaCargaId = carga.FechaCargaId,
+                SedeId = carga.SedeId,
+                EntidadCompradoraId = carga.EntidadCompradoraId
+              })
+        .ToListAsync();
+
+    return resultado;
+}
+
     public double GetHoras(int equipoId)
     {
         

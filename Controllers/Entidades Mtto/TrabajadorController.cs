@@ -7,7 +7,7 @@ public class TrabajadorData{
     public int SedeId {get; set;}
 }
 
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 [ApiController]
 public class TrabajadorController : Controller
 {
@@ -40,7 +40,7 @@ public class TrabajadorController : Controller
             return BadRequest();
         }
         Trabajador trabajadorCreado = await _trabajadorServicio.Create(trabajador);
-        return CreatedAtRoute("Get", new { id = trabajadorCreado.TrabajadorId }, trabajadorCreado);
+        return Ok(trabajadorCreado);
     }
 
     [HttpPut]

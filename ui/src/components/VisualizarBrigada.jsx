@@ -67,8 +67,8 @@ export default class VisualizarBrigada extends React.Component {
             <Tbody>
               {
                 this.state.Brigadas.map((brigada) => (
-                  <Tr key={brigada.BrigadaId}>
-                    <Td>{brigada.BrigadaId}</Td>
+                  <Tr key={brigada.brigadaId}>
+                    <Td>{brigada.brigadaId}</Td>
                     <Td>{brigada.descripcion}</Td>
                   </Tr>
                 )

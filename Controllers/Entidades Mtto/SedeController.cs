@@ -3,7 +3,7 @@ namespace ECOCEMProject;
 
     public class SedeData
     {
-        public int sedeid { get; set; }
+        public int sedeId { get; set; }
         public string? nombreSede { get; set; }
         public string? ubicacionSede { get; set; }
         public int empresaId { get; set; }

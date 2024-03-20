@@ -24,9 +24,9 @@ Peso del cemento:
 
 - Conocer el peso del cemento despachado a los autosilos antes de pasar por la báscula de camiones, evitando así el movimiento reiterado entre el silo y la báscula para completar el peso del cemento planificado o para la extracción del cemento vertido en exceso. (podríamos crear alguna funcionalidad para entre dos fechas que el usuario indique, o desde la última a la anterior medición detecte el cambio de volumen como estimación para una compra o venta a silo o autosilo.)
 
-- AQUI Alertar en los puestos de operaciones y móviles habilitados de las UEB y de la Oficina Central, sobre el inventario de cemento disponible en todas y cada una de las graneleras de ECOCEM a través de la VPN de la empresa o a través de Internet. (vista para visualizar el total de cemento actualmente en la empresa por tipo, silo, total, etc, ver excell Demostración autoguardado)
+- YA MAS MENOS: Alertar en los puestos de operaciones y móviles habilitados de las UEB y de la Oficina Central, sobre el inventario de cemento disponible en todas y cada una de las graneleras de ECOCEM a través de la VPN de la empresa o a través de Internet. (vista para visualizar el total de cemento actualmente en la empresa por tipo, silo, total, etc, ver excell Demostración autoguardado)
 
-- Visualizar los resultados más importantes relacionados con la descarga de los ferrosilos, autosilos y la venta de cemento, a partir de resúmenes como: Tabla de Control de la Descarga Real de Ferrosilos o Autosilos de Cemento y Tabla de Control de la Venta de Cemento. (ver excell "Demostración 8.09.23 para apoyar")
+- FACIL Visualizar los resultados más importantes relacionados con la descarga de los ferrosilos, autosilos y la venta de cemento, a partir de resúmenes como: Tabla de Control de la Descarga Real de Ferrosilos o Autosilos de Cemento y Tabla de Control de la Venta de Cemento. (ver excell "Demostración 8.09.23 para apoyar")
 
 Gestión del mantenimiento:
 

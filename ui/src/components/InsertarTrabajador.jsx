@@ -11,9 +11,9 @@ import {
   } from "@chakra-ui/react"; 
 
 const InsertarTrabajador = ({onClose}) => {
-  const [trabajadorId, setTrabajadorId] = useState("");
+  // const [trabajadorId, setTrabajadorId] = useState(0);
   const [nombre, setNombre] = useState("");
-  const [sede, setSede] = useState("");
+  const [sede, setSede] = useState(0);
   const [insertarTrabajadorModalAbierto, setInsertarTrabajadorModalAbierto] = useState(false);
 
   const [sedes, setSedes] = useState([]);
@@ -29,9 +29,9 @@ const InsertarTrabajador = ({onClose}) => {
   const createTrabajador = async () => {
 
     axios.post(`http://localhost:5103/api/Trabajador`, {
-      trabajadorId: trabajadorId,
-      nombre: nombre,
-      sedeId: sedeId
+      trabajadorId: 0,
+      nombreTrabajador: nombre,
+      sedeId: sede
     })
     .then((response) => {
       console.log(response);
@@ -69,19 +69,6 @@ const InsertarTrabajador = ({onClose}) => {
 <FormLabel style={{fontSize: 30}}>
   Insertar Trabajador
 </FormLabel>
-
-  <FormControl>
-              <FormLabel style={{margin: "5px 20px 0px 40px"}}>ID del Trabajador</FormLabel>
-              <Input
-                value={trabajadorId}
-                placeholder="Ingrese el ID del trabajador"
-                onChange={(e) => setTrabajadorId(e.target.value)}
-                marginTop={0.5}
-                marginLeft={8}
-                width={80}
-                backgroundColor= "white"
-              />
-            </FormControl>
     
             <FormControl>
               <FormLabel style={{margin: "30px 20px 0px 40px"}}>Nombre</FormLabel>
@@ -106,8 +93,8 @@ const InsertarTrabajador = ({onClose}) => {
           marginBottom={30}
         >
           {sedes.map((sede) => (
-            <option key={sede.id} value={sede.id}>
-              {sede.nombre}
+            <option key={sede.sedeId} value={sede.sedeId}>
+              {sede.nombreSede}
             </option>
           ))}
         </Select>

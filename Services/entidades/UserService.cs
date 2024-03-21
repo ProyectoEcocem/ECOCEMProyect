@@ -65,7 +65,8 @@ public class UserService
             var user = new User()
             {
                 UserName = new_user.Name,
-                Email = new_user.Email
+                Email = new_user.Email,
+                NoSede = new_user.NoSede
             };
 
             var result = await _userManager.CreateAsync(

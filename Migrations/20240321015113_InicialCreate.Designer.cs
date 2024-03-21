@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240320123715_InicialCreate")]
+    [Migration("20240321015113_InicialCreate")]
     partial class InicialCreate
     {
         /// <inheritdoc />
@@ -57,21 +57,13 @@ namespace ECOCEMProject.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AMId"));
 
-                    b.Property<int>("BrigadaId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("EquipoId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("FechaId")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("TrabajadorId")
-                        .HasColumnType("integer");
 
                     b.HasKey("AMId");
 
@@ -866,6 +858,9 @@ namespace ECOCEMProject.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("NoSede")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("text");

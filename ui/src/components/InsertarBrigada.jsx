@@ -12,14 +12,14 @@ import {
 import axios from "axios";
 
 const InsertarBrigada = ({onClose}) => {
-    const [brigadaId, setBrigadaId] = useState(0);
+    // const [brigadaId, setBrigadaId] = useState(0);
     const [descripcion, setDescripcion] = useState("");
     const [insertarBrigadaModalAbierto, setInsertarBrigadaModalAbierto] = useState(false);
 
     const createBrigada = async () => {
       
         axios.post(`http://localhost:5103/api/Brigada`, {
-        brigadaId: brigadaId,
+        brigadaId: 0,
         descripcion: descripcion
       })
       .then((response) => {

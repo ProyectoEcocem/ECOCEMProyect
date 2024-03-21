@@ -51,6 +51,7 @@ const InsertarEquipo = ({onClose}) => {
       console.log(response);
       alert("El Equipo ha sido insertado correctamente.")
       setInsertarEquipoModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("El Equipo no se ha insertado.")

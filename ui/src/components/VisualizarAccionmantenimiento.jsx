@@ -26,12 +26,17 @@ export default class VisualizarAccionMantenimiento extends React.Component {
     }
   
     componentDidMount() {
-      axios.get(`http://localhost:5103/api/AccionMantenimiento`)
-        .then(res => {
-          const accionesMantenimiento= res.data;
-          this.setState({ accionesMantenimiento });
-        })
+      this.cargarBD();
     }
+
+    cargarBD(){
+      axios.get(`http://localhost:5103/api/AccionMantenimiento`)
+      .then(res => {
+        const accionesMantenimiento= res.data;
+        this.setState({ accionesMantenimiento });
+      })
+  }
+    
 
     manejarInsertarAccionMantenimientoModal = () => {
       this.setState({ insertarAccionMantenimientoEModalAbierto: true });
@@ -39,8 +44,7 @@ export default class VisualizarAccionMantenimiento extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
-<AbsoluteCenter top={"80px"} left={"700px"}>
+        <div style={{ position: "absolute", top: "5%", left: "55%", transform: "translateX(-50%)" }}>
 <Button
          onClick={this. manejarInsertarAccionMantenimientoModal}
          marginBottom={10}
@@ -79,7 +83,6 @@ export default class VisualizarAccionMantenimiento extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-        </AbsoluteCenter>
         </div>
         // <ul>
           // { this.state.roturasE.map(roturaE => <li key={roturaE.roturaId}> Id:{roturaE.roturaId} Equipo: {roturaE.equipoId} Fecha:  Equipo: {roturaE.fechaId} </li>)}

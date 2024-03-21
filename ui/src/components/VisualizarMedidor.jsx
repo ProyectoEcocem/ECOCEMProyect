@@ -26,11 +26,14 @@ export default class Medidor extends React.Component {
     }
   
     componentDidMount() {
+     this.cargarBD();
+    }
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Medidor`)
-        .then(res => {
-          const Medidors= res.data;
-          this.setState({ Medidors });
-        })
+      .then(res => {
+        const Medidors= res.data;
+        this.setState({ Medidors });
+      })
     }
 
     manejarInsertarMedidorModal = () => {
@@ -39,8 +42,7 @@ export default class Medidor extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"550px"}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarMedidorModal}
          marginBottom={5}
@@ -50,7 +52,7 @@ export default class Medidor extends React.Component {
          </Button>
          <Modal isOpen={this.state.insertarMedidorModalAbierto} onClose={() => this.setState({ insertarMedidorModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarMedidor onClose={() => this.setState({ insertarMedidorModalAbierto: false })} />
+         <InsertarMedidor onClose={() => {this.setState({ insertarMedidorModalAbierto: false }); this.cargarBD();} }/>
          </AbsoluteCenter>
          </Modal>
         <TableContainer>
@@ -74,7 +76,6 @@ export default class Medidor extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
-      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Medidors.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

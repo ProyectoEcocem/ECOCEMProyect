@@ -26,11 +26,15 @@ export default class Vehiculo extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Vehiculo`)
-        .then(res => {
-          const Vehiculos= res.data;
-          this.setState({ Vehiculos });
-        })
+      .then(res => {
+        const Vehiculos= res.data;
+        this.setState({ Vehiculos });
+      })
     }
 
     manejarInsertarVehiculoModal = () => {
@@ -39,8 +43,7 @@ export default class Vehiculo extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"550px"}>
+        <div style={{ position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarVehiculoModal}
          marginBottom={5}
@@ -50,7 +53,7 @@ export default class Vehiculo extends React.Component {
          </Button>
          <Modal isOpen={this.state.insertarVehiculoModalAbierto} onClose={() => this.setState({ insertarVehiculoModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarVehiculo onClose={() => this.setState({ insertarVehiculoModalAbierto: false })} />
+         <InsertarVehiculo onClose={() => {this.setState({ insertarVehiculoModalAbierto: false }); this.cargarBD();} }/>
          </AbsoluteCenter>
          </Modal>
         <TableContainer>
@@ -74,7 +77,6 @@ export default class Vehiculo extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
-      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Vehiculos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

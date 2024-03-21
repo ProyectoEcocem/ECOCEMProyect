@@ -26,11 +26,15 @@ export default class Silo extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Silo`)
-        .then(res => {
-          const silos= res.data;
-          this.setState({ silos });
-        })
+      .then(res => {
+        const silos= res.data;
+        this.setState({ silos });
+      })
     }
 
     manejarInsertarSiloModal = () => {
@@ -39,8 +43,7 @@ export default class Silo extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"700px"}>
+        <div style={{ position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarSiloModal}
          marginBottom={5}
@@ -50,7 +53,7 @@ export default class Silo extends React.Component {
          </Button>
          <Modal isOpen={this.state.insertarSiloModalAbierto} onClose={() => this.setState({ insertarSiloModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarSilo onClose={() => this.setState({ insertarSiloModalAbierto: false })} />
+         <InsertarSilo onClose={() => {this.setState({ insertarSiloModalAbierto: false }); this.cargarBD();}} />
          </AbsoluteCenter>
          </Modal>
         <TableContainer>
@@ -80,7 +83,6 @@ export default class Silo extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
-      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Medidors.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

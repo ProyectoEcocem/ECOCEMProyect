@@ -23,16 +23,20 @@ export default class Reporte extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Reporte`)
-        .then(res => {
-          const Reportes= res.data;
-          this.setState({ Reportes });
-        })
+      .then(res => {
+        const Reportes= res.data;
+        this.setState({ Reportes });
+      })
     }
   
     render() {
       return (
-        <div style={{height : 400}}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
           <AbsoluteCenter top={"80px"} left={"900px"}>
         <TableContainer>
         <Table>

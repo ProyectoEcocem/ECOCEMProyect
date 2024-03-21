@@ -5,6 +5,7 @@ import {
     Flex,
     Select,
     Input,
+    AbsoluteCenter,
     //BackgroundImage
   } from "@chakra-ui/react"; 
 import axios from "axios";
@@ -112,6 +113,7 @@ const InsertarCarga = ({venta, onClose}) => {
 };
 
   return (
+    <AbsoluteCenter marginTop={20}>
     <div style={{
       width: "400px",
       height: "1200px",
@@ -287,7 +289,9 @@ const InsertarCarga = ({venta, onClose}) => {
     Cancelar
   </Button>
   </Flex>
+  
       </div>
+      </AbsoluteCenter>
   );
 };
 

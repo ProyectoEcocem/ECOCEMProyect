@@ -26,11 +26,15 @@ export default class VisualizarOrdenTrabajo extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/OrdenTrabajo`)
-        .then(res => {
-          const roturasE= res.data;
-          this.setState({ ordenesTrabajo });
-        })
+      .then(res => {
+        const roturasE= res.data;
+        this.setState({ ordenesTrabajo });
+      })
     }
 
     manejarInsertarOrdenesTrabajoModal = () => {
@@ -39,9 +43,8 @@ export default class VisualizarOrdenTrabajo extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
+        <div style={{ position: "absolute", top: "5%", left: "55%", transform: "translateX(-50%)" }}>
 
-<AbsoluteCenter top={"80px"} left={"750px"}>
 <Button
          onClick={this.manejarInsertarOrdenesTrabajoModal}
          marginBottom={5}
@@ -52,7 +55,7 @@ export default class VisualizarOrdenTrabajo extends React.Component {
 
          <Modal isOpen={this.state.insertarOrdenTrabajoModalAbierto} onClose={() => this.setState({ insertarOrdenTrabajoModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarOrdenTrabajo onClose={() => this.setState({ insertarOrdenTrabajoModalAbierto: false })} />
+         <InsertarOrdenTrabajo onClose={() => {this.setState({ insertarOrdenTrabajoModalAbierto: false }); this.cargarBD();}} />
          </AbsoluteCenter>
          </Modal>
 
@@ -80,7 +83,6 @@ export default class VisualizarOrdenTrabajo extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-        </AbsoluteCenter>
         </div>
         // <ul>
           // { this.state.roturasE.map(roturaE => <li key={roturaE.roturaId}> Id:{roturaE.roturaId} Equipo: {roturaE.equipoId} Fecha:  Equipo: {roturaE.fechaId} </li>)}

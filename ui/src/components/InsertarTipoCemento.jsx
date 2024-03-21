@@ -23,6 +23,7 @@ const InsertarTipoCemento = ({onClose}) => {
       console.log(response);
       alert("El Tipo de Cemento se ha insertado")
       setInsertarTipoCementoModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("El Tipo de Cemento no se ha insertado")
@@ -45,6 +46,7 @@ const InsertarTipoCemento = ({onClose}) => {
         width: "400px",
         height: "400px",
         display: "flex",
+        top: "5%",
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "white",

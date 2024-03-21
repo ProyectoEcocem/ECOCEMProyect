@@ -6,10 +6,12 @@ public class AccionMantenimientoData
 {
     public int AMId { get; set; }
 
-    public int EquipoId {get; set;} 
-    public int BrigadaId {get; set;}
-    public int TrabajadorId {get; set;}
-    public DateTime FechaId {get; set;}
+    public string Description { get; set; }
+
+    // public int EquipoId {get; set;} 
+    // public int BrigadaId {get; set;}
+    // public int TrabajadorId {get; set;}
+    // public DateTime FechaId {get; set;}
 }
 
 [ApiController]

@@ -18,10 +18,7 @@ namespace ECOCEMProject.Migrations
                 {
                     AMId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EquipoId = table.Column<int>(type: "integer", nullable: false),
-                    BrigadaId = table.Column<int>(type: "integer", nullable: false),
-                    TrabajadorId = table.Column<int>(type: "integer", nullable: false),
-                    FechaId = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Descripcion = table.Column<string>(type: "text", nullable: false),
                     Discriminator = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -280,6 +277,7 @@ namespace ECOCEMProject.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nombre = table.Column<string>(type: "text", nullable: true),
+                    NoSede = table.Column<int>(type: "integer", nullable: false),
                     UserName = table.Column<string>(type: "text", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: true),

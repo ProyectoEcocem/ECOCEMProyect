@@ -2,8 +2,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System.Net.Http.Headers; 
-using Microsoft.AspNetCore.Authentication;
+// using System.Net.Http.Headers; 
+// using Microsoft.AspNetCore.Authentication;
 
 using ECOCEMProject;
 
@@ -78,8 +78,6 @@ builder.Services.AddIdentity<User, Role>(options =>
 
 
 builder.Services.AddAuthorization();
-
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

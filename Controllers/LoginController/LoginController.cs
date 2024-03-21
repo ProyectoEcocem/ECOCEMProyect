@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
 
-
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : Controller
@@ -26,9 +25,6 @@ namespace ECOCEMProject;
             UserRoleServicio userRoleService,
             IConfiguration configuration,
             FiltroMantenimientoService filtro,
-            
-            
-            
             SignInManager<User> signInManager)
         {
             _userService = userService;
@@ -38,8 +34,6 @@ namespace ECOCEMProject;
             _signInManager = signInManager;
             _filtro = filtro;
         }
-
-        
 
         [HttpPost]
         public async Task<IActionResult> Login([FromBody]LoginModel login)

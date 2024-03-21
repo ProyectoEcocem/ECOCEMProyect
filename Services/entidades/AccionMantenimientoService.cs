@@ -43,10 +43,7 @@ public class AccionMantenimientoService
         AccionMantenimiento am = new AccionMantenimiento();
 
         am.AMId = accionM.AMId;
-        am.BrigadaId = accionM.BrigadaId;
-        am.EquipoId = accionM.EquipoId;
-        am.FechaId = accionM.FechaId;
-        am.TrabajadorId = accionM.TrabajadorId;
+        am.Descripcion = accionM.Description;
 
         _context.AccionesMantenimientos.Add(am);
         await _context.SaveChangesAsync();

@@ -75,4 +75,16 @@ public class FiltroMantenimientoController : Controller
 
         return Ok(result);
     }
+    [HttpGet]
+    public async Task<IActionResult> GetSede()
+    {
+        var result =  await _filtroMantenimientoService.ObtenerCargaSiloJoin();
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(result);
+    }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
@@ -29,6 +30,7 @@ public class BrigadaController : Controller
         return Ok(brigada);
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<IEnumerable<Brigada>> GetAll() => await _brigadaServicio.GetAll();
 

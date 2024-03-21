@@ -26,6 +26,7 @@ const InsertarBrigada = ({onClose}) => {
        // console.log(response);
         alert("La Brigada se ha insertado correctamente")
         setInsertarBrigadaModalAbierto(false);
+        onClose();
       }, (error) => {
         console.log(error);
         alert("La Brigada no se ha insertado.")

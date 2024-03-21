@@ -27,11 +27,15 @@ export default class EntidadCompradora extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/EntidadCompradora`)
-        .then(res => {
-          const EntidadCompradoras= res.data;
-          this.setState({ EntidadCompradoras });
-        })
+      .then(res => {
+        const EntidadCompradoras= res.data;
+        this.setState({ EntidadCompradoras });
+      })
     }
 
     manejarInsertarEntidadCompradoraModal = () => {
@@ -40,8 +44,7 @@ export default class EntidadCompradora extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"550px"}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarEntidadCompradoraModal}
          marginBottom={5}
@@ -51,7 +54,7 @@ export default class EntidadCompradora extends React.Component {
          </Button>
          <Modal isOpen={this.state.insertarEntidadCompradoraModalAbierto} onClose={() => this.setState({ insertarEntidadCompradoraModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarEntidadCompradora onClose={() => this.setState({ insertarEntidadCompradoraModalAbierto: false })} />
+         <InsertarEntidadCompradora onClose={() => {this.setState({ insertarEntidadCompradoraModalAbierto: false }); this.cargarBD();} }/>
          </AbsoluteCenter>
          </Modal>
         <TableContainer>
@@ -75,7 +78,6 @@ export default class EntidadCompradora extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
-      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.EntidadCompradoras.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

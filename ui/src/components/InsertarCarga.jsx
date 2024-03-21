@@ -5,11 +5,13 @@ import {
     Flex,
     Select,
     Input,
+    AbsoluteCenter,
     //BackgroundImage
   } from "@chakra-ui/react"; 
 import axios from "axios";
+import Venta from "./VizualizarVenta";
 
-const InsertarCarga = () => {
+const InsertarCarga = ({venta, onClose}) => {
   const [tipoCementoId, setTipoCementoId] = useState(1);
   const [siloId, setSiloId] = useState(1);
   const [vehiculoId, setVehiculoId] = useState(1);
@@ -20,6 +22,7 @@ const InsertarCarga = () => {
   const [pesoBascula, setPesoBascula] = useState(1);
   const [volumen, setVolumen] = useState(1);
   const [fechaId, setFecha] = useState(new Date());
+  const [insertarCargaModalAbierto, setInsertarCargaModalAbierto] = useState(false);
 
     //Lista de tipoCementos
     const [tipoCementos, setTipoCementos] = useState([]);
@@ -88,20 +91,29 @@ const InsertarCarga = () => {
       pesoM: pesoMedidor,
       volumen: volumen,
       basculaId: basculaId,
-      pesoB: pesoBascula
+      pesoB: pesoBascula,
+      sedeId: venta.sedeId,
+      entidadCompradoraId: venta.entidadCompradoraId,
+      fechaVentaId: venta.fechaVentaId
     })
     .then((response) => {
       console.log(response);
-      alert("Se insertó correctamente")
+      alert("La Carga se ha insertado correctamente")
+      setInsertarVentaModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("Revise los datos insertados")
     });
  };
 
-
+ const handleCancelar = () => {
+  // Cierra la ventana modal desde el componente padre.
+  onClose();
+};
 
   return (
+    <AbsoluteCenter marginTop={20}>
     <div style={{
       width: "400px",
       height: "1200px",
@@ -114,17 +126,17 @@ const InsertarCarga = () => {
       border: "2px solid #5F89C1",
     }}>
      
-        <FormLabel style={{fontSize: 30}}>
-        Insertar Carga:
+        <FormLabel style={{fontSize: 20}}>
+        Insertar Carga
         </FormLabel>
 
-        <FormLabel style={{margin: "0px 260px 0px 0px"}}>Granelera:</FormLabel>
+        <FormLabel style={{marginLeft:10, marginBottom:10, marginTop:5, marginRight:200}}>Tipo de Cemento</FormLabel>
 
         <Select
         value={tipoCementoId}
         onChange={(e) => setTipoCementoId(e.target.value)}
         width={80}
-        marginBottom={30}
+        marginBottom={5}
         >
         {tipoCementos.map((tipoCemento) => (
         <option key={tipoCemento.tipoCementoId} value={tipoCemento.tipoCementoId}>
@@ -134,13 +146,13 @@ const InsertarCarga = () => {
         </Select>
 
 
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar silo:</FormLabel>
+        <FormLabel style={{marginLeft: 10, marginRight:200, marginTop:2}}>Seleccionar Silo</FormLabel>
   
         <Select
           value={siloId}
           onChange={(e) => setSiloId(e.target.value)}
           width={80}
-          marginBottom={30}
+          marginBottom={5}
         >
           {silos.map((silo) => (
             <option key={silo.siloId} value={silo.siloId}>
@@ -149,13 +161,13 @@ const InsertarCarga = () => {
           ))}
         </Select>
 
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar vehiculo:</FormLabel>
+        <FormLabel style={{marginLeft: 10, marginTop: 10, marginTop:5, marginRight:180}}>Seleccionar Vehículo</FormLabel>
   
         <Select
           value={vehiculoId}
           onChange={(e) => setVehiculoId(e.target.value)}
           width={80}
-          marginBottom={30}
+          marginBottom={5}
         >
           {vehiculos.map((vehiculo) => (
             <option key={vehiculo.vehiculoId} value={vehiculo.vehiculoId}>
@@ -164,26 +176,26 @@ const InsertarCarga = () => {
           ))}
         </Select>
 
-        <FormLabel style={{margin: "0px 180px 0px 0px"}}>Fecha de la carga:</FormLabel>
+        <FormLabel style={{marginLeft: 10, marginTop: 10, marginTop:5, marginRight:190}}>Fecha de la carga:</FormLabel>
 
         <Input
           type="datetime-local"
           value={fechaId.toISOString().substring(0,16)}
           onChange={(e) => setFecha(new Date(e.target.value))}
           width={80}
-          marginBottom={30}
+          marginBottom={5}
         
         />
 
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Medicion Silo:</FormLabel>
+        <FormLabel style={{marginLeft: 10, marginTop: 10, marginTop:5}}>Medición Silo</FormLabel>
           
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar medidor:</FormLabel>
+        <FormLabel style={{marginLeft: 10, marginTop: 10, marginTop:5, marginRight:180}}>Seleccionar Medidor</FormLabel>
           
           <Select
             value={medidorId}
             onChange={(e) => setMedidorId(e.target.value)}
             width={80}
-            marginBottom={30}
+            marginBottom={3}
           >
             {medidores.map((medidor) => (
               <option key={medidor.medidorId} value={medidor.medidorId}>
@@ -192,31 +204,33 @@ const InsertarCarga = () => {
             ))}
           </Select>
 
-          <FormLabel style={{margin: "0px 180px 0px 0px"}}>Nivel:</FormLabel>
+          <FormLabel style={{marginLeft: 10, marginTop:5, marginRight:280}}>Nivel</FormLabel>
 
           <Input
             value={nivel}
             placeholder="Ingrese el Nivel"
             onChange={(e) => setNivel(e.target.value)}
             marginTop={0.5}
+            marginBottom={5}
             width={80}
             backgroundColor="white"
 
           />
 
-          <FormLabel style={{margin: "0px 180px 0px 0px"}}>Peso del medidor:</FormLabel>
+          <FormLabel style={{marginLeft: 10, marginRight: 190, marginTop:5}}>Peso del medidor</FormLabel>
 
           <Input
             value={pesoMedidor}
             placeholder="Ingrese el Peso del medidor"
             onChange={(e) => setPesoMedidor(e.target.value)}
             marginTop={0.5}
+            marginBottom={5}
             width={80}
             backgroundColor="white"
 
           />
 
-          <FormLabel style={{margin: "0px 180px 0px 0px"}}>Volumen:</FormLabel>
+          <FormLabel style={{marginLeft: 10, marginRight:250, marginTop:5}}>Volumen</FormLabel>
 
           <Input
             value={volumen}
@@ -227,15 +241,15 @@ const InsertarCarga = () => {
             backgroundColor="white"
 
           />
-           <FormLabel style={{margin: "0px 250px 0px 40px"}}>Medicion bascula:</FormLabel>
+           <FormLabel style={{marginLeft: 10, marginTop: 20}}>Medición Báscula</FormLabel>
 
-          <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar bascula:</FormLabel>
+          <FormLabel style={{marginLeft: 10, marginRight:180, marginTop:5}}>Seleccionar Báscula</FormLabel>
           
           <Select
             value={basculaId}
             onChange={(e) => setBasculaId(e.target.value)}
             width={80}
-            marginBottom={30}
+            marginBottom={5}
           >
             {basculas.map((bascula) => (
               <option key={bascula.basculaId} value={bascula.basculaId}>
@@ -244,13 +258,14 @@ const InsertarCarga = () => {
             ))}
           </Select>
 
-          <FormLabel style={{margin: "0px 180px 0px 0px"}}>Peso de la bascula:</FormLabel>
+          <FormLabel style={{marginLeft: 10, marginRight:180, marginTop:5}}>Peso de la Báscula:</FormLabel>
 
           <Input
             value={pesoBascula}
             placeholder="Ingrese el Peso de la bascula"
             onChange={(e) => setPesoBascula(e.target.value)}
             marginTop={0.5}
+            marginBottom={15}
             width={80}
             backgroundColor="white"
 
@@ -259,7 +274,7 @@ const InsertarCarga = () => {
 
 
 
-
+        <Flex>
         <Button 
         variant="contained" 
         color="primary" 
@@ -269,7 +284,14 @@ const InsertarCarga = () => {
         >
           Aceptar
         </Button>
+
+        <Button variant="outline" colorScheme="red" marginTop={0} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
+  
       </div>
+      </AbsoluteCenter>
   );
 };
 

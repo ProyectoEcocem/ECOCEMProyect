@@ -62,6 +62,7 @@ const InsertarAccionMantenimiento = ({onClose}) => {
       //console.log(response);
       alert("La Acción de Mantenimiento se ha insertado correctamente.")
       setInsertarAccionMantenimientoEModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("La Acción de Mantenimiento no se ha insertado.")
@@ -69,6 +70,7 @@ const InsertarAccionMantenimiento = ({onClose}) => {
  };
 
  const handleCancelar = () => {
+  onClose();
   // Cierra la ventana modal desde el componente padre.
 };
 

@@ -26,11 +26,15 @@ export default class VisualizarBrigada extends React.Component {
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Brigada`)
-        .then(res => {
-          const Brigadas = res.data;
-          this.setState({ Brigadas });
-        })
+      .then(res => {
+        const Brigadas = res.data;
+        this.setState({ Brigadas });
+      })
     }
 
     manejarInsertarBrigadaModal = () => {
@@ -39,8 +43,7 @@ export default class VisualizarBrigada extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
- <AbsoluteCenter top={"80px"} left={"550px"}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarBrigadaModal}
          marginBottom={5}
@@ -51,7 +54,7 @@ export default class VisualizarBrigada extends React.Component {
 
          <Modal isOpen={this.state.insertarBrigadaModalAbierto} onClose={() => this.setState({ insertarBrigadaModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarBrigada onClose={() => this.setState({ insertarBrigadaModalAbierto: false })} />
+         <InsertarBrigada onClose={() => {this.setState({ insertarBrigadaModalAbierto: false }); this.cargarBD();} } />
          </AbsoluteCenter>
          </Modal>
 
@@ -77,7 +80,6 @@ export default class VisualizarBrigada extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-        </AbsoluteCenter>
 </div>
 
         // <ul>

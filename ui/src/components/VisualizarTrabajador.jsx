@@ -26,11 +26,15 @@ export default class Trabajador extends React.Component {
     }
   
     componentDidMount() {
+     this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Trabajador`)
-        .then(res => {
-          const Trabajadors= res.data;
-          this.setState({ Trabajadors });
-        })
+      .then(res => {
+        const Trabajadors= res.data;
+        this.setState({ Trabajadors });
+      })
     }
 
     manejarInsertarTrabajadorModal = () => {
@@ -39,8 +43,7 @@ export default class Trabajador extends React.Component {
   
     render() {
       return (
-        <div style={{height : 400}}>
-          <AbsoluteCenter top={"80px"} left={"600px"}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarTrabajadorModal}
          marginBottom={5}
@@ -50,7 +53,7 @@ export default class Trabajador extends React.Component {
          </Button>
          <Modal isOpen={this.state.insertarTrabajadorModalAbierto} onClose={() => this.setState({ insertarTrabajadorModalAbierto: false })}>
          <AbsoluteCenter>
-         <InsertarTrabajador onClose={() => this.setState({ insertarTrabajadorModalAbierto: false })} />
+         <InsertarTrabajador onClose={() => {this.setState({ insertarTrabajadorModalAbierto: false }); this.cargarBD();} }/>
          </AbsoluteCenter>
          </Modal>
 
@@ -78,7 +81,6 @@ export default class Trabajador extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
-      </AbsoluteCenter>
       </div>
         // <ul>
           // { this.state.Trabajadors.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}

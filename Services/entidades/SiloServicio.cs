@@ -30,6 +30,11 @@ public class SiloServicio
         return await _context.Silos.ToListAsync();
     }
 
+    public async Task<IEnumerable<Silo>> GetAll(int sedeId)
+    {
+        return await _context.Silos.Where(s => s.NoSede == sedeId).ToListAsync();
+    }
+
     public async Task<Silo> Update(int id, Silo silo)
     {
         var siloExistente = await Get(id);

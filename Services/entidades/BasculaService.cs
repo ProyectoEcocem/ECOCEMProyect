@@ -32,24 +32,12 @@ public class BasculaService
         return await _context.Basculas.ToListAsync();
     }
 
-    // public async Task<IEnumerable<Bascula>> GetBasculasBySedeId(int sedeId)
-    // {
-    //     var basculas = await _context.MedicionesBasculas
-    //     .Join(_context.Cargas,
-    //         mb => mb.CargaId, // Asumiendo que MedicionBascula tiene una propiedad CargaId
-    //         c => c.Id, // Asumiendo que Carga tiene una propiedad Id
-    //         (mb, c) => new { MedicionBascula = mb, Carga = c })
-    //     .Join(_context.Ventas,
-    //         temp => temp.Carga.VentaId, // Asumiendo que Carga tiene una propiedad VentaId
-    //         v => v.Id, // Asumiendo que Venta tiene una propiedad Id
-    //         (temp, v) => new { temp.MedicionBascula, temp.Carga, Venta = v })
-    //     .Where(x => x.Venta.SedeId == sedeId)
-    //     .Select(x => x.MedicionBascula.Bascula)
-    //     .Distinct()
-    //     .ToListAsync();
+    public async Task<IEnumerable<Bascula>> GetAll(int noSede)
+    {
+        return await _context.Basculas.Where(b => b.NoSede == noSede).ToListAsync();
+    }
 
-    //     return basculas;
-    // }
+    
 
     public async Task<Bascula> Update(int id,Bascula bascula)
     {

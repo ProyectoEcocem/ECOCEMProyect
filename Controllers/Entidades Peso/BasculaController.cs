@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 namespace ECOCEMProject;
 
 public class BasculaData
@@ -37,9 +38,28 @@ public class BasculaController : Controller
 
         return Ok(bascula);
     }
-
+    [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<Bascula>> GetAll() => await _basculaService.GetAll();
+    public async Task<IEnumerable<Bascula>> GetAll()
+    {
+        List<Bascula>basculas = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _basculaService.GetAll();
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _basculaService.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return basculas;
+    } 
 
     [Authorize(Roles="admin, jefe")]
     [HttpPost]

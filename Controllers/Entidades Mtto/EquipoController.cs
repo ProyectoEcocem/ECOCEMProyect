@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 namespace ECOCEMProject;
 public class EquipoData
 {
@@ -13,10 +15,12 @@ public class EquipoData
 public class EquipoController : Controller
 {
     private readonly EquipoServicio _equipoServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public EquipoController(EquipoServicio equipoServicio)
+    public EquipoController(EquipoServicio equipoServicio,  UserManager<User> userManager)
     {
         _equipoServicio = equipoServicio;
+        _userManager = userManager;
     }
 
     [HttpGet("{id}")]
@@ -29,9 +33,29 @@ public class EquipoController : Controller
         }
         return Ok(equipo);
     }
-
+    [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<Equipo>> GetAll() => await _equipoServicio.GetAll();
+    public async Task<IEnumerable<Equipo>> GetAll()
+    {
+         List<Equipo>equipos = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _equipoServicio.GetAll();
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _equipoServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return equipos;
+
+    } 
 
     [HttpPost]
     public async Task<IActionResult> Post(EquipoData equipo)

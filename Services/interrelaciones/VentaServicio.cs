@@ -24,6 +24,11 @@ public class VentaServicio
     {
         return await _context.Ventas.ToListAsync();
     }
+
+    public async Task<IEnumerable<Venta>> GetAll(int sedeId)
+    {
+        return await _context.Ventas.Where(v => v.SedeId == sedeId).ToListAsync();
+    }
     public async Task<Venta> Update(int SedeId,int EntidadCompradoraId,DateTime FechaVentaId,Venta venta)
     {
         var VentaExistente = await Get(SedeId,EntidadCompradoraId,FechaVentaId);

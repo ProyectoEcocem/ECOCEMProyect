@@ -37,6 +37,7 @@ const InsertarTrabajador = ({onClose}) => {
       console.log(response);
       alert("El Trabajador ha sido insertado correctamente.")
       setInsertarTrabajadorModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("El Trabajador no se ha insertado.")

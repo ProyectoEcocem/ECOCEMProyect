@@ -52,6 +52,7 @@ import InsertarEmpresa from './InsertarEmpresa';
 import Resumenes from './ResumenesParametrosIndicadores';
 import Venta from './VizualizarVenta';
 import Carga from './VisualizarCarga';
+import Compra from './VisualizarCompra';
 
  const VentanaPrincipal = () => {
 
@@ -80,6 +81,7 @@ import Carga from './VisualizarCarga';
         const [insertarEmpresaModalAbierto, setInsertarEmpresaModalAbierto] = useState(false);
         const [visualizarVentaModalAbierto, setVisualizarVentaModalAbierto] = useState(false);
         const [visualizarCargaModalAbierto, setVisualizarCargaModalAbierto] = useState(false);
+        const [visualizarCompraModalAbierto, setVisualizarCompraModalAbierto] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -105,7 +107,8 @@ import Carga from './VisualizarCarga';
              ['VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto],
              ['InsertarEmpresaModalAbierto', setInsertarEmpresaModalAbierto],
              ['VisualizarVentaModalAbierto', setVisualizarVentaModalAbierto],
-             ['VisualizarCargaModalAbierto', setVisualizarCargaModalAbierto]
+             ['VisualizarCargaModalAbierto', setVisualizarCargaModalAbierto],
+             ['VisualizarCompraModalAbierto', setVisualizarCompraModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -230,6 +233,10 @@ import Carga from './VisualizarCarga';
         <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarCargaModalAbierto', setVisualizarCargaModalAbierto) }
        >
         Carga
+        </Button>
+        <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarCompraModalAbierto', setVisualizarCompraModalAbierto) }
+       >
+        Compra
         </Button>
       <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto)}
       >
@@ -616,6 +623,21 @@ import Carga from './VisualizarCarga';
       zIndex={100}
  >
  <Carga
+ onClose={() => setVisualizarCargaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarCompraModalAbierto}
+ onClose={() => setVisualizarCompraModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Compra
  onClose={() => setVisualizarCargaModalAbierto(false)}/>
  </Modal>
       </Box>

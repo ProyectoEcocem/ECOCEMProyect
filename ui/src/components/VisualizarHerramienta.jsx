@@ -72,7 +72,7 @@ export default class VisualizarHerramienta extends React.Component {
             <Tbody>
               {
                 this.state.herramientas.map((herramienta) => (
-                  <Tr key={herramienta.herramienta.Id}>
+                  <Tr key={herramienta.herramientaId}>
                     <Td>{herramienta.herramientaId}</Td>
                     <Td>{herramienta.nombre}</Td>
                     <Td>{herramienta.descripcion}</Td>

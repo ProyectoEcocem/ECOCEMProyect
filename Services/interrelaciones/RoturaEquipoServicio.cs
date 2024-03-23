@@ -23,6 +23,21 @@ public class RoturaEquipoServicio
     {
         return await _context.RoturasEquipos.ToListAsync();
     }
+
+    public async Task<List<RoturaEquipo>> GetAll(int sedeId)
+{
+    var roturasEquipo = await _context.RoturasEquipos
+        .Join(_context.Equipos,
+            re => re.EquipoId, 
+            e => e.EquipoId, 
+            (re, e) => new { RoturaEquipo = re, Equipo = e })
+        .Where(x => x.Equipo.SedeId == sedeId)
+        .Select(x => x.RoturaEquipo)
+        .ToListAsync();
+
+    return roturasEquipo;
+}
+
     public async Task<RoturaEquipo> Update(int RoturaId,int EquipoId,DateTime FechaId,RoturaEquipo roturaE)
     {
         var roturaEExistente = await Get(RoturaId,EquipoId,FechaId);

@@ -22,6 +22,21 @@ public class OrdenTrabajoServicio
     {
         return await _context.OrdenTrabajos.ToListAsync();
     }
+
+    public async Task<List<OrdenTrabajo>> GetAll(int sedeId)
+{
+    var ordenesTrabajo = await _context.OrdenTrabajos
+        .Join(_context.Equipos,
+            ot => ot.EquipoId, 
+            e => e.EquipoId,
+            (ot, e) => new { OrdenTrabajo = ot, Equipo = e })
+        .Where(x => x.Equipo.SedeId == sedeId)
+        .Select(x => x.OrdenTrabajo)
+        .ToListAsync();
+
+    return ordenesTrabajo;
+}    
+
     public async Task<OrdenTrabajo> Update(int EquipoId,int BrigadaId,int TrabajadorId,DateTime FechaId, OrdenTrabajo OT)
     {
         var OTExistente = await Get(EquipoId,BrigadaId,TrabajadorId,FechaId);

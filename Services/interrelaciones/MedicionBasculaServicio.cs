@@ -24,6 +24,21 @@ public class MedicionBasculaServicio
     {
         return await _context.MedicionesBasculas.ToListAsync();
     }
+
+    public async Task<List<MedicionBascula>> GetAll(int sedeId)
+{
+    var medicionesBascula = await _context.MedicionesBasculas
+        .Join(_context.Basculas,
+            mb => mb.BasculaId,
+            b => b.BasculaId,
+            (mb, b) => new { MedicionBascula = mb, Bascula = b })
+        .Where(x => x.Bascula.NoSede == sedeId)
+        .Select(x => x.MedicionBascula)
+        .ToListAsync();
+
+    return medicionesBascula;
+}
+
     public async Task<MedicionBascula> Update(int BasculaId,int VehiculoId,DateTime FechaBId,MedicionBascula medicionBascula)
     {
         var medicionBasculaExistente = await Get(BasculaId,VehiculoId,FechaBId);

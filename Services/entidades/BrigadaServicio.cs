@@ -42,6 +42,7 @@ public class BrigadaServicio
     {
         Brigada b = new Brigada();
 
+        b.BrigadaId = brigada.BrigadaId;
         b.Descripcion = brigada.Descripcion;
 
         _context.Brigadas.Add(b);

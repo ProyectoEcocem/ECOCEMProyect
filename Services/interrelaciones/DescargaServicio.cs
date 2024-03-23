@@ -23,6 +23,12 @@ public class DescargaServicio
     {
         return await _context.Descargas.ToListAsync();
     }
+
+    public async Task<IEnumerable<Descarga>> GetAll(int sedeId)
+    {
+        return await _context.Descargas.Where(d =>d.SedeId ==  sedeId).ToListAsync();
+    }
+
     public async Task<Descarga> Update(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaId,Descarga descarga)
     {
         var DescargaExistente = await Get(TipoCementoId,SiloId,VehiculoId,FechaId);

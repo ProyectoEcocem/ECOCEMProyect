@@ -24,6 +24,21 @@ public class MedicionSiloServicio
     {
         return await _context.MedicionesSilos.ToListAsync();
     }
+
+    public async Task<List<MedicionSilo>> GetAll(int sedeId)
+    {
+        var medicionesSilo = await _context.MedicionesSilos
+            .Join(_context.Silos,
+                ms => ms.SiloId,
+                s => s.SiloId,
+                (ms, s) => new { MedicionSilo = ms, Silo = s })
+            .Where(x => x.Silo.NoSede == sedeId)
+            .Select(x => x.MedicionSilo)
+            .ToListAsync();
+
+        return medicionesSilo;
+    }
+
     public async Task<MedicionSilo> Update(int SiloId,int MedidorId,DateTime FechaMId,MedicionSilo medicionSilo)
     {
         var medicionSiloExistente = await Get(SiloId,MedidorId,FechaMId);

@@ -1,6 +1,5 @@
 
 import React from 'react';
-import InsertarOrdenTrabajo from './InsertarOrdenTrabajo';
 import {
   Input,
   Button,
@@ -19,6 +18,7 @@ import {
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+import InsertarOrdenTrabajo from './Insertar OrdenTrabajo';
 export default class VisualizarOrdenTrabajo extends React.Component {
     state = {
       ordenesTrabajo: [],
@@ -32,7 +32,7 @@ export default class VisualizarOrdenTrabajo extends React.Component {
     cargarBD() {
       axios.get(`http://localhost:5103/api/OrdenTrabajo`)
       .then(res => {
-        const roturasE= res.data;
+        const ordenesTrabajo= res.data;
         this.setState({ ordenesTrabajo });
       })
     }
@@ -43,7 +43,7 @@ export default class VisualizarOrdenTrabajo extends React.Component {
   
     render() {
       return (
-        <div style={{ position: "absolute", top: "5%", left: "55%", transform: "translateX(-50%)" }}>
+        <div style={{ position: "absolute", top: "5%", left: "60%", transform: "translateX(-50%)" }}>
 
 <Button
          onClick={this.manejarInsertarOrdenesTrabajoModal}
@@ -73,7 +73,7 @@ export default class VisualizarOrdenTrabajo extends React.Component {
               {
                 this.state.ordenesTrabajo.map((ordenTrabajo) => (
                   <Tr key={ordenTrabajo.equipoId}>
-                    <Td>{roturaE.equipoId}</Td>
+                    <Td>{ordenTrabajo.equipoId}</Td>
                     <Td>{ordenTrabajo.brigadaId}</Td>
                     <Td>{ordenTrabajo.trabajadorId}</Td>
                     <Td>{ordenTrabajo.fechaId}</Td>

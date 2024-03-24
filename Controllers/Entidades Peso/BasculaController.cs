@@ -41,7 +41,7 @@ public class BasculaController : Controller
     [HttpGet]
     public async Task<IEnumerable<Bascula>> GetAll() => await _basculaService.GetAll();
 
-    [Authorize(Roles="admin, jefe")]
+    // [Authorize(Roles="admin, jefe")]
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] Bascula bascula)
     {

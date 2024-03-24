@@ -11,9 +11,9 @@ import {
 import axios from "axios";
 
 const InsertarOrdenTrabajo = ({onClose}) => {
-  const [equipoId, setEquipoId] = useState("");
-  const [brigadaId, setBrigadaId] = useState("");
-  const [trabajadorId, setTrabajadorId] = useState("");
+  const [equipoId, setEquipoId] = useState(1);
+  const [brigadaId, setBrigadaId] = useState(1);
+  const [trabajadorId, setTrabajadorId] = useState(1);
   const [fecha, setFecha] = useState(new Date());
   const [insertarOrdenTrabajoModalAbierto, setInsertarOrdenTrabajoModalAbierto] = useState(false);
 
@@ -55,7 +55,7 @@ const InsertarOrdenTrabajo = ({onClose}) => {
       equipoId: equipoId,
       brigadaId: brigadaId,
       trabajadorId: trabajadorId,
-      fecha: fecha
+      fechaId: fecha
     })
     .then((response) => {
       //console.log(response);

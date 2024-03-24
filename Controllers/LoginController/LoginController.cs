@@ -3,6 +3,8 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 //using Microsoft.IdentityModel.Tokens;
 
 
@@ -61,6 +63,25 @@ namespace ECOCEMProject;
             {
                 claims.Add(new Claim(ClaimTypes.Role, role.Name!));
             }
+
+            // // Crear un ClaimsIdentity y un ClaimsPrincipal.
+            // var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            // var principal = new ClaimsPrincipal(identity);
+
+            // // Crear AuthenticationProperties.
+            // var authProperties = new AuthenticationProperties
+            // {
+            //     // Configura la cookie para que expire después de 10 minutos.
+            //     ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+            //     // Configura la cookie para que sea persistente.
+            //     IsPersistent = true,
+            //     // Configura la cookie para que solo se envíe a través de HTTPS.
+            //     RedirectUri = Url.Action("Index", "Home"),
+            // };
+
+            // Inicia la sesión del usuario.
+            // await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
+
 
             return Ok();
         }

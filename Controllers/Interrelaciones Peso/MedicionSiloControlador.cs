@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
@@ -19,15 +21,17 @@ public class MedicionSiloData
 public class MedicionSiloController : Controller
 {
     private readonly MedicionSiloServicio _medicionSiloServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public MedicionSiloController(MedicionSiloServicio medicionSiloServicio)
+    public MedicionSiloController(MedicionSiloServicio medicionSiloServicio, UserManager<User> userManager)
     {
         _medicionSiloServicio = medicionSiloServicio;
+        _userManager = userManager;
     }
 
     // POST
     [HttpPost]
-    public async Task<ActionResult> Post(MedicionSiloData medicionSilo)
+    public async Task<ActionResult> Post(MedicionSiloData medicionSilo, UserManager<User> userManager)
     {
         return Ok(await  _medicionSiloServicio.Create(medicionSilo));
     }
@@ -42,9 +46,30 @@ public class MedicionSiloController : Controller
         }
         return Ok(medicionSilo);
     }
-    // GETALL
+    
+    [Authorize(Roles="admin, jefe")]
      [HttpGet]
-    public async Task<IEnumerable<MedicionSilo>> GetAll() => await _medicionSiloServicio.GetAll();
+    public async Task<IEnumerable<MedicionSilo>> GetAll() 
+    {
+        List<MedicionSilo>ms = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _medicionSiloServicio.GetAll();
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _medicionSiloServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return ms;
+
+    }
 
     [HttpPut]
     public async Task<IActionResult> Put(int SiloId,int MedidorId,DateTime FechaMId,MedicionSilo medicionSilo)

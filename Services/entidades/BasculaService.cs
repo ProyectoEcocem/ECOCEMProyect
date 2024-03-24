@@ -32,24 +32,12 @@ public class BasculaService
         return await _context.Basculas.ToListAsync();
     }
 
-    // public async Task<IEnumerable<Bascula>> GetBasculasBySedeId(int sedeId)
-    // {
-    //     var basculas = await _context.MedicionesBasculas
-    //     .Join(_context.Cargas,
-    //         mb => mb.CargaId, // Asumiendo que MedicionBascula tiene una propiedad CargaId
-    //         c => c.Id, // Asumiendo que Carga tiene una propiedad Id
-    //         (mb, c) => new { MedicionBascula = mb, Carga = c })
-    //     .Join(_context.Ventas,
-    //         temp => temp.Carga.VentaId, // Asumiendo que Carga tiene una propiedad VentaId
-    //         v => v.Id, // Asumiendo que Venta tiene una propiedad Id
-    //         (temp, v) => new { temp.MedicionBascula, temp.Carga, Venta = v })
-    //     .Where(x => x.Venta.SedeId == sedeId)
-    //     .Select(x => x.MedicionBascula.Bascula)
-    //     .Distinct()
-    //     .ToListAsync();
+    public async Task<IEnumerable<Bascula>> GetAll(int noSede)
+    {
+        return await _context.Basculas.Where(b => b.NoSede == noSede).ToListAsync();
+    }
 
-    //     return basculas;
-    // }
+    
 
     public async Task<Bascula> Update(int id,Bascula bascula)
     {
@@ -66,7 +54,7 @@ public class BasculaService
         return bascula;
     }
 
-    public async Task<Bascula> Create(Bascula bascula)
+    public async Task<Bascula> Create(Bascula bascula,int NoSede)
     {
         if(_context.Basculas.Any(elemento => elemento.NoSerie == bascula.NoSerie))
             return null!;
@@ -75,17 +63,17 @@ public class BasculaService
         EquipoData e = new EquipoData();
 
 
+        b1.NoSede = NoSede;
         b1.NoSerie = bascula.NoSerie;
         b1.BasculaId = bascula.BasculaId;
         b1.Descripcion = bascula.Descripcion;
-        b1.NoSede=bascula.NoSede;
         e.EquipoId = bascula.BasculaId;
         e.SedeId = bascula.NoSede;
         //falta ponerle el tipo de equipo
         if(await _context.TiposEquipos.AnyAsync(elemento => elemento.TipoE == "bascula")) 
         {
             e.TipoEId =  _context.TiposEquipos.First(elem => elem.TipoE == "bascula").TipoEId;
-            await _equipoServicio.Create(e); 
+            await _equipoServicio.Create(e,NoSede); 
         }
         else{
            TipoEData tipoBascula=new TipoEData();
@@ -93,7 +81,7 @@ public class BasculaService
            tipoBascula.TipoEId=0;
            TipoEquipo TE = await _tipoEServicio.Create(tipoBascula);
            e.TipoEId=TE.TipoEId;
-           await _equipoServicio.Create(e);
+           await _equipoServicio.Create(e,NoSede);
            //cuando se borre esa bascula se debe borrar ese equipo
         }
            

@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
@@ -27,10 +29,12 @@ public class DescargaData
 public class DescargaController : Controller
 {
     private readonly DescargaServicio _descargaServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public DescargaController(DescargaServicio descargaServicio)
+    public DescargaController(DescargaServicio descargaServicio, UserManager<User> userManager)
     {
         _descargaServicio =descargaServicio;
+        _userManager = userManager;
     }
 
     // POST
@@ -50,9 +54,28 @@ public class DescargaController : Controller
         }
         return Ok(descarga);
     }
-    // GETALL
+    [Authorize(Roles="admin, jefe")]
      [HttpGet]
-    public async Task<IEnumerable<Descarga>> GetAll() => await _descargaServicio.GetAll();
+    public async Task<IEnumerable<Descarga>> GetAll() 
+    {
+        List<Descarga>d = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _descargaServicio.GetAll();
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _descargaServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return d;
+    }
 
     [HttpPut]
     public async Task<IActionResult> Put(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaId,Descarga descarga)

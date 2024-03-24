@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
@@ -16,10 +18,12 @@ public class CompraData
 public class CompraController : Controller
 {
     private readonly CompraServicio _compraServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public CompraController(CompraServicio compraServicio)
+    public CompraController(CompraServicio compraServicio, UserManager<User> userManager)
     {
         _compraServicio =compraServicio;
+        _userManager = userManager;
     }
 
     // POST
@@ -30,7 +34,21 @@ public class CompraController : Controller
         {
             return BadRequest();
         }
-        Compra createdCompra =  await  _compraServicio.Create(compra);
+
+        if (User.IsInRole("jefe"))
+        {
+            int NoSede=0;
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                NoSede = currentUser.NoSede;
+                Compra createdCompra1 =  await  _compraServicio.Create(compra, NoSede);
+                return Ok(createdCompra1);
+            }
+        }
+
+        Compra createdCompra =  await  _compraServicio.Create(compra, compra.SedeId);
         return Ok(createdCompra);
     }
 
@@ -44,9 +62,28 @@ public class CompraController : Controller
         }
         return Ok(compra);
     }
-    // GETALL
+    [Authorize(Roles="admin, jefe")]
      [HttpGet]
-    public async Task<IEnumerable<Compra>> GetAll() => await _compraServicio.GetAll();
+    public async Task<IEnumerable<Compra>> GetAll()
+    {
+        List<Compra>c = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _compraServicio.GetAll();
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _compraServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return c;
+    }
 
     [HttpPut]
     public async Task<IActionResult> Put(int SedeId,int FabricaId,DateTime FechaCompraId,Compra compra)

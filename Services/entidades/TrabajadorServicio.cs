@@ -33,7 +33,7 @@ public class TrabajadorServicio
         await _context.SaveChangesAsync();
         return trabajador;
     }
-    public async Task<Trabajador> Create(TrabajadorData trabajador)
+    public async Task<Trabajador> Create(TrabajadorData trabajador, int NoSede)
     {
         if(_context.Trabajadores.Any(elemento => elemento.NombreTrabajador == trabajador.NombreTrabajador))
             return null!;
@@ -41,7 +41,7 @@ public class TrabajadorServicio
         Trabajador trabajador1= new Trabajador();
         trabajador1.TrabajadorId=trabajador.TrabajadorId;
         trabajador1.NombreTrabajador=trabajador.NombreTrabajador;
-        trabajador1.SedeId=trabajador.SedeId;
+        trabajador1.SedeId=NoSede;
 
         _context.Trabajadores.Add(trabajador1);
         await _context.SaveChangesAsync();

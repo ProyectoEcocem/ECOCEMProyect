@@ -24,6 +24,12 @@ public class CargaServicio
     {
         return await _context.Cargas.ToListAsync();
     }
+
+    public async Task<IEnumerable<Carga>> GetAll(int sedeId)
+    {
+        return await _context.Cargas.Where(c => c.SedeId == sedeId).ToListAsync();
+    }
+
     public async Task<Carga> Update(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaCargaId,Carga ordenTrabajoHerramienta)
     {
         var CargaExistente = await Get(TipoCementoId,SiloId,VehiculoId,FechaCargaId);
@@ -45,6 +51,7 @@ public class CargaServicio
         Carga d = new Carga();
         MedicionSilo ms = new MedicionSilo();
         MedicionBascula mb = new MedicionBascula();
+        
 
         //creacion de carga
         d.TipoCementoId = carga.TipoCementoId;

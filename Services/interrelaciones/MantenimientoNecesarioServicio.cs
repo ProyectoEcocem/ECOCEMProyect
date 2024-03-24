@@ -22,6 +22,21 @@ public class MantenimientoNecesarioServicio
     {
         return await _context.MantenimientosNecesarios.ToListAsync();
     }
+
+    public async Task<List<MantenimientoNecesario>> GetAll(int sedeId)
+    {
+        var mantenimientosNecesarios = await _context.MantenimientosNecesarios
+            .Join(_context.Equipos,
+                mn => mn.TipoEquipoId,
+                e => e.TipoEId,
+                (mn, e) => new { MantenimientoNecesario = mn, Equipo = e })
+            .Where(x => x.Equipo.SedeId == sedeId)
+            .Select(x => x.MantenimientoNecesario)
+            .ToListAsync();
+
+        return mantenimientosNecesarios;
+    }
+
     public async Task<MantenimientoNecesario> Update(int TipoEquipoId,int AMId,double HorasExpId, MantenimientoNecesario MN)
     {
         var MNExistente = await Get(TipoEquipoId,AMId,HorasExpId);

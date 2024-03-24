@@ -19,6 +19,10 @@ public class TrabajadorServicio
     {
         return await _context.Trabajadores.ToListAsync();
     }
+    public async Task<IEnumerable<Trabajador>> GetAll(int sedeId)
+    {
+        return await _context.Trabajadores.Where(e => e.SedeId == sedeId).ToListAsync();
+    }
     public async Task<Trabajador> Update(int id, Trabajador trabajador)
     {
         var trabajadorExistente = await Get(id);

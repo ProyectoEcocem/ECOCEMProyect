@@ -39,7 +39,7 @@ const InsertarCarga = ({sedeId, entidadCompradoraId, fechaVentaId, onClose}) => 
   const [silos, setSilos] = useState([]);
   
   useEffect(() => {
-    axios.get(`http://localhost:5103/api/Silo`)
+      axios.get(`http://localhost:5103/api/Silo`)
       .then(res => {
         setSilos(res.data);
       })
@@ -156,7 +156,7 @@ const InsertarCarga = ({sedeId, entidadCompradoraId, fechaVentaId, onClose}) => 
         >
           {silos.map((silo) => (
             <option key={silo.siloId} value={silo.siloId}>
-              {silo.nombre}
+              {silo.noSilo}
             </option>
           ))}
         </Select>

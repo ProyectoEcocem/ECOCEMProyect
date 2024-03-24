@@ -20,7 +20,9 @@ const Registration = ({manejoClick, onclose}) => {
     
       const [sedes, setSedes] = useState([]);
 
-      const roles = ["Administrador", "Jefe de Mantenimiento"]
+      // const roles = ["Administrador", "Jefe de Mantenimiento"]
+      const roles = ["admin", "jefe"]
+      
   
   useEffect(() => {
     axios.get(`http://localhost:5103/api/Sede`)

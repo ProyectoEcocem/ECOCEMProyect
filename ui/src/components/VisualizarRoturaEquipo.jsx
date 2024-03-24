@@ -19,10 +19,14 @@ import {
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+import InsertarOrdenTrabajoRE from  "./InsertarOrdenTrabajoRE"
 export default class RoturaEquipo extends React.Component {
     state = {
       roturasE: [],
       insertarRoturaEModalAbierto: false,
+      insertarOrdenTrabajoModalAbierto: false,
+      selectedRoturaId: 1,
+      selectedEquipoId: 1
     }
   
     componentDidMount() {
@@ -40,10 +44,14 @@ export default class RoturaEquipo extends React.Component {
     manejarInsertarRoturaEModal = () => {
       this.setState({ insertarRoturaEModalAbierto: true });
     };
+
+    manejarClickAOrdenTrabajo = (selectedEquipoId, selectedRoturaId) => {
+      this.setState({ insertarOrdenTrabajoModalAbierto: true });
+    }
   
     render() {
       return (
-        <div style={{ position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)" }}>
+        <div style={{ position: "absolute", top: "5%", left: "60%", transform: "translateX(-50%)" }}>
 
 <Button
          onClick={this.manejarInsertarRoturaEModal}
@@ -59,6 +67,15 @@ export default class RoturaEquipo extends React.Component {
          </AbsoluteCenter>
          </Modal>
 
+         <AbsoluteCenter>
+         <Modal isOpen={this.state.insertarOrdenTrabajoModalAbierto} onClose={() => this.setState({ insertarOrdenTrabajoModalAbierto: false })}>
+         
+         <InsertarOrdenTrabajoRE equipoId={this.state.selectedEquipoId} roturaId={this.state.selectedRoturaId} onClose={() => this.setState({ insertarOrdenTrabajoModalAbierto: false })} />
+         
+         
+         </Modal>
+         </AbsoluteCenter>
+
         <TableContainer>
           <Table>
             <Thead>
@@ -66,6 +83,7 @@ export default class RoturaEquipo extends React.Component {
                 <Th>ID de la Rotura</Th>
                 <Th>ID del Equipo</Th>
                 <Th>Fecha</Th>
+                <Th>Orden de Trabajo</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -75,6 +93,11 @@ export default class RoturaEquipo extends React.Component {
                     <Td>{roturaE.roturaId}</Td>
                     <Td>{roturaE.equipoId}</Td>
                     <Td>{roturaE.fechaId}</Td>
+                    <Td>
+                    <Button onClick={() => {this.manejarClickAOrdenTrabajo(roturaE.roturaId, roturaE.equipoId); this.setState({selectedEquipoId: roturaE.equipoId}); this.setState({selectedRoturaId: roturaE.roturaId})}}>+ Orden de Trabajo</Button>
+                    
+                  </Td>
+                  
                   </Tr>
                 ))
               }

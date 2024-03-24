@@ -6,12 +6,13 @@ import {
     Select,
     Input,
     Modal,
+    AbsoluteCenter,
     //BackgroundImage
   } from "@chakra-ui/react"; 
 import axios from "axios";
 
-const InsertarOrdenTrabajo = ({onClose}) => {
-  const [equipoId, setEquipoId] = useState(1);
+const InsertarOrdenTrabajoRE = ({equipoId, roturaId, onClose}) => {
+  // const [equipoId, setEquipoId] = useState(1);
   const [brigadaId, setBrigadaId] = useState(1);
   const [trabajadorId, setTrabajadorId] = useState(1);
   const [fecha, setFecha] = useState(new Date());
@@ -29,7 +30,7 @@ const InsertarOrdenTrabajo = ({onClose}) => {
     }, []);
 
     //Lista de equipos
-  const [equipos, setEquipos] = useState([]);
+  //const [equipos, setEquipos] = useState([]);
   
   useEffect(() => {
     axios.get(`http://localhost:5103/api/Equipo`)
@@ -51,11 +52,12 @@ const InsertarOrdenTrabajo = ({onClose}) => {
 
 
   const createOT = async () => {
-    axios.post(`http://localhost:5103/api/OrdenTrabajo`, {
+    axios.post(`http://localhost:5103/api/OrdenTrabajoRoturaEquipo`, {
       equipoId: equipoId,
       brigadaId: brigadaId,
       trabajadorId: trabajadorId,
-      fechaId: fecha
+      fechaId: fecha,
+      roturaId: roturaId
     })
     .then((response) => {
       //console.log(response);
@@ -76,6 +78,7 @@ const InsertarOrdenTrabajo = ({onClose}) => {
 
 
   return (
+    <AbsoluteCenter>
     <div style={{
       width: "400px",
       height: "500px",
@@ -87,12 +90,12 @@ const InsertarOrdenTrabajo = ({onClose}) => {
       borderRadius: 20,
       border: "2px solid #5F89C1",
     }}>
-     
+    
  <FormLabel style={{fontSize: 30}}>
    Insertar Orden de Trabajo
  </FormLabel>
 
- <FormLabel style={{margin: "0px 260px 0px 0px"}}>Equipo</FormLabel>
+ {/*<FormLabel style={{margin: "0px 260px 0px 0px"}}>Equipo</FormLabel>
 
  <Select
  value={equipoId}
@@ -105,7 +108,7 @@ const InsertarOrdenTrabajo = ({onClose}) => {
   {equipo.equipoId}
  </option>
  ))}
- </Select>
+ </Select>*/}
 
 
  <FormLabel style={{margin: "0px 300px 0px 40px"}}>Brigada</FormLabel>
@@ -166,8 +169,9 @@ const InsertarOrdenTrabajo = ({onClose}) => {
   </Flex>
 
       </div>
+      </AbsoluteCenter>
   );
 };
 
 
-export default InsertarOrdenTrabajo;
+export default InsertarOrdenTrabajoRE;

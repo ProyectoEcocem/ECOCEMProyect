@@ -12,7 +12,7 @@ import axios from "axios";
 
 const InsertarRoturaEquipo = ({onClose}) => {
   const [equipoId, setEquipoId] = useState("");
-  const [roturaId, setRoturaId] = useState("");
+  const [roturaId, setRoturaId] = useState(1);
   const [fecha, setFecha] = useState(new Date());
   const [insertarRoturaEModalAbierto, setInsertarRoturaEModalAbierto] = useState(false);
 
@@ -48,6 +48,7 @@ const InsertarRoturaEquipo = ({onClose}) => {
       //console.log(response);
       alert("La Rotura de Equipo se ha insertado correctamente.")
       setInsertarRoturaEModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("La Rotura de Equipo no se ha insertado.")

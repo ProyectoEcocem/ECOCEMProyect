@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
@@ -16,10 +18,12 @@ public class VentaData
 public class VentaController : Controller
 {
     private readonly VentaServicio _ventaServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public VentaController(VentaServicio ventaServicio)
+    public VentaController(VentaServicio ventaServicio, UserManager<User> userManager)
     {
         _ventaServicio =ventaServicio;
+        _userManager = userManager;
     }
 
     // POST
@@ -30,7 +34,21 @@ public class VentaController : Controller
         {
             return BadRequest();
         }
-        Venta createdVenta =  await  _ventaServicio.Create(venta);
+
+          if (User.IsInRole("jefe"))
+        {
+            int NoSede=0;
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                NoSede = currentUser.NoSede;
+                Venta createdVenta1 =  await  _ventaServicio.Create(venta,NoSede);
+                return Ok(createdVenta1);
+            }
+        }
+
+        Venta createdVenta =  await  _ventaServicio.Create(venta,venta.SedeId);
         return Ok(createdVenta);
     }
 
@@ -44,10 +62,30 @@ public class VentaController : Controller
         }
         return Ok(venta);
     }
-    // GETALL
-     [HttpGet]
-    public async Task<IEnumerable<Venta>> GetAll() => await _ventaServicio.GetAll();
+    [Authorize(Roles="admin, jefe")]
+    [HttpGet]
+    public async Task<IEnumerable<Venta>> GetAll() 
+    {
+        List<Venta>v = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _ventaServicio.GetAll();
 
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _ventaServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return v;
+    }
+    
     [HttpPut]
     public async Task<IActionResult> Put(int SedeId,int EntidadCompradoraId,DateTime FechaVentaId,Venta venta)
     {

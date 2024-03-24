@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
@@ -17,10 +19,12 @@ public class RoturaEquipoData
 public class RoturaEquipoController : Controller
 {
     private readonly RoturaEquipoServicio _roturaEquipoServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public RoturaEquipoController(RoturaEquipoServicio roturaEquipoServicio)
+    public RoturaEquipoController(RoturaEquipoServicio roturaEquipoServicio, UserManager<User> userManager)
     {
         _roturaEquipoServicio =roturaEquipoServicio;
+        _userManager = userManager;
     }
 
     
@@ -45,9 +49,30 @@ public class RoturaEquipoController : Controller
         }
         return Ok(roturaE);
     }
-    // GETALL
-     [HttpGet]
-    public async Task<IEnumerable<RoturaEquipo>> GetAll() => await _roturaEquipoServicio.GetAll();
+    
+    [Authorize(Roles="admin, jefe")]
+    [HttpGet]
+    public async Task<IEnumerable<RoturaEquipo>> GetAll() 
+    {
+        List<RoturaEquipo>re = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _roturaEquipoServicio.GetAll();
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _roturaEquipoServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return re;
+
+    }
 
     [HttpPut]
     public async Task<IActionResult> Put(int RoturaId,int EquipoId,DateTime FechaId,RoturaEquipo roturaEquipo)

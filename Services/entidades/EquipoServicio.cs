@@ -34,12 +34,15 @@ public class EquipoServicio
         await _context.SaveChangesAsync();
         return equipo;
     }
-    public async Task<Equipo> Create(EquipoData equipo)
+    public async Task<Equipo> Create(EquipoData equipo, int NoSede)
     {
+        if(_context.Equipos.Any(elemento => elemento.SedeId == NoSede || elemento.EquipoId == equipo.EquipoId || elemento.TipoEId==equipo.TipoEId))
+            return null!;
+
         Equipo equipo1 = new Equipo();
 
     
-        equipo1.SedeId = equipo.SedeId;
+        equipo1.SedeId = NoSede;
         equipo1.EquipoId = equipo.EquipoId;
         equipo1.TipoEId = equipo.TipoEId;
 

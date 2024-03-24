@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 namespace ECOCEMProject;
 
 public class SiloData
@@ -16,10 +18,12 @@ public class SiloData
 public class SiloController:Controller
 {
     private readonly SiloServicio _siloServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public SiloController(SiloServicio siloServicio)
+    public SiloController(SiloServicio siloServicio, UserManager<User> userManager)
     {
         _siloServicio = siloServicio;
+        _userManager = userManager;
     }
 
     [HttpGet("{id}")]
@@ -35,8 +39,28 @@ public class SiloController:Controller
         return Ok(silo);
     }
 
+    [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<Silo>> GetAll() => await _siloServicio.GetAll();
+    public async Task<IEnumerable<Silo>> GetAll()
+    {
+        List<Silo>silos = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _siloServicio.GetAll();
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _siloServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return silos; 
+    } 
 
     [HttpPost]
     public async Task<IActionResult> Post( SiloData silo)
@@ -46,7 +70,20 @@ public class SiloController:Controller
             return BadRequest();
         }
 
-        Silo siloCreado= await _siloServicio.Create(silo);
+        if (User.IsInRole("jefe"))
+        {
+            int NoSede=0;
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                NoSede = currentUser.NoSede;
+                Silo siloCreado1= await _siloServicio.Create(silo,NoSede);
+                return Ok(siloCreado1);
+            }
+        }
+
+        Silo siloCreado= await _siloServicio.Create(silo,silo.NoSede);
 
         return Ok(siloCreado);
     }

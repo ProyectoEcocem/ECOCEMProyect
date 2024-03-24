@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 namespace ECOCEMProject;
 
 public class MantenimientoNecesarioData
@@ -15,10 +16,12 @@ public class MantenimientoNecesarioData
 public class MantenimientoNecesarioController : Controller
 {
     private readonly MantenimientoNecesarioServicio _mantenimientoNecesarioServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public MantenimientoNecesarioController(MantenimientoNecesarioServicio mantenimientoNecesarioServicio)
+    public MantenimientoNecesarioController(MantenimientoNecesarioServicio mantenimientoNecesarioServicio, UserManager<User> userManager)
     {
         _mantenimientoNecesarioServicio = mantenimientoNecesarioServicio;
+        _userManager = userManager;
     }
 
     
@@ -37,8 +40,29 @@ public class MantenimientoNecesarioController : Controller
         }
         return Ok(mn);
     }
+
+    [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<MantenimientoNecesario>> GetAll() => await _mantenimientoNecesarioServicio.GetAll();
+    public async Task<IEnumerable<MantenimientoNecesario>> GetAll()
+    {
+        List<MantenimientoNecesario>mn = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _mantenimientoNecesarioServicio.GetAll();
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _mantenimientoNecesarioServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return mn;
+    }
 
     [HttpPut]
     public async Task<IActionResult> Put(int TipoEquipoId,int AMId,double HorasExpId,MantenimientoNecesario mn)

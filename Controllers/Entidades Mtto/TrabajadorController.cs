@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 
@@ -12,10 +14,12 @@ public class TrabajadorData{
 public class TrabajadorController : Controller
 {
     private readonly TrabajadorServicio _trabajadorServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public TrabajadorController(TrabajadorServicio trabajadorServicio)
+    public TrabajadorController(TrabajadorServicio trabajadorServicio,  UserManager<User> userManager)
     {
        _trabajadorServicio = trabajadorServicio;
+       _userManager = userManager;
     }
 
     [HttpGet("{id}")]
@@ -29,9 +33,31 @@ public class TrabajadorController : Controller
         return Ok(trabajador);
     }
 
+    [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<Trabajador>> GetAll() => await _trabajadorServicio.GetAll();
+    public async Task<IEnumerable<Trabajador>> GetAll() 
+    {
+         List<Trabajador>trab = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _trabajadorServicio.GetAll();
+        }
+        else{
 
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _trabajadorServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return trab;
+
+    }
+
+    [Authorize(Roles="admin, jefe")]
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] TrabajadorData trabajador)
     {
@@ -39,7 +65,21 @@ public class TrabajadorController : Controller
         {
             return BadRequest();
         }
-        Trabajador trabajadorCreado = await _trabajadorServicio.Create(trabajador);
+
+        if (User.IsInRole("jefe"))
+        {
+            int NoSede=0;
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                NoSede = currentUser.NoSede;
+                Trabajador trabajadorCreado1 = await _trabajadorServicio.Create(trabajador,NoSede);
+                return Ok(trabajadorCreado1);
+            }
+        }
+
+        Trabajador trabajadorCreado = await _trabajadorServicio.Create(trabajador, trabajador.SedeId);
         return Ok(trabajadorCreado);
     }
 

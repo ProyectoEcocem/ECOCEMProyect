@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 namespace ECOCEMProject;
 
 
@@ -16,10 +17,12 @@ public class OrdenTrabajoData
 public class OrdenTrabajoController : Controller
 {
     private readonly OrdenTrabajoServicio _ordenTrabajoServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public OrdenTrabajoController(OrdenTrabajoServicio ordenTrabajoServicio)
+    public OrdenTrabajoController(OrdenTrabajoServicio ordenTrabajoServicio, UserManager<User> userManager)
     {
         _ordenTrabajoServicio = ordenTrabajoServicio;
+        _userManager = userManager;
     }
 
     
@@ -44,9 +47,30 @@ public class OrdenTrabajoController : Controller
         }
         return Ok(OT);
     }
-    // GETALL
-     [HttpGet]
-    public async Task<IEnumerable<OrdenTrabajo>> GetAll() => await _ordenTrabajoServicio.GetAll();
+    
+    [Authorize(Roles="admin, jefe")]
+    [HttpGet]
+    public async Task<IEnumerable<OrdenTrabajo>> GetAll() 
+    {
+         List<OrdenTrabajo>ot = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _ordenTrabajoServicio.GetAll();
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _ordenTrabajoServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return ot;
+
+    }
 
     [HttpPut]
     public async Task<IActionResult> Put(int EquipoId,int BrigadaId,int TrabajadorId,DateTime FechaId, OrdenTrabajo OT)

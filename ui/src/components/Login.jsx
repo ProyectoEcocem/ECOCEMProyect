@@ -8,6 +8,7 @@ import {
   //BackgroundImage
 } from "@chakra-ui/react"; 
 import axios from "axios"; 
+axios.defaults.withCredentials = true;
 
 const Login = ({manejoClick}) => {
     const [nombreUsuario, setNombreUsuario] = useState("");
@@ -25,6 +26,7 @@ const Login = ({manejoClick}) => {
           Password : contrasena
         })
         .then((response) => {
+          
             console.log(response);
             alert("Inicio de sesión exitoso");
             manejoClick();

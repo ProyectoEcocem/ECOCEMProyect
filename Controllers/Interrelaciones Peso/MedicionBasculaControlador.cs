@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECOCEMProject;
@@ -17,10 +19,12 @@ public class MedicionBasculaData
 public class MedicionBasculaController : Controller
 {
     private readonly MedicionBasculaServicio _medicionBasculaServicio;
+    private readonly UserManager<User>  _userManager;
 
-    public MedicionBasculaController(MedicionBasculaServicio medicionBasculaServicio)
+    public MedicionBasculaController(MedicionBasculaServicio medicionBasculaServicio, UserManager<User> userManager)
     {
         _medicionBasculaServicio = medicionBasculaServicio;
+        _userManager = userManager;
     }
 
     // POST
@@ -40,9 +44,29 @@ public class MedicionBasculaController : Controller
         }
         return Ok(medicionBascula);
     }
-    // GETALL
+    
+    [Authorize(Roles="admin, jefe")]
      [HttpGet]
-    public async Task<IEnumerable<MedicionBascula>> GetAll() => await _medicionBasculaServicio.GetAll();
+    public async Task<IEnumerable<MedicionBascula>> GetAll() 
+    {
+        List<MedicionBascula>mb = new();
+        
+        if (User.IsInRole("admin"))
+        {
+            return await _medicionBasculaServicio.GetAll();
+        }
+        else{
+
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                return await _medicionBasculaServicio.GetAll(currentUser.NoSede);
+            }
+
+        }
+        return mb;
+    }
 
     [HttpPut]
     public async Task<IActionResult> Put(int BasculaId,int VehiculoId,DateTime FechaBId,MedicionBascula medicionBascula)

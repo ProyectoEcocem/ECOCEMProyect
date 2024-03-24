@@ -9,7 +9,7 @@ import {
   } from "@chakra-ui/react"; 
 import axios from "axios";
 
-const InsertarDescarga = () => {
+const InsertarDescarga = ({sedeId, entidadCompradoraId, fechaCompraId, onClose}) => {
   const [tipoCementoId, setTipoCementoId] = useState(1);
   const [siloId, setSiloId] = useState(1);
   const [vehiculoId, setVehiculoId] = useState(1);
@@ -20,6 +20,7 @@ const InsertarDescarga = () => {
   const [pesoBascula, setPesoBascula] = useState(1);
   const [volumen, setVolumen] = useState(1);
   const [fechaId, setFecha] = useState(new Date());
+  const [insertarDescargaModalAbierto, setInsertarDescargaModalAbierto] = useState(false);
 
     //Lista de tipoCementos
     const [tipoCementos, setTipoCementos] = useState([]);
@@ -88,18 +89,25 @@ const InsertarDescarga = () => {
       pesoM: pesoMedidor,
       volumen: volumen,
       basculaId: basculaId,
-      pesoB: pesoBascula
+      pesoB: pesoBascula,
+      sedeId: sedeId,
+      entidadCompradoraId: entidadCompradoraId,
+      fechaCompraId: fechaCompraId
     })
     .then((response) => {
       console.log(response);
       alert("Se insertó correctamente")
+      onClose();
     }, (error) => {
       console.log(error);
       alert("Revise los datos insertados")
     });
  };
 
-
+ const handleCancelar = () => {
+  // Cierra la ventana modal desde el componente padre.
+  onClose();
+};
 
   return (
     <div style={{
@@ -114,11 +122,11 @@ const InsertarDescarga = () => {
       border: "2px solid #5F89C1",
     }}>
      
-        <FormLabel style={{fontSize: 30}}>
-        Insertar Descarga:
+        <FormLabel style={{fontSize: 20}}>
+        Insertar Descarga
         </FormLabel>
 
-        <FormLabel style={{margin: "0px 260px 0px 0px"}}>Granelera:</FormLabel>
+        <FormLabel style={{marginLeft:10, marginRight:250}}>Granelera</FormLabel>
 
         <Select
         value={tipoCementoId}
@@ -134,7 +142,7 @@ const InsertarDescarga = () => {
         </Select>
 
 
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar silo:</FormLabel>
+        <FormLabel style={{marginLeft:10, marginRight:290}}>Silo</FormLabel>
   
         <Select
           value={siloId}
@@ -149,7 +157,7 @@ const InsertarDescarga = () => {
           ))}
         </Select>
 
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar vehiculo:</FormLabel>
+        <FormLabel style={{marginLeft:10, marginRight:260}}>Vehículo</FormLabel>
   
         <Select
           value={vehiculoId}
@@ -164,26 +172,26 @@ const InsertarDescarga = () => {
           ))}
         </Select>
 
-        <FormLabel style={{margin: "0px 180px 0px 0px"}}>Fecha de la descarga:</FormLabel>
+        <FormLabel style={{marginLeft:10, marginRight:190}}>Fecha de Descarga</FormLabel>
 
         <Input
           type="datetime-local"
           value={fechaId.toISOString().substring(0,16)}
           onChange={(e) => setFecha(new Date(e.target.value))}
           width={80}
-          marginBottom={30}
+          marginBottom={18}
         
         />
 
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Medicion Silo:</FormLabel>
+        <FormLabel style={{marginLeft:10}}>Medición Silo</FormLabel>
           
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar medidor:</FormLabel>
+        <FormLabel style={{marginLeft:10, marginRight:250}}>Medidor</FormLabel>
           
           <Select
             value={medidorId}
             onChange={(e) => setMedidorId(e.target.value)}
             width={80}
-            marginBottom={30}
+            marginBottom={5}
           >
             {medidores.map((medidor) => (
               <option key={medidor.medidorId} value={medidor.medidorId}>
@@ -192,7 +200,7 @@ const InsertarDescarga = () => {
             ))}
           </Select>
 
-          <FormLabel style={{margin: "0px 180px 0px 0px"}}>Nivel:</FormLabel>
+          <FormLabel style={{marginLeft:10, marginRight:270}}>Nivel</FormLabel>
 
           <Input
             value={nivel}
@@ -200,11 +208,12 @@ const InsertarDescarga = () => {
             onChange={(e) => setNivel(e.target.value)}
             marginTop={0.5}
             width={80}
+            marginBottom={5}
             backgroundColor="white"
 
           />
 
-          <FormLabel style={{margin: "0px 180px 0px 0px"}}>Peso del medidor:</FormLabel>
+          <FormLabel style={{margin: "0px 180px 0px 0px"}}>Peso del Medidor</FormLabel>
 
           <Input
             value={pesoMedidor}
@@ -212,11 +221,12 @@ const InsertarDescarga = () => {
             onChange={(e) => setPesoMedidor(e.target.value)}
             marginTop={0.5}
             width={80}
+            marginBottom={5}
             backgroundColor="white"
 
           />
 
-          <FormLabel style={{margin: "0px 180px 0px 0px"}}>Volumen:</FormLabel>
+          <FormLabel style={{marginLeft:10, marginRight:250}}>Volumen</FormLabel>
 
           <Input
             value={volumen}
@@ -224,12 +234,13 @@ const InsertarDescarga = () => {
             onChange={(e) => setVolumen(e.target.value)}
             marginTop={0.5}
             width={80}
+            marginBottom={18}
             backgroundColor="white"
 
           />
-           <FormLabel style={{margin: "0px 250px 0px 40px"}}>Medicion bascula:</FormLabel>
+           <FormLabel style={{marginLeft:10}}>Medición Báscula:</FormLabel>
 
-          <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar bascula:</FormLabel>
+          <FormLabel style={{marginLeft:10, marginRight:270}}>Báscula</FormLabel>
           
           <Select
             value={basculaId}
@@ -244,7 +255,7 @@ const InsertarDescarga = () => {
             ))}
           </Select>
 
-          <FormLabel style={{margin: "0px 180px 0px 0px"}}>Peso de la bascula:</FormLabel>
+          <FormLabel style={{margin: "0px 180px 0px 0px"}}>Peso de la Báscula</FormLabel>
 
           <Input
             value={pesoBascula}
@@ -252,14 +263,12 @@ const InsertarDescarga = () => {
             onChange={(e) => setPesoBascula(e.target.value)}
             marginTop={0.5}
             width={80}
+            marginBottom={25}
             backgroundColor="white"
 
           />
            
-
-
-
-
+           <Flex>
         <Button 
         variant="contained" 
         color="primary" 
@@ -269,6 +278,11 @@ const InsertarDescarga = () => {
         >
           Aceptar
         </Button>
+
+        <Button variant="outline" colorScheme="red" marginTop={0} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
       </div>
   );
 };

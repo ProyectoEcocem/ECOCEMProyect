@@ -23,6 +23,7 @@ const InsertarEntidadCompradora = ({onClose}) => {
       console.log(response);
       alert("La Entidad Compradora se ha insertado exitosamente")
       setInsertarEntidadCompradoraModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("No se ha insertado.")

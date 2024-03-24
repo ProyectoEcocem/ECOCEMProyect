@@ -9,7 +9,7 @@ import {
   } from "@chakra-ui/react"; 
 import axios from "axios";
 
-const InsertarCompra = () => {
+const InsertarCompra = ({onClose}) => {
   const [sedeId, setSedeId] = useState(1);
   const [fabricaId, setFabricaId] = useState(1);
   const [fechaId, setFecha] = useState(new Date());
@@ -45,14 +45,19 @@ const InsertarCompra = () => {
     })
     .then((response) => {
       console.log(response);
-      alert("ok")
+      alert("La Compra se ha insertado correctamente.")
+      onClose();
     }, (error) => {
       console.log(error);
-      alert("no ok")
+      alert("La Compra no se ha insertado correctamente.")
     });
  };
 
 
+ const handleCancelar = () => {
+  // Cierra la ventana modal desde el componente padre.
+  onClose();
+};
 
   return (
     <div style={{
@@ -87,7 +92,7 @@ const InsertarCompra = () => {
         </Select>
 
 
-        <FormLabel style={{margin: "0px 250px 0px 40px"}}>Seleccionar fabrica</FormLabel>
+        <FormLabel style={{marginLeft:10, marginRight:250}}>Fábrica</FormLabel>
   
         <Select
           value={fabricaId}
@@ -113,7 +118,7 @@ const InsertarCompra = () => {
           marginBottom={30}
          
         />
-
+<Flex>
         <Button 
         variant="contained" 
         color="primary" 
@@ -123,6 +128,10 @@ const InsertarCompra = () => {
         >
           Aceptar
         </Button>
+        <Button variant="outline" colorScheme="red" marginTop={0} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
       </div>
   );
 };

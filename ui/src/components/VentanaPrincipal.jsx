@@ -52,6 +52,8 @@ import InsertarEmpresa from './InsertarEmpresa';
 import Resumenes from './ResumenesParametrosIndicadores';
 import Venta from './VizualizarVenta';
 import Carga from './VisualizarCarga';
+import Compra from './VisualizarCompra';
+import Registration from './Registration';
 
  const VentanaPrincipal = () => {
 
@@ -80,6 +82,8 @@ import Carga from './VisualizarCarga';
         const [insertarEmpresaModalAbierto, setInsertarEmpresaModalAbierto] = useState(false);
         const [visualizarVentaModalAbierto, setVisualizarVentaModalAbierto] = useState(false);
         const [visualizarCargaModalAbierto, setVisualizarCargaModalAbierto] = useState(false);
+        const [visualizarCompraModalAbierto, setVisualizarCompraModalAbierto] = useState(false);
+        const [registrationModalAbierto, setRegistrationModalAbierto ] = useState(false);
         
 
          const abrirModal = (modalAbierto, setModalAbierto) => {
@@ -105,7 +109,9 @@ import Carga from './VisualizarCarga';
              ['VisualizarTrabajadorModalAbierto', setVisualizarTrabajadorModalAbierto],
              ['InsertarEmpresaModalAbierto', setInsertarEmpresaModalAbierto],
              ['VisualizarVentaModalAbierto', setVisualizarVentaModalAbierto],
-             ['VisualizarCargaModalAbierto', setVisualizarCargaModalAbierto]
+             ['VisualizarCargaModalAbierto', setVisualizarCargaModalAbierto],
+             ['VisualizarCompraModalAbierto', setVisualizarCompraModalAbierto],
+             ['RegistrationModalAbierto', setRegistrationModalAbierto]
           ];
          
           // Función para establecer el estado de todos los modales en false
@@ -231,6 +237,10 @@ import Carga from './VisualizarCarga';
        >
         Carga
         </Button>
+        <Button colorScheme='teal' variant='link' onClick={ () => abrirModal('VisualizarCompraModalAbierto', setVisualizarCompraModalAbierto) }
+       >
+        Compra
+        </Button>
       <Button colorScheme='teal' variant='link' onClick= { () => abrirModal('VisualizarEntidadCompradoraModalAbierto', setVisualizarEntidadCompradoraModalAbierto)}
       >
         Entidad Compradora
@@ -294,6 +304,11 @@ import Carga from './VisualizarCarga';
           <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'InsertarEmpresaModalAbierto', setInsertarEmpresaModalAbierto )}
         >
           Empresa
+          </Button>
+
+          <Button colorScheme='teal' variant='link' onClick={ () => abrirModal( 'RegistrationModalAbierto', setRegistrationModalAbierto )}
+        >
+          Registrar Usuario
           </Button>
 </Stack>
     </AccordionPanel>
@@ -617,6 +632,36 @@ import Carga from './VisualizarCarga';
  >
  <Carga
  onClose={() => setVisualizarCargaModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={visualizarCompraModalAbierto}
+ onClose={() => setVisualizarCompraModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Compra
+ onClose={() => setVisualizarCompraModalAbierto(false)}/>
+ </Modal>
+
+ <Modal
+ isOpen={registrationModalAbierto}
+ onClose={() => setRegistrationModalAbierto(false)}
+ position="absolute"
+ left="50%"
+ top="50%"
+      transform="translate(-50%, -50%)"
+      width="500px"
+      height="500px"
+      zIndex={100}
+ >
+ <Registration
+ onClose={() => setRegistrationModalAbierto(false)}/>
  </Modal>
       </Box>
     </Flex>

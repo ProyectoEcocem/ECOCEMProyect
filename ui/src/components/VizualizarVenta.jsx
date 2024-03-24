@@ -43,7 +43,7 @@ export default class Venta extends React.Component {
       this.setState({ insertarVentaModalAbierto: true });
     };
 
-    manejarClickACarga = (venta) => {
+    manejarClickACarga = (sedeId, entidadCompradoraId, fechaVentaId) => {
       this.setState({ insertarCargaModalAbierto: true });
     }
   
@@ -91,7 +91,7 @@ export default class Venta extends React.Component {
                   <Td>{venta.entidadCompradoraId}</Td>
                   <Td>{venta.fechaVentaId}</Td>
                   <Td>
-                    <Button onClick={() => this.manejarClickACarga(venta)}>+ Carga</Button>
+                    <Button onClick={() => this.manejarClickACarga(venta.sedeId, venta.entidadCompradoraId, venta.fechaVentaId)}>+ Carga</Button>
                   </Td>
                 </Tr>
               )

@@ -42,6 +42,7 @@ const InsertarSede = ({onClose}) => {
       //console.log(response);
       alert("La sede ha sido insertada correctamente")
       setInsertarSedeModalAbierto(false); // Cierra el modal
+      onClose();
     }, (error) => {
       console.log(error);
       alert(console.log(error))

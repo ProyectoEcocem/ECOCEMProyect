@@ -47,7 +47,7 @@ public class SiloServicio
         return silo;
     }
 
-    public async Task<Silo> Create(SiloData silo)
+    public async Task<Silo> Create(SiloData silo, int NoSede)
     {
        if(_context.Silos.Any(elemento => elemento.NoSilo == silo.NoSilo))
             return null!;
@@ -55,7 +55,7 @@ public class SiloServicio
         Silo s1 = new Silo();
         EquipoData e = new EquipoData();
         s1.altura=silo.altura;
-        s1.NoSede=silo.NoSede;
+        s1.NoSede=NoSede;
         s1.radio=silo.radio;
         s1.SiloId=silo.SiloId;
         s1.NoSilo=silo.NoSilo;
@@ -66,7 +66,7 @@ public class SiloServicio
         if(await _context.TiposEquipos.AnyAsync(elemento => elemento.TipoE == "silo")) 
         {
             e.TipoEId =  _context.TiposEquipos.First(elem => elem.TipoE == "silo").TipoEId;
-            await _equipoServicio.Create(e); 
+            await _equipoServicio.Create(e,NoSede); 
         }
         else{
            TipoEData tipoSilo=new TipoEData();
@@ -74,7 +74,7 @@ public class SiloServicio
            tipoSilo.TipoEId=0;
            TipoEquipo TE = await _tipoEServicio.Create(tipoSilo);
            e.TipoEId=TE.TipoEId;
-           await _equipoServicio.Create(e);
+           await _equipoServicio.Create(e,NoSede);
            //cuando se borre ese silo se debe borrar ese equipo
         }
            

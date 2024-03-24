@@ -65,24 +65,26 @@ public class BasculaController : Controller
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] Bascula bascula)
     {
-        if (User.IsInRole("role"))
-        {
-            Console.WriteLine("User belongs to the NetworkUser role.");
-        }
-        // Get the current user
-        var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-
-        if (currentUser != null)
-        {
-            int NoSede = currentUser.NoSede;
-        }
 
         if (bascula == null)
         {
             return BadRequest();
         }
 
-        Bascula createdBascula = await _basculaService.Create(bascula);
+        if (User.IsInRole("jefe"))
+        {
+            int NoSede=0;
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                NoSede = currentUser.NoSede;
+                Bascula createdBascula1 = await _basculaService.Create(bascula,NoSede);
+                return Ok(createdBascula1);
+            }
+        }
+
+        Bascula createdBascula = await _basculaService.Create(bascula,bascula.NoSede);
         return Ok(createdBascula);
     }
 

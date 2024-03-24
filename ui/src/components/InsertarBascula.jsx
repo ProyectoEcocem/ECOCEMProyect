@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 const InsertarBascula = ({onClose}) => {
+  const [basculaId, setbasculaId] = useState(1);
   const [numeroBascula, setNumeroBascula] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [noSede, setSedeId] = useState(1);
@@ -29,12 +30,10 @@ useEffect(() => {
   const createBascula = async () => {
   
     axios.post(`http://localhost:5103/api/Bascula`, {
-        
-        basculaId: 0,
+        basculaId: 1,
         noSerie: numeroBascula,
-        noSede:noSede,
+        sedeId:noSede,
         descripcion:descripcion
-
     })
     .then((response) => {
       console.log(response);

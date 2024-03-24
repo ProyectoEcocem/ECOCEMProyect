@@ -34,7 +34,21 @@ public class VentaController : Controller
         {
             return BadRequest();
         }
-        Venta createdVenta =  await  _ventaServicio.Create(venta);
+
+          if (User.IsInRole("jefe"))
+        {
+            int NoSede=0;
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                NoSede = currentUser.NoSede;
+                Venta createdVenta1 =  await  _ventaServicio.Create(venta,NoSede);
+                return Ok(createdVenta1);
+            }
+        }
+
+        Venta createdVenta =  await  _ventaServicio.Create(venta,venta.SedeId);
         return Ok(createdVenta);
     }
 

@@ -57,6 +57,7 @@ public class TrabajadorController : Controller
 
     }
 
+    [Authorize(Roles="admin, jefe")]
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] TrabajadorData trabajador)
     {
@@ -64,7 +65,21 @@ public class TrabajadorController : Controller
         {
             return BadRequest();
         }
-        Trabajador trabajadorCreado = await _trabajadorServicio.Create(trabajador);
+
+        if (User.IsInRole("jefe"))
+        {
+            int NoSede=0;
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                NoSede = currentUser.NoSede;
+                Trabajador trabajadorCreado1 = await _trabajadorServicio.Create(trabajador,NoSede);
+                return Ok(trabajadorCreado1);
+            }
+        }
+
+        Trabajador trabajadorCreado = await _trabajadorServicio.Create(trabajador, trabajador.SedeId);
         return Ok(trabajadorCreado);
     }
 

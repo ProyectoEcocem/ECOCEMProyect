@@ -34,7 +34,21 @@ public class CompraController : Controller
         {
             return BadRequest();
         }
-        Compra createdCompra =  await  _compraServicio.Create(compra);
+
+        if (User.IsInRole("jefe"))
+        {
+            int NoSede=0;
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                NoSede = currentUser.NoSede;
+                Compra createdCompra1 =  await  _compraServicio.Create(compra, NoSede);
+                return Ok(createdCompra1);
+            }
+        }
+
+        Compra createdCompra =  await  _compraServicio.Create(compra, compra.SedeId);
         return Ok(createdCompra);
     }
 

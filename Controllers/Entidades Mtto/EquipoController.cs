@@ -64,7 +64,21 @@ public class EquipoController : Controller
         {
             return BadRequest();
         }
-        Equipo equipoCreado = await _equipoServicio.Create(equipo);
+
+          if (User.IsInRole("jefe"))
+        {
+            int NoSede=0;
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                NoSede = currentUser.NoSede;
+                Equipo equipoCreado1 = await _equipoServicio.Create(equipo,NoSede);
+                return Ok(equipoCreado1);
+            }
+        }
+
+        Equipo equipoCreado = await _equipoServicio.Create(equipo,equipo.SedeId);
         return Ok(equipoCreado);
     }
 

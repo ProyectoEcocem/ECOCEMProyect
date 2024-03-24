@@ -70,7 +70,20 @@ public class SiloController:Controller
             return BadRequest();
         }
 
-        Silo siloCreado= await _siloServicio.Create(silo);
+        if (User.IsInRole("jefe"))
+        {
+            int NoSede=0;
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (currentUser != null)
+            {
+                NoSede = currentUser.NoSede;
+                Silo siloCreado1= await _siloServicio.Create(silo,NoSede);
+                return Ok(siloCreado1);
+            }
+        }
+
+        Silo siloCreado= await _siloServicio.Create(silo,silo.NoSede);
 
         return Ok(siloCreado);
     }

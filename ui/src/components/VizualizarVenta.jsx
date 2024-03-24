@@ -25,6 +25,9 @@ export default class Venta extends React.Component {
       Ventas: [],
       insertarVentaModalAbierto: false,
       insertarCargaModalAbierto: false,
+      selectedSedeId:1, 
+      selectedEntidadCompradoraId:1,
+      selectedFechaVenta:  new Date()
     }
   
     componentDidMount() {
@@ -43,7 +46,7 @@ export default class Venta extends React.Component {
       this.setState({ insertarVentaModalAbierto: true });
     };
 
-    manejarClickACarga = (sedeId, entidadCompradoraId, fechaVentaId) => {
+    manejarClickACarga = (selectedSedeId, selectedEntidadCompradoraId, selectedFechaVentaId) => {
       this.setState({ insertarCargaModalAbierto: true });
     }
   
@@ -67,7 +70,7 @@ export default class Venta extends React.Component {
          <AbsoluteCenter>
          <Modal isOpen={this.state.insertarCargaModalAbierto} onClose={() => this.setState({ insertarCargaModalAbierto: false })}>
          
-         <InsertarCarga onClose={() => this.setState({ insertarCargaModalAbierto: false })} />
+         <InsertarCarga sedeId={this.state.selectedSedeId} entidadCompradoraId={this.state.selectedEntidadCompradoraId} fechaVentaId={this.state.selectedFechaVenta} onClose={() => this.setState({ insertarCargaModalAbierto: false })} />
          
          
          </Modal>
@@ -91,7 +94,7 @@ export default class Venta extends React.Component {
                   <Td>{venta.entidadCompradoraId}</Td>
                   <Td>{venta.fechaVentaId}</Td>
                   <Td>
-                    <Button onClick={() => this.manejarClickACarga(venta.sedeId, venta.entidadCompradoraId, venta.fechaVentaId)}>+ Carga</Button>
+                    <Button onClick={() => {this.manejarClickACarga(venta.sedeId, venta.entidadCompradoraId, venta.fechaVentaId); this.setState({selectedSedeId: venta.sedeId}); this.setState({selectedEntidadCompradoraId: venta.entidadCompradoraId}); this.setState({selectedFechaVenta: venta.fechaVentaId})}}>+ Carga</Button>
                   </Td>
                 </Tr>
               )

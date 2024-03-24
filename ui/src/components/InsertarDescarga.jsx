@@ -5,11 +5,12 @@ import {
     Flex,
     Select,
     Input,
+    AbsoluteCenter,
     //BackgroundImage
   } from "@chakra-ui/react"; 
 import axios from "axios";
 
-const InsertarDescarga = ({sedeId, entidadCompradoraId, fechaCompraId, onClose}) => {
+const InsertarDescarga = ({sedeId, fabricaId, fechaCompraId, onClose}) => {
   const [tipoCementoId, setTipoCementoId] = useState(1);
   const [siloId, setSiloId] = useState(1);
   const [vehiculoId, setVehiculoId] = useState(1);
@@ -50,7 +51,7 @@ const InsertarDescarga = ({sedeId, entidadCompradoraId, fechaCompraId, onClose})
       useEffect(() => {
         axios.get(`http://localhost:5103/api/Vehiculo`)
           .then(res => {
-            setSilos(res.data);
+            setVehiculos(res.data);
           })
           .catch(err => console.log(err));
       }, []);
@@ -91,7 +92,7 @@ const InsertarDescarga = ({sedeId, entidadCompradoraId, fechaCompraId, onClose})
       basculaId: basculaId,
       pesoB: pesoBascula,
       sedeId: sedeId,
-      entidadCompradoraId: entidadCompradoraId,
+      fabricaId: fabricaId,
       fechaCompraId: fechaCompraId
     })
     .then((response) => {
@@ -110,6 +111,7 @@ const InsertarDescarga = ({sedeId, entidadCompradoraId, fechaCompraId, onClose})
 };
 
   return (
+    <AbsoluteCenter>
     <div style={{
       width: "400px",
       height: "1200px",
@@ -120,13 +122,16 @@ const InsertarDescarga = ({sedeId, entidadCompradoraId, fechaCompraId, onClose})
       flexDirection: "column",
       borderRadius: 20,
       border: "2px solid #5F89C1",
+      marginTop:150
     }}>
-     
+      <p>{sedeId}</p>
+      <p>{fabricaId}</p>  
+      <p>{fechaCompraId}</p>   
         <FormLabel style={{fontSize: 20}}>
         Insertar Descarga
         </FormLabel>
 
-        <FormLabel style={{marginLeft:10, marginRight:250}}>Granelera</FormLabel>
+        <FormLabel style={{marginLeft:10, marginRight:250}}>TipoCemento</FormLabel>
 
         <Select
         value={tipoCementoId}
@@ -152,7 +157,7 @@ const InsertarDescarga = ({sedeId, entidadCompradoraId, fechaCompraId, onClose})
         >
           {silos.map((silo) => (
             <option key={silo.siloId} value={silo.siloId}>
-              {silo.nombre}
+              {silo.noSilo}
             </option>
           ))}
         </Select>
@@ -284,6 +289,7 @@ const InsertarDescarga = ({sedeId, entidadCompradoraId, fechaCompraId, onClose})
   </Button>
   </Flex>
       </div>
+      </AbsoluteCenter>
   );
 };
 

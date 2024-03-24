@@ -25,6 +25,9 @@ export default class Compra extends React.Component {
       Compras: [],
       insertarCompraModalAbierto: false,
       insertarDescargaModalAbierto: false,
+      selectedSedeId:1,
+      selectedFabricaId:1,
+      selectedFechaCompra: new Date()
     }
   
     componentDidMount() {
@@ -42,13 +45,13 @@ export default class Compra extends React.Component {
       this.setState({ insertarCompraModalAbierto: true });
     };
 
-    manejarClickADescarga = (sedeId, entidadCompradoraId, fechaId) => {
+    manejarClickADescarga = (selectedSedeId, selectedFabricaId, seectedFechaCompra) => {
       this.setState({ insertarDescargaModalAbierto: true });
     }
   
     render() {
       return (
-        <div style={{ position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)" }}>
+        <div style={{ position: "absolute", top: "5%", left: "60%", transform: "translateX(-50%)" }}>
           <Button
          onClick={this.manejarInsertarCompraModal}
          marginBottom={5}
@@ -63,7 +66,7 @@ export default class Compra extends React.Component {
          <AbsoluteCenter>
          <Modal isOpen={this.state.insertarDescargaModalAbierto} onClose={() => this.setState({ insertarDescargaModalAbierto: false })}>
          
-         <InsertarDescarga onClose={() => this.setState({ insertarDescargaModalAbierto: false })} />
+         <InsertarDescarga sedeId={this.state.selectedSedeId} fabricaId={this.state.selectedFabricaId} fechaCompraId={this.state.selectedFechaCompra} onClose={() => this.setState({ insertarDescargaModalAbierto: false })} />
          
          
          </Modal>
@@ -86,7 +89,7 @@ export default class Compra extends React.Component {
                   <Td>{compra.fabricaId}</Td>
                   <Td>{compra.fechaId}</Td>
                   <Td>
-                    <Button onClick={() => this.manejarClickADescarga(compra.sedeId, compra.entidadCompradoraId, compra.fechaId)}>+ Descarga</Button>
+                    <Button onClick={() => {this.manejarClickADescarga(compra.sedeId, compra.entidadCompradoraId, compra.fechaId); this.setState({selectedSedeId: compra.sedeId}); this.setState({selectedFabricaId: compra.fabricaId}); this.setState({selectedFechaCompra: compra.fechaCompraId})}}>+ Descarga</Button>
                   </Td>
                 </Tr>
               )

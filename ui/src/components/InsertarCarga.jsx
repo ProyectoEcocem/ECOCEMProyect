@@ -79,22 +79,33 @@ const InsertarCarga = ({sedeId, entidadCompradoraId, fechaVentaId, onClose}) => 
           .catch(err => console.log(err));
       }, []);
 
+      const carga = {
+        tipoCementoId: tipoCementoId,
+        siloId: siloId,
+        vehiculoId: vehiculoId,
+        fechaCargaId: fechaId
+      }
+
+      const medicionSilo = {
+
+      }
   
   const createRE = async () => {
     axios.post(`http://localhost:5103/api/Carga`, {
       tipoCementoId: tipoCementoId,
       siloId: siloId,
       vehiculoId: vehiculoId,
-      fecha: fechaId,
+      fechaCargaId: fechaId,
+      sedeId: sedeId,
+      entidadCompradoraId: entidadCompradoraId,
+      fechaVentaId: fechaVentaId,
       medidorId: medidorId,
       nivel: nivel,
       pesoM: pesoMedidor,
       volumen: volumen,
       basculaId: basculaId,
       pesoB: pesoBascula,
-      sedeId: sedeId,
-      entidadCompradoraId: entidadCompradoraId,
-      fechaVentaId: fechaVentaId
+      
     })
     .then((response) => {
       console.log(response);

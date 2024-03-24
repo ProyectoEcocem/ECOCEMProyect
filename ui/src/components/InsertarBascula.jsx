@@ -40,6 +40,7 @@ useEffect(() => {
       console.log(response);
       alert("La Báscula se ha insertado correctamente")
       setInsertarBasculaModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("Revise que no exista otra bascula con ese número de serie")

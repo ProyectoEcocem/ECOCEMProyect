@@ -23,6 +23,7 @@ const InsertarMedidor = ({onClose}) => {
       console.log(response);
       alert("El Medidor se ha insertado")
       setInsertarMedidorModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("El Medidor no se ha insertado")

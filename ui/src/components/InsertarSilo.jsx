@@ -40,6 +40,7 @@ const InsertarSilo = ({onClose}) => {
       console.log(response);
       alert("El Silo se ha insertado correctamente")
       setInsertarSiloModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("No se ha insertado, comprueba los datos de entrada")

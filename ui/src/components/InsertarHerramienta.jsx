@@ -31,6 +31,7 @@ const InsertarHerramienta = ({onClose}) => {
       //console.log(response);
       alert("La Herramienta ha sido insertada correctamente")
       setInsertarHerramientaModalAbierto(false); // Cierra el modal
+      onClose();
     }, (error) => {
       console.log(error);
       alert(console.log(error))

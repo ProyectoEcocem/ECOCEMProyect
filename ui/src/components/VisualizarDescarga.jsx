@@ -21,7 +21,7 @@ import axios from 'axios';
 import  InsertarMedicionSilo from './InsertarMedicionSilo'
 import InsertarMedicionBascula from './InsertarMedicionBascula'
 
-export default class Carga extends React.Component {
+export default class Descarga extends React.Component {
     state = {
       cargas: [],
       insertarMedMedidorModalAbierto: false,
@@ -29,10 +29,10 @@ export default class Carga extends React.Component {
     }
   
     componentDidMount() {
-      axios.get(`http://localhost:5103/api/Carga`)
+      axios.get(`http://localhost:5103/api/Descarga`)
         .then(res => {
-          const cargas= res.data;
-          this.setState({ cargas });
+          const descargas= res.data;
+          this.setState({ descargas });
         })
     }
 
@@ -74,14 +74,14 @@ export default class Carga extends React.Component {
           </Thead>
           <Tbody>
             {
-              this.state.cargas.map((carga) => (
-                <Tr key={carga.cargaId}>
-                  <Td>{carga.tipoCementoId}</Td>
-                  <Td>{carga.siloId}</Td>
-                  <Td>{carga.vehiculoId}</Td>
-                  <Td>{carga.sedeId}</Td>
-                  <Td>{carga.entidadCompradoraId}</Td>
-                  <Td>P{carga.fechaVentaId}</Td>
+              this.state.descargascargas.map((descarga) => (
+                <Tr key={descarga.descargaId}>
+                  <Td>{descarga.tipoCementoId}</Td>
+                  <Td>{descarga.siloId}</Td>
+                  <Td>{descarga.vehiculoId}</Td>
+                  <Td>{descarga.sedeId}</Td>
+                  <Td>{descarga.entidadCompradoraId}</Td>
+                  <Td>P{descarga.fechaCompraId}</Td>
                   <Td>
                     <Button onClick={() => this.manejarClickAMedidor(carga)}>+ M. Medidor</Button>
                   </Td>

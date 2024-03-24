@@ -120,7 +120,7 @@ const InsertarRoturaEquipo = ({onClose}) => {
           marginBottom={30}
          
         />
-
+       
 <Flex justifyContent="space-between">
         <Button 
        variant="outline"

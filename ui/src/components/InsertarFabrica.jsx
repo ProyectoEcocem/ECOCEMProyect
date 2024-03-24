@@ -23,6 +23,7 @@ const InsertarFabrica = ({onClose}) => {
       console.log(response);
       alert("Se ha insertado la Fábrica")
       setInsertarFabricaModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("No se ha insertado la Fábrica")

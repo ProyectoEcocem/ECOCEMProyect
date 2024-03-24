@@ -8,6 +8,8 @@ import VentanaPrincipal from './components/VentanaPrincipal'
 import InsertarRoles from './components/InsertarRoles'
 import { useState } from 'react'
 import Resumenes from './components/ResumenesParametrosIndicadores'
+import InsertarDescarga from './components/InsertarDescarga'
+import InsertarCarga from './components/InsertarCarga'
 
 function App() {
  // const [count, setCount] = useState(0)
@@ -21,13 +23,13 @@ function App() {
 
    return (
      <ChakraProvider>
-      <div> <VentanaPrincipal/>
-      {/*{mostrarLogin ? (
+      
+      {mostrarLogin ? (
         <Login manejoClick={manejoClick} />
       ) : (
         <VentanaPrincipal />
-      )}*/}
-    </div>
+      )}
+    
   </ChakraProvider>
   )
 }

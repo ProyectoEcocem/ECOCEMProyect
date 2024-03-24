@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import Venta from "./VizualizarVenta";
 
-const InsertarCarga = ({venta, onClose}) => {
+const InsertarCarga = ({sedeId, entidadCompradoraId, fechaVentaId, onClose}) => {
   const [tipoCementoId, setTipoCementoId] = useState(1);
   const [siloId, setSiloId] = useState(1);
   const [vehiculoId, setVehiculoId] = useState(1);
@@ -92,9 +92,9 @@ const InsertarCarga = ({venta, onClose}) => {
       volumen: volumen,
       basculaId: basculaId,
       pesoB: pesoBascula,
-      sedeId: venta.sedeId,
-      entidadCompradoraId: venta.entidadCompradoraId,
-      fechaVentaId: venta.fechaVentaId
+      sedeId: sedeId,
+      entidadCompradoraId: entidadCompradoraId,
+      fechaVentaId: fechaVentaId
     })
     .then((response) => {
       console.log(response);

@@ -26,6 +26,7 @@ const InsertarTipoDeEquipo = ({onClose}) => {
         //console.log(response);
         alert("El Tipo de Equipo ha sido insertado correctamente")
         setInsertarTipoEquipoModalAbierto(false)
+        onClose();
       }, (error) => {
         console.log(error);
         alert("El Tipo de Equipo no se ha insertado correctamente")
@@ -51,17 +52,18 @@ const InsertarTipoDeEquipo = ({onClose}) => {
             border: "2px solid #5F89C1",
           }}>
           
-          <FormLabel style={{fontSize: 30, marginTop: 20}}>
+          <FormLabel style={{fontSize: 30, marginTop: 10, marginBottom: 20}}>
             Insertar Tipo de Equipo
           </FormLabel>
       
             <FormControl>
-              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Tipo de Equipo</FormLabel>
+              <FormLabel style = {{marginLeft:38}}>Tipo de Equipo</FormLabel>
               <Input
                 value={tipoEquipo}
                 placeholder="Ingrese el Tipo de equipo"
                 onChange={(a) => setTipoEquipo(a.target.value)}
                 marginTop={0.5}
+                marginLeft={38}
                 width={80}
                 backgroundColor= "white"
                 marginBottom={30}

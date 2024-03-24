@@ -23,6 +23,7 @@ const InsertarVehiculo = ({onClose}) => {
       console.log(response);
       alert("El Vehículo se ha insertado correctamente")
       setInsertarVehiculoModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
       alert("El Vehículo no se ha insertado")

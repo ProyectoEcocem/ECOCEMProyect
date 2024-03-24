@@ -61,6 +61,7 @@ const InsertarOrdenTrabajo = ({onClose}) => {
       //console.log(response);
       alert("La Orden de Trabajo se ha insertado correctamente.")
       setInsertarOrdenTrabajoModalAbierto(false)
+      onClose();
     }, (error) => {
       console.log(error);
       alert("La Orden de Trabajo no se ha insertado.")

@@ -23,7 +23,7 @@ function App() {
 
    return (
      <ChakraProvider>
-      <div> <InsertarDescarga/>
+      <div> <VentanaPrincipal/>
       {/*{mostrarLogin ? (
         <Login manejoClick={manejoClick} />
       ) : (

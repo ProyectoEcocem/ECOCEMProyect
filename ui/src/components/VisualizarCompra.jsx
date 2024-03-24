@@ -13,25 +13,61 @@ import {
   Tr,
   Th,
   Td,
+  Modal,
+  AbsoluteCenter
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+import InsertarCompra from './InsertarCompra'
+import InsertarDescarga from './InsertarDescarga'
 export default class Compra extends React.Component {
     state = {
-      Compras: []
+      Compras: [],
+      insertarCompraModalAbierto: false,
+      insertarDescargaModalAbierto: false,
     }
   
     componentDidMount() {
+      this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Compra`)
-        .then(res => {
-          const Compras= res.data;
-          this.setState({ Compras });
-        })
+      .then(res => {
+        const Compras= res.data;
+        this.setState({ Compras });
+      })
+    }
+    manejarInsertarCompraModal = () => {
+      this.setState({ insertarCompraModalAbierto: true });
+    };
+
+    manejarClickADescarga = (sedeId, entidadCompradoraId, fechaId) => {
+      this.setState({ insertarDescargaModalAbierto: true });
     }
   
     render() {
       return (
-        <div style={{height : 400}}>
+        <div style={{ position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)" }}>
+          <Button
+         onClick={this.manejarInsertarCompraModal}
+         marginBottom={5}
+         marginTop={5}
+         >Agregar Compra</Button>
+         <Modal isOpen={this.state.insertarCompraModalAbierto} onClose={() => this.setState({ insertarCompraModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarCompra onClose={() => {this.setState({ insertarCompraModalAbierto: false }); this.cargarBD();} }/>
+
+         </AbsoluteCenter>
+         </Modal>
+         <AbsoluteCenter>
+         <Modal isOpen={this.state.insertarDescargaModalAbierto} onClose={() => this.setState({ insertarDescargaModalAbierto: false })}>
+         
+         <InsertarDescarga onClose={() => this.setState({ insertarDescargaModalAbierto: false })} />
+         
+         
+         </Modal>
+         </AbsoluteCenter>
         <TableContainer>
         <Table>
           <Thead>
@@ -39,15 +75,19 @@ export default class Compra extends React.Component {
             <Th>Sede Id</Th>
             <Th>Fabrica Id</Th>
             <Th>Fecha</Th>
+            <Th>Asociar Descarga</Th>
             </Tr>
           </Thead>
           <Tbody>
             {
-              this.state.Compras.map((b) => (
-                <Tr key={b.CompraId}>
-                  <Td>{b.sedeId}</Td>
-                  <Td>{b.fabricaId}</Td>
-                  <Td>{b.fechaId}</Td>
+              this.state.Compras.map((compra) => (
+                <Tr key={compra.CompraId}>
+                  <Td>{compra.sedeId}</Td>
+                  <Td>{compra.fabricaId}</Td>
+                  <Td>{compra.fechaId}</Td>
+                  <Td>
+                    <Button onClick={() => this.manejarClickADescarga(compra.sedeId, compra.entidadCompradoraId, compra.fechaId)}>+ Descarga</Button>
+                  </Td>
                 </Tr>
               )
               )

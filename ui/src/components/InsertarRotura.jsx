@@ -26,6 +26,7 @@ const InsertarRotura = ({onClose}) => {
        // console.log(response);
         alert("La Rotura se ha insertado correctamente")
         setInsertarRoturaModalAbierto(false);
+        onClose();
       }, (error) => {
         console.log(error);
         alert("La Rotura no se ha insertado.")

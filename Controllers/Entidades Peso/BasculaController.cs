@@ -61,7 +61,7 @@ public class BasculaController : Controller
         return basculas;
     } 
 
-    [Authorize(Roles="admin, jefe")]
+    // [Authorize(Roles="admin, jefe")]
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] Bascula bascula)
     {

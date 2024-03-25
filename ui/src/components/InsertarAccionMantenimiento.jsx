@@ -12,9 +12,9 @@ import {
 import axios from "axios";
 
 const InsertarAccionMantenimiento = ({onClose}) => {
-  const [equipoId, setEquipoId] = useState(0);
-  const [brigadaId, setBrigadaId] = useState(0);
-  const [trabajadorId, setTrabajadorId] = useState(0);
+  const [equipoId, setEquipoId] = useState(1);
+  const [brigadaId, setBrigadaId] = useState(1);
+  const [trabajadorId, setTrabajadorId] = useState(1);
   const [fecha, setFecha] = useState(new Date());
   const [insertarAccionMantenimientoEModalAbierto, setInsertarAccionMantenimientoEModalAbierto] = useState(false);
 
@@ -89,7 +89,7 @@ const InsertarAccionMantenimiento = ({onClose}) => {
     }}>
      
  <FormLabel style={{fontSize: 30}}>
-   Insertar Accion de Mtto
+   Insertar Acción de Mtto
  </FormLabel>
 
  <FormLabel style={{marginBottom: 0, marginLeft:0, marginRight: 250}}>Equipo</FormLabel>

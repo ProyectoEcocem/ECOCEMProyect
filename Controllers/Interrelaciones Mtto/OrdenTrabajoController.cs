@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 namespace ECOCEMProject;
 
-[ApiController]
-[Route("api/[controller]")]
 
 public class OrdenTrabajoData
 {
@@ -13,6 +11,9 @@ public class OrdenTrabajoData
    public int TrabajadorId {get; set;}
    public DateTime FechaId {get; set;}
 }
+
+[ApiController]
+[Route("api/[controller]")]
 public class OrdenTrabajoController : Controller
 {
     private readonly OrdenTrabajoServicio _ordenTrabajoServicio;

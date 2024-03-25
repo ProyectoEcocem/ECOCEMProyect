@@ -13,7 +13,7 @@ import {
 const InsertarTrabajador = ({onClose}) => {
   // const [trabajadorId, setTrabajadorId] = useState(0);
   const [nombre, setNombre] = useState("");
-  const [sede, setSede] = useState(0);
+  const [sede, setSede] = useState(1);
   const [insertarTrabajadorModalAbierto, setInsertarTrabajadorModalAbierto] = useState(false);
 
   const [sedes, setSedes] = useState([]);

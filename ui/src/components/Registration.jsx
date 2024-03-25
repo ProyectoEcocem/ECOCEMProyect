@@ -14,16 +14,15 @@ import axios from "axios";
 const Registration = ({manejoClick, onclose}) => {
     const [nombreUsuario, setNombreUsuario] = useState("");
     const [contrasena, setContraseña] = useState("");
-    const [noSede, setNoSede]  = useState(0);
-    const [rol, setRol]        = useState('');
+    const [noSede, setNoSede]  = useState(1);
+    const [email, setEmail] = useState("");
+    const [rol, setRol] = useState('');
 
-    
-      const [sedes, setSedes] = useState([]);
-
+    const [sedes, setSedes] = useState([]);
+  
       // const roles = ["Administrador", "Jefe de Mantenimiento"]
       const roles = ["admin", "jefe"]
-      
-  
+
   useEffect(() => {
     axios.get(`http://localhost:5103/api/Sede`)
       .then(res => {
@@ -31,7 +30,23 @@ const Registration = ({manejoClick, onclose}) => {
       })
       .catch(err => console.log(err));
   }, []);
+
+
+
   const ClickAceptar = async () => {
+
+    const role = {
+      name: rol,
+      description: ""
+    }
+    
+    const user = {
+      name: nombreUsuario,
+      password: contrasena,
+      noSede: noSede,
+      old_Password: "",
+      email: email,
+    }
     
     if (!nombreUsuario || !contrasena) {
         alert("Ingrese un nombre de usuario y una contraseña.");
@@ -39,10 +54,8 @@ const Registration = ({manejoClick, onclose}) => {
       }
   
         axios.post(`http://localhost:5103/api/Registration`,{
-          Name : nombreUsuario,
-          Password : contrasena,
-          noSede: noSede,
-          rol: rol
+          user: user,
+          role: role
         })
         .then((response) => {
             console.log(response);
@@ -63,7 +76,7 @@ const Registration = ({manejoClick, onclose}) => {
     return (
         <div style={{
             width: "400px",
-            height: "650px",
+            height: "700px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -104,6 +117,20 @@ const Registration = ({manejoClick, onclose}) => {
                 value={contrasena}
                 placeholder="Ingrese su contraseña"
                 onChange={(e) => setContraseña(e.target.value)}
+                marginTop={0.5}
+                marginLeft={30}
+                marginBottom={5}
+                width={80}
+                backgroundColor= "white"
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel style = {{marginLeft:30}}>Correo</FormLabel>
+              <Input
+                value={email}
+                placeholder="Ingrese su correo"
+                onChange={(e) => setEmail(e.target.value)}
                 marginTop={0.5}
                 marginLeft={30}
                 marginBottom={5}

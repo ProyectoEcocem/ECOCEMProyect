@@ -7,13 +7,15 @@ import {
     Button,
     Flex,
     Select,
+    Modal,
     //BackgroundImage
   } from "@chakra-ui/react"; 
 
-const InsertarEquipo = () => {
-  const [EquipoId, setEquipoId] = useState(0);
-  const [TipoEId, setTipoEId] = useState(0);
-  const [SedeId, setSedeId] = useState(0);
+const InsertarEquipo = ({onClose}) => {
+  const [equipoId, setEquipoId] = useState(1);
+  const [tipoEId, setTipoEId] = useState(1);
+  const [sedeId, setSedeId] = useState(1);
+  const [insertarEquipoModalAbierto, setInsertarEquipoModalAbierto] = useState(false);
 
   //Lista de tipos de equipos
     const [tiposEquipos, setTiposEquipos] = useState([]);
@@ -41,19 +43,25 @@ const InsertarEquipo = () => {
   const createEquipo = async () => {
 
     axios.post(`http://localhost:5103/api/Equipo`, {
-      EquipoId: EquipoId,
-      TipoEId: TipoEId,
-      SedeId: SedeId
+      equipoId: equipoId,
+      tipoEId: tipoEId,
+      sedeId: sedeId
     })
     .then((response) => {
       console.log(response);
-      alert("ok")
+      alert("El Equipo ha sido insertado correctamente.")
+      setInsertarEquipoModalAbierto(false);
+      onClose();
     }, (error) => {
       console.log(error);
-      alert("Iserción fallida")
+      alert("El Equipo no se ha insertado.")
     });
   };
 
+  const handleCancelar = () => {
+    // Cierra la ventana modal desde el componente padre.
+    onClose();
+  };
 
   return (
     <div style={{
@@ -75,10 +83,11 @@ const InsertarEquipo = () => {
   <FormControl>
               <FormLabel style={{margin: "0px 20px 0px 40px"}}>Número de Serie del Equipo</FormLabel>
               <Input
-                value={EquipoId}
+                value={equipoId}
                 placeholder="Ingrese el Número de serie del equipo"
                 onChange={(e) => setEquipoId(e.target.value)}
                 marginTop={0.5}
+                marginLeft={9}
                 width={80}
                 backgroundColor= "white"
               />
@@ -86,8 +95,8 @@ const InsertarEquipo = () => {
       
             <FormLabel style={{margin: "20px 210px 0px 0px"}}>Tipo de Equipo</FormLabel>
 
-            <Select
-          value={TipoEId}
+          <Select
+          value={tipoEId}
           onChange={(e) => setTipoEId(e.target.value)}
           width={80}
           marginBottom={30}
@@ -102,7 +111,7 @@ const InsertarEquipo = () => {
             <FormLabel style={{margin: "0px 140px 0px 0px"}}>Sede a la que pertenece</FormLabel>
 
             <Select
-          value={SedeId}
+          value={sedeId}
           onChange={(e) => setSedeId(e.target.value)}
           width={80}
           marginBottom={30}
@@ -110,20 +119,24 @@ const InsertarEquipo = () => {
           {sedes.map((sede) => (
             <option key={sede.sedeId} value={sede.sedeId}>
               {sede.nombreSede}
+              
             </option>
           ))}
         </Select>
            
         <Flex>
         <Button 
-        variant="contained" 
-        color="primary" 
+        variant="outline"
+        colorScheme="blue" 
         style={{ marginRight: 10 }}
         onClick={createEquipo}
         type="submit"
         >
           Aceptar
         </Button>
+        <Button variant="outline" colorScheme="red" marginTop={0} onClick={handleCancelar}>
+    Cancelar
+  </Button>
         </Flex>
       </div>
   );

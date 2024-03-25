@@ -1,5 +1,6 @@
 
 import React from 'react';
+import InsertarTipoDeEquipo from './InsertarTipoDeEquipo';
 import {
   Input,
   Button,
@@ -13,25 +14,52 @@ import {
   Tr,
   Th,
   Td,
+  Modal,
+  AbsoluteCenter,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
+
 export default class TiposEquipo extends React.Component {
     state = {
-      tipoEquipos: []
+      tipoEquipos: [],
+      insertarTipoEquipoModalAbierto: false, //controlar si la pestana de insertar tipo de equipo esta abierta
     }
   
     componentDidMount() {
-      axios.get(`http://localhost:5103/api/TipoEquipo`)
-        .then(res => {
-          const tipoEquipos= res.data;
-          this.setState({ tipoEquipos });
-        })
+     this.cargarBD();
     }
+
+    cargarBD() {
+      axios.get(`http://localhost:5103/api/TipoEquipo`)
+      .then(res => {
+        const tipoEquipos= res.data;
+        this.setState({ tipoEquipos });
+      })
+    }
+
+    //Funcion para abrir el modal de Insertar Tipo de Equipo
+    manejarInsertarTipoEquipoModal = () => {
+      this.setState({ insertarTipoEquipoModalAbierto: true });
+    };
   
     render() {
       return (
-       <div style={{height : 400}}>
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
+        <Button
+         onClick={this.manejarInsertarTipoEquipoModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Tipo de Equipo
+         </Button>
+
+         <Modal isOpen={this.state.insertarTipoEquipoModalAbierto} onClose={() => this.setState({ insertarTipoEquipoModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarTipoDeEquipo onClose={() => {this.setState({ insertarTipoEquipoModalAbierto: false }); this.cargarBD();} } />
+         </AbsoluteCenter>
+         </Modal>
+
         <TableContainer>
           <Table>
             <Thead>
@@ -53,7 +81,6 @@ export default class TiposEquipo extends React.Component {
             </Tbody>
           </Table>
         </TableContainer>
-       
        </div>
       )
     }

@@ -11,9 +11,11 @@ public class MedicionSilo
     public int Volumen {get; set; }
 
 
-    public int TipoCementoId { get; set; }
-    public int VehiculoId { get; set; }
-    public DateTime FechaCargaId {get; set;}
+    //public int TipoCementoId { get; set; }
+    //public int VehiculoId { get; set; }
+    
+    //public DateTime FechaCargaId {get; set;}
+
     public Carga? Carga {get; set; }
     public Descarga? Descarga {get; set; }
 

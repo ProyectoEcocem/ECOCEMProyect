@@ -31,7 +31,7 @@ public class OrdenTrabajoAtendidaServicio
 
         if (ordenTAExistente == null)
         {
-            return null;
+            return null!;
         }
         
        

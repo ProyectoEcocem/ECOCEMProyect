@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 const InsertarEmpresa = () => {
-  const [numeroEmpresa, setNumeroEmpresa] = useState("");
+  const [numeroEmpresa, setNumeroEmpresa] = useState("0");
   const [nombreEmpresa, setNombreEmpresa] = useState("");
   const [insertSuccess, setInsertSuccess] = useState(false);
 
@@ -48,11 +48,12 @@ const InsertarEmpresa = () => {
         flexDirection: "column",
         borderRadius: 20,
         border: "2px solid #5F89C1",
+        position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)"
       }}
     >
       <FormLabel style={{ fontSize: 30 }}>Insertar Empresa</FormLabel>
 
-      <FormControl>
+      {/* <FormControl>
         <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
           Número de Empresa
         </FormLabel>
@@ -64,7 +65,7 @@ const InsertarEmpresa = () => {
           width={80}
           backgroundColor="white"
         />
-      </FormControl>
+      </FormControl> */}
 
       <FormControl>
         <FormLabel style={{ margin: "20px 0px 0px 40px" }}>
@@ -80,11 +81,10 @@ const InsertarEmpresa = () => {
         />
       </FormControl>
 
-      <Flex>
         <Button
           variant="contained"
           color="primary"
-          style={{ marginRight: 10 }}
+          style={{ marginRight: 10, marginTop: 20 }}
           onClick={createEmpresa}
           type="submit"
           >
@@ -95,11 +95,7 @@ const InsertarEmpresa = () => {
           )}
           Aceptar
         </Button>
-
-        <Button variant="contained" color="secondary">
-          Cancelar
-        </Button>
-      </Flex>
+      
 
     </div>
   );

@@ -26,13 +26,11 @@ const Login = ({manejoClick}) => {
         })
         .then((response) => {
             console.log(response);
-            alert("ok")
             alert("Inicio de sesión exitoso");
             manejoClick();
         }, (error) => {
             console.log(error);
-            alert("no ok")
-            setError("Nombre de usuario o contraseña inválidos.")
+            alert("Nombre de usuario o contraseña inválidos.")
         });
     };
   
@@ -55,6 +53,7 @@ const Login = ({manejoClick}) => {
         height={100}
         
       />
+      <FormLabel style={{margin: "30px 20px 0px 40px", fontSize: 30}}>Inicio de Sesión</FormLabel>
           <FormControl>
               <FormLabel style={{margin: "30px 20px 0px 40px"}}>Nombre de usuario</FormLabel>
               <Input

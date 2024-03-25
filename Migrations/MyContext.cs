@@ -14,6 +14,7 @@ public class MyContext: DbContext
 
 
     public DbSet<User>Users {get; set;}
+    public DbSet<HerramientaMantNecesario>HerramientaMantNecesarios {get; set;}
     public DbSet<Role>Roles {get; set;}
     public DbSet<UserRole>UserRoles {get; set;}
     public DbSet<Bascula>Basculas {get; set;}
@@ -35,6 +36,7 @@ public class MyContext: DbContext
     public DbSet<JefeMantenimiento>JefesMantenimientos{get;set;}
     public DbSet<Reporte>Reportes{get;set;}
     public DbSet<Rotura>Roturas{get;set;}
+    public DbSet<OrdenTrabajoHerramienta>OrdenTrabajoHerramientas{get;set;}
     public DbSet<TipoEquipo>TiposEquipos{get;set;}
     public DbSet<Trabajador>Trabajadores{get;set;}
     public DbSet<Operador>Operadores{get;set;}
@@ -43,8 +45,11 @@ public class MyContext: DbContext
     public DbSet<MantenimientoNecesario>MantenimientosNecesarios{get;set;} 
     public DbSet<MedicionBascula>MedicionesBasculas{get;set;}
     public DbSet<MedicionSilo>MedicionesSilos{get;set;}
+    public DbSet<OrdenTrabajo>OrdenTrabajos{get;set;}
     public DbSet<OrdenTrabajoAtendida>OrdenesTrabajoAtendidas{get;set;}
     public DbSet<Venta>Ventas{get;set;}
+    public DbSet<OrdenTrabajoRoturaEquipo>OrdenTrabajoRoturaEquipos{get;set;}
+    public DbSet<OrdenTrabajoAMRealizada>OrdenTrabajoAMRealizadas{get;set;}
     public DbSet<IdentityUserClaim<int>> UserClaims { get; set; }
 
 

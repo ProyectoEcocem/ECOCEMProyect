@@ -12,8 +12,6 @@ public class RoturaEquipoServicio
     }
     public async Task<RoturaEquipo> Get(int RoturaId,int EquipoId,DateTime FechaId)
     {
-        
-        
         var current_entity = await _context.RoturasEquipos.FindAsync(RoturaId,EquipoId,FechaId);
         
         if(current_entity == null!){
@@ -25,26 +23,49 @@ public class RoturaEquipoServicio
     {
         return await _context.RoturasEquipos.ToListAsync();
     }
+
+    public async Task<List<RoturaEquipo>> GetAll(int sedeId)
+{
+    var roturasEquipo = await _context.RoturasEquipos
+        .Join(_context.Equipos,
+            re => re.EquipoId, 
+            e => e.EquipoId, 
+            (re, e) => new { RoturaEquipo = re, Equipo = e })
+        .Where(x => x.Equipo.SedeId == sedeId)
+        .Select(x => x.RoturaEquipo)
+        .ToListAsync();
+
+    return roturasEquipo;
+}
+
     public async Task<RoturaEquipo> Update(int RoturaId,int EquipoId,DateTime FechaId,RoturaEquipo roturaE)
     {
         var roturaEExistente = await Get(RoturaId,EquipoId,FechaId);
 
         if (roturaEExistente== null)
         {
-            return null;
+            return null!;
         }
-        
+    
        
         await _context.SaveChangesAsync();
 
         return roturaE;
     }
-    public async Task<RoturaEquipo> Create(RoturaEquipo roturaE)
+    public async Task<RoturaEquipo> Create(RoturaEquipoData roturaE)
     {
-        _context.RoturasEquipos.Add(roturaE);
-        await _context.SaveChangesAsync();
+         if(_context.RoturasEquipos.Any(elemento => elemento.EquipoId == roturaE.EquipoId && elemento.RoturaId== roturaE.RoturaId && elemento.FechaId==roturaE.FechaId))
+            return null!;
+            
+        RoturaEquipo f1 = new RoturaEquipo();
 
-        return roturaE;
+        f1.RoturaId = roturaE.RoturaId;
+        f1.EquipoId = roturaE.EquipoId;
+        f1.FechaId = roturaE.FechaId;
+
+        _context.RoturasEquipos.Add(f1);
+        await _context.SaveChangesAsync();
+        return f1;
     }
      public async Task Delete(int RoturaId,int EquipoId,DateTime FechaId)
     {

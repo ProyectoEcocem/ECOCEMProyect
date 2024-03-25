@@ -24,26 +24,49 @@ public class MedicionBasculaServicio
     {
         return await _context.MedicionesBasculas.ToListAsync();
     }
+
+    public async Task<List<MedicionBascula>> GetAll(int sedeId)
+{
+    var medicionesBascula = await _context.MedicionesBasculas
+        .Join(_context.Basculas,
+            mb => mb.BasculaId,
+            b => b.BasculaId,
+            (mb, b) => new { MedicionBascula = mb, Bascula = b })
+        .Where(x => x.Bascula.NoSede == sedeId)
+        .Select(x => x.MedicionBascula)
+        .ToListAsync();
+
+    return medicionesBascula;
+}
+
     public async Task<MedicionBascula> Update(int BasculaId,int VehiculoId,DateTime FechaBId,MedicionBascula medicionBascula)
     {
         var medicionBasculaExistente = await Get(BasculaId,VehiculoId,FechaBId);
 
         if (medicionBasculaExistente == null)
         {
-            return null;
+            return null!;
         }
         
-        //existingBascula.BasculaId = bascula.BasculaId;
         await _context.SaveChangesAsync();
 
         return medicionBascula;
     }
-    public async Task<MedicionBascula> Create(MedicionBascula medicionBascula)
+    public async Task<MedicionBascula> Create(MedicionBasculaData medicionBascula)
     {
-        _context.MedicionesBasculas.Add(medicionBascula);
-        await _context.SaveChangesAsync();
+        
+        MedicionBascula mb = new MedicionBascula();
 
-        return medicionBascula;
+        //creacion de medicion bascula
+        mb.VehiculoId = medicionBascula.VehiculoId;
+        mb.BasculaId = medicionBascula.BasculaId;
+        mb.FechaBId = medicionBascula.FechaBId;
+        mb.PesoB = medicionBascula.PesoB;
+
+
+        _context.MedicionesBasculas.Add(mb);
+        await _context.SaveChangesAsync();
+        return mb;
     }
      public async Task Delete(int BasculaId,int VehiculoId,DateTime FechaBId)
     {

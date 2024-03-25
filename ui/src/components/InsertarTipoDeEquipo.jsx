@@ -6,35 +6,38 @@ import {
   Input,
   Button,
   Flex,
+  Modal,
 } from "@chakra-ui/react"; 
 
-const InsertarTipoDeEquipo = () => {
-    const [tipoEquipoId, setTipoEquipoId] = useState(8);
-    const [tipoEquipo, setTipoEquipo] = useState("te");
+const InsertarTipoDeEquipo = ({onClose}) => {
+    const [tipoEquipo, setTipoEquipo] = useState("");
+    const [insertarTipoEquipoModalAbierto, setInsertarTipoEquipoModalAbierto] = useState(false);
 
   
     const createTipoEquipo = async (event) => {
       event.preventDefault();
 
-      const tipoEquipoData = {
-        tipoEquipoId: parseInt(tipoEquipoId),
-        tipoEquipo: tipoEquipo,
-      };
       
       axios.post(`http://localhost:5103/api/TipoEquipo`, {
-        tipoEId: tipoEquipoId,
+        tipoEId: 0,
         tipoE: tipoEquipo
       })
       .then((response) => {
-        console.log(response);
-        alert("ok")
+        //console.log(response);
+        alert("El Tipo de Equipo ha sido insertado correctamente")
+        setInsertarTipoEquipoModalAbierto(false)
+        onClose();
       }, (error) => {
         console.log(error);
-        alert("no ok")
+        alert("El Tipo de Equipo no se ha insertado correctamente")
       });
     };
 
-  
+    const handleCancelar = () => {
+      // Cierra la ventana modal desde el componente padre.
+      onClose();
+     
+    };
 
     return (
         <div style={{
@@ -49,47 +52,39 @@ const InsertarTipoDeEquipo = () => {
             border: "2px solid #5F89C1",
           }}>
           
-<FormLabel style={{fontSize: 30, marginTop: 20}}>
-  Insertar Tipo de Equipo
-</FormLabel>
-          <FormControl>
-              <FormLabel style={{margin: "20px 20px 0px 40px"}}>ID del Tipo de Equipo</FormLabel>
-              <Input
-                value={tipoEquipoId}
-                placeholder="Ingrese el Id del Tipo de Equipo"
-                onChange={(e) => setTipoEquipoId(e.target.value)}
-                marginTop={0.5}
-                width={80}
-                backgroundColor= "white"
-              />
-            </FormControl>
+          <FormLabel style={{fontSize: 30, marginTop: 10, marginBottom: 20}}>
+            Insertar Tipo de Equipo
+          </FormLabel>
       
             <FormControl>
-              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Tipo de Equipo</FormLabel>
+              <FormLabel style = {{marginLeft:38}}>Tipo de Equipo</FormLabel>
               <Input
                 value={tipoEquipo}
                 placeholder="Ingrese el Tipo de equipo"
                 onChange={(a) => setTipoEquipo(a.target.value)}
                 marginTop={0.5}
+                marginLeft={38}
                 width={80}
                 backgroundColor= "white"
                 marginBottom={30}
               />
             </FormControl>
-            <Flex>
+
+           <Flex justifyContent="space-between"> 
         <Button 
-          variant="contained" 
-          color="primary" 
-          style={{ marginRight: 10 }}
+          variant="outline" 
+          colorScheme="blue" 
+          style={{ marginRight: 10,  marginTop: 15}}
           onClick={createTipoEquipo}
           type="submit"
           >
           Aceptar
         </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
-        </Button>
-        </Flex>
+      
+        <Button variant="outline" colorScheme="red" marginTop={4} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
       </div>
   );
 };

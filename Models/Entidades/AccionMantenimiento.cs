@@ -1,23 +1,24 @@
-using ECOCEMProject;
+using System.Text.Json.Serialization;
 
 namespace ECOCEMProject;
 
 public class AccionMantenimiento
 {
     public int AMId { get; set; }
+    public string Descripcion { get; set; }
 
-    public int EquipoId {get; set;} 
-    public int BrigadaId {get; set;}
-    public int TrabajadorId {get; set;}
-    public DateTime FechaId {get; set;}
+    [JsonIgnore]
     public List<OrdenTrabajo> OrdenesTrabajo {get; } = new();
+    [JsonIgnore]
     public List<OrdenTrabajoAMRealizada> OrdenesAMRealizadas {get; } = new();
 }
+
 public class MantenimientoImprevisto : AccionMantenimiento 
 {
     
 }
 public class MantenimientoPlanificado : AccionMantenimiento 
 {
+    [JsonIgnore]
     public List<MantenimientoNecesario> MantenimientosNecesarios {get;} = new();
 }

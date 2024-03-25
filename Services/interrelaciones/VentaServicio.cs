@@ -24,6 +24,11 @@ public class VentaServicio
     {
         return await _context.Ventas.ToListAsync();
     }
+
+    public async Task<IEnumerable<Venta>> GetAll(int sedeId)
+    {
+        return await _context.Ventas.Where(v => v.SedeId == sedeId).ToListAsync();
+    }
     public async Task<Venta> Update(int SedeId,int EntidadCompradoraId,DateTime FechaVentaId,Venta venta)
     {
         var VentaExistente = await Get(SedeId,EntidadCompradoraId,FechaVentaId);
@@ -38,12 +43,20 @@ public class VentaServicio
 
         return venta;
     }
-    public async Task<Venta> Create(Venta venta)
+    public async Task<Venta> Create(VentaData venta)
     {
-        _context.Ventas.Add(venta);
-        await _context.SaveChangesAsync();
+        if(_context.Ventas.Any(elemento => elemento.SedeId == venta.SedeId && elemento.EntidadCompradoraId== venta.EntidadCompradoraId && elemento.FechaVentaId==venta.FechaId))
+            return null!;
+            
+        Venta f1 = new Venta();
 
-        return venta;
+        f1.SedeId = venta.SedeId;
+        f1.EntidadCompradoraId = venta.EntidadCompradoraId;
+        f1.FechaVentaId = venta.FechaId;
+
+        _context.Ventas.Add(f1);
+        await _context.SaveChangesAsync();
+        return f1;
     }
      public async Task Delete(int SedeId,int EntidadCompradoraId,DateTime FechaVentaId)
     {

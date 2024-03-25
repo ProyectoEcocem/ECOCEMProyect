@@ -5,34 +5,38 @@ import {
   Input,
   Button,
   Flex,
+  Modal,
   //BackgroundImage
 } from "@chakra-ui/react"; 
 import axios from "axios";
 
-const InsertarRotura = () => {
-    const [roturaId, setRoturaId] = useState("");
+const InsertarRotura = ({onClose}) => {
     const [nombreRotura, setNombreRotura] = useState("");
-  
+    const [insertarRoturaModalAbierto, setInsertarRoturaModalAbierto] = useState(false);
+    const [descripcion, setDescripcion] = useState("")
 
     const createRotura = async () => {
-      const rotura = {
-        roturaId: roturaId,
-        nombreRotura: nombreRotura
-      };
       
         axios.post(`http://localhost:5103/api/Rotura`, {
-        roturaId: roturaId,
-        nombreRotura: nombreRotura
+        roturaId: 0,
+        nombreRotura: nombreRotura,
+        descripcion: descripcion
       })
       .then((response) => {
-        console.log(response);
-        alert("ok")
+       // console.log(response);
+        alert("La Rotura se ha insertado correctamente")
+        setInsertarRoturaModalAbierto(false);
+        onClose();
       }, (error) => {
         console.log(error);
-        alert("no ok")
+        alert("La Rotura no se ha insertado.")
       });
     };
 
+    const handleCancelar = () => {
+      // Cierra la ventana modal desde el componente padre.
+      onClose();
+    };
 
     return (
         <div style={{
@@ -50,17 +54,6 @@ const InsertarRotura = () => {
 <FormLabel style={{fontSize: 30, marginTop: 20}}>
   Insertar Tipo de Rotura
 </FormLabel>
-          <FormControl>
-              <FormLabel style={{margin: "20px 20px 0px 40px"}}>ID de la Rotura</FormLabel>
-              <Input
-                value={roturaId}
-                placeholder="Ingrese el Id de la Rotura"
-                onChange={(e) => setRoturaId(e.target.value)}
-                marginTop={0.5}
-                width={80}
-                backgroundColor= "white"
-              />
-            </FormControl>
       
             <FormControl>
               <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Nombre de la Rotura</FormLabel>
@@ -69,25 +62,41 @@ const InsertarRotura = () => {
                 placeholder="Ingrese el nombre de la Rotura"
                 onChange={(a) => setNombreRotura(a.target.value)}
                 marginTop={0.5}
+                marginLeft={10}
                 width={80}
                 backgroundColor= "white"
                 marginBottom={30}
               />
             </FormControl>
-            <Flex>
+
+            <FormControl>
+              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Descripción de la Rotura</FormLabel>
+              <Input
+                value={descripcion}
+                placeholder="Ingrese una descripción"
+                onChange={(a) => setDescripcion(a.target.value)}
+                marginTop={0.5}
+                marginLeft={10}
+                width={80}
+                backgroundColor= "white"
+                marginBottom={30}
+              />
+            </FormControl>
+            
+            <Flex justifyContent="space-between">
         <Button 
-        variant="contained" 
-        color="primary" 
-        style={{ marginRight: 10 }}
+        variant="outline"
+        colorScheme="blue"
+        style={{ marginRight: 10, marginTop: 15}}
         onClick={createRotura}
         type="submit"
         >
           Aceptar
         </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
-        </Button>
-        </Flex>
+        <Button variant="outline" colorScheme="red" marginTop={4} onClick={handleCancelar}>
+    Cancelar
+  </Button>
+  </Flex>
       </div>
   );
 };

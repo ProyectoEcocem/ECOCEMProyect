@@ -38,11 +38,19 @@ public class FabricaService
         return fabrica;
     }
 
-    public async Task<Fabrica> Create(Fabrica fabrica)
+    public async Task<Fabrica> Create(FabricaData fabrica)
     {
-        _context.Fabricas.Add(fabrica);
+        if(_context.Fabricas.Any(elemento => elemento.Nombre == fabrica.Nombre))
+            return null!;
+            
+        Fabrica f1 = new Fabrica();
+
+        f1.FabricaId = fabrica.FabricaId;
+        f1.Nombre = fabrica.Nombre;
+
+        _context.Fabricas.Add(f1);
         await _context.SaveChangesAsync();
-        return fabrica;
+        return f1;
     }
 
     public async Task Delete(int id)

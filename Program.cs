@@ -2,8 +2,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System.Net.Http.Headers; 
-using Microsoft.AspNetCore.Authentication;
+// using System.Net.Http.Headers; 
+// using Microsoft.AspNetCore.Authentication;
 
 using ECOCEMProject;
 
@@ -21,14 +21,6 @@ builder.Services.AddDbContext<MyContext>(opciones=>
 
 
 
-builder.Services.AddControllers();
-
-//agregar el contexto de la base de datos como servicios
-builder.Services.AddDbContext<MyContext>(opciones=>
-    opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
-
-
 // Servicios de entidades
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<RoleService>();
@@ -37,7 +29,7 @@ builder.Services.AddScoped<AccionMantenimientoService>();
 builder.Services.AddScoped<SedeService>();
 builder.Services.AddScoped<MedidorService>();
 builder.Services.AddScoped<EntidadCompradoraService>();
-builder.Services.AddScoped<Vehiculo>();
+builder.Services.AddScoped<VehiculoService>();
 builder.Services.AddScoped<TipoCementoService>();
 builder.Services.AddScoped<FabricaService>();
 builder.Services.AddScoped<EmpresaService>();
@@ -62,7 +54,12 @@ builder.Services.AddScoped<OrdenTrabajoAtendidaServicio>();
 builder.Services.AddScoped<RoturaEquipoServicio>();
 builder.Services.AddScoped<UserRoleServicio>();
 builder.Services.AddScoped<FiltroMantenimientoService>();
-
+builder.Services.AddScoped<OrdenTrabajoServicio>();
+builder.Services.AddScoped<MantenimientoNecesarioServicio>();
+builder.Services.AddScoped<OrdenTrabajoRoturaEquipoServicio>();
+builder.Services.AddScoped<OrdenTrabajoAMRealizadaServicio>();
+builder.Services.AddScoped<HerramientaMantNecesarioServicio>();
+builder.Services.AddScoped<OrdenTrabajoHerramientaServicio>();
 
 // Agregar las clases User y Role usando el paquete Identity de .Net Core
 builder.Services.AddIdentity<User, Role>(options =>
@@ -81,8 +78,6 @@ builder.Services.AddIdentity<User, Role>(options =>
 
 
 builder.Services.AddAuthorization();
-
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

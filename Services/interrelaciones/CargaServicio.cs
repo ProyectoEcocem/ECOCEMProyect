@@ -24,7 +24,13 @@ public class CargaServicio
     {
         return await _context.Cargas.ToListAsync();
     }
-    public async Task<Carga> Update(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaCargaId,Carga carga)
+
+    public async Task<IEnumerable<Carga>> GetAll(int sedeId)
+    {
+        return await _context.Cargas.Where(c => c.SedeId == sedeId).ToListAsync();
+    }
+
+    public async Task<Carga> Update(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaCargaId,Carga ordenTrabajoHerramienta)
     {
         var CargaExistente = await Get(TipoCementoId,SiloId,VehiculoId,FechaCargaId);
 
@@ -35,25 +41,55 @@ public class CargaServicio
         
         await _context.SaveChangesAsync();
 
-        return carga;
+        return ordenTrabajoHerramienta;
     }
-    public async Task<Carga> Create(Carga carga)
+    public async Task<Carga> Create(CargaData carga)
     {
-        _context.Cargas.Add(carga);
-        await _context.SaveChangesAsync();
+         if(_context.Descargas.Any(elemento => elemento.TipoCementoId == carga.TipoCementoId && elemento.SiloId== carga.SiloId && elemento.FechaId==carga.FechaId && elemento.VehiculoId==carga.VehiculoId))
+            return null!;
+            
+        Carga d = new Carga();
+        MedicionSilo ms = new MedicionSilo();
+        MedicionBascula mb = new MedicionBascula();
+        
 
-        return carga;
+        //creacion de carga
+        d.TipoCementoId = carga.TipoCementoId;
+        d.SiloId = carga.SiloId;
+        d.VehiculoId = carga.VehiculoId;
+        d.FechaCargaId = carga.FechaId;
+
+        //creacion de medicion bascula
+        mb.VehiculoId = carga.VehiculoId;
+        mb.BasculaId = carga.BasculaId;
+        mb.FechaBId = carga.FechaId;
+        mb.PesoB = carga.PesoB;
+
+        //creacion de medicion silo
+        ms.SiloId = carga.SiloId;
+        ms.MedidorId = carga.MedidorId;
+        ms.FechaMId = carga.FechaId;
+        ms.Nivel = carga.Nivel;
+        ms.PesoM = carga.PesoM;
+        ms.Volumen = carga.Volumen;
+        
+
+        _context.Cargas.Add(d);
+        _context.MedicionesSilos.Add(ms);
+        _context.MedicionesBasculas.Add(mb);
+        await _context.SaveChangesAsync();
+        return d;
     }
      public async Task Delete(int TipoCementoId,int SiloId,int VehiculoId,DateTime FechaCargaId)
     {
-        var carga = await Get(TipoCementoId,SiloId,VehiculoId,FechaCargaId);
+        var ordenTrabajoHerramienta = await Get(TipoCementoId,SiloId,VehiculoId,FechaCargaId);
 
-        if (carga == null)
+        if (ordenTrabajoHerramienta == null)
         {
             return;
         }
 
-        _context.Cargas.Remove(carga);
+        _context.Cargas.Remove(ordenTrabajoHerramienta);
         await _context.SaveChangesAsync();
     }
 

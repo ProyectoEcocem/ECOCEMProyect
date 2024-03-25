@@ -24,6 +24,12 @@ public class CompraServicio
     {
         return await _context.Compras.ToListAsync();
     }
+
+    public async Task<IEnumerable<Compra>> GetAll(int sedeId)
+    {
+        return await _context.Compras.Where(c => c.SedeId == sedeId).ToListAsync();
+    }
+
     public async Task<Compra> Update(int SedeId,int FabricaId,DateTime FechaCompraId,Compra compra)
     {
         var CompraExistente = await Get(SedeId, FabricaId, FechaCompraId);
@@ -38,12 +44,20 @@ public class CompraServicio
 
         return compra;
     }
-    public async Task<Compra> Create(Compra compra)
+    public async Task<Compra> Create(CompraData compra)
     {
-        _context.Compras.Add(compra);
-        await _context.SaveChangesAsync();
+       if(_context.Compras.Any(elemento => elemento.SedeId == compra.SedeId && elemento.FabricaId== compra.FabricaId && elemento.FechaId==compra.FechaId))
+            return null!;
+            
+        Compra f1 = new Compra();
 
-        return compra;
+        f1.SedeId = compra.SedeId;
+        f1.FabricaId = compra.FabricaId;
+        f1.FechaId = compra.FechaId;
+
+        _context.Compras.Add(f1);
+        await _context.SaveChangesAsync();
+        return f1;
     }
      public async Task Delete(int SedeId,int FabricaId,DateTime FechaCompraId)
     {

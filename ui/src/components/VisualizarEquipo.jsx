@@ -1,5 +1,6 @@
 
 import React from 'react';
+import InsertarEquipo from './InsertarEquipo';
 import {
   Input,
   Button,
@@ -13,25 +14,52 @@ import {
   Tr,
   Th,
   Td,
+  Modal,
+  AbsoluteCenter,
   //BackgroundImage
 } from "@chakra-ui/react";
 import axios from 'axios';
 export default class Equipo extends React.Component {
     state = {
-      Equipos: []
+      Equipos: [],
+      insertarEquipoModalAbierto: false, //controlar si la pestana de insertar equipo esta abierta
     }
   
     componentDidMount() {
+     this.cargarBD();
+    }
+
+    cargarBD() {
       axios.get(`http://localhost:5103/api/Equipo`)
-        .then(res => {
-          const Equipos= res.data;
-          this.setState({ Equipos });
-        })
+      .then(res => {
+        const Equipos= res.data;
+        this.setState({ Equipos });
+      })
     }
   
+    //Funcion para abrir el modal de Insertar Sede
+    manejarInsertarEquipoModal = () => {
+      this.setState({ insertarEquipoModalAbierto: true });
+    };
+
     render() {
       return (
-        
+        <div style={{ position: "absolute", top: "5%", left: "45%", transform: "translateX(-50%)" }}>
+
+<Button
+         onClick={this.manejarInsertarEquipoModal}
+         marginBottom={5}
+         marginTop={5}
+         >
+          Agregar Equipo
+         </Button>
+
+         <Modal isOpen={this.state.insertarEquipoModalAbierto} onClose={() => this.setState({ insertarEquipoModalAbierto: false })}>
+         <AbsoluteCenter>
+         <InsertarEquipo onClose={() => {this.setState({ insertarEquipoModalAbierto: false }); this.cargarBD();}} />
+         </AbsoluteCenter>
+         </Modal>
+
         <TableContainer>
         <Table>
           <Thead>
@@ -55,6 +83,7 @@ export default class Equipo extends React.Component {
           </Tbody>
         </Table>
       </TableContainer>
+      </div>
         // <ul>
           // { this.state.Equipos.map(equipo => <li key={equipo.equipoId}> Id:{equipo.equipoId} Tipo: {equipo.tipoEId} Sede: {equipo.sedeId} </li>)}
         // </ul>

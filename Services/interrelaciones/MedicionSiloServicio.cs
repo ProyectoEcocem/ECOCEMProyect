@@ -24,13 +24,28 @@ public class MedicionSiloServicio
     {
         return await _context.MedicionesSilos.ToListAsync();
     }
+
+    public async Task<List<MedicionSilo>> GetAll(int sedeId)
+    {
+        var medicionesSilo = await _context.MedicionesSilos
+            .Join(_context.Silos,
+                ms => ms.SiloId,
+                s => s.SiloId,
+                (ms, s) => new { MedicionSilo = ms, Silo = s })
+            .Where(x => x.Silo.NoSede == sedeId)
+            .Select(x => x.MedicionSilo)
+            .ToListAsync();
+
+        return medicionesSilo;
+    }
+
     public async Task<MedicionSilo> Update(int SiloId,int MedidorId,DateTime FechaMId,MedicionSilo medicionSilo)
     {
         var medicionSiloExistente = await Get(SiloId,MedidorId,FechaMId);
 
         if (medicionSiloExistente == null)
         {
-            return null;
+            return null!;
         }
         
         
@@ -38,12 +53,21 @@ public class MedicionSiloServicio
 
         return medicionSilo;
     }
-    public async Task<MedicionSilo> Create(MedicionSilo medicionSilo)
+    public async Task<MedicionSilo> Create(MedicionSiloData medicionSilo)
     {
-        _context.MedicionesSilos.Add(medicionSilo);
-        await _context.SaveChangesAsync();
+        MedicionSilo ms = new MedicionSilo();
 
-        return medicionSilo;
+        //creacion de medicion silo
+        ms.SiloId = medicionSilo.SiloId;
+        ms.MedidorId = medicionSilo.MedidorId;
+        ms.FechaMId = medicionSilo.FechaMId;
+        ms.Nivel = medicionSilo.Nivel;
+        ms.PesoM = medicionSilo.PesoM;
+        ms.Volumen = medicionSilo.Volumen;
+
+        _context.MedicionesSilos.Add(ms);
+        await _context.SaveChangesAsync();
+        return ms;
     }
      public async Task Delete(int SiloId,int MedidorId,DateTime FechaMId)
     {

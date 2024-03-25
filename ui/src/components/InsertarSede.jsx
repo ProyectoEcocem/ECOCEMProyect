@@ -6,49 +6,71 @@ import {
     Input,
     Button,
     Flex,
+    Modal,
+    Select,
     //BackgroundImage
   } from "@chakra-ui/react"; 
 //import { sedeController } from "../../../Controllers/Entidades"
 
-const InsertarSede = () => {
-  const [numeroSede, setNumeroSede] = useState("");
+const InsertarSede = ({onClose}) => {
+  // const [sedeId, setNumeroSede] = useState(0);
   const [nombreSede, setNombreSede] = useState("");
   const [ubicacionSede, setUbicacion] = useState("");
-  const [empresaId, setEmpresaId] = useState("");
+  const [empresaId, setEmpresaId] = useState(1);
   const [insertSuccess, setInsertSuccess] = useState(false);
+  const [insertarSedeModalAbierto, setInsertarSedeModalAbierto] = useState(false);
+  const [empresas, setEmpresas] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:5103/api/Empresa`)
+      .then(res => {
+        setEmpresas(res.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
 
   const EnviarForm = async () => {
-    const sede = {
-      numeroSede: numeroSede,
-      nombreSede: nombreSede,
-      ubicacionSede: ubicacionSede,
-      empresaId: empresaId
-    };
+
     axios.post(`http://localhost:5103/api/Sede`, {
-      numeroSede: numeroSede,
+      sedeId: 0,
       nombreSede: nombreSede,
       ubicacionSede: ubicacionSede,
       empresaId: empresaId
     })
     .then((response) => {
-      console.log(response);
-      alert("se inserto")
+      //console.log(response);
+      alert("La sede ha sido insertada correctamente")
+      setInsertarSedeModalAbierto(false); // Cierra el modal
+      onClose();
     }, (error) => {
       console.log(error);
       alert(console.log(error))
-      alert("noo se inserto")
+      alert("La sede no se ha insertado.")
     });
+
+    useEffect(() => {
+      
+  }, []); // El array vacío significa que este efecto se ejecuta solo una vez al montar el componente
+
   };
+
 
    useEffect(() => {
      setInsertSuccess(false);
-   }, [numeroSede,nombreSede,ubicacionSede,empresaId]);
+   }, [nombreSede,ubicacionSede,empresaId]);
  
+
+   const handleCancelar = () => {
+    // Cierra la ventana modal desde el componente padre.
+    onClose();
+   
+  };
 
   return (
     <div style={{
       width: "400px",
-      height: "400px",
+      height: "500px",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -62,17 +84,7 @@ const InsertarSede = () => {
   Insertar Sede
 </FormLabel>
 
-  <FormControl>
-              <FormLabel style={{margin: "0px 20px 0px 40px"}}>Número de Sede</FormLabel>
-              <Input
-                value={numeroSede}
-                placeholder="Ingrese el Número de la Sede"
-                onChange={(e) => setNumeroSede(e.target.value)}
-                marginTop={0.5}
-                width={80}
-                backgroundColor= "white"
-              />
-            </FormControl>
+ 
       
             <FormControl>
               <FormLabel style = {{margin: "20px 0px 0px 40px"}}>Nombre de la Sede</FormLabel>
@@ -81,6 +93,7 @@ const InsertarSede = () => {
                 placeholder="Ingrese el nombre de la Sede"
                 onChange={(e) => setNombreSede(e.target.value)}
                 marginTop={0.5}
+                marginLeft={10}
                 width={80}
                 backgroundColor= "white"
               />
@@ -93,43 +106,46 @@ const InsertarSede = () => {
                 placeholder="Ingrese la ubicación"
                 onChange={(e) => setUbicacion(e.target.value)}
                 marginTop={0.5}
+                marginLeft={10}
                 width={80}
                 backgroundColor= "white"
-                marginBottom={30}
+                marginBottom={1}
               />
             </FormControl>
 
-            <FormControl>
-              <FormLabel style = {{margin: "20px 0px 0px 40px"}}>EmpresaId</FormLabel>
-              <Input
-                value={empresaId}
-                placeholder="Ingrese la empresaId"
-                onChange={(e) => setEmpresaId(e.target.value)}
-                marginTop={0.5}
-                width={80}
-                backgroundColor= "white"
-                marginBottom={30}
-              />
-            </FormControl>
-        <Flex>
+              <FormLabel style = {{marginLeft: 10, marginTop: 10, marginRight:200}}>ID de la Empresa</FormLabel>
+              <Select
+          value={empresaId}
+          onChange={(e) => setEmpresaId(e.target.value)}
+          width={80}
+          marginBottom={30}
+        >
+          {empresas.map((empresa) => (
+            <option key={empresa.empresaId} value={empresa.empresaId}>
+              {empresa.nombreEmpresa}
+            </option>
+          ))}
+        </Select>
+            
+        <Flex justifyContent="space-between">
         <Button 
-          variant="contained" 
-          color="primary" 
+          variant="outline"
+          colorScheme="blue" 
           style={{ marginRight: 10 }}
           onClick = {EnviarForm}
           type="submit"
           mt="4"
           >
           {insertSuccess && (
-            <div style={{ marginTop: 20 }}>
-              <Alert status="success">La empresa se creó correctamente.</Alert>
+            <div style={{ marginTop: 5 }}>
+              <Alert status="success">La sede se creó correctamente.</Alert>
             </div>
           )}
           Aceptar
         </Button>
-        <Button variant="contained" color="secondary">
-          Cancelar
-        </Button>
+        <Button variant="outline" colorScheme="red" marginTop={4} onClick={handleCancelar}>
+    Cancelar
+  </Button>
         </Flex>
         
     
@@ -138,7 +154,3 @@ const InsertarSede = () => {
 };
 
 export default InsertarSede;
-
-// ToDo: Verificar que ya no exista la sede creada (por el Id)
-// ToDo: Evento con los botones.
-// Question: Las sedes tienen un id propio en la vida real o es asignado por el programa?

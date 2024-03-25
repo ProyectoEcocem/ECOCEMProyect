@@ -24,10 +24,11 @@ public class TipoEquipoController : Controller
     public async Task<ActionResult> Post(TipoEData tipoE)
     {
         
-        if (tipoE == null)
+        if (tipoE == null || tipoE.TipoE=="")
         {
             return BadRequest();
         }
+
         TipoEquipo TE = await _tipoEServicio.Create(tipoE);
         return Ok(TE);
     }

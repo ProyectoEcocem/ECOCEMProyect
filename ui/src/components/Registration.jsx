@@ -34,6 +34,12 @@ const Registration = ({manejoClick, onclose}) => {
 
 
   const ClickAceptar = async () => {
+
+    const role = {
+      name: rol,
+      description: ""
+    }
+    
     const user = {
       name: nombreUsuario,
       password: contrasena,
@@ -41,10 +47,7 @@ const Registration = ({manejoClick, onclose}) => {
       old_Password: "",
       email: email,
     }
-    const rol = {
-      name: rol,
-      description: ""
-    }
+    
     if (!nombreUsuario || !contrasena) {
         alert("Ingrese un nombre de usuario y una contraseña.");
         return;
@@ -52,7 +55,7 @@ const Registration = ({manejoClick, onclose}) => {
   
         axios.post(`http://localhost:5103/api/Registration`,{
           user: user,
-          role: rol
+          role: role
         })
         .then((response) => {
             console.log(response);

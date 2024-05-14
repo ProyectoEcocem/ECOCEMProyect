@@ -80,7 +80,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyCorsPolicy", builder =>
     {
-        builder.WithOrigins("http://localhost:5173") // Reemplaza con el dominio de tu cliente
+        builder.WithOrigins("http://localhost:5103") // Reemplaza con el dominio de tu cliente
                .AllowCredentials()
                .AllowAnyHeader()
                .AllowAnyMethod();

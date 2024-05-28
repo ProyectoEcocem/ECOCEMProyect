@@ -11,6 +11,16 @@ public class Carga
 
     public DateTime FechaFinal {get; set;}
 
+    // otras propiedades
+    public int PesoBruto {get; set;}
+    public int Tara {get; set;}
+    public int PesoNeto {
+        get{ return PesoBruto - Tara; }
+    }
+    public int PesoCalculado {
+        get{ return 0; }
+    }
+
     //llaves de venta
     public int SedeId {get; set;}
     public int EntidadCompradoraId {get; set;}

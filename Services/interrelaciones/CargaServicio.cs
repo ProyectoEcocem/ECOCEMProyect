@@ -58,6 +58,8 @@ public class CargaServicio
         d.SiloId = carga.SiloId;
         d.VehiculoId = carga.VehiculoId;
         d.FechaCargaId = carga.FechaId;
+        d.PesoBruto = carga.PesoBruto;
+        d.Tara = carga.Tara;
 
         //creacion de medicion bascula
         mb.VehiculoId = carga.VehiculoId;
@@ -71,7 +73,7 @@ public class CargaServicio
         ms.FechaMId = carga.FechaId;
         ms.Nivel = carga.Nivel;
         ms.PesoM = carga.PesoM;
-        ms.Volumen = carga.Volumen;
+        // ms.Volumen = carga.Volumen;
         
 
         _context.Cargas.Add(d);

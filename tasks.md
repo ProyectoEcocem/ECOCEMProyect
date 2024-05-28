@@ -2,11 +2,11 @@ Task a culminar antes del 29 de marzo (o lunes 25 de marzo para validación):
 
 Peso del cemento:
 
--Poner a disposición de los usuarios una interfaz para introducir por teclado los valores obtenidos por la cinta
+-MAS MENOS Poner a disposición de los usuarios una interfaz para introducir por teclado los valores obtenidos por la cinta (Falta el front)(Back ya)
 
 - Llevar el registro de los *tipos de cemento* comercializados por las UEB de ECOCEM, así como la *dependencia del nivel de cemento dentro de los silos metálicos respecto al tiempo de asentamiento y tipo de cemento*, el *coeficiente de las pérdidas por emanaciones* y otros valores y relaciones de relevancia para el cálculo del peso.
 
-- De los valores reportados por los operarios a partir del uso de las cintas u otros elementos, obtener el *nivel de cemento (N)* y *calcular* el *volumen* del mismo según las fórmulas de las figuras geométricas que conforman el silo. (En esta primera etapa el valor del nivel se insertaría por teclado, ver excell cálculo volumen silo).
+-YA De los valores reportados por los operarios a partir del uso de las cintas u otros elementos, obtener el *nivel de cemento (N)* y *calcular* el *volumen* del mismo según las fórmulas de las figuras geométricas que conforman el silo. (En esta primera etapa el valor del nivel se insertaría por teclado, ver excell cálculo volumen silo).
 
 - De los valores obtenidos por *teclado* sobre la *corriente de salida de los MANs* (de 4 hasta 20 mA), *calcular el nivel* y luego el *volumen* correspondiente dentro del silo, a partir de las alturas de las figuras geométricas que lo conforman.
 

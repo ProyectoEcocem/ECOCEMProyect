@@ -57,6 +57,11 @@ public class DescargaServicio
         d.SiloId = descarga.SiloId;
         d.VehiculoId = descarga.VehiculoId;
         d.FechaId = descarga.FechaId;
+        d.PesoBruto = descarga.PesoBruto;
+        d.Tara = descarga.Tara;
+        d.Temperatura = descarga.Temperatura;
+        d.TipoAsentamiento = descarga.TipoAsentamiento;
+        d.Corriente = descarga.Corriente;
 
         //creacion de medicion bascula
         mb.VehiculoId = descarga.VehiculoId;
@@ -70,7 +75,7 @@ public class DescargaServicio
         ms.FechaMId = descarga.FechaId;
         ms.Nivel = descarga.Nivel;
         ms.PesoM = descarga.PesoM;
-        ms.Volumen = descarga.Volumen;
+        // ms.Volumen = descarga.Volumen;
         
 
         _context.Descargas.Add(d);

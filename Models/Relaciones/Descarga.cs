@@ -9,6 +9,23 @@ public class Descarga
     public int VehiculoId { get; set; }
     public DateTime FechaId {get; set;}
 
+    //otras propiedades de descarga
+    public int PesoBruto {get; set;}
+    public int Tara {get; set;}
+    public int Temperatura {get; set;}
+    public int TipoAsentamiento {get; set;}
+    public int Corriente {get; set;}
+
+    public int PesoNeto {
+        get{ return PesoBruto - Tara; }
+    }
+    public int PesoCalculado {
+        get{ return 0; }
+    }
+    public int PesoLimpManual {
+        get{ return 0; }
+    }
+
     //llaves foraneas de compra
     public int SedeId {get; set;}
     public int FabricaId { get; set; }

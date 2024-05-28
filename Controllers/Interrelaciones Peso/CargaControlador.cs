@@ -12,6 +12,9 @@ public class CargaData
     public int VehiculoId { get; set; }
     public DateTime FechaId {get; set;}
 
+    public int PesoBruto {get; set;}
+    public int Tara {get; set;}
+
     //public required Venta venta {get; set; }
     //public required ICollection<MedicionSilo> MedicionesSilo {get; set; }
     public int MedidorId { get; set; }

@@ -12,6 +12,12 @@ public class DescargaData
     public int VehiculoId { get; set; }
     public DateTime FechaId {get; set;}
 
+    public int PesoBruto {get; set;}
+    public int Tara {get; set;}
+    public int Temperatura {get; set;}
+    public int TipoAsentamiento {get; set;}
+    public int Corriente {get; set;}
+
     //public required Compra compra {get; set; }
     //public required ICollection<MedicionSilo> MedicionesSilo {get; set; }
     public int MedidorId { get; set; }
@@ -55,7 +61,7 @@ public class DescargaController : Controller
         return Ok(descarga);
     }
     [Authorize(Roles="admin, jefe")]
-     [HttpGet]
+    [HttpGet]
     public async Task<IEnumerable<Descarga>> GetAll() 
     {
         List<Descarga>d = new();

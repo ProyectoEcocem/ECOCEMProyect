@@ -44,3 +44,7 @@ Gestión del mantenimiento:
 
 - Visualizar los resultados más importantes relacionados con la gestión del mantenimiento en los puestos de operaciones y en los móviles habilitados de las UEB y de la Oficina Central a partir de resúmenes diarios, mensuales y anuales de los mantenimientos de los equipos tecnológicos en todas las graneleras de ECOCEM.
 
+Tasks mios:
+- Arreglar el visual
+- Validar informacion de descarga, ver que no se descarga mas cemento con respecto a la compra.
+- Cual es la dif entre med silo y med bascula.

@@ -7,7 +7,7 @@ public class BasculaService
 {
     private readonly MyContext _context;
     private readonly TipoEquipoServicio _tipoEServicio;
-     private readonly EquipoServicio _equipoServicio;
+    private readonly EquipoServicio _equipoServicio;
 
     public BasculaService(MyContext context, TipoEquipoServicio tipoEServicio,EquipoServicio equipoServicio)
     {

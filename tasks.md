@@ -1,6 +1,6 @@
 Task a culminar antes del 29 de marzo (o lunes 25 de marzo para validación):
 
-Peso del cemento:
+# Peso del cemento:
 
 -MAS MENOS Poner a disposición de los usuarios una interfaz para introducir por teclado los valores obtenidos por la cinta (Falta el front)(Back ya)
 
@@ -28,7 +28,7 @@ Peso del cemento:
 
 - FACIL Visualizar los resultados más importantes relacionados con la descarga de los ferrosilos, autosilos y la venta de cemento, a partir de resúmenes como: Tabla de Control de la Descarga Real de Ferrosilos o Autosilos de Cemento y Tabla de Control de la Venta de Cemento. (ver excell "Demostración 8.09.23 para apoyar")
 
-Gestión del mantenimiento:
+# Gestión del mantenimiento:
 
 - YA Monitorear el tiempo de operación de los equipos, emitiendo avisos de la cercanía de los distintos tipos de mantenimiento industrial de acuerdo al tiempo de explotación. 
 

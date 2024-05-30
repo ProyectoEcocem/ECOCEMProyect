@@ -63,7 +63,7 @@ public class MedicionSiloServicio
         ms.FechaMId = medicionSilo.FechaMId;
         ms.Nivel = medicionSilo.Nivel;
         ms.PesoM = medicionSilo.PesoM;
-        ms.Volumen = medicionSilo.Volumen;
+        // ms.Volumen = medicionSilo.Volumen;
 
         _context.MedicionesSilos.Add(ms);
         await _context.SaveChangesAsync();

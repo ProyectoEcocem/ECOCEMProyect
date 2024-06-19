@@ -76,16 +76,16 @@ builder.Services.AddIdentity<User, Role>(options =>
     .AddUserStore<UserStore<User,Role,MyContext,int>>()
     .AddRoleStore<RoleStore<Role, MyContext, int>>();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("MyCorsPolicy", builder =>
-    {
-        builder.WithOrigins("http://localhost:5103") // Reemplaza con el dominio de tu cliente
-               .AllowCredentials()
-               .AllowAnyHeader()
-               .AllowAnyMethod();
-    });
-});
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("MyCorsPolicy", builder =>
+//     {
+//         builder.WithOrigins("http://localhost:5103") // Reemplaza con el dominio de tu cliente
+//                .AllowCredentials()
+//                .AllowAnyHeader()
+//                .AllowAnyMethod();
+//     });
+// });
 
 
 builder.Services.AddAuthorization();
@@ -102,11 +102,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("MyCorsPolicy");
-// app.UseCors(b => b
-//     .AllowAnyOrigin()
-//     .AllowAnyMethod()
-//     .AllowCredentials()
-//     .AllowAnyHeader());
+app.UseCors(b => b
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    // .AllowCredentials()
+    .AllowAnyHeader());
 
 
 app.UseHttpsRedirection();

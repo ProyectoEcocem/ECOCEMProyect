@@ -105,7 +105,7 @@ app.UseCors("MyCorsPolicy");
 app.UseCors(b => b
     .AllowAnyOrigin()
     .AllowAnyMethod()
-    // .AllowCredentials()
+    .AllowCredentials()
     .AllowAnyHeader());
 
 

@@ -37,7 +37,7 @@ public class EquipoController : Controller
     [HttpGet]
     public async Task<IEnumerable<Equipo>> GetAll()
     {
-         List<Equipo>equipos = new();
+        List<Equipo>equipos = new();
         
         if (User.IsInRole("admin"))
         {

@@ -51,6 +51,16 @@ namespace ECOCEMProject;
             var user = await _userService.GetByName(login.Name!);
             var roles =  await _filtro.GetRoles(user.Id);
             
+            // Creación e inicialización de un diccionario con pares clave-valor
+            Dictionary<string, string> response = new Dictionary<string, string>();
+            string user_name = user.UserName;
+            List<Role> rol = roles.ToList();
+            string role_name = rol[0].Name;
+            // Añadiendo un valor al diccionario
+            response.Add("uario",user_name);
+            response.Add("role", role_name);
+
+            
             // Crea una lista de claims.
             var claims = new List<Claim>
             {
@@ -83,6 +93,6 @@ namespace ECOCEMProject;
             // await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
 
 
-            return Ok();
+            return Ok(response);
         }
     }

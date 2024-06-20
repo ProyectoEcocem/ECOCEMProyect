@@ -103,7 +103,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("MyCorsPolicy");
 app.UseCors(b => b
-    .AllowAnyOrigin()
+    .WithOrigins("http://localhost:3000")
     .AllowAnyMethod()
     .AllowCredentials()
     .AllowAnyHeader());

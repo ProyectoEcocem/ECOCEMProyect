@@ -45,7 +45,7 @@ public class AccionMantenimientoController : Controller
         return Ok(accionMantenimiento);
     }
     // GETALL
-     [HttpGet]
+    [HttpGet]
     public async Task<IEnumerable<AccionMantenimiento>> GetAll() => await _accionMantenimientoService.GetAll();
 
     [HttpPut]

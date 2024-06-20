@@ -25,6 +25,13 @@ public class OkController : Controller
         return Ok();
     }
 
+    [HttpGet("user")]
+    [Authorize]
+    public IActionResult Get2()
+    {
+        return Ok();
+    }
+
 
 }
 

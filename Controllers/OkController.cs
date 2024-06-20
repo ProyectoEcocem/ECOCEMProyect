@@ -11,14 +11,14 @@ namespace ECOCEMProject;
 public class OkController : Controller
 {
 
-    [HttpGet]
+    [HttpGet("admin")]
     [Authorize(Roles="admin")]
     public IActionResult Get()
     {
         return Ok();
     }
 
-    [HttpGet]
+    [HttpGet("jefe")]
     [Authorize(Roles="jefe")]
     public IActionResult Get1()
     {

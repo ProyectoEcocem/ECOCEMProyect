@@ -53,20 +53,6 @@ const InsertarEmpresa = () => {
     >
       <FormLabel style={{ fontSize: 30 }}>Insertar Empresa</FormLabel>
 
-      {/* <FormControl>
-        <FormLabel style={{ margin: "0px 20px 0px 40px" }}>
-          Número de Empresa
-        </FormLabel>
-        <Input
-          value={numeroEmpresa}
-          placeholder="Ingrese el Número de la Empresa"
-          onChange={(e) => setNumeroEmpresa(e.target.value)}
-          marginTop={0.5}
-          width={80}
-          backgroundColor="white"
-        />
-      </FormControl> */}
-
       <FormControl>
         <FormLabel style={{ margin: "20px 0px 0px 40px" }}>
           Nombre de la Empresa

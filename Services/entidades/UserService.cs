@@ -43,6 +43,14 @@ public class UserService
 
     }
 
+    public async Task<IEnumerable<User>> GetAllUsers()
+    {
+       
+        var users = _context.Users.ToList();
+        return users;
+
+    }
+
     public async Task Update(int user_id, [FromBody]RegistrationModel edited_model)
         {
             var current_user = await Get(user_id);

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using NuGet.Packaging;
 //using Microsoft.IdentityModel.Tokens;
 
 
@@ -94,5 +95,23 @@ namespace ECOCEMProject;
 
 
             return Ok(response);
+        }
+        [HttpGet]
+        public async Task<List<Object>> GetAll() {
+            // Completame esto
+            IEnumerable<User> users = await _userService.GetAllUsers();
+
+            List<Object> user = new List<Object>();
+
+            foreach(User i in users)
+            {
+                Dictionary<string, string> response = new Dictionary<string, string>();
+                response.Add("Name", i.Nombre);
+                response.Add("Sede", i.NoSede.ToString());
+                response.Add("Email", i.Email);
+                user.Add(response);
+            }
+
+            return user;
         }
     }

@@ -15,27 +15,31 @@ public class EquipoServicio
         }
         return current_entity;
     }
-    public async Task<IEnumerable<Equipo>> GetAll()
+    public async Task<IEnumerable<EquipoDto>> GetAll()
     {
-        var result = await _context.Equipos.Join(_context.TiposEquipos,
-                                        equipo =>equipo.TipoEId,
-                                        tipoEquipo => tipoEquipo.TipoEId,
-                                        (equipo,tipoEquipo)=> new { EquipoId = equipo.EquipoId, TipoE = tipoEquipo.TipoE })
-                                        .ToListAsync();
-
-        // var result = await myContext.Equipos.Join(myContext.TiposEquipos,
-        //                                 equipo =>equipo.TipoEId,
-        //                                 tipoEquipo => tipoEquipo.TipoEId,
-        //                                 (equipo,tipoEquipo)=> new { EquipoId = equipo.EquipoId, TipoE = tipoEquipo.TipoE })
-        //                                 .Where(x => x.TipoE == TipoE)
-        //                                 .Select(x => x.EquipoId)
-        //                                 .ToListAsync();
-        return await _context.Equipos.ToListAsync();
+        return await (from e in _context.Equipos
+                      join te in _context.TiposEquipos on e.TipoEId equals te.TipoEId
+                      join s in _context.Sedes on e.SedeId equals s.SedeId
+                      select new EquipoDto
+                      {
+                          EquipoId = e.EquipoId,
+                          TipoEquipoNombre = te.TipoE,
+                          SedeNombre = s.NombreSede
+                      }).ToListAsync();
     }
 
-    public async Task<IEnumerable<Equipo>> GetAll(int sedeId)
+    public async Task<IEnumerable<EquipoDto>> GetAll(int sedeId)
     {
-        return await _context.Equipos.Where(e => e.SedeId == sedeId).ToListAsync();
+        return await (from e in _context.Equipos
+                      join te in _context.TiposEquipos on e.TipoEId equals te.TipoEId
+                      join s in _context.Sedes on e.SedeId equals s.SedeId
+                      where e.SedeId == sedeId
+                      select new EquipoDto
+                      {
+                          EquipoId = e.EquipoId,
+                          TipoEquipoNombre = te.TipoE,
+                          SedeNombre = s.NombreSede
+                      }).ToListAsync();
     }
     public async Task<Equipo> Update(int id, Equipo equipo)
     {

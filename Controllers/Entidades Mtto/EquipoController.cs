@@ -35,9 +35,9 @@ public class EquipoController : Controller
     }
     [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<Equipo>> GetAll()
+    public async Task<IEnumerable<EquipoDto>> GetAll()
     {
-        List<Equipo>equipos = new();
+        List<EquipoDto>equipos = new();
         
         if (User.IsInRole("admin"))
         {

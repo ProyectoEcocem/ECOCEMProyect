@@ -73,12 +73,12 @@ public class EquipoController : Controller
             if (currentUser != null)
             {
                 NoSede = currentUser.NoSede;
-                Equipo equipoCreado1 = await _equipoServicio.Create(equipo,NoSede);
+                var equipoCreado1 = await _equipoServicio.Create(equipo,NoSede);
                 return Ok(equipoCreado1);
             }
         }
 
-        Equipo equipoCreado = await _equipoServicio.Create(equipo,equipo.SedeId);
+        var equipoCreado = await _equipoServicio.Create(equipo,equipo.SedeId);
         return Ok(equipoCreado);
     }
 

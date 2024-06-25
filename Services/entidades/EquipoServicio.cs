@@ -17,6 +17,19 @@ public class EquipoServicio
     }
     public async Task<IEnumerable<Equipo>> GetAll()
     {
+        var result = await _context.Equipos.Join(_context.TiposEquipos,
+                                        equipo =>equipo.TipoEId,
+                                        tipoEquipo => tipoEquipo.TipoEId,
+                                        (equipo,tipoEquipo)=> new { EquipoId = equipo.EquipoId, TipoE = tipoEquipo.TipoE })
+                                        .ToListAsync();
+
+        // var result = await myContext.Equipos.Join(myContext.TiposEquipos,
+        //                                 equipo =>equipo.TipoEId,
+        //                                 tipoEquipo => tipoEquipo.TipoEId,
+        //                                 (equipo,tipoEquipo)=> new { EquipoId = equipo.EquipoId, TipoE = tipoEquipo.TipoE })
+        //                                 .Where(x => x.TipoE == TipoE)
+        //                                 .Select(x => x.EquipoId)
+        //                                 .ToListAsync();
         return await _context.Equipos.ToListAsync();
     }
 
@@ -29,25 +42,25 @@ public class EquipoServicio
         var equipoExistente = await Get(id);
         if (equipoExistente == null)
         {
-            return null;
+            return null!;
         }
         await _context.SaveChangesAsync();
         return equipo;
     }
-    public async Task<Equipo> Create(EquipoData equipo, int NoSede)
+    public async Task<Object> Create(EquipoData equipo, int NoSede)
     {
         if(_context.Equipos.Any(elemento => elemento.SedeId == NoSede || elemento.EquipoId == equipo.EquipoId || elemento.TipoEId==equipo.TipoEId))
             return null!;
 
         Equipo equipo1 = new Equipo();
 
-    
         equipo1.SedeId = NoSede;
         equipo1.EquipoId = equipo.EquipoId;
         equipo1.TipoEId = equipo.TipoEId;
 
         _context.Equipos.Add(equipo1);
         await _context.SaveChangesAsync();
+
         return equipo1;
     }
     public async Task Delete(int id)

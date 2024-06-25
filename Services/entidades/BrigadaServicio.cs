@@ -16,7 +16,7 @@ public class BrigadaServicio
         var current_entity = await _context.Brigadas.FindAsync(id);
         if (current_entity == null)
         {
-            return null;
+            return null!;
         }
         return current_entity;
     }
@@ -31,7 +31,7 @@ public class BrigadaServicio
         var brigadaExistente = await Get(id);
         if (brigadaExistente == null)
         {
-            return null;
+            return null!;
         }
         brigadaExistente.BrigadaId = brigada.BrigadaId;
         await _context.SaveChangesAsync();

@@ -4,7 +4,7 @@ namespace ECOCEMProject;
 public class TipoEquipo
 {
     public int TipoEId { get; set; }
-    public string TipoE {get; set;}
+    public string? TipoE {get; set;}
 
     
     public List<Equipo>? Equipos {get; }=new List<Equipo>();

@@ -30,7 +30,7 @@ public class AccionMantenimientoService
 
         if (accionMExistente == null)
         {
-            return null;
+            return null!;
         }
         
         //existingBascula.BasculaId = bascula.BasculaId;

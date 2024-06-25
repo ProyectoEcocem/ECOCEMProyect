@@ -4,7 +4,7 @@ namespace ECOCEMProject;
 public class OrdenTrabajoAMRealizada
 {
     public int AMId {get; set;}
-    public AccionMantenimiento AccionMantenimiento {get; set;}
+    public AccionMantenimiento? AccionMantenimiento {get; set;}
 
     //llaves de Orden de Trabajo 
     public int EquipoId {get; set;} 

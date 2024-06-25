@@ -5,7 +5,7 @@ namespace ECOCEMProject;
 public class AccionMantenimiento
 {
     public int AMId { get; set; }
-    public string Descripcion { get; set; }
+    public string? Descripcion { get; set; }
 
     [JsonIgnore]
     public List<OrdenTrabajo> OrdenesTrabajo {get; } = new();

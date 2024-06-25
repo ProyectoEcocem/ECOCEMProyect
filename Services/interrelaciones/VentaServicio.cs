@@ -52,7 +52,7 @@ public class VentaServicio
 
         if (VentaExistente == null)
         {
-            return null;
+            return null!;
         }
         
        

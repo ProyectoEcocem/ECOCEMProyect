@@ -35,7 +35,7 @@ public class DescargaServicio
 
         if (DescargaExistente == null)
         {
-            return null;
+            return null!;
         }
         
         //existingBascula.BasculaId = bascula.BasculaId;

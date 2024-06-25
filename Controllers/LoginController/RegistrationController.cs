@@ -74,7 +74,7 @@ namespace ECOCEMProject;
             {
 
                 await _roleService.Delete(current_user.Id);
-                await _userService.DeleteByName(current_user.Nombre);
+                await _userService.DeleteByName(current_user.Nombre ?? string.Empty);
 
                 return BadRequest("Fatal errwor");
             }

@@ -15,7 +15,7 @@ public class JefeMantenimientoServicio
         var current_entity = await _context.JefesMantenimientos.FindAsync(id);
         if (current_entity == null)
         {
-            return null;
+            return null!;
         }
         return current_entity;
     }
@@ -30,7 +30,7 @@ public class JefeMantenimientoServicio
         var jefeMExistente = await Get(id);
         if (jefeMExistente == null)
         {
-            return null;
+            return null!;
         }
         jefeMExistente.TrabajadorId = jefeMantenimiento.TrabajadorId;
         await _context.SaveChangesAsync();

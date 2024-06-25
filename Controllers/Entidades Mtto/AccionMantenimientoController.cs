@@ -6,7 +6,7 @@ public class AccionMantenimientoData
 {
     public int AMId { get; set; }
 
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
     // public int EquipoId {get; set;} 
     // public int BrigadaId {get; set;}

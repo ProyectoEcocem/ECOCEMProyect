@@ -4,7 +4,7 @@ namespace ECOCEMProject;
 public class TipoCementoData
 {
     public int TipoCementoId { get; set; }
-    public string NombreTipoCemento { get; set; }
+    public string? NombreTipoCemento { get; set; }
 }
 
 [Route("api/[controller]")]

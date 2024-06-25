@@ -4,7 +4,7 @@ namespace ECOCEMProject;
 public class MedidorData
 {
     public int MedidorId { get; set; }
-    public string NoSerie { get; set; }
+    public string? NoSerie { get; set; }
 }
 
 [Route("api/[controller]")]

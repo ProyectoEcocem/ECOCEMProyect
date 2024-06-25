@@ -27,11 +27,11 @@ public class Carga
     public DateTime FechaVentaId {get; set;}
   
     [JsonIgnore]
-    public Venta Venta {get; set; }
+    public Venta? Venta {get; set; }
 
     [JsonIgnore]
-    public ICollection<MedicionSilo> MedicionesSilo {get; set; }
+    public ICollection<MedicionSilo>? MedicionesSilo {get; set; }
 
     [JsonIgnore]
-    public ICollection<MedicionBascula> MedicionesBascula {get; set; }
+    public ICollection<MedicionBascula>? MedicionesBascula {get; set; }
 }

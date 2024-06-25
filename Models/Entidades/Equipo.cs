@@ -8,10 +8,10 @@ public class Equipo
     public int SedeId {get; set;}
     
     [JsonIgnore]
-    public  TipoEquipo TipoEquipo {get;set; }
+    public  TipoEquipo? TipoEquipo {get;set; }
     
     [JsonIgnore]
-    public Sede Sede {get; }
+    public Sede? Sede {get; }
     
     //public List<Reporte> Reportes = null!;
     //public List<RoturaEquipo> RoturasEquipos {get; set;}

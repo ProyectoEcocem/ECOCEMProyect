@@ -4,7 +4,7 @@ namespace ECOCEMProject;
 public class EntidadCompradoraData
 {
     public int EntidadCompradoraId {get; set;}
-    public string NombreEntidadCompradora {get; set;}
+    public string? NombreEntidadCompradora {get; set;}
 }
 
 [Route("api/[controller]")]

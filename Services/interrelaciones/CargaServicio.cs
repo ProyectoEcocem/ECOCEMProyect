@@ -36,7 +36,7 @@ public class CargaServicio
 
         if (CargaExistente == null)
         {
-            return null;
+            return null!;
         }
         
         await _context.SaveChangesAsync();

@@ -11,7 +11,7 @@ public class UserRole : IdentityUserRole<int>
     public int IdRole { get { return RoleId; } set { RoleId = value; } }
 
     [JsonIgnore]
-    public User User { get; set; }
+    public User? User { get; set; }
     [JsonIgnore]
-    public Role Role { get; set; }
+    public Role? Role { get; set; }
 }

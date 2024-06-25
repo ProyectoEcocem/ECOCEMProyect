@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ECOCEMProject;
 public class TipoEData{
     public int TipoEId { get; set; }
-    public string TipoE {get; set;} 
+    public string? TipoE {get; set;} 
 }
 
 [Route("api/[controller]")]

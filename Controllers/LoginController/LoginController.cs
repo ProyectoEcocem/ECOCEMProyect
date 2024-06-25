@@ -54,9 +54,9 @@ namespace ECOCEMProject;
             
             // Creación e inicialización de un diccionario con pares clave-valor
             Dictionary<string, string> response = new Dictionary<string, string>();
-            string user_name = user.UserName;
+            string user_name = user.UserName ?? string.Empty;
             List<Role> rol = roles.ToList();
-            string role_name = rol[0].Name;
+            string role_name = rol[0].Name ?? string.Empty;
             // Añadiendo un valor al diccionario
             response.Add("uario",user_name);
             response.Add("role", role_name);
@@ -106,9 +106,9 @@ namespace ECOCEMProject;
             foreach(User i in users)
             {
                 Dictionary<string, string> response = new Dictionary<string, string>();
-                response.Add("Name", i.Nombre);
+                response.Add("Name", i.Nombre ?? string.Empty);
                 response.Add("Sede", i.NoSede.ToString());
-                response.Add("Email", i.Email);
+                response.Add("Email", i.Email ?? string.Empty);
                 user.Add(response);
             }
 

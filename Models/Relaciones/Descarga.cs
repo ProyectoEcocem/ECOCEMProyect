@@ -32,9 +32,9 @@ public class Descarga
     public DateTime FechaCompraId {get; set;}
 
     [JsonIgnore]
-    public  Compra Compra {get; set; }
+    public  Compra? Compra {get; set; }
     [JsonIgnore]
-    public  ICollection<MedicionSilo> MedicionesSilo {get; set; }
+    public  ICollection<MedicionSilo>? MedicionesSilo {get; set; }
     [JsonIgnore]
-    public  ICollection<MedicionBascula> MedicionesBascula {get; set; }
+    public  ICollection<MedicionBascula>? MedicionesBascula {get; set; }
 }

@@ -30,7 +30,7 @@ public class OrdenTrabajoHerramientaServicio
 
         if (OrdenTrabajoHerramientaExistente == null)
         {
-            return null;
+            return null!;
         }
         
         await _context.SaveChangesAsync();

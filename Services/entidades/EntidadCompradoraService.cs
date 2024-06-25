@@ -24,7 +24,7 @@ public class EntidadCompradoraService
         var existingEntidadCompradora = await Get(id);
         if (existingEntidadCompradora == null)
         {
-            return null;
+            return null!;
         }
         await _context.SaveChangesAsync();
         return entidadCompradora;

@@ -30,7 +30,7 @@ public class HerramientaMantNecesarioServicio
 
         if (HerramientaMantNecesarioExistente == null)
         {
-            return null;
+            return null!;
         }
         
         //existingBascula.BasculaId = bascula.BasculaId;

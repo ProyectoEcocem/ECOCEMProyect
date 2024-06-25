@@ -34,7 +34,7 @@ public class HerramientaService
 
         if (herramientaExistente == null)
         {
-            return null;
+            return null!;
         }
         
         await _context.SaveChangesAsync();

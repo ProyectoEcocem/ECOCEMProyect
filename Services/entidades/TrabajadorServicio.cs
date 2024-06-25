@@ -28,7 +28,7 @@ public class TrabajadorServicio
         var trabajadorExistente = await Get(id);
         if (trabajadorExistente == null)
         {
-            return null;
+            return null!;
         }
         await _context.SaveChangesAsync();
         return trabajador;

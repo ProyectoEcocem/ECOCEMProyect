@@ -30,7 +30,7 @@ public class ReporteServicio
 
         if (reporteExistente == null)
         {
-            return null;
+            return null!;
         }
         
        

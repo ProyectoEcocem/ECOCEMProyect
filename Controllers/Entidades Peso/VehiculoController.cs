@@ -4,7 +4,7 @@ namespace ECOCEMProject;
 public class VehiculoData
 {
     public int VehiculoId { get; set; }
-    public string NoSerie { get; set; }
+    public string? NoSerie { get; set; }
 }
 
 [Route("api/[controller]")]

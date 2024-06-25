@@ -15,7 +15,7 @@ public class OperadorServicio
         var current_entity = await _context.Operadores.FindAsync(id);
         if (current_entity == null)
         {
-            return null;
+            return null!;
         }
         return current_entity;
     }
@@ -30,7 +30,7 @@ public class OperadorServicio
         var operadorExistente = await Get(id);
         if (operadorExistente == null)
         {
-            return null;
+            return null!;
         }
         operadorExistente.TrabajadorId = operador.TrabajadorId;
         await _context.SaveChangesAsync();

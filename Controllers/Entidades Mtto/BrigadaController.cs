@@ -6,7 +6,7 @@ namespace ECOCEMProject;
 public class BrigadaData
 {
     public int BrigadaId { get; set; }
-    public string Descripcion { get; set; }
+    public string? Descripcion { get; set; }
 }
 
 [Route("api/[controller]")]

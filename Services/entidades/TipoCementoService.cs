@@ -14,7 +14,7 @@ public class TipoCementoService
         var current_entity = await _context.TipoCementos.FindAsync(id);
         if (current_entity == null)
         {
-            return null;
+            return null!;
         }
         return current_entity;
     }
@@ -29,7 +29,7 @@ public class TipoCementoService
         var existingTipoCemento = await Get(id);
         if (existingTipoCemento == null)
         {
-            return null;
+            return null!;
         }
         existingTipoCemento.TipoCementoId = tipoCemento.TipoCementoId;
         await _context.SaveChangesAsync();

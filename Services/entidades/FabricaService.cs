@@ -16,7 +16,7 @@ public class FabricaService
         var current_entity = await _context.Fabricas.FindAsync(id);
         if (current_entity == null)
         {
-            return null;
+            return null!;
         }
         return current_entity;
     }
@@ -31,7 +31,7 @@ public class FabricaService
         var existingFabrica = await Get(id);
         if (existingFabrica == null)
         {
-            return null;
+            return null!;
         }
         existingFabrica.FabricaId = fabrica.FabricaId;
         await _context.SaveChangesAsync();

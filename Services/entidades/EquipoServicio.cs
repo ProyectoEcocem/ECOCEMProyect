@@ -23,8 +23,8 @@ public class EquipoServicio
                       select new EquipoDto
                       {
                           EquipoId = e.EquipoId,
-                          TipoEquipoNombre = te.TipoE,
-                          SedeNombre = s.NombreSede
+                          TipoEquipoNombre = te.TipoE!,
+                          SedeNombre = s.NombreSede!
                       }).ToListAsync();
     }
 
@@ -37,8 +37,8 @@ public class EquipoServicio
                       select new EquipoDto
                       {
                           EquipoId = e.EquipoId,
-                          TipoEquipoNombre = te.TipoE,
-                          SedeNombre = s.NombreSede
+                          TipoEquipoNombre = te.TipoE!,
+                          SedeNombre = s.NombreSede ?? string.Empty
                       }).ToListAsync();
     }
     public async Task<Equipo> Update(int id, Equipo equipo)
@@ -51,7 +51,7 @@ public class EquipoServicio
         await _context.SaveChangesAsync();
         return equipo;
     }
-    public async Task<Object> Create(EquipoData equipo, int NoSede)
+    public async Task<Equipo> Create(EquipoData equipo, int NoSede)
     {
         if(_context.Equipos.Any(elemento => elemento.SedeId == NoSede || elemento.EquipoId == equipo.EquipoId || elemento.TipoEId==equipo.TipoEId))
             return null!;

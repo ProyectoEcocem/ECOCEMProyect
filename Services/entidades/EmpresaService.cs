@@ -16,7 +16,7 @@ public class EmpresaService
         var current_entity = await _context.Empresas.FindAsync(id);
         if (current_entity == null)
         {
-            return null;
+            return null!;
         }
         return current_entity;
     }
@@ -24,7 +24,7 @@ public class EmpresaService
     public async Task<IEnumerable<Empresa>> GetAll()
     {
 
-        var empresas=_context.Empresas.Include(e => e.Sedes).ThenInclude(e=>e.Trabajadores).ToList();
+        var empresas=  _context.Empresas.Include(e => e.Sedes).ThenInclude(e=>e.Trabajadores).ToList();
         return empresas;
     }
 
@@ -33,7 +33,7 @@ public class EmpresaService
         var existenteEmpresa = await Get(id);
         if (existenteEmpresa == null)
         {
-            return null;
+            return null!;
         }
         existenteEmpresa.EmpresaId = empresa.EmpresaId;
         await _context.SaveChangesAsync();

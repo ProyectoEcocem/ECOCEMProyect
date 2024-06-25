@@ -15,7 +15,7 @@ public class VehiculoService
         var current_entity = await _context.Vehiculos.FindAsync(id);
         if (current_entity == null)
         {
-            return null;
+            return null!;
         }
         return current_entity;
     }
@@ -30,7 +30,7 @@ public class VehiculoService
         var existingVehiculo = await Get(id);
         if (existingVehiculo == null)
         {
-            return null;
+            return null!;
         }
         existingVehiculo.VehiculoId = vehiculo.VehiculoId;
         await _context.SaveChangesAsync();

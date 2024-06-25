@@ -15,7 +15,7 @@ public class RoturaService
         var current_entity = await _context.Roturas.FindAsync(id);
         if (current_entity == null)
         {
-            return null;
+            return null!;
         }
         return current_entity;
     }
@@ -30,7 +30,7 @@ public class RoturaService
         var existingRotura = await Get(id);
         if (existingRotura == null)
         {
-            return null;
+            return null!;
         }
         existingRotura.RoturaId = rotura.RoturaId;
         await _context.SaveChangesAsync();

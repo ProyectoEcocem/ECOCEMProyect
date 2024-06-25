@@ -4,7 +4,7 @@ namespace ECOCEMProject;
 public class FabricaData
 {
     public int FabricaId { get; set; }
-    public string Nombre { get; set; }
+    public string? Nombre { get; set; }
 }
 
 [Route("api/[controller]")]

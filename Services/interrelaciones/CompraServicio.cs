@@ -53,7 +53,7 @@ public class CompraServicio
 
         if (CompraExistente == null)
         {
-            return null;
+            return null!;
         }
         
        

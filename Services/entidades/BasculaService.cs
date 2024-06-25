@@ -34,9 +34,9 @@ public class BasculaService
                           select new BasculaDto
                           {
                               BasculaId = b.BasculaId,
-                              NoSerie = b.NoSerie,
-                              NombreSede = s.NombreSede ?? string.Empty,
-                              Descripcion = b.Descripcion
+                              NoSerie = b.NoSerie!,
+                              NombreSede = s.NombreSede!,
+                              Descripcion = b.Descripcion!
                           }).ToListAsync();
     }
 
@@ -48,9 +48,9 @@ public class BasculaService
                           select new BasculaDto
                           {
                               BasculaId = b.BasculaId,
-                              NoSerie = b.NoSerie,
-                              NombreSede = s.NombreSede ?? string.Empty,
-                              Descripcion = b.Descripcion
+                              NoSerie = b.NoSerie!,
+                              NombreSede = s.NombreSede!,
+                              Descripcion = b.Descripcion!
                           }).ToListAsync();
     }
 
@@ -62,7 +62,7 @@ public class BasculaService
 
         if (existingBascula == null)
         {
-            return null;
+            return null!;
         }
         
         //existingBascula.BasculaId = bascula.BasculaId;

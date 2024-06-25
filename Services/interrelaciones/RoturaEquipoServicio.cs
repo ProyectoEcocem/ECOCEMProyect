@@ -27,7 +27,7 @@ public class RoturaEquipoServicio
                 select new EquipoRoturaDto
                 {
                     EquipoId = re.EquipoId,
-                    NombreRotura = r.NombreRotura,
+                    NombreRotura = r.NombreRotura!,
                     FechaId = re.FechaId
                 }).ToListAsync();
     }
@@ -41,7 +41,7 @@ public class RoturaEquipoServicio
                         select new EquipoRoturaDto
                         {
                             EquipoId = re.EquipoId,
-                            NombreRotura = r.NombreRotura,
+                            NombreRotura = r.NombreRotura!,
                             FechaId = re.FechaId
                         }).ToListAsync();
     }

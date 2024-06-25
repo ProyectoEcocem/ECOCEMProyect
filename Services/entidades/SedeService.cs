@@ -31,7 +31,7 @@ public class SedeService
                             SedeId = s.SedeId,
                             NombreSede = s.NombreSede ?? string.Empty,
                             UbicacionSede = s.UbicacionSede ?? string.Empty,
-                            NombreEmpresa = e.NombreEmpresa
+                            NombreEmpresa = e.NombreEmpresa!
                         }).ToListAsync();
     }
 

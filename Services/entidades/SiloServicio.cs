@@ -32,7 +32,7 @@ public class SiloServicio
                 select new SiloDto
                 {
                     SiloId = s.SiloId,
-                    NoSilo = s.NoSilo,
+                    NoSilo = s.NoSilo!,
                     NombreSede = sd.NombreSede ?? string.Empty,
                     Radio = s.radio,
                     Altura = s.altura
@@ -47,7 +47,7 @@ public class SiloServicio
                         select new SiloDto
                         {
                             SiloId = s.SiloId,
-                            NoSilo = s.NoSilo,
+                            NoSilo = s.NoSilo!,
                             NombreSede = sd.NombreSede ?? string.Empty,
                             Radio = s.radio,
                             Altura = s.altura

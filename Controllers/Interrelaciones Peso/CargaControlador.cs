@@ -59,9 +59,9 @@ public class CargaController : Controller
     
     [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<Carga>> GetAll()
+    public async Task<IEnumerable<CargaDto>> GetAll()
     {
-         List<Carga>carga = new();
+         List<CargaDto>carga = new();
         
         if (User.IsInRole("admin"))
         {

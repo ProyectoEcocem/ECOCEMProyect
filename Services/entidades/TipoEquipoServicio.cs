@@ -24,7 +24,7 @@ public class TipoEquipoServicio
         var tipoEExistente = await Get(id);
         if (tipoEExistente == null)
         {
-            return null;
+            return null!;
         }
         await _context.SaveChangesAsync();
         return tipoE;

@@ -41,9 +41,9 @@ public class SiloController:Controller
 
     [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<Silo>> GetAll()
+    public async Task<IEnumerable<SiloDto>> GetAll()
     {
-        List<Silo>silos = new();
+        List<SiloDto>silos = new();
         
         if (User.IsInRole("admin"))
         {

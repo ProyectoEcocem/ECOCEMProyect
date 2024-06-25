@@ -22,9 +22,17 @@ public class SedeService
     }
 
 
-    public async Task<IEnumerable<Sede>> GetAll()
+    public async Task<IEnumerable<SedeDto>> GetAll()
     {
-        return await _context.Sedes.Include(e=> e.Trabajadores).Include(e=> e.Equipos).ToListAsync();
+        return await (from s in _context.Sedes
+                        join e in _context.Empresas on s.EmpresaId equals e.EmpresaId
+                        select new SedeDto
+                        {
+                            SedeId = s.SedeId,
+                            NombreSede = s.NombreSede ?? string.Empty,
+                            UbicacionSede = s.UbicacionSede ?? string.Empty,
+                            NombreEmpresa = e.NombreEmpresa
+                        }).ToListAsync();
     }
 
     public async Task<Sede> Update(int id,Sede sede)

@@ -20,14 +20,31 @@ public class VentaServicio
         }
         return current_entity;
     }
-    public async Task<IEnumerable<Venta>> GetAll()
+    public async Task<IEnumerable<VentaDto>> GetAll()
     {
-        return await _context.Ventas.ToListAsync();
+        return await (from v in _context.Ventas
+                          join ec in _context.EntidadCompradoras on v.EntidadCompradoraId equals ec.EntidadCompradoraId
+                          select new VentaDto
+                          {
+                              SedeId = v.SedeId,
+                              EntidadCompradoraId = ec.EntidadCompradoraId,
+                              NombreEntidadCompradora = ec.NombreEntidadCompradora ?? string.Empty,
+                              FechaVentaId = v.FechaVentaId
+                          }).ToListAsync();
     }
 
-    public async Task<IEnumerable<Venta>> GetAll(int sedeId)
+    public async Task<IEnumerable<VentaDto>> GetAll(int sedeId)
     {
-        return await _context.Ventas.Where(v => v.SedeId == sedeId).ToListAsync();
+        return await (from v in _context.Ventas
+                          join ec in _context.EntidadCompradoras on v.EntidadCompradoraId equals ec.EntidadCompradoraId
+                          where v.SedeId == sedeId
+                          select new VentaDto
+                          {
+                              SedeId = v.SedeId,
+                              EntidadCompradoraId = ec.EntidadCompradoraId,
+                              NombreEntidadCompradora = ec.NombreEntidadCompradora ?? string.Empty,
+                              FechaVentaId = v.FechaVentaId
+                          }).ToListAsync();
     }
     public async Task<Venta> Update(int SedeId,int EntidadCompradoraId,DateTime FechaVentaId,Venta venta)
     {

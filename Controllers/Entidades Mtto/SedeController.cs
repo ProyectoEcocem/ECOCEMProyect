@@ -34,7 +34,7 @@ public class SedeController:Controller
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Sede>> GetAll() => await _sedeService.GetAll();
+    public async Task<IEnumerable<SedeDto>> GetAll() => await _sedeService.GetAll();
 
 
     [HttpGet("Equipos")]

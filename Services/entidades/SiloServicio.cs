@@ -20,19 +20,38 @@ public class SiloServicio
         var current_entity = await _context.Silos.FindAsync(id);
         if (current_entity == null)
         {
-            return null;
+            return null!;
         }
         return current_entity;
     }
 
-    public async Task<IEnumerable<Silo>> GetAll()
+    public async Task<IEnumerable<SiloDto>> GetAll()
     {
-        return await _context.Silos.ToListAsync();
+        return await (from s in _context.Silos
+                join sd in _context.Sedes on s.NoSede equals sd.SedeId
+                select new SiloDto
+                {
+                    SiloId = s.SiloId,
+                    NoSilo = s.NoSilo,
+                    NombreSede = sd.NombreSede ?? string.Empty,
+                    Radio = s.radio,
+                    Altura = s.altura
+                }).ToListAsync();
     }
 
-    public async Task<IEnumerable<Silo>> GetAll(int sedeId)
+    public async Task<IEnumerable<SiloDto>> GetAll(int sedeId)
     {
-        return await _context.Silos.Where(s => s.NoSede == sedeId).ToListAsync();
+        return await (from s in _context.Silos
+                        join sd in _context.Sedes on s.NoSede equals sd.SedeId
+                        where s.NoSede == sedeId
+                        select new SiloDto
+                        {
+                            SiloId = s.SiloId,
+                            NoSilo = s.NoSilo,
+                            NombreSede = sd.NombreSede ?? string.Empty,
+                            Radio = s.radio,
+                            Altura = s.altura
+                        }).ToListAsync();
     }
 
     public async Task<Silo> Update(int id, Silo silo)
@@ -40,7 +59,7 @@ public class SiloServicio
         var siloExistente = await Get(id);
         if (siloExistente == null)
         {
-            return null;
+            return null!;
         }
         //siloExistente.EquipoId = silo.EquipoId;
         await _context.SaveChangesAsync();

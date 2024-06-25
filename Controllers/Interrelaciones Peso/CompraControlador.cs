@@ -64,9 +64,9 @@ public class CompraController : Controller
     }
     [Authorize(Roles="admin, jefe")]
      [HttpGet]
-    public async Task<IEnumerable<Compra>> GetAll()
+    public async Task<IEnumerable<CompraDto>> GetAll()
     {
-        List<Compra>c = new();
+        List<CompraDto>c = new();
         
         if (User.IsInRole("admin"))
         {

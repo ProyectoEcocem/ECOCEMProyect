@@ -27,14 +27,31 @@ public class BasculaService
     }
 
 
-    public async Task<IEnumerable<Bascula>> GetAll()
+    public async Task<IEnumerable<BasculaDto>> GetAll()
     {
-        return await _context.Basculas.ToListAsync();
+        return await (from b in _context.Basculas
+                          join s in _context.Sedes on b.NoSede equals s.SedeId
+                          select new BasculaDto
+                          {
+                              BasculaId = b.BasculaId,
+                              NoSerie = b.NoSerie,
+                              NombreSede = s.NombreSede ?? string.Empty,
+                              Descripcion = b.Descripcion
+                          }).ToListAsync();
     }
 
-    public async Task<IEnumerable<Bascula>> GetAll(int noSede)
+    public async Task<IEnumerable<BasculaDto>> GetAll(int noSede)
     {
-        return await _context.Basculas.Where(b => b.NoSede == noSede).ToListAsync();
+        return await (from b in _context.Basculas
+                          join s in _context.Sedes on b.NoSede equals s.SedeId
+                          where s.SedeId == noSede
+                          select new BasculaDto
+                          {
+                              BasculaId = b.BasculaId,
+                              NoSerie = b.NoSerie,
+                              NombreSede = s.NombreSede ?? string.Empty,
+                              Descripcion = b.Descripcion
+                          }).ToListAsync();
     }
 
     

@@ -52,9 +52,9 @@ public class RoturaEquipoController : Controller
     
     [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<RoturaEquipo>> GetAll() 
+    public async Task<IEnumerable<EquipoRoturaDto>> GetAll() 
     {
-        List<RoturaEquipo>re = new();
+        List<EquipoRoturaDto>re = new();
         
         if (User.IsInRole("admin"))
         {

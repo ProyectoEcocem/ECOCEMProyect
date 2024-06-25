@@ -20,14 +20,31 @@ public class CompraServicio
         }
         return current_entity;
     }
-    public async Task<IEnumerable<Compra>> GetAll()
+    public async Task<IEnumerable<CompraDto>> GetAll()
     {
-        return await _context.Compras.ToListAsync();
+        return await (from c in _context.Compras
+                          join s in _context.Sedes on c.SedeId equals s.SedeId
+                          join f in _context.Fabricas on c.FabricaId equals f.FabricaId
+                          select new CompraDto
+                          {
+                              NombreSede = s.NombreSede ?? string.Empty,
+                              NombreFabrica = f.Nombre ?? string.Empty,
+                              FechaId = c.FechaId
+                          }).ToListAsync();
     }
 
-    public async Task<IEnumerable<Compra>> GetAll(int sedeId)
+    public async Task<IEnumerable<CompraDto>> GetAll(int sedeId)
     {
-        return await _context.Compras.Where(c => c.SedeId == sedeId).ToListAsync();
+        return await (from c in _context.Compras
+                          join s in _context.Sedes on c.SedeId equals s.SedeId
+                          join f in _context.Fabricas on c.FabricaId equals f.FabricaId
+                          where c.SedeId == sedeId
+                          select new CompraDto
+                          {
+                              NombreSede = s.NombreSede ?? string.Empty,
+                              NombreFabrica = f.Nombre ?? string.Empty,
+                              FechaId = c.FechaId
+                          }).ToListAsync();
     }
 
     public async Task<Compra> Update(int SedeId,int FabricaId,DateTime FechaCompraId,Compra compra)

@@ -40,9 +40,9 @@ public class BasculaController : Controller
     }
     [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<Bascula>> GetAll()
+    public async Task<IEnumerable<BasculaDto>> GetAll()
     {
-        List<Bascula>basculas = new();
+        List<BasculaDto>basculas = new();
         
         if (User.IsInRole("admin"))
         {

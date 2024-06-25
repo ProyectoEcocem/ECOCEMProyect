@@ -64,9 +64,9 @@ public class VentaController : Controller
     }
     [Authorize(Roles="admin, jefe")]
     [HttpGet]
-    public async Task<IEnumerable<Venta>> GetAll() 
+    public async Task<IEnumerable<VentaDto>> GetAll() 
     {
-        List<Venta>v = new();
+        List<VentaDto>v = new();
         
         if (User.IsInRole("admin"))
         {

@@ -19,24 +19,32 @@ public class RoturaEquipoServicio
         }
         return current_entity;
     }
-    public async Task<IEnumerable<RoturaEquipo>> GetAll()
+    public async Task<IEnumerable<EquipoRoturaDto>> GetAll()
     {
-        return await _context.RoturasEquipos.ToListAsync();
+        return await (from e in _context.Equipos
+                join re in _context.RoturasEquipos on e.EquipoId equals re.EquipoId
+                join r in _context.Roturas on re.RoturaId equals r.RoturaId
+                select new EquipoRoturaDto
+                {
+                    EquipoId = re.EquipoId,
+                    NombreRotura = r.NombreRotura,
+                    FechaId = re.FechaId
+                }).ToListAsync();
     }
 
-    public async Task<List<RoturaEquipo>> GetAll(int sedeId)
-{
-    var roturasEquipo = await _context.RoturasEquipos
-        .Join(_context.Equipos,
-            re => re.EquipoId, 
-            e => e.EquipoId, 
-            (re, e) => new { RoturaEquipo = re, Equipo = e })
-        .Where(x => x.Equipo.SedeId == sedeId)
-        .Select(x => x.RoturaEquipo)
-        .ToListAsync();
-
-    return roturasEquipo;
-}
+     public async Task<IEnumerable<EquipoRoturaDto>> GetAll(int sedeId)
+    {
+        return await (from e in _context.Equipos
+                        join re in _context.RoturasEquipos on e.EquipoId equals re.EquipoId
+                        join r in _context.Roturas on re.RoturaId equals r.RoturaId
+                        where e.SedeId == sedeId
+                        select new EquipoRoturaDto
+                        {
+                            EquipoId = re.EquipoId,
+                            NombreRotura = r.NombreRotura,
+                            FechaId = re.FechaId
+                        }).ToListAsync();
+    }
 
     public async Task<RoturaEquipo> Update(int RoturaId,int EquipoId,DateTime FechaId,RoturaEquipo roturaE)
     {

@@ -7,6 +7,7 @@ namespace ECOCEMProject;
 
 public class CargaData
 {
+    public int CargaId = 0;
     public int TipoCementoId { get; set; }
     public int SiloId {get; set;}
     public int VehiculoId { get; set; }

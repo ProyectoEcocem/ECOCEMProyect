@@ -102,6 +102,7 @@ public class CargaServicio
         
 
         //creacion de carga
+        d.CargaId = carga.CargaId;
         d.TipoCementoId = carga.TipoCementoId;
         d.SiloId = carga.SiloId;
         d.VehiculoId = carga.VehiculoId;

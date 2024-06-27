@@ -53,6 +53,7 @@ public class DescargaServicio
         MedicionBascula mb = new MedicionBascula();
 
         //creacion de descarga
+        d.DescargaId = descarga.DescargaId;
         d.TipoCementoId = descarga.TipoCementoId;
         d.SiloId = descarga.SiloId;
         d.VehiculoId = descarga.VehiculoId;

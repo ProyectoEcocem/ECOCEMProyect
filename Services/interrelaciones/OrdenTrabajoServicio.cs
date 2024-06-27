@@ -55,6 +55,7 @@ public class OrdenTrabajoServicio
     {
         OrdenTrabajo ot = new OrdenTrabajo();
 
+        ot.OrdenTrabajoId = OT.OrdenTrabajoId;
         ot.EquipoId = OT.EquipoId;
         ot.BrigadaId = OT.BrigadaId;
         ot.TrabajadorId = OT.TrabajadorId;

@@ -4,6 +4,7 @@ namespace ECOCEMProject;
 using System.Text.Json.Serialization;
 public class OrdenTrabajo
 {
+   public int OrdenTrabajoId {get; set;}
    public int EquipoId {get; set;} 
    public int BrigadaId {get; set;}
    public int TrabajadorId {get; set;}

@@ -51,7 +51,7 @@ public class MyContext: DbContext
     public DbSet<OrdenTrabajoRoturaEquipo>OrdenTrabajoRoturaEquipos{get;set;}
     public DbSet<OrdenTrabajoAMRealizada>OrdenTrabajoAMRealizadas{get;set;}
     public DbSet<IdentityUserClaim<int>> UserClaims { get; set; }
-
+    public DbSet<Notification> Notifications { get; set; }
 
  
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -55,7 +55,6 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AMId"));
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Discriminator")
@@ -80,14 +79,12 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BasculaId"));
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("NoSede")
                         .HasColumnType("integer");
 
                     b.Property<string>("NoSerie")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("BasculaId");
@@ -104,7 +101,6 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BrigadaId"));
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("BrigadaId");
@@ -135,16 +131,22 @@ namespace ECOCEMProject.Migrations
                     b.Property<DateTime>("FechaVentaId")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("PesoBruto")
+                        .HasColumnType("integer");
+
                     b.Property<int>("SedeId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("VentaEntidadCompradoraId")
+                    b.Property<int>("Tara")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("VentaFechaVentaId")
+                    b.Property<int?>("VentaEntidadCompradoraId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("VentaFechaVentaId")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("VentaSedeId")
+                    b.Property<int?>("VentaSedeId")
                         .HasColumnType("integer");
 
                     b.HasKey("TipoCementoId", "SiloId", "VehiculoId", "FechaCargaId");
@@ -184,13 +186,16 @@ namespace ECOCEMProject.Migrations
                     b.Property<DateTime>("FechaId")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("CompraFabricaId")
+                    b.Property<int?>("CompraFabricaId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("CompraFechaId")
+                    b.Property<DateTime?>("CompraFechaId")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("CompraSedeId")
+                    b.Property<int?>("CompraSedeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Corriente")
                         .HasColumnType("integer");
 
                     b.Property<int>("FabricaId")
@@ -199,7 +204,19 @@ namespace ECOCEMProject.Migrations
                     b.Property<DateTime>("FechaCompraId")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("PesoBruto")
+                        .HasColumnType("integer");
+
                     b.Property<int>("SedeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Tara")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Temperatura")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TipoAsentamiento")
                         .HasColumnType("integer");
 
                     b.HasKey("TipoCementoId", "SiloId", "VehiculoId", "FechaId");
@@ -218,7 +235,6 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EmpresaId"));
 
                     b.Property<string>("NombreEmpresa")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("EmpresaId");
@@ -235,7 +251,6 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EntidadCompradoraId"));
 
                     b.Property<string>("NombreEntidadCompradora")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("EntidadCompradoraId");
@@ -275,7 +290,6 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FabricaId"));
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("FabricaId");
@@ -292,11 +306,9 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("HerramientaId"));
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("HerramientaId");
@@ -399,7 +411,16 @@ namespace ECOCEMProject.Migrations
                     b.Property<int?>("DescargaVehiculoId")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime>("FechaCargaId")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<int>("PesoB")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SiloId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TipoCementoId")
                         .HasColumnType("integer");
 
                     b.HasKey("VehiculoId", "BasculaId", "FechaBId");
@@ -421,6 +442,9 @@ namespace ECOCEMProject.Migrations
 
                     b.Property<DateTime>("FechaMId")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<double>("AlturaCinta")
+                        .HasColumnType("double precision");
 
                     b.Property<DateTime?>("CargaFechaCargaId")
                         .HasColumnType("timestamp with time zone");
@@ -452,8 +476,17 @@ namespace ECOCEMProject.Migrations
                     b.Property<int>("PesoM")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Volumen")
-                        .HasColumnType("integer");
+                    b.Property<double>("RadioMayorConoInf")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("RadioMayorConoSuperior")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("RadioMenorConoInferior")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("RadioMenorConoSuperior")
+                        .HasColumnType("double precision");
 
                     b.HasKey("SiloId", "MedidorId", "FechaMId");
 
@@ -473,7 +506,6 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MedidorId"));
 
                     b.Property<string>("NoSerie")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("MedidorId");
@@ -689,11 +721,9 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoturaId"));
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("NombreRotura")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("RoturaId");
@@ -753,7 +783,6 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("NoSilo")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("altura")
@@ -776,7 +805,6 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TipoCementoId"));
 
                     b.Property<string>("NombreTipoCemento")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("TipoCementoId");
@@ -793,7 +821,6 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TipoEId"));
 
                     b.Property<string>("TipoE")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("TipoEId");
@@ -900,7 +927,6 @@ namespace ECOCEMProject.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("VehiculoId"));
 
                     b.Property<string>("NoSerie")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("VehiculoId");
@@ -1110,9 +1136,7 @@ namespace ECOCEMProject.Migrations
                 {
                     b.HasOne("ECOCEMProject.Venta", "Venta")
                         .WithMany("Cargas")
-                        .HasForeignKey("VentaSedeId", "VentaEntidadCompradoraId", "VentaFechaVentaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VentaSedeId", "VentaEntidadCompradoraId", "VentaFechaVentaId");
 
                     b.Navigation("Venta");
                 });
@@ -1121,9 +1145,7 @@ namespace ECOCEMProject.Migrations
                 {
                     b.HasOne("ECOCEMProject.Compra", "Compra")
                         .WithMany("Descargas")
-                        .HasForeignKey("CompraSedeId", "CompraFabricaId", "CompraFechaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CompraSedeId", "CompraFabricaId", "CompraFechaId");
 
                     b.Navigation("Compra");
                 });
@@ -1173,13 +1195,15 @@ namespace ECOCEMProject.Migrations
 
             modelBuilder.Entity("ECOCEMProject.MedicionBascula", b =>
                 {
-                    b.HasOne("ECOCEMProject.Carga", null)
+                    b.HasOne("ECOCEMProject.Carga", "Carga")
                         .WithMany("MedicionesBascula")
                         .HasForeignKey("CargaTipoCementoId", "CargaSiloId", "CargaVehiculoId", "CargaFechaCargaId");
 
                     b.HasOne("ECOCEMProject.Descarga", "Descarga")
                         .WithMany("MedicionesBascula")
                         .HasForeignKey("DescargaTipoCementoId", "DescargaSiloId", "DescargaVehiculoId", "DescargaFechaId");
+
+                    b.Navigation("Carga");
 
                     b.Navigation("Descarga");
                 });

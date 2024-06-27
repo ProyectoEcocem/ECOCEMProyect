@@ -108,6 +108,9 @@ public class CargaServicio
         d.FechaCargaId = carga.FechaId;
         d.PesoBruto = carga.PesoBruto;
         d.Tara = carga.Tara;
+        d.SedeId = carga.SedeId;
+        d.EntidadCompradoraId = carga.EntidadCompradoraId;
+        d.FechaVentaId = carga.FechaVentaId;
 
         //creacion de medicion bascula
         mb.VehiculoId = carga.VehiculoId;

@@ -12,6 +12,12 @@ public class CargaData
     public int VehiculoId { get; set; }
     public DateTime FechaId {get; set;}
 
+    //llaves de venta
+    public int SedeId {get; set;}
+    public int EntidadCompradoraId {get; set;}
+    public DateTime FechaVentaId {get; set;}
+
+    //otros
     public int PesoBruto {get; set;}
     public int Tara {get; set;}
 

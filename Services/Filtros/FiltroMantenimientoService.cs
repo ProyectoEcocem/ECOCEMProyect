@@ -48,6 +48,11 @@ public class FiltroMantenimientoService
                 var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Year == anno );
                 return reportesAnno;
             }
+            if (dia == null && mes != null && anno == null)
+            {
+                var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Month == mes );
+                return reportesAnno;
+            }
         }
         else{
 
@@ -64,6 +69,11 @@ public class FiltroMantenimientoService
             if (dia == null && mes == null && anno != null)
             {
                 var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Year == anno && r.EquipoId==equipoId);
+                return reportesAnno;
+            }
+            if (dia == null && mes != null && anno == null)
+            {
+                var reportesAnno = myContext.Reportes.Where(r=>r.FechaId.Month == mes && r.EquipoId==equipoId );
                 return reportesAnno;
             }
 

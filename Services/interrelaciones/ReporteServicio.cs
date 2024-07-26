@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 namespace ECOCEMProject;
 
 public class ReporteServicio
@@ -40,7 +41,21 @@ public class ReporteServicio
     }
     public async Task<Reporte> Create(Reporte reporte)
     {
-        _context.Reportes.Add(reporte);
+        Reporte r = new Reporte();
+        r.EquipoId = reporte.EquipoId;
+        r.FechaId = reporte.FechaId;
+        r.TiempoRealParoFalla = reporte.TiempoRealParoFalla;
+        r.TiempoRealMant = reporte.TiempoRealMant;
+        r.TiempoOPeracionReal = reporte.TiempoOPeracionReal;
+        r.TiempoParoTrabajosPlan = reporte.TiempoParoTrabajosPlan;
+        r.TiempoParoMant = reporte.TiempoParoMant;
+        r.TiempoOperacionRequerido = reporte.TiempoOperacionRequerido;
+        r.TiempoRequeridoAccProgramadas = reporte.TiempoRequeridoAccProgramadas;
+        r.CostoTotalMant = reporte.CostoTotalMant;
+        r.Facturacion = reporte.Facturacion;
+        r.CostoMantContratado = reporte.CostoMantContratado;
+
+        _context.Reportes.Add(r);
         await _context.SaveChangesAsync();
 
         return reporte;

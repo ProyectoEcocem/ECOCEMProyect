@@ -51,10 +51,10 @@ public class MyContext: DbContext
     public DbSet<OrdenTrabajoRoturaEquipo>OrdenTrabajoRoturaEquipos{get;set;}
     public DbSet<OrdenTrabajoAMRealizada>OrdenTrabajoAMRealizadas{get;set;}
     public DbSet<IdentityUserClaim<int>> UserClaims { get; set; }
-
+    public DbSet<NotificationMessage> NotificationMessages { get; set; }
 
  
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
 
     {
         modelBuilder.Entity<Compra>()
@@ -86,6 +86,9 @@ public class MyContext: DbContext
         
         modelBuilder.Entity<AccionMantenimiento>()
             .HasKey(key => new { key.AMId });
+
+        modelBuilder.Entity<NotificationMessage>()
+            .HasKey(key => new { key.NotificationId });
         
         modelBuilder.Entity<HerramientaMantNecesario>()
             .HasKey(key => new { key.HerramientasId, key.TipoEquipoId,key.AMId, key.HorasExpId  });

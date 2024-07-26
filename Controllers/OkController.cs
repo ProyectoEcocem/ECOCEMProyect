@@ -12,7 +12,7 @@ public class OkController : Controller
 {
 
     [HttpGet("admin")]
-    [Authorize(Roles="admin, jefe")]
+    [Authorize(Roles="admin")]
     public IActionResult Get()
     {
         return Ok();

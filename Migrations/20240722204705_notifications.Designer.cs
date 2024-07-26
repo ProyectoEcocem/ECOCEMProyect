@@ -3,6 +3,7 @@ using System;
 using ECOCEMProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECOCEMProject.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20240722204705_notifications")]
+    partial class notifications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1057,6 +1060,9 @@ namespace ECOCEMProject.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<double>("Facturacion")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("PerdidaIndisponibilidad")
                         .HasColumnType("double precision");
 
                     b.Property<double>("TiempoOPeracionReal")

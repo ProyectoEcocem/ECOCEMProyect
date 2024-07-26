@@ -10,17 +10,19 @@ using ECOCEMProject;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
 
 //agregar el contexto de la base de datos como servicios
 builder.Services.AddDbContext<MyContext>(opciones=>
     opciones.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 
 );
+    
 
-
-
+builder.Services.AddScoped<INotificationService, NotificationService>();
 // Servicios de entidades
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<RoleService>();

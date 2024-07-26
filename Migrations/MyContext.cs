@@ -52,6 +52,7 @@ public class MyContext: DbContext
     public DbSet<OrdenTrabajoAMRealizada>OrdenTrabajoAMRealizadas{get;set;}
     public DbSet<IdentityUserClaim<int>> UserClaims { get; set; }
     public DbSet<NotificationMessage> NotificationMessages { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
 
  
     protected override void OnModelCreating(ModelBuilder modelBuilder)
